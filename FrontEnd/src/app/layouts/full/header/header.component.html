@@ -1,0 +1,22 @@
+        
+<!-- ============================================================== -->
+<!-- Profile - style you can find in header.scss -->
+<!-- ============================================================== -->
+<ng-container
+  *ngIf="menuItems.isLoggedIn(); then loggedIn; else loggedOut">
+</ng-container>
+
+<ng-template #loggedIn>
+    <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <img src="assets/images/users/1.jpg" alt="user" class="profile-pic"> </button>
+        <mat-menu #profile="matMenu" class="mymegamenu">
+            <button *ngFor="let menuitem of menuItems.getHeaderMenuitem()" [routerLink]="['/', menuitem.state]" mat-menu-item>
+                <mat-icon>{{menuitem.icon}}</mat-icon>{{menuitem.name}}</button>
+        </mat-menu>
+</ng-template>
+
+<ng-template #loggedOut>
+        <button routerLink="/login" mat-button color="basic">Sign In</button>
+        <button routerLink="/registration" mat-button color="basic">Register</button>
+</ng-template>
+
+

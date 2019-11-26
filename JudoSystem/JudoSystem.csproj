@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\191122203203_CREATE_TABLE_USERS.sql" />
+    <None Remove="Scripts\191122203204_CREATE_TABLE_JUDOKAS.sql" />
+    <None Remove="Scripts\191124154440_CREATE_TABLE_EVENT.sql" />
+    <None Remove="Scripts\191124155307_CREATE_TABLE_GROUP.sql" />
+    <None Remove="Scripts\191124160745_CREATE_TABLE_CATEGORY.sql" />
+    <None Remove="Scripts\191124161152_CREATE_TABLE_COMPETITORS.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\191122203203_CREATE_TABLE_USERS.sql" />
+    <EmbeddedResource Include="Scripts\191122203204_CREATE_TABLE_JUDOKAS.sql" />
+    <EmbeddedResource Include="Scripts\191124154440_CREATE_TABLE_EVENT.sql" />
+    <EmbeddedResource Include="Scripts\191124155307_CREATE_TABLE_GROUP.sql" />
+    <EmbeddedResource Include="Scripts\191124160745_CREATE_TABLE_CATEGORY.sql" />
+    <EmbeddedResource Include="Scripts\191124161152_CREATE_TABLE_COMPETITORS.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="dbup-consolescripts" Version="1.5.0" />
+    <PackageReference Include="dbup-mysql" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="MySql.Data" Version="8.0.18" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+  </ItemGroup>
+
+</Project>

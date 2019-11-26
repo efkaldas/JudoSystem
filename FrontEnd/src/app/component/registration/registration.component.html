@@ -1,0 +1,51 @@
+<mat-card>
+    <mat-card-content>
+    <mat-card-title>Accordion</mat-card-title>
+    <mat-card-subtitle>Expansion panel</mat-card-subtitle>
+    
+    <form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()" color="accent">
+            <mat-form-field>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="Username" formControlName="Username">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="ClubName" formControlName="ClubName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="FirstName" formControlName="FirstName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="LastName" formControlName="LastName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="Country" formControlName="Country">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="City" formControlName="City">
+            </mat-form-field>
+
+            <mat-form-field>
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    <input autofocus type="text" matInput placeholder="Email" formControlName="Email">
+            </mat-form-field>
+  
+            <mat-form-field>
+              <mat-icon matPrefix>lock_outline</mat-icon>
+              <input type="password" autocomplete="false" matInput placeholder="Password" formControlName="Password">
+            </mat-form-field>
+  
+            <button type="submit" mat-raised-button color="primary">Login</button>
+          </form>
+
+    </mat-card-content>
+</mat-card>
