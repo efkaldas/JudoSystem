@@ -16,9 +16,10 @@ namespace JudoSystem.Controllers
     [ApiController]
     public class AgeGroupController : ControllerBase
     {
+        static ICategorySql categorySql = new CategorySql();
         static IAgeGroupSql ageGroupSql = new AgeGroupSql();
         // GET: api/AgeGroup
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public Response getAgeGroupList()
         {
             Response res = new Response();
@@ -52,7 +53,7 @@ namespace JudoSystem.Controllers
             return res;
         }
         // POST: api/AgeGroup
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Roles = "Admin")]
         public Response insertAgeGroup([FromBody] AgeGroupDao newAgeGroup)
         {
             Response res = new Response();
@@ -67,9 +68,25 @@ namespace JudoSystem.Controllers
             }
             return res;
         }
+        // GET: api/AgeGroup/5
+        [HttpGet("{id}/Category", Name = "getAgeGroupCategories"), Authorize(Roles = "Admin, User")]
+        public Response getAgeGroupCategories(int id)
+        {
+            Response res = new Response();
+            try
+            {
+                List<CategoryDao> newCategory= categorySql.getCategoriesByGroup(id);
+                res.success(newCategory);
+            }
+            catch (Exception e)
+            {
+                res.error(e.Message);
+            }
+            return res;
+        }
 
         // PUT: api/AgeGroup/5
-        [HttpPut("{id}"), Authorize]
+        [HttpPut("{id}"), Authorize(Roles = "Admin")]
         public Response updateAgeGroup(int id, [FromBody] AgeGroupDao newAgeGroup)
         {
             Response res = new Response();
@@ -87,7 +104,7 @@ namespace JudoSystem.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public Response deleteAgeGroup(int id)
         {
             Response res = new Response();

@@ -63,7 +63,6 @@ namespace JudoSystem
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-
                         ValidIssuer = Configuration["JWT:ValidIssuer"],
                         ValidAudience = Configuration["JWT:ValidAudience"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SigningKey"]))

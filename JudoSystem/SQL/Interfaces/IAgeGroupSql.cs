@@ -13,5 +13,6 @@ namespace JudoSystem.SQL.Interfaces
         void insertAgeGroup(AgeGroupDao newAgeGroup);
         void updateAgeGroup(AgeGroupDao newAgeGroup);
         void deleteAgeGroup(int id);
+        List<AgeGroupDao> getAgeGroupsByEvent(int eventId);
     }
 }

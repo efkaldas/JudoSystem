@@ -17,8 +17,9 @@ namespace JudoSystem.Controllers
     public class EventController : ControllerBase
     {
         static IEventSql eventSql = new EventSql();
+        static IAgeGroupSql ageGroupSql = new AgeGroupSql();
         // GET: api/Event
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Roles = "User")]
         public Response getEventList()
         {
             Response res = new Response();
@@ -51,9 +52,25 @@ namespace JudoSystem.Controllers
             }
             return res;
         }
+        // GET: api/Event/5
+        [HttpGet("{id}/AgeGroup", Name = "getEventAgeGroup"), Authorize(Roles = "Admin, User")]
+        public Response getEventAgeGroup(int id)
+        {
+            Response res = new Response();
+            try
+            {
+                List<AgeGroupDao> newEvent = ageGroupSql.getAgeGroupsByEvent(id);
+                res.success(newEvent);
+            }
+            catch (Exception e)
+            {
+                res.error(e.Message);
+            }
+            return res;
+        }
 
         // POST: api/Event
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Roles = "Admin")]
         public Response createEvent([FromBody] EventDao newEvent)
         {
             Response res = new Response();

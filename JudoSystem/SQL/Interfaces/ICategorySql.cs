@@ -13,5 +13,6 @@ namespace JudoSystem.SQL.Interfaces
         void insertCategory(CategoryDao newCategory);
         void updateCategory(CategoryDao newCategory);
         void deleteCategory(int id);
+        List<CategoryDao> getCategoriesByGroup(int groupID);
     }
 }

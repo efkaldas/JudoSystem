@@ -26,6 +26,7 @@ import { LoginApiService } from './services/login.service';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { EventComponent } from './component/event/event.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
   ],
   imports: [
     BrowserModule,

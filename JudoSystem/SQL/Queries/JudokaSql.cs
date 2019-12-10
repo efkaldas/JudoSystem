@@ -23,6 +23,17 @@ namespace JudoSystem.SQL.Queries
             }
             return ret;
         }
+        public List<JudokaDao> getUserJudokas(int userID)
+        {
+            List<JudokaDao> ret;
+            using (var db = getConnection())
+            {
+                const string sql = @"SELECT * FROM Judokas where userID=@userID";
+
+                ret = db.Query<JudokaDao>(sql, new { userID }, commandType: CommandType.Text).ToList();
+            }
+            return ret;
+        }
         public JudokaDao getJudokaById(int id)
         {
             JudokaDao ret;

@@ -16,6 +16,7 @@ const HEADERMENUITEMS = [
 
 const MENUITEMS = [
   { state: 'judokas', type: 'link', name: 'Judokas', icon: 'people' },
+  { state: 'events', type: 'link', name: 'Events', icon: 'event' },
   { state: 'starter', name: 'Starter Page', type: 'link', icon: 'av_timer' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },

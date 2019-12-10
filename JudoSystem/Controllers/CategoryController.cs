@@ -18,7 +18,7 @@ namespace JudoSystem.Controllers
     {
         static ICategorySql categorySql = new CategorySql();
         // GET: api/Category
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public Response getCategoryList()
         {
             Response res = new Response();
@@ -36,7 +36,7 @@ namespace JudoSystem.Controllers
         }
 
         // GET: api/Category/5
-        [HttpGet("{id}", Name = "getCategory"), Authorize]
+        [HttpGet("{id}", Name = "getCategory"), Authorize(Roles = "Admin, User")]
         public Response getCategory(int id)
         {
             Response res = new Response();
@@ -53,7 +53,7 @@ namespace JudoSystem.Controllers
         }
 
         // POST: api/Category
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Roles = "Admin")]
         public Response createCategory([FromBody] CategoryDao newCategory)
         {
             Response res = new Response();
@@ -70,7 +70,7 @@ namespace JudoSystem.Controllers
         }
 
         // PUT: api/Category/5
-        [HttpPut("{id}"), Authorize]
+        [HttpPut("{id}"), Authorize(Roles = "Admin")]
         public Response updateCategory(int id, [FromBody] CategoryDao newCategory)
         {
             Response res = new Response();
@@ -88,7 +88,7 @@ namespace JudoSystem.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public Response deleteCategory(int id)
         {
             Response res = new Response();

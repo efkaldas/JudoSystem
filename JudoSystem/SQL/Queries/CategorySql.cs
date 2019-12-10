@@ -23,6 +23,17 @@ namespace JudoSystem.SQL.Queries
             }
             return ret;
         }
+        public List<CategoryDao> getCategoriesByGroup(int groupID)
+        {
+            List<CategoryDao> ret;
+            using (var db = getConnection())
+            {
+                const string sql = @"SELECT * FROM categories where groupID = @groupID";
+
+                ret = db.Query<CategoryDao>(sql, new { groupID }, commandType: CommandType.Text).ToList();
+            }
+            return ret;
+        }
         public CategoryDao getCategoryById(int id)
         {
             CategoryDao ret;

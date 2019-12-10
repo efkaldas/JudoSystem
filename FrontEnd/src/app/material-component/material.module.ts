@@ -41,6 +41,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LogoutComponent } from '../component/logout/logout.component';
 import { RegistrationComponent } from '../component/registration/registration.component';
 import { RegistrationApiService } from '../services/registration.service';
+import { EventComponent } from '../component/event/event.component';
 
 @NgModule({
   imports: [
@@ -77,7 +78,8 @@ import { RegistrationApiService } from '../services/registration.service';
     LoginComponent,
     JudokaComponent,
     LogoutComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    EventComponent
   ]
 })
 export class MaterialComponentsModule {}

@@ -10,6 +10,7 @@ namespace JudoSystem.SQL.Interfaces
     public interface IJudokaSql
     {
         List<JudokaDao> getJudokas();
+        List<JudokaDao> getUserJudokas(int userID);
         JudokaDao getJudokaById(int id);
         void insertJudoka(JudokaDao judoka);
         void updateJudoka(JudokaDao judoka);

@@ -20,6 +20,7 @@ import { JudokaComponent } from '../component/judoka/judoka.component';
 import { LoginComponent } from '../component/login/login.component';
 import { LogoutComponent } from '../component/logout/logout.component';
 import { RegistrationComponent } from '../component/registration/registration.component';
+import { EventComponent } from '../component/event/event.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -101,5 +102,9 @@ export const MaterialRoutes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent
+  },
+  {
+    path: 'events',
+    component: EventComponent
   }
 ];

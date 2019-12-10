@@ -34,6 +34,17 @@ namespace JudoSystem.SQL.Queries
             }
             return ret;
         }
+        public List<AgeGroupDao> getAgeGroupsByEvent(int eventId)
+        {
+            List<AgeGroupDao> ret;
+            using (var db = getConnection())
+            {
+                const string sql = @"SELECT * FROM age_groups where eventID = @eventId";
+
+                ret = db.Query<AgeGroupDao>(sql, new { eventId }, commandType: CommandType.Text).ToList();
+            }
+            return ret;
+        }
         public void insertAgeGroup(AgeGroupDao newAgeGroup)
         {
             using (var db = getConnection())

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using JudoSystem.Models;
 using JudoSystem.Models.Dao;
@@ -18,7 +19,7 @@ namespace JudoSystem.Controllers
     {
         static IJudokaSql judokaSql = new JudokaSql();
         // GET: api/Judoka
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Roles="Admin, User")]
         public Response getJudokas()
         {
             Response res = new Response();
@@ -26,6 +27,24 @@ namespace JudoSystem.Controllers
             {
                 List<JudokaDao> judokas = new List<JudokaDao>();
                 judokas = judokaSql.getJudokas();
+                res.success(judokas);
+            }
+            catch (Exception e)
+            {
+                res.error(e.Message);
+            }
+            return res;
+        }
+        [Route("UserJudokas")]
+        [HttpGet, Authorize(Roles = "Admin, User")]
+        public Response getUserJudokas()
+        {
+            Response res = new Response();
+            try
+            {
+                string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+                List<JudokaDao> judokas = new List<JudokaDao>();
+                judokas = judokaSql.getUserJudokas(Convert.ToInt32(userId));
                 res.success(judokas);
             }
             catch (Exception e)
@@ -58,6 +77,14 @@ namespace JudoSystem.Controllers
             Response res = new Response();
             try
             {
+                if (newJudoka.UserId != 0)
+                {
+                    throw new Exception("U can't do it");
+                }
+                string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+
+                newJudoka.UserId = Convert.ToInt32(userId);
+
                 judokaSql.insertJudoka(newJudoka);
                 res.success(newJudoka);
             }

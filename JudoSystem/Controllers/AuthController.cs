@@ -9,6 +9,8 @@ using JudoSystem.Authentication;
 using JudoSystem.Models;
 using JudoSystem.Models.Dto;
 using JudoSystem.Services;
+using JudoSystem.SQL.Interfaces;
+using JudoSystem.SQL.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,7 @@ namespace JudoSystem.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        IUserSql userSql = new UserSql();
         private readonly IConfiguration configuration;
 
         public AuthController(IConfiguration configuration)
@@ -38,7 +41,8 @@ namespace JudoSystem.Controllers
                 UserService userService = new UserService();
                 if (userService.checkUser(userDto))
                 {
-                    string token = authService.generateToken(configuration);
+                    UserDao user = userSql.getByName(userDto.Username);
+                    string token = authService.generateToken(configuration, user);
                     response.success(token);
                 }
                 else

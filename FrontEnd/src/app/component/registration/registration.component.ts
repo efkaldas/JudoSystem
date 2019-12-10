@@ -33,13 +33,12 @@ export class RegistrationComponent implements OnInit {
   public onSubmit()
   {
     this.newUser = this.registrationForm.value;
-    console.log(this.newUser);
     this.apiService.Register(this.newUser)
     .subscribe(
       data => {
         if (data['status'] == 'success')  {
-          this.message = "Login success" ;
-          console.log("error");  
+          this.router.navigate(['/login']);
+          this.message = (data['message']);
         } else {
           console.log("error");
           this.message = data['message'];
@@ -48,7 +47,7 @@ export class RegistrationComponent implements OnInit {
       error => {
         if (error.status == 401) {
           console.log(error);
-   //       this.apiService.logout();        
+          this.apiService.logout();        
           this.router.navigate(['/login']);
         } else {
           this.message = error.message;

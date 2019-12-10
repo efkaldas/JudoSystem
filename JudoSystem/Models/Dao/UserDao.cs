@@ -8,6 +8,9 @@ namespace JudoSystem.Models
 {
     public class UserDao
     {
+        public static readonly string ADMIN = "Admin";
+        public static readonly string USER = "User";
+
         public int Id { get; set; }
         public int UserRole { get; set; }
         public string Username { get; set; }

@@ -15,11 +15,11 @@ namespace JudoSystem.Services
         {
             List<UserDao> users = new List<UserDao>();
             users = usersSql.getUsers();
-            UserDao user = usersSql.getByName(userDto.username);
+            UserDao user = usersSql.getByName(userDto.Username);
             if (user == null)
                 return false;
             else
-                return verifyPassword(userDto.password, user);
+                return verifyPassword(userDto.Password, user);
 
             //    bool logInResult = VerifyPasswordHash(userDto.password, user.passwordHash, user.passwordSalt);
         }

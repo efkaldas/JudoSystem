@@ -1,8 +1,9 @@
 export class Judoka {
-    id: number;
-    lastName: string;
-    firstName: string;
-    gender: number;
-    danKyu: number;
-    userId: number;
+    Id: number;
+    LastName: string;
+    FirstName: string;
+    Gender: number;
+    DanKyu: number;
+    BirthYears: number;
+    UserId: number;
 }
