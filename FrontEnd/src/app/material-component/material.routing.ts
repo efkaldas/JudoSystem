@@ -21,6 +21,7 @@ import { LoginComponent } from '../component/login/login.component';
 import { LogoutComponent } from '../component/logout/logout.component';
 import { RegistrationComponent } from '../component/registration/registration.component';
 import { EventComponent } from '../component/event/event.component';
+import { EventShowComponent } from '../component/event-show/event-show.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -106,5 +107,9 @@ export const MaterialRoutes: Routes = [
   {
     path: 'events',
     component: EventComponent
+  },
+  {
+    path: 'eventss',
+    component: EventShowComponent
   }
 ];

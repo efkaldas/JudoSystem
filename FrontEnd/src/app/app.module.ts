@@ -27,6 +27,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { EventComponent } from './component/event/event.component';
+import { EventShowComponent } from './component/event-show/event-show.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { EventComponent } from './component/event/event.component';
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent,
+    AppSidebarComponent
   ],
   imports: [
     BrowserModule,

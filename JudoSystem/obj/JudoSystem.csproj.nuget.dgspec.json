@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repos\\JudoSystem\\JudoSystem\\JudoSystem.csproj": {}
+    "C:\\repos\\SimpleIS\\JudoSystem\\JudoSystem.csproj": {}
   },
   "projects": {
-    "C:\\repos\\JudoSystem\\JudoSystem\\JudoSystem.csproj": {
+    "C:\\repos\\SimpleIS\\JudoSystem\\JudoSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\JudoSystem\\JudoSystem\\JudoSystem.csproj",
+        "projectUniqueName": "C:\\repos\\SimpleIS\\JudoSystem\\JudoSystem.csproj",
         "projectName": "JudoSystem",
-        "projectPath": "C:\\repos\\JudoSystem\\JudoSystem\\JudoSystem.csproj",
-        "packagesPath": "C:\\Users\\evkus\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\JudoSystem\\JudoSystem\\obj\\",
+        "projectPath": "C:\\repos\\SimpleIS\\JudoSystem\\JudoSystem.csproj",
+        "packagesPath": "C:\\Users\\Evaldas\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\SimpleIS\\JudoSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\evkus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Evaldas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

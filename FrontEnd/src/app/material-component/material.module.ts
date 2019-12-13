@@ -42,6 +42,7 @@ import { LogoutComponent } from '../component/logout/logout.component';
 import { RegistrationComponent } from '../component/registration/registration.component';
 import { RegistrationApiService } from '../services/registration.service';
 import { EventComponent } from '../component/event/event.component';
+import { EventShowComponent } from '../component/event-show/event-show.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { EventComponent } from '../component/event/event.component';
     JudokaComponent,
     LogoutComponent,
     RegistrationComponent,
-    EventComponent
+    EventComponent,
+    EventShowComponent
   ]
 })
 export class MaterialComponentsModule {}
