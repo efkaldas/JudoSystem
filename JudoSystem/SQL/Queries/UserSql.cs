@@ -12,7 +12,7 @@ namespace JudoSystem.SQL.Queries
 {
     public class UserSql : DataAccess, IUserSql
     {
-        public List<UserDao> getUsers()
+        public List<UserDao> GetUsers()
         {
             List<UserDao> ret;
             using (var db = getConnection())
@@ -23,41 +23,42 @@ namespace JudoSystem.SQL.Queries
             }
             return ret;
         }
-        public void insertUser(UserDao newUser)
+        public void InsertUser(UserDao newUser)
         {
             using (var db = getConnection())
             {
-                const string sql = @"INSERT INTO Users (UserRole, Username, ClubName, FirstName, LastName, Country, City,
-                                            Email, Password, DateCreated, DateUpdated)
-                                        VALUES (@UserRole, @Username, @ClubName, @FirstName, @LastName, @Country, @City,
-                                            @Email, @Password, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+                const string sql = @"INSERT INTO Users (role, parentUser, email, firstname, lastname, phoneNumber,
+                                            status, organizationId, password, dateCreated, dateUpdated)
+                                        VALUES (@Role, @ParentUser, @Email, @Firstname, @Lastname, @PhoneNumber, @Status,
+                                            @OrganizationId, @Password, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
                 db.Execute(sql, new
                 {
-                    newUser.UserRole,
-                    newUser.Username,
-                    newUser.ClubName,
-                    newUser.FirstName,
-                    newUser.LastName,
-                    newUser.Country,
-                    newUser.City,
+                    newUser.Role,
+                    newUser.ParentUser,
                     newUser.Email,
-                    newUser.Password
+                    newUser.Firstname,
+                    newUser.Lastname,
+                    newUser.PhoneNumber,
+                    newUser.Status,
+                    newUser.OrganizationId,
+                    newUser.Password,
                 },
                     commandType: CommandType.Text);
             }
         }
-        public UserDao getByName(string username)
+        public UserDao GetByMail(string email)
         {
-            List<UserDao> ret;
+            UserDao ret;
             using (var db = getConnection())
             {
-                const string sql = @"SELECT * FROM Users WHERE username = @username";
+                const string sql = @"SELECT * FROM Users WHERE email = @email";
 
-                ret = db.Query<UserDao>(sql, new { username }, commandType: CommandType.Text).ToList();
+                ret = db.Query<UserDao>(sql, new { email }, commandType: CommandType.Text).FirstOrDefault();
             }
-            return ret.First();
+            return ret;
         }
-        public UserDao getUserById(int id)
+        public UserDao GetUser(int id)
         {
             UserDao ret;
             using (var db = getConnection())
@@ -68,31 +69,31 @@ namespace JudoSystem.SQL.Queries
             }
             return ret;
         }
-        public void updateUser(UserDao newUser)
+        public void UpdateUser(UserDao newUser)
         {
             using (var db = getConnection())
             {
-                const string sql = @"UPDATE Events SET UserRole = @UserRole, Username = @Username,
-                                        ClubName = @ClubName, FirstName = @FirstName, LastName = @LastName,
-                                        Country = @Country,  City = @City, Email = @Email,
-                                        Password = @Password, WHERE id = @id";
+                const string sql = @"UPDATE Users SET role = @Role, parentUser = @ParentUser,
+                                        email = @Email, firstname = @Firstname, lastname = @Lastname,
+                                        phoneNumber = @PhoneNumber, status = @Status, organizationId = @OrganizationId,
+                                        password = @Password, dateUpdated = CURRENT_TIMESTAMP WHERE id = @id";
                 db.Execute(sql, new
                 {
-                    newUser.UserRole,
-                    newUser.Username,
-                    newUser.ClubName,
-                    newUser.FirstName,
-                    newUser.LastName,
-                    newUser.Country,
-                    newUser.City,
+                    newUser.Role,
+                    newUser.ParentUser,
                     newUser.Email,
+                    newUser.Firstname,
+                    newUser.Lastname,
+                    newUser.PhoneNumber,
+                    newUser.Status,
+                    newUser.OrganizationId,
                     newUser.Password,
                     newUser.Id,
                 },
                     commandType: CommandType.Text);
             }
         }
-        public void deleteUser(int id)
+        public void DeleteUser(int id)
         {
             using (var db = getConnection())
             {

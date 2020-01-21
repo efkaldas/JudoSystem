@@ -26,13 +26,22 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="Gender">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+      <ng-container *matCellDef="let element">
+        <td mat-cell  *ngIf="element.gender === 1"> Man </td>
+        <td mat-cell  *ngIf="element.gender === 2"> Woman </td>
+      </ng-container>
+
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="DanKyu">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
       <td mat-cell *matCellDef="let element"> {{element.danKyu}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="BirthYears">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
+      <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
     </ng-container>
 
         <!-- Symbol Column -->
@@ -43,7 +52,7 @@
               <mat-grid-tile
                 [colspan]="1"
                 [rowspan]="1">
-                <button mat-raised-button routerLink="/button" color="accent"><mat-icon>edit</mat-icon> Edit </button>
+                <button mat-raised-button (click)="openDialog(addJudokaModal)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
               </mat-grid-tile>
               <mat-grid-tile
               [colspan]="1"
@@ -102,7 +111,7 @@
 </ng-template>
 
 <ng-template #editJudokaModal>
-    <h1 mat-dialog-title>Add judoka</h1>
+    <h1 mat-dialog-title>Edit judoka</h1>
   <div mat-dialog-content>
     <form [formGroup]="judokaForm" novalidate (ngSubmit)="addJudoka()" color="accent">
       <mat-form-field>

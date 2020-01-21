@@ -8,11 +8,11 @@ namespace JudoSystem.SQL.Interfaces
 {
     public interface IUserSql
     {
-        List<UserDao> getUsers();
-        void insertUser(UserDao newUser);
-        UserDao getByName(string username);
-        UserDao getUserById(int id);
-        void updateUser(UserDao judoka);
-        void deleteUser(int id);
+        List<UserDao> GetUsers();
+        void InsertUser(UserDao newUser);
+        UserDao GetByMail(string email);
+        UserDao GetUser(int id);
+        void UpdateUser(UserDao judoka);
+        void DeleteUser(int id);
     }
 }

@@ -12,9 +12,9 @@ namespace JudoSystem.Models.Dao
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal EntryFee { get; set; }
-        public string RegistrationStartDate { get; set; }
-        public string RegistrationEndDate { get; set; }
-        public string EventStartDate { get; set; }
+        public DateTime RegistrationStartDate { get; set; }
+        public DateTime RegistrationEndDate { get; set; }
+        public DateTime EventStartDate { get; set; }
         public List<AgeGroupDao> AgeGroups { get; set; }
 
     }

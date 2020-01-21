@@ -10,7 +10,7 @@ namespace JudoSystem.SQL.Interfaces
     {
         List<AgeGroupDao> getAgeGroups();
         AgeGroupDao getAgeGroupById(int id);
-        void insertAgeGroup(AgeGroupDao newAgeGroup);
+        int insertAgeGroup(AgeGroupDao newAgeGroup);
         void updateAgeGroup(AgeGroupDao newAgeGroup);
         void deleteAgeGroup(int id);
         List<AgeGroupDao> getAgeGroupsByEvent(int eventId);

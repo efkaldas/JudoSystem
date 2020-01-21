@@ -45,14 +45,15 @@ namespace JudoSystem.SQL.Queries
             }
             return ret;
         }
-        public void insertAgeGroup(AgeGroupDao newAgeGroup)
+        public int insertAgeGroup(AgeGroupDao newAgeGroup)
         {
             using (var db = getConnection())
             {
                 const string sql = @"INSERT INTO age_groups (Title, Gender, YearsFrom, YearsTo, EventID)
-                                        VALUES (@Title, @Gender, @YearsFrom, @YearsTo, @EventID)";
+                                        VALUES (@Title, @Gender, @YearsFrom, @YearsTo, @EventID);
+                                        SELECT LAST_INSERT_ID();";
 
-                db.Execute(sql, new
+                int groupID = db.Query<int>(sql, new
                 {
                     newAgeGroup.Title,
                     newAgeGroup.Gender,
@@ -60,7 +61,8 @@ namespace JudoSystem.SQL.Queries
                     newAgeGroup.YearsTo,
                     newAgeGroup.EventID
                 },
-                      commandType: CommandType.Text);
+                      commandType: CommandType.Text).First();
+                return groupID;
             }
         }
         public void updateAgeGroup(AgeGroupDao newAgeGroup)

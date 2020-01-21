@@ -13,12 +13,12 @@ namespace JudoSystem.Services
 {
     public class AuthService
     {
-        public string generateToken(IConfiguration configuration, UserDao user)
+        public string GenerateToken(IConfiguration configuration, UserDao user)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-            ClaimsIdentity identity = getClaimsIdentity(user);
+            ClaimsIdentity identity = GetClaimsIdentity(user);
 
             var tokeOptions = new JwtSecurityToken(
                 issuer: configuration["JWT:ValidIssuer"],
@@ -31,7 +31,7 @@ namespace JudoSystem.Services
 
             return tokenString;
         }
-        private ClaimsIdentity getClaimsIdentity(UserDao user)
+        private ClaimsIdentity GetClaimsIdentity(UserDao user)
         {
             Claim[] claims = new[]
             {
@@ -40,12 +40,12 @@ namespace JudoSystem.Services
             };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token");
 
-            if (user.UserRole == 1)
+            if (user.Role == 1)
             {
                 claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserDao.ADMIN));
                 return claimsIdentity;
             }
-            if (user.UserRole == 2)
+            if (user.Role == 2)
             {
                 claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserDao.USER));
                 return claimsIdentity;

@@ -59,7 +59,12 @@ namespace JudoSystem.Controllers
             Response res = new Response();
             try
             {
-                ageGroupSql.insertAgeGroup(newAgeGroup);
+                int groupID = ageGroupSql.insertAgeGroup(newAgeGroup);
+                foreach (CategoryDao category in newAgeGroup.Categories)
+                {
+                    category.GroupID = groupID;
+                    categorySql.insertCategory(category);
+                }
                 res.success(newAgeGroup);
             }
             catch (Exception e)

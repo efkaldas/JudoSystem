@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JudoSystem.Filters;
 using JudoSystem.Models;
 using JudoSystem.SQL.Queries;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +24,7 @@ namespace JudoSystem.Controllers
             try
             {
                 List<UserDao> users = new List<UserDao>();
-                users = userSql.getUsers();
+                users = userSql.GetUsers();
                 res.success(users);
             }
             catch (Exception e)
@@ -49,7 +48,7 @@ namespace JudoSystem.Controllers
             try
             {
                 user.Id = id;
-                userSql.updateUser(user);
+                userSql.UpdateUser(user);
                 res.success(user);
             }
             catch (Exception e)
@@ -66,7 +65,7 @@ namespace JudoSystem.Controllers
             Response res = new Response();
             try
             {
-                userSql.deleteUser(id);
+                userSql.DeleteUser(id);
                 res.success("Removed");
             }
             catch (Exception e)

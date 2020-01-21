@@ -27,6 +27,7 @@
           "Dapper": "2.0.30",
           "Microsoft.AspNet.WebApi.Core": "5.2.7",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.0.0",
+          "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "3.0.0",
           "Microsoft.Extensions.Logging.Debug": "3.0.0",
@@ -644,6 +645,14 @@
           "lib/netstandard2.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll": {}
         }
       },
+      "Microsoft.CodeAnalysis.FxCopAnalyzers/2.9.8": {
+        "dependencies": {
+          "Microsoft.CodeAnalysis.VersionCheckAnalyzer": "2.9.8",
+          "Microsoft.CodeQuality.Analyzers": "2.9.8",
+          "Microsoft.NetCore.Analyzers": "2.9.8",
+          "Microsoft.NetFramework.Analyzers": "2.9.8"
+        }
+      },
       "Microsoft.CodeAnalysis.Razor/3.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Razor.Language": "3.0.0",
@@ -660,6 +669,7 @@
           "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.dll": {}
         }
       },
+      "Microsoft.CodeAnalysis.VersionCheckAnalyzer/2.9.8": {},
       "Microsoft.CodeAnalysis.Workspaces.Common/3.3.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.Common": "3.3.0",
@@ -716,6 +726,7 @@
           "lib/netstandard2.0/Microsoft.CodeAnalysis.Workspaces.dll": {}
         }
       },
+      "Microsoft.CodeQuality.Analyzers/2.9.8": {},
       "Microsoft.CSharp/4.6.0": {},
       "Microsoft.Data.SqlClient/1.0.19249.1": {
         "dependencies": {
@@ -977,8 +988,10 @@
           "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll": {}
         }
       },
+      "Microsoft.NetCore.Analyzers/2.9.8": {},
       "Microsoft.NETCore.Platforms/2.1.2": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Microsoft.NetFramework.Analyzers/2.9.8": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/3.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "3.0.0",
@@ -4174,6 +4187,13 @@
       "path": "microsoft.codeanalysis.csharp.workspaces/3.3.0",
       "hashPath": "microsoft.codeanalysis.csharp.workspaces.3.3.0.nupkg.sha512"
     },
+    "Microsoft.CodeAnalysis.FxCopAnalyzers/2.9.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FZhO7S+xinFrcRvPyIxPbFgY0Jg3X+KNkawhg7wwoVxnT/ySdoO162dyIMXfQQ6/qCmjNFHmTDXiNlpPNvKNyQ==",
+      "path": "microsoft.codeanalysis.fxcopanalyzers/2.9.8",
+      "hashPath": "microsoft.codeanalysis.fxcopanalyzers.2.9.8.nupkg.sha512"
+    },
     "Microsoft.CodeAnalysis.Razor/3.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4181,12 +4201,26 @@
       "path": "microsoft.codeanalysis.razor/3.0.0",
       "hashPath": "microsoft.codeanalysis.razor.3.0.0.nupkg.sha512"
     },
+    "Microsoft.CodeAnalysis.VersionCheckAnalyzer/2.9.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iSjqkECKpagJPjzc7sMjD6rQWSznVYqTfUZ96yR0r0jDzA45TymBof350tlOfGDRvn4OrU/KKJav21/oZDttrA==",
+      "path": "microsoft.codeanalysis.versioncheckanalyzer/2.9.8",
+      "hashPath": "microsoft.codeanalysis.versioncheckanalyzer.2.9.8.nupkg.sha512"
+    },
     "Microsoft.CodeAnalysis.Workspaces.Common/3.3.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-XqnerOQKZkDFGPqg+G1xwadwVfvEx+NJ7OLK66C4kg5zr7ITM5vIigJl6z/avMVutYwLH97DpHvyKru5O1gfmw==",
       "path": "microsoft.codeanalysis.workspaces.common/3.3.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.3.3.0.nupkg.sha512"
+    },
+    "Microsoft.CodeQuality.Analyzers/2.9.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KevAiJKuolGKK84jDHMVGJjBAigH/86xyCVtbOzh5avUYzW7jPErdJW708byKKMiVKTwv027mbKCNnnOgNQHsA==",
+      "path": "microsoft.codequality.analyzers/2.9.8",
+      "hashPath": "microsoft.codequality.analyzers.2.9.8.nupkg.sha512"
     },
     "Microsoft.CSharp/4.6.0": {
       "type": "package",
@@ -4377,6 +4411,13 @@
       "path": "microsoft.identitymodel.tokens/5.6.0",
       "hashPath": "microsoft.identitymodel.tokens.5.6.0.nupkg.sha512"
     },
+    "Microsoft.NetCore.Analyzers/2.9.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zbGttCZ8T5wJiBDhgIaFWTrYa/X7zbCnQ76PEu/B4gb64KY+yB9gjkndsKWR+2TbOId76PN7WrSQAn+W7gr5jQ==",
+      "path": "microsoft.netcore.analyzers/2.9.8",
+      "hashPath": "microsoft.netcore.analyzers.2.9.8.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/2.1.2": {
       "type": "package",
       "serviceable": true,
@@ -4390,6 +4431,13 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.NetFramework.Analyzers/2.9.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8fZYJqeKBW5uuKBact26IeOBogchn5Km85klHqHneRY7Jxp+ERtrw8zJVumNFUVL68pIcf4uKPOY7zfBQ7eY3A==",
+      "path": "microsoft.netframework.analyzers/2.9.8",
+      "hashPath": "microsoft.netframework.analyzers.2.9.8.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Web.CodeGeneration/3.0.0": {
       "type": "package",
@@ -4534,7 +4582,7 @@
     "runtime.native.System.IO.Compression/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-INBPonS5QPEgn7naufQFXJEp3zX6L4bwHgJ/ZH78aBTpeNfQMtf7C6VrAFhlq2xxWBveIOWyFzQjJ8XzHMhdOQ==",
+      "sha512": "sha512-b+V9JC/Ii3sR659flBeaBJww111425tgjcDS1k+hqV4sGh9FALRDBvJnDtQ895gAzpPTUOFDHdqaZ2Et7BpZMg==",
       "path": "runtime.native.system.io.compression/4.3.0",
       "hashPath": "runtime.native.system.io.compression.4.3.0.nupkg.sha512"
     },
@@ -4590,7 +4638,7 @@
     "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nyFNiCk/r+VOiIqreLix8yN+q3Wga9+SE8BCgkf+2BwEKiNx6DyvFjCgkfV743/grxv8jHJ8gUK4XEQw7yzRYg==",
+      "sha512": "sha512-T5NvFgmHX0WH4c7lP72krsnk+IJI10vJf2j2twGE+5QBRA4RyRAgD+ZjEgdmpLOjW4B+nZGaadewTCUcR899OQ==",
       "path": "runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
@@ -4688,7 +4736,7 @@
     "System.Collections.NonGeneric/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
+      "sha512": "sha512-LE/oChpRvkSi3U25u0KnJcI44JeDZ1QJCyN4qFDx2uusEypdqR24w7lKYw21eYe5esuCBuc862wRmpF63Yy1KQ==",
       "path": "system.collections.nongeneric/4.3.0",
       "hashPath": "system.collections.nongeneric.4.3.0.nupkg.sha512"
     },
@@ -4723,7 +4771,7 @@
     "System.ComponentModel.TypeConverter/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-16pQ6P+EdhcXzPiEK4kbA953Fu0MNG2ovxTZU81/qsCd1zPRsKc3uif5NgvllCY598k6bI0KUyKW8fanlfaDQg==",
+      "sha512": "sha512-HZiP0DwTHJ+C+rdFqP47nBYUh5283kcwXIGY2zOVVhsJmVI/2tYiX2zNRdjRQRHsTox58Ydkec6h0pWSh8wAsw==",
       "path": "system.componentmodel.typeconverter/4.3.0",
       "hashPath": "system.componentmodel.typeconverter.4.3.0.nupkg.sha512"
     },

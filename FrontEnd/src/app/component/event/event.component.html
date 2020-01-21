@@ -1,16 +1,19 @@
+<script type="text/javascript" src="/static/inline.bundle.js"></script>
 <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button (click)="openDialog(addEventModal)" color="primary">+<mat-icon>event</mat-icon> Add Event </button>
+    <button mat-raised-button (click)="openDialog(addEventModal, $event)" color="primary">+<mat-icon>event</mat-icon> Add Event </button>
 </div><br>
 
-<div fxLayout="row" fxLayoutWrap="wrap">
+<div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let event of eventsList">
     <!-- column -->
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
         <mat-card>
             <mat-card-content>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="end center">
-                    <button mat-raised-button (click)="openDialog(addGroupModal)" color="primary"><mat-icon>group_add</mat-icon> Add Age Group </button>
+                    <button mat-raised-button (click)="openDialog(addGroupModal, event.id)" color="primary"><mat-icon>group_add</mat-icon> Add Age Group </button>
                 </div>
+                <a attr.href="{{event.id}}-event-show"><h1>{{event.title}}</h1></a>
+                <small>{{event.eventStartDate}}</small>
             </mat-card-content>
         </mat-card>
     </div>
@@ -56,7 +59,7 @@
 <ng-template #addGroupModal>
     <h1 mat-dialog-title>Add Age Group</h1>
     <div mat-dialog-content>
-        <form [formGroup]="groupForm" novalidate (ngSubmit)="addGroup()" color="accent">
+        <form [formGroup]="groupForm" novalidate (ngSubmit)="addAgeGroup()" color="accent">
             <mat-form-field>
                 <input autofocus type="text" matInput placeholder="Title" required formControlName="Title">
             </mat-form-field>
@@ -81,7 +84,7 @@
             <mat-form-field class="demo-chip-list">
                 <mat-chip-list #chipList>
                     <mat-chip *ngFor="let category of categories" [selectable]="selectable" [removable]="removable" (removed)="remove(category)">
-                        {{category.name}}
+                        {{category.Title}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
                     <input placeholder="New category..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />

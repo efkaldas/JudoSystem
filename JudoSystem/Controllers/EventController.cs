@@ -19,7 +19,7 @@ namespace JudoSystem.Controllers
         static IEventSql eventSql = new EventSql();
         static IAgeGroupSql ageGroupSql = new AgeGroupSql();
         // GET: api/Event
-        [HttpGet, Authorize(Roles = "User")]
+        [HttpGet, Authorize(Roles = "Admin, User")]
         public Response getEventList()
         {
             Response res = new Response();
@@ -85,6 +85,7 @@ namespace JudoSystem.Controllers
             }
             return res;
         }
+
 
         // PUT: api/Event/5
         [HttpPut("{id}"), Authorize]

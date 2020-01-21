@@ -22,7 +22,7 @@ export class JudokaComponent implements OnInit {
   source : MatTableDataSource<Judoka>;
   dataSource = new MatTableDataSource;
   newJudoka: Judoka;
-  displayedColumns: string[] = ['Position', 'LastName', 'FirstName', 'Gender', 'DanKyu', 'Actions'];
+  displayedColumns: string[] = ['Position', 'LastName', 'FirstName', 'Gender', 'DanKyu', 'BirthYears', 'Actions'];
   genders: any[] = [
     {value: 1, viewValue: 'Man'},
     {value: 2, viewValue: 'Woman'},
