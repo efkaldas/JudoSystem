@@ -1,0 +1,1 @@
+/* Migration Script 200122104256_CREATE_TABLE_JUDOKAS.sql */
