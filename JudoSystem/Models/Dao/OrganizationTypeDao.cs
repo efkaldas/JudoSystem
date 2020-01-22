@@ -8,8 +8,8 @@ namespace JudoSystem.Models.Dao
     public class OrganizationTypeDao
     {
         public int Id { get; set; }
-        public string TypeNameLt { get; set; }
-        public string TypeNameEn { get; set; }
-        public string TypeNameRu { get; set; }
+        public string TypeNameLT { get; set; }
+        public string TypeNameEN { get; set; }
+        public string TypeNameRU { get; set; }
     }
 }
