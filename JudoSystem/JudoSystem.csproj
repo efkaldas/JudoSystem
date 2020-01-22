@@ -8,14 +8,24 @@
     <None Remove="Scripts\191122203203_CREATE_TABLE_USERS.sql" />
     <None Remove="Scripts\200120190000_CREATE_TABLE_ORGANIZATION_TYPES.sql" />
     <None Remove="Scripts\200120192445_CREATE_TABLE_ORGANIZATION.sql" />
-    <None Remove="Scripts\200120201054_INSERT_INTO_TABLE_ORGANIZATION_TYPES.sql" />
+    <None Remove="Scripts\200120201054_SEED_TABLE_ORGANIZATION_TYPES.sql" />
+    <None Remove="Scripts\200122103600_CREATE_TABLE_GENDER.sql" />
+    <None Remove="Scripts\200122103610_CREATE_TABLE_DANKYU.sql" />
+    <None Remove="Scripts\200122104256_CREATE_TABLE_JUDOKAS.sql" />
+    <None Remove="Scripts\200122110628_SEED_TABLE_GENDER.sql" />
+    <None Remove="Scripts\200122163521_SEED_TABLE_DANKYU.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\191122203203_CREATE_TABLE_USERS.sql" />
     <EmbeddedResource Include="Scripts\200120192445_CREATE_TABLE_ORGANIZATION.sql" />
     <EmbeddedResource Include="Scripts\200120190000_CREATE_TABLE_ORGANIZATION_TYPES.sql" />
-    <EmbeddedResource Include="Scripts\200120201054_INSERT_INTO_TABLE_ORGANIZATION_TYPES.sql" />
+    <EmbeddedResource Include="Scripts\200120201054_SEED_TABLE_ORGANIZATION_TYPES.sql" />
+    <EmbeddedResource Include="Scripts\200122104256_CREATE_TABLE_JUDOKAS.sql" />
+    <EmbeddedResource Include="Scripts\200122103600_CREATE_TABLE_GENDER.sql" />
+    <EmbeddedResource Include="Scripts\200122103610_CREATE_TABLE_DANKYU.sql" />
+    <EmbeddedResource Include="Scripts\200122110628_SEED_TABLE_GENDER.sql" />
+    <EmbeddedResource Include="Scripts\200122163521_SEED_TABLE_DANKYU.sql" />
   </ItemGroup>
 
   <ItemGroup>

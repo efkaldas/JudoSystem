@@ -17,7 +17,7 @@ namespace JudoSystem.SQL.Queries
             List<OrganizationDao> ret;
             using (var db = getConnection())
             {
-                const string sql = @"SELECT * FROM Organzations";
+                const string sql = @"SELECT * FROM Organzation";
 
                 ret = db.Query<OrganizationDao>(sql, commandType: CommandType.Text).ToList();
             }
@@ -28,7 +28,7 @@ namespace JudoSystem.SQL.Queries
             OrganizationDao ret;
             using (var db = getConnection())
             {
-                const string sql = @"SELECT * FROM Organzations where user_id = @userId";
+                const string sql = @"SELECT * FROM Organzation where user_id = @userId";
 
                 ret = db.Query<OrganizationDao>(sql, new { userId }, commandType: CommandType.Text).FirstOrDefault();
             }
@@ -39,7 +39,7 @@ namespace JudoSystem.SQL.Queries
             OrganizationDao ret;
             using (var db = getConnection())
             {
-                const string sql = @"SELECT * FROM Organzations where id = @id";
+                const string sql = @"SELECT * FROM Organzation where id = @id";
 
                 ret = db.Query<OrganizationDao>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
             }
@@ -49,7 +49,7 @@ namespace JudoSystem.SQL.Queries
         {
             using (var db = getConnection())
             {
-                const string sql = @"INSERT INTO Organizations (name, country, city, typeId)
+                const string sql = @"INSERT INTO Organization (name, country, city, typeId)
                                         VALUES (@Name, @Country, @City, @TypeId);
                                      SELECT LAST_INSERT_ID();";
 
@@ -67,7 +67,7 @@ namespace JudoSystem.SQL.Queries
         {
             using (var db = getConnection())
             {
-                const string sql = @"UPDATE Organzations SET name = @Name, country = @Country,
+                const string sql = @"UPDATE Organzation SET name = @Name, country = @Country,
                                         city = @City, type_id = @typeId WHERE id = @id";
                 db.Execute(sql, new
                 {
@@ -84,7 +84,7 @@ namespace JudoSystem.SQL.Queries
         {
             using (var db = getConnection())
             {
-                const string sql = @"DELETE FROM Organzations WHERE id = @id";
+                const string sql = @"DELETE FROM Organzation WHERE id = @id";
 
                 db.Execute(sql, new { id }, commandType: CommandType.Text);
             }

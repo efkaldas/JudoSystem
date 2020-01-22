@@ -1,4 +1,4 @@
-CREATE TABLE Users(
+CREATE TABLE User(
 	id int AUTO_INCREMENT PRIMARY KEY,
 	role int not null,
 	parentUser int default 0,

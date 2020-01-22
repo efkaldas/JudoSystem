@@ -1,1 +1,4 @@
-/* Migration Script 200122110628_SEED_TABLE_GENDER.sql */
+﻿INSERT INTO Gender (textLT, textEN, textRU) values
+('Vyras', 'Male', 'Mужчина'),
+('Moteris', 'Female', 'женщина')
+
