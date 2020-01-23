@@ -8,19 +8,41 @@ import {
   Directive,
   AfterViewInit
 } from '@angular/core';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MediaMatcher } from '@angular/cdk/layout';
+
+
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { LoginApiService } from '../../../services/login.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: []
 })
 export class AppSidebarComponent implements OnDestroy {
+  public config: PerfectScrollbarConfigInterface = {};
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
+  status: boolean = true;
+  
+  itemSelect:number[]=[]
+  parentIndex : Number;
+  childIndex : Number;
 
+  setClickedRow(i,j){
+   this.parentIndex=i;
+   this.childIndex = j;
+  }
+  subclickEvent() {
+    this.status = true;
+  }
+  scrollToTop(){
+  	document.querySelector('.page-wrapper').scroll({
+  	top: 0,
+  	left: 0
+	});
+  }	
+  
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,

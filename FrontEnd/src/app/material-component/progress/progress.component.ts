@@ -10,5 +10,4 @@ export class ProgressComponent {
   mode = 'determinate';
   value = 50;
   bufferValue = 75;
-
 }

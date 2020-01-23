@@ -5,6 +5,7 @@ export interface DemoColor {
   name: string;
   color: string;
 }
+
 @Component({
   selector: 'app-chips',
   templateUrl: './chips.component.html',
@@ -16,17 +17,17 @@ export class ChipsComponent {
   removable = true;
   addOnBlur = true;
 
-  availableColors: DemoColor[] = [
-    { name: 'none', color: 'gray' },
-    { name: 'Primary', color: 'primary' },
-    { name: 'Accent', color: 'accent' },
-    { name: 'Warn', color: 'warn' }
-  ];
-
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
 
   fruits = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
+
+  availableColors: DemoColor[] = [
+    {name: 'none', color: undefined},
+    {name: 'Primary', color: 'primary'},
+    {name: 'Accent', color: 'accent'},
+    {name: 'Warn', color: 'warn'}
+  ];
 
   add(event: MatChipInputEvent): void {
     const input = event.input;

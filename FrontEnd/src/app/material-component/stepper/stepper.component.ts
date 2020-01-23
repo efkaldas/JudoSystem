@@ -10,6 +10,8 @@ export class StepperComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  isOptional = false;
+  isEditable = false;
 
   constructor(private _formBuilder: FormBuilder) {}
 

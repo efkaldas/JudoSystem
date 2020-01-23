@@ -1,4 +1,4 @@
-import * as $ from 'jquery';
+
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import {
@@ -8,25 +8,46 @@ import {
   OnDestroy,
   ViewChild,
   HostListener,
-  Directive,
-  AfterViewInit
+  Directive
 } from '@angular/core';
 import { MenuItems } from '../../shared/menu-items/menu-items';
 import { AppHeaderComponent } from './header/header.component';
 import { AppSidebarComponent } from './sidebar/sidebar.component';
+import { AppBreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+
+import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
 /** @title Responsive sidenav */
 @Component({
   selector: 'app-full-layout',
   templateUrl: 'full.component.html',
-  styleUrls: ['./full.component.css']
+  styleUrls: []
 })
-export class FullComponent implements OnDestroy, AfterViewInit {
+export class FullComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+  dir = 'ltr';
+  green: boolean;
+  blue: boolean;
+  dark: boolean;
+  minisidebar: boolean;
+  boxed: boolean;
+  danger: boolean;
+  showHide: boolean;
+  url: string;
+  sidebarOpened;
+  status = false;
 
+  public showSearch = false;
+
+  public config: PerfectScrollbarConfigInterface = {};
   private _mobileQueryListener: () => void;
 
+  clickEvent() {
+    this.status = !this.status;
+  }
+
   constructor(
+    public router: Router,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public menuItems: MenuItems
@@ -39,5 +60,7 @@ export class FullComponent implements OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-  ngAfterViewInit() {}
+
+
+  // Mini sidebar
 }

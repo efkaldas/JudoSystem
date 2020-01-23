@@ -1,9 +1,15 @@
 <mat-card>
-  <mat-card-content>    
-  <mat-card-title>Buttons</mat-card-title>
-      <mat-card-subtitle>Angular Material buttons are native <code> button or a </code> elements enhanced with Material Design styling and ink ripples. <code><a href="https://material.angular.io/components/button/overview" target="_blank">Official Doc</a></code></mat-card-subtitle>
-  
-      <h4>Basic Buttons <br/><code class="bg-light">&lt;button mat-button color="primary"&gt;Primary&lt;/button&gt;</code></h4>
+  <mat-card-content>
+    <mat-card-title>Buttons</mat-card-title>
+    <mat-card-subtitle>Angular Material buttons are native
+      <code> button or a </code> elements enhanced with Material Design styling and ink ripples.
+      <code><a href="https://material.angular.io/components/button/overview" target="_blank">Official Doc</a></code>
+    </mat-card-subtitle>
+
+    <h4>Basic Buttons</h4>
+    <h4>
+      <code class="bg-light">&lt;button mat-button color="primary"&gt;Primary&lt;/button&gt;</code>
+    </h4>
     <div class="button-row">
       <button mat-button>Basic</button>
       <button mat-button color="primary">Primary</button>
@@ -13,7 +19,10 @@
       <a mat-button routerLink=".">Link</a>
     </div>
 
-    <h4>Raised Buttons <br/><code class="bg-light">&lt;button mat-raised-button color="primary"&gt;Primary&lt;/button&gt;</code></h4>
+    <h4>Raised Buttons</h4>
+    <h4>
+      <code class="bg-light">&lt;button mat-raised-button color="primary"&gt;Primary&lt;/button&gt;</code>
+    </h4>
     <div class="button-row">
       <button mat-raised-button>Basic</button>
       <button mat-raised-button color="primary">Primary</button>
@@ -23,7 +32,10 @@
       <a mat-raised-button routerLink=".">Link</a>
     </div>
 
-    <h4>Icon Buttons <br/><code class="bg-light">&lt;button mat-icon-button color="primary"&gt; <br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;mat-icon aria-label="Example icon-button with a heart icon"&gt;favorite&lt;/mat-icon&gt;<br/>&lt;/button&gt;</code></h4>
+    <h4>Icon Buttons</h4>
+    <h4>
+      <code class="bg-light">&lt;button mat-icon-button color="primary"&gt; <br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;mat-icon aria-label="Example icon-button with a heart icon"&gt;favorite&lt;/mat-icon&gt;<br/>&lt;/button&gt;</code>
+    </h4>
     <div class="button-row">
       <button mat-icon-button>
         <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
@@ -42,7 +54,10 @@
       </button>
     </div>
 
-    <h4>Fab Buttons <br/><code class="bg-light">&lt;button mat-fab color="primary"&gt;Primary&lt;/button&gt;</code></h4>
+    <h4>Fab Buttons</h4>
+    <h4>
+      <code class="bg-light">&lt;button mat-fab color="primary"&gt;Primary&lt;/button&gt;</code>
+    </h4>
     <div class="button-row">
       <button mat-fab>Basic</button>
       <button mat-fab color="primary">Primary</button>
@@ -55,7 +70,10 @@
       <a mat-fab routerLink=".">Link</a>
     </div>
 
-    <h4>Mini Fab Buttons <br/><code class="bg-light">&lt;button mat-mini-fab color="primary"&gt;Primary&lt;/button&gt;</code></h4>
+    <h4>Mini Fab Buttons</h4>
+    <h4>
+      <code class="bg-light">&lt;button mat-mini-fab color="primary"&gt;Primary&lt;/button&gt;</code>
+    </h4>
     <div class="button-row">
       <button mat-mini-fab>Base</button>
       <button mat-mini-fab color="primary">Pri</button>
@@ -67,7 +85,7 @@
       </button>
       <a mat-mini-fab routerLink=".">Link</a>
     </div>
-    <h4>Button toggle </h4>  
+    <h4>Button toggle </h4>
     <mat-button-toggle-group #group="matButtonToggleGroup">
       <mat-button-toggle value="left">
         <mat-icon>format_align_left</mat-icon>
@@ -82,6 +100,7 @@
         <mat-icon>format_align_justify</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
-    <div class="m-t-20">Selected value: {{group.value}}</div>  
+    <div class="m-t-20">Selected value: {{group.value}}</div>
+
   </mat-card-content>
 </mat-card>
