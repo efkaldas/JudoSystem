@@ -20,7 +20,7 @@ namespace JudoSystem.Controllers
         static IJudokaSql judokaSql = new JudokaSql();
         // GET: api/Judoka
         [HttpGet, Authorize(Roles="Admin, User")]
-        public Response getJudokas()
+        public Response GetJudokas()
         {
             Response res = new Response();
             try
@@ -35,9 +35,8 @@ namespace JudoSystem.Controllers
             }
             return res;
         }
-        [Route("UserJudokas")]
-        [HttpGet, Authorize(Roles = "Admin, User")]
-        public Response getUserJudokas()
+        [HttpGet("UserJudokas", Name = "GetUserJudokas"), Authorize(Roles = "Admin, User")]
+        public Response GetUserJudokas()
         {
             Response res = new Response();
             try
@@ -53,8 +52,8 @@ namespace JudoSystem.Controllers
             }
             return res;
         }
-        [HttpGet("{id}", Name = "getJudoka"), Authorize]
-        public Response getJudoka(int id)
+        [HttpGet("{id}", Name = "GetJudoka"), Authorize]
+        public Response GetJudoka(int id)
         {
             Response res = new Response();
             try
@@ -72,7 +71,7 @@ namespace JudoSystem.Controllers
 
         // POST: api/Judoka
         [HttpPost, Authorize]
-        public Response createJudoka([FromBody] JudokaDao newJudoka)
+        public Response CreateJudoka([FromBody] JudokaDao newJudoka)
         {
             Response res = new Response();
             try
@@ -97,7 +96,7 @@ namespace JudoSystem.Controllers
 
         // PUT: api/Judoka/5
         [HttpPut("{id}"), Authorize]
-        public Response updateJudoka(int id, [FromBody]JudokaDao judoka)
+        public Response UpdateJudoka(int id, [FromBody]JudokaDao judoka)
         {
             Response res = new Response();
             try
@@ -114,7 +113,7 @@ namespace JudoSystem.Controllers
         }
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}"), Authorize]
-        public Response deleteJudokas(int id)
+        public Response DeleteJudoka(int id)
         {
             Response res = new Response();
             try
