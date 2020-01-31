@@ -12,10 +12,9 @@ namespace JudoSystem.Services
 {
     public class LoginService
     {
-        IUserSql usersSql = new UserSql();
-        public UserDao GetLoggedUser(UserDto userDto)
+        public User GetLoggedUser(UserDto userDto, JudoDbContext db)
         {
-            UserDao user = usersSql.GetByMail(userDto.Email);
+            User user = db.User.ToList().Find(x => x.Email == userDto.Email);
             if (user == null)
                 throw new Exception("Incorrect email");
             else if (IsPasswordCorrect(StringHelper.HashPassword(userDto.Password), user))
@@ -24,7 +23,7 @@ namespace JudoSystem.Services
                 throw new Exception("Incorrect password");
         }
 
-        private bool IsPasswordCorrect(string password, UserDao user)
+        private bool IsPasswordCorrect(string password, User user)
         {
             if (password == user.Password)
                 return true;

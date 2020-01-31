@@ -19,14 +19,14 @@ namespace JudoSystem.Controllers
     {
         static IJudokaSql judokaSql = new JudokaSql();
         // GET: api/Judoka
-        [HttpGet, Authorize(Roles="Admin, User")]
+        [HttpGet]
         public Response GetJudokas()
         {
             Response res = new Response();
             try
             {
                 List<JudokaDao> judokas = new List<JudokaDao>();
-                judokas = judokaSql.getJudokas();
+                judokas = judokaSql.GetJudokas();
                 res.success(judokas);
             }
             catch (Exception e)
@@ -43,7 +43,7 @@ namespace JudoSystem.Controllers
             {
                 string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
                 List<JudokaDao> judokas = new List<JudokaDao>();
-                judokas = judokaSql.getUserJudokas(Convert.ToInt32(userId));
+                judokas = judokaSql.GetUserJudokas(Convert.ToInt32(userId));
                 res.success(judokas);
             }
             catch (Exception e)
@@ -58,7 +58,7 @@ namespace JudoSystem.Controllers
             Response res = new Response();
             try
             {
-                JudokaDao newJudoka = judokaSql.getJudokaById(id);
+                JudokaDao newJudoka = judokaSql.GetJudokaById(id);
                 res.success(newJudoka);
             }
             catch (Exception e)
@@ -84,7 +84,7 @@ namespace JudoSystem.Controllers
 
                 newJudoka.UserId = Convert.ToInt32(userId);
 
-                judokaSql.insertJudoka(newJudoka);
+                judokaSql.InsertJudoka(newJudoka);
                 res.success(newJudoka);
             }
             catch (Exception e)
@@ -102,7 +102,7 @@ namespace JudoSystem.Controllers
             try
             {
                 judoka.Id = id;
-                judokaSql.updateJudoka(judoka);
+                judokaSql.UpdateJudoka(judoka);
                 res.success(judoka);
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace JudoSystem.Controllers
             Response res = new Response();
             try
             {
-                judokaSql.deleteJudoka(id);
+                judokaSql.DeleteJudoka(id);
                 res.success("Removed");
             }
             catch (Exception e)

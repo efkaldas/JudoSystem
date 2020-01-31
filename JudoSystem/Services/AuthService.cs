@@ -13,7 +13,7 @@ namespace JudoSystem.Services
 {
     public class AuthService
     {
-        public string GenerateToken(IConfiguration configuration, UserDao user)
+        public string GenerateToken(IConfiguration configuration, User user)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -31,7 +31,7 @@ namespace JudoSystem.Services
 
             return tokenString;
         }
-        private ClaimsIdentity GetClaimsIdentity(UserDao user)
+        private ClaimsIdentity GetClaimsIdentity(User user)
         {
             Claim[] claims = new[]
             {

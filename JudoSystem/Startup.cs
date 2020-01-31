@@ -19,6 +19,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace JudoSystem
 {
@@ -39,17 +41,17 @@ namespace JudoSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            string connectionString = Configuration.GetConnectionString("JudoSystem-db");
+            //string connectionString = Configuration.GetConnectionString("JudoSystem-db");
 
-            DataAccess DataAccess = new DataAccess(connectionString);
+            //DataAccess DataAccess = new DataAccess(connectionString);
 
-            var upgrader = DeployChanges.To
-                .MySqlDatabase(connectionString)
-                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
-                .LogToConsole()
-                .Build();
+            //var upgrader = DeployChanges.To
+            //    .MySqlDatabase(connectionString)
+            //    .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+            //    .LogToConsole()
+            //    .Build();
 
-            var result = upgrader.PerformUpgrade();
+            //var result = upgrader.PerformUpgrade();
 
             services.AddAuthentication(opt =>
             {
@@ -69,8 +71,9 @@ namespace JudoSystem
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SigningKey"]))
                     };
                 });
+            services.AddDbContext<JudoDbContext>(options =>
+    options.UseMySql(Configuration.GetConnectionString("JudoSystem-db")));
 
-            services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

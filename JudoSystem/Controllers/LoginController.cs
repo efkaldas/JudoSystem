@@ -12,10 +12,16 @@ namespace JudoSystem.Controllers
     [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
+        private readonly JudoDbContext db;
+        //public LoginController(JudoDbContext context)
+        //{
+        //    db = context;
+        //}
         private readonly IConfiguration configuration;
-        public LoginController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration, JudoDbContext context)
         {
             this.configuration = configuration;
+            db = context;
         }
 
         [AllowAnonymous]
@@ -27,7 +33,7 @@ namespace JudoSystem.Controllers
             try
             {
                 LoginService userService = new LoginService();
-                UserDao user = userService.GetLoggedUser(userDto);
+                User user = userService.GetLoggedUser(userDto, db);
                 string token = authService.GenerateToken(configuration, user);
 
                 response.success(token);

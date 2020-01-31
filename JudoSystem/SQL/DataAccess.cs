@@ -18,9 +18,9 @@ namespace JudoSystem.Models
         {
         }
 
-        public static MySqlConnection getConnection()
-        {
-            return new MySqlConnection(ConnectionString);
-        }
+        //public static DataAccess getConnection()
+        //{
+        //   // return new MySqlConnection(ConnectionString);
+        //}
     }
 }

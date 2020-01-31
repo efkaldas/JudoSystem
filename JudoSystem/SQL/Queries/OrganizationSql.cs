@@ -15,79 +15,80 @@ namespace JudoSystem.SQL.Queries
         public List<OrganizationDao> GetOrganizations()
         {
             List<OrganizationDao> ret;
-            using (var db = getConnection())
-            {
-                const string sql = @"SELECT * FROM Organzation";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"SELECT * FROM Organzation";
 
-                ret = db.Query<OrganizationDao>(sql, commandType: CommandType.Text).ToList();
-            }
-            return ret;
+            //    ret = db.Query<OrganizationDao>(sql, commandType: CommandType.Text).ToList();
+            //}
+            return null;
         }
         public OrganizationDao GetOrganizationByUserId(int userId)
         {
             OrganizationDao ret;
-            using (var db = getConnection())
-            {
-                const string sql = @"SELECT * FROM Organzation where user_id = @userId";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"SELECT * FROM Organzation where user_id = @userId";
 
-                ret = db.Query<OrganizationDao>(sql, new { userId }, commandType: CommandType.Text).FirstOrDefault();
-            }
-            return ret;
+            //    ret = db.Query<OrganizationDao>(sql, new { userId }, commandType: CommandType.Text).FirstOrDefault();
+            //}
+            return null;
         }
         public OrganizationDao GetOrganization(int id)
         {
             OrganizationDao ret;
-            using (var db = getConnection())
-            {
-                const string sql = @"SELECT * FROM Organzation where id = @id";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"SELECT * FROM Organzation where id = @id";
 
-                ret = db.Query<OrganizationDao>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
-            }
-            return ret;
+            //    ret = db.Query<OrganizationDao>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+            //}
+            return null;
         }
         public int InsertOrganization(OrganizationDao newOrganization)
         {
-            using (var db = getConnection())
-            {
-                const string sql = @"INSERT INTO Organization (name, country, city, typeId)
-                                        VALUES (@Name, @Country, @City, @TypeId);
-                                     SELECT LAST_INSERT_ID();";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"INSERT INTO Organization (name, country, city, typeId)
+            //                            VALUES (@Name, @Country, @City, @TypeId);
+            //                         SELECT LAST_INSERT_ID();";
 
-                return db.Query<int>(sql, new
-                {
-                    newOrganization.Name,
-                    newOrganization.Country,
-                    newOrganization.City,
-                    newOrganization.TypeId,
-                },
-                    commandType: CommandType.Text).Single();
-            }
+            //    return db.Query<int>(sql, new
+            //    {
+            //        newOrganization.Name,
+            //        newOrganization.Country,
+            //        newOrganization.City,
+            //        newOrganization.TypeId,
+            //    },
+            //        commandType: CommandType.Text).Single();
+            //}
+            return 0;
         }
         public void UpdateOrganization(OrganizationDao newOrganization)
         {
-            using (var db = getConnection())
-            {
-                const string sql = @"UPDATE Organzation SET name = @Name, country = @Country,
-                                        city = @City, type_id = @typeId WHERE id = @id";
-                db.Execute(sql, new
-                {
-                    newOrganization.Name,
-                    newOrganization.Country,
-                    newOrganization.City,
-                    newOrganization.TypeId,
-                    newOrganization.Id,
-                },
-                    commandType: CommandType.Text);
-            }
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"UPDATE Organzation SET name = @Name, country = @Country,
+            //                            city = @City, type_id = @typeId WHERE id = @id";
+            //    db.Execute(sql, new
+            //    {
+            //        newOrganization.Name,
+            //        newOrganization.Country,
+            //        newOrganization.City,
+            //        newOrganization.TypeId,
+            //        newOrganization.Id,
+            //    },
+            //        commandType: CommandType.Text);
+            //}
         }
         public void DeleteOrganization(int id)
         {
-            using (var db = getConnection())
-            {
-                const string sql = @"DELETE FROM Organzation WHERE id = @id";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"DELETE FROM Organzation WHERE id = @id";
 
-                db.Execute(sql, new { id }, commandType: CommandType.Text);
-            }
+            //    db.Execute(sql, new { id }, commandType: CommandType.Text);
+            //}
         }
     }
 }
