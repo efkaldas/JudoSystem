@@ -9,12 +9,12 @@ namespace JudoSystem.SQL.Interfaces
 {
     public interface IJudokaSql
     {
-        List<JudokaDao> getJudokas();
-        List<JudokaDao> getUserJudokas(int userID);
-        JudokaDao getJudokaById(int id);
-        void insertJudoka(JudokaDao judoka);
-        void updateJudoka(JudokaDao judoka);
-        void deleteJudoka(int id);
+        List<JudokaDao> GetJudokas();
+        List<JudokaDao> GetUserJudokas(int userId);
+        JudokaDao GetJudokaById(int id);
+        void InsertJudoka(JudokaDao judoka);
+        void UpdateJudoka(JudokaDao judoka);
+        void DeleteJudoka(int id);
 
     }
 }

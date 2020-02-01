@@ -13,11 +13,11 @@ namespace JudoSystem.Services
         private const string MESSAGE_EMAIL_EXIST = "This email allready exists";
 
         IUserSql userSql = new UserSql();
-        public bool IsFormValid(UserDao userDao)
+        public bool IsFormValid(User user, JudoDbContext db)
         {
-            List<UserDao> allUsers = userSql.GetUsers();
+            List<User> allUsers = db.User.ToList();
 
-            if (allUsers.Find(x => x.Email == userDao.Email) != null)
+            if (allUsers.Find(x => x.Email == user.Email) != null)
                 throw new Exception(MESSAGE_EMAIL_EXIST);
             else
                 return true;

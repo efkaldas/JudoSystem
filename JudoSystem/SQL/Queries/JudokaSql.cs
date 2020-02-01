@@ -12,69 +12,69 @@ namespace JudoSystem.SQL.Queries
 {
     public class JudokaSql : DataAccess, IJudokaSql
     {
-        public List<JudokaDao> getJudokas()
+        public List<JudokaDao> GetJudokas()
         {
             List<JudokaDao> ret;
-            using (var db = getConnection())
-            {
-                const string sql = @"SELECT * FROM Judokas";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"SELECT * FROM Judokas";
 
-                ret = db.Query<JudokaDao>(sql, commandType: CommandType.Text).ToList();
-            }
-            return ret;
+            //    ret = db.Query<JudokaDao>(sql, commandType: CommandType.Text).ToList();
+            //}
+            return null;
         }
-        public List<JudokaDao> getUserJudokas(int userID)
+        public List<JudokaDao> GetUserJudokas(int userId)
         {
             List<JudokaDao> ret;
-            using (var db = getConnection())
-            {
-                const string sql = @"SELECT * FROM Judokas where userID=@userID";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"SELECT * FROM Judokas where userId = @userId";
 
-                ret = db.Query<JudokaDao>(sql, new { userID }, commandType: CommandType.Text).ToList();
-            }
-            return ret;
+            //    ret = db.Query<JudokaDao>(sql, new { userId }, commandType: CommandType.Text).ToList();
+            //}
+            return null;
         }
-        public JudokaDao getJudokaById(int id)
+        public JudokaDao GetJudokaById(int id)
         {
             JudokaDao ret;
-            using (var db = getConnection())
-            {
-                const string sql = @"SELECT * FROM Judokas where id = @id";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"SELECT * FROM Judokas where id = @id";
 
-                ret = db.Query<JudokaDao>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
-            }
-            return ret;
+            //    ret = db.Query<JudokaDao>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+            //}
+            return null;
         }
-        public void insertJudoka(JudokaDao judoka)
+        public void InsertJudoka(JudokaDao judoka)
         {
-            using (var db = getConnection())
-            {
-                const string sql = @"INSERT INTO Judokas (lastName, firstName, gender, danKyu, BirthYears, userId)
-                                        VALUES (@lastName, @firstName, @gender, @danKyu, @BirthYears, @userId)";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"INSERT INTO Judokas (lastName, firstName, gender, danKyu, BirthYears, userId)
+            //                            VALUES (@lastName, @firstName, @gender, @danKyu, @BirthYears, @userId)";
 
-                db.Execute(sql, new { judoka.LastName, judoka.FirstName, judoka.Gender, judoka.DanKyu, judoka.BirthYears, judoka.UserId },
-                    commandType: CommandType.Text);
-            }
+            //    db.Execute(sql, new { judoka.LastName, judoka.FirstName, judoka.Gender, judoka.DanKyu, judoka.BirthYears, judoka.UserId },
+            //        commandType: CommandType.Text);
+        //    }
         }
-        public void updateJudoka(JudokaDao judoka)
+        public void UpdateJudoka(JudokaDao judoka)
         {
-            using (var db = getConnection())
-            {
-                const string sql = @"UPDATE Judokas SET lastName = @lastName, firstName = @firstName,
-                                        gender = @gender, danKyu = @danKyu, BirthYears = @BirthYears, userId = @userId WHERE id = @id";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"UPDATE Judokas SET lastName = @lastName, firstName = @firstName,
+            //                            gender = @gender, danKyu = @danKyu, BirthYears = @BirthYears, userId = @userId WHERE id = @id";
 
-                db.Execute(sql, new { judoka.LastName, judoka.FirstName, judoka.Gender, judoka.DanKyu, judoka.BirthYears, judoka.UserId, judoka.Id },
-                    commandType: CommandType.Text);
-            }
+            //    db.Execute(sql, new { judoka.LastName, judoka.FirstName, judoka.Gender, judoka.DanKyu, judoka.BirthYears, judoka.UserId, judoka.Id },
+            //        commandType: CommandType.Text);
+           // }
         }
-        public void deleteJudoka(int id)
+        public void DeleteJudoka(int id)
         {
-            using (var db = getConnection())
-            {
-                const string sql = @"DELETE FROM Judokas WHERE id = @id";
+            //using (var db = getConnection())
+            //{
+            //    const string sql = @"DELETE FROM Judokas WHERE id = @id";
 
-                db.Execute(sql, new { id }, commandType: CommandType.Text);
-            }
+            //    db.Execute(sql, new { id }, commandType: CommandType.Text);
+            //}
         }
     }
 }

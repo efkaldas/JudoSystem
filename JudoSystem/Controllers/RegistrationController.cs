@@ -13,26 +13,31 @@ namespace JudoSystem.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        static IUserSql userSql = new UserSql();
+        private readonly JudoDbContext db;
+        public RegistrationController(JudoDbContext context)
+        {
+            db = context;
+        }
 
         // POST: api/Registration
         [AllowAnonymous]
         [HttpPost]
-        public Response Register([FromBody]UserDao userDao)
+        public Response Register([FromBody]User user)
         {
             Response response = new Response();
             try
             {
                 RegistrationService service = new RegistrationService();
 
-                userDao.Password = StringHelper.HashPassword(userDao.Password);
+                user.Password = StringHelper.HashPassword(user.Password);
 
-                if (service.IsFormValid(userDao))
+                if (service.IsFormValid(user, db))
                 {
-                    userSql.InsertUser(userDao);
+                    db.User.Add(user);
+                    db.SaveChanges();
                 }
 
-                response.success(userDao);
+                response.success(user);
             }
             catch (Exception e)
             {
