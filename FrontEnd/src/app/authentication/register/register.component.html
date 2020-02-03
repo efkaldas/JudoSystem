@@ -11,6 +11,27 @@
             <!-- col full-->
             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
               <mat-form-field style="width: 100%">
+                <input matInput placeholder="Firstname" type="text" [formControl]="form.controls['email']">
+              </mat-form-field>
+              <small *ngIf="form.controls['firstname'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
+            </div>
+            <!-- col full-->
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field style="width: 100%">
+                <input matInput placeholder="Lastname" type="text" [formControl]="form.controls['email']">
+              </mat-form-field>
+              <small *ngIf="form.controls['lastname'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
+            </div>
+            <!-- col full-->
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field style="width: 100%">
+                <input matInput placeholder="Phonenumber" type="text" [formControl]="form.controls['email']">
+              </mat-form-field>
+              <small *ngIf="form.controls['phoneNumber'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
+            </div>
+            <!-- col full-->
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+              <mat-form-field style="width: 100%">
                 <input matInput placeholder="Email address" type="email" [formControl]="form.controls['email']">
               </mat-form-field>
               <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>

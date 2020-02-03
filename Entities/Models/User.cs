@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JudoSystem.Models
+namespace Entities.Models
 {
     public class User
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public int Role { get; set; }
+        public UserRole Role { get; set; }
+        public int RoleId { get; set; }
         public User ParentUser { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
@@ -30,10 +30,10 @@ namespace JudoSystem.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string PhoneNumber { get; set; }
-      //  [Required]
-        public Status Status { get; set; }
-      //  [Required]
+        public UserStatus Status { get; set; }
+        public int StatuId { get; set; }
         public Organization Organization { get; set; }
+        public int? OrganizationId { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]

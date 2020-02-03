@@ -1,14 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="Scripts\**" />
+    <Compile Remove="SQL\Interfaces\**" />
+    <Compile Remove="SQL\Queries\**" />
     <Content Remove="bin\**" />
+    <Content Remove="Scripts\**" />
+    <Content Remove="SQL\Interfaces\**" />
+    <Content Remove="SQL\Queries\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Scripts\**" />
+    <EmbeddedResource Remove="SQL\Interfaces\**" />
+    <EmbeddedResource Remove="SQL\Queries\**" />
     <None Remove="bin\**" />
+    <None Remove="Scripts\**" />
+    <None Remove="SQL\Interfaces\**" />
+    <None Remove="SQL\Queries\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,34 +28,8 @@
     <Compile Remove="Migrations\20200129122940_AddedUser.Designer.cs" />
     <Compile Remove="Migrations\20200129123057_addUsers.cs" />
     <Compile Remove="Migrations\20200129123057_addUsers.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Scripts\191122203203_CREATE_TABLE_USER.sql" />
-    <None Remove="Scripts\200120190000_CREATE_TABLE_ORGANIZATION_TYPE.sql" />
-    <None Remove="Scripts\200120192445_CREATE_TABLE_ORGANIZATION.sql" />
-    <None Remove="Scripts\200120201054_SEED_TABLE_ORGANIZATION_TYPE.sql" />
-    <None Remove="Scripts\200122103600_CREATE_TABLE_GENDER.sql" />
-    <None Remove="Scripts\200122103610_CREATE_TABLE_DANKYU.sql" />
-    <None Remove="Scripts\200122104256_CREATE_TABLE_JUDOKA.sql" />
-    <None Remove="Scripts\200122110628_SEED_TABLE_GENDER.sql" />
-    <None Remove="Scripts\200122163521_SEED_TABLE_DANKYU.sql" />
-    <None Remove="Scripts\200122193114_CREATE_TABLE_JUDGE_QUALIFICATION.sql" />
-    <None Remove="Scripts\200122194442_CREATE_TABLE_JUDGE.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\191122203203_CREATE_TABLE_USER.sql" />
-    <EmbeddedResource Include="Scripts\200120192445_CREATE_TABLE_ORGANIZATION.sql" />
-    <EmbeddedResource Include="Scripts\200120190000_CREATE_TABLE_ORGANIZATION_TYPE.sql" />
-    <EmbeddedResource Include="Scripts\200120201054_SEED_TABLE_ORGANIZATION_TYPE.sql" />
-    <EmbeddedResource Include="Scripts\200122104256_CREATE_TABLE_JUDOKA.sql" />
-    <EmbeddedResource Include="Scripts\200122103600_CREATE_TABLE_GENDER.sql" />
-    <EmbeddedResource Include="Scripts\200122103610_CREATE_TABLE_DANKYU.sql" />
-    <EmbeddedResource Include="Scripts\200122110628_SEED_TABLE_GENDER.sql" />
-    <EmbeddedResource Include="Scripts\200122163521_SEED_TABLE_DANKYU.sql" />
-    <EmbeddedResource Include="Scripts\200122194442_CREATE_TABLE_JUDGE.sql" />
-    <EmbeddedResource Include="Scripts\200122193114_CREATE_TABLE_JUDGE_QUALIFICATION.sql" />
+    <Compile Remove="Migrations\20200201115549_firstMigration.cs" />
+    <Compile Remove="Migrations\20200201115549_firstMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,19 +37,25 @@
     <PackageReference Include="dbup-consolescripts" Version="1.5.0" />
     <PackageReference Include="dbup-mysql" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="MySql.Data" Version="8.0.19" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
 </Project>

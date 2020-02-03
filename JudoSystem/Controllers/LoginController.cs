@@ -1,6 +1,9 @@
 ﻿using System;
+using Contracts.Interfaces;
+using Entities;
+using Entities.Models;
+using Entities.Models.Dto;
 using JudoSystem.Models;
-using JudoSystem.Models.Dto;
 using JudoSystem.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +15,13 @@ namespace JudoSystem.Controllers
     [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
-        private readonly JudoDbContext db;
-        //public LoginController(JudoDbContext context)
-        //{
-        //    db = context;
-        //}
+        private IRepositoryWrapper db;
+
         private readonly IConfiguration configuration;
-        public LoginController(IConfiguration configuration, JudoDbContext context)
+        public LoginController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
         {
             this.configuration = configuration;
-            db = context;
+            db = repoWrapper;
         }
 
         [AllowAnonymous]
