@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JudoSystem.Models;
-using JudoSystem.Models.Contexts;
+using JudoSystem.Services;
+using Entities;
+using Entities.Models;
 
 namespace JudoSystem.Controllers
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JudoSystem.Models.Contexts.Seeds
+namespace Entities.Models.Seeds
 {
     public static class GenderSeed
     {

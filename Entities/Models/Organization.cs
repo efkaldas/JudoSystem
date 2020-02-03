@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JudoSystem.Models
+namespace Entities.Models
 {
     public class Organization
     {

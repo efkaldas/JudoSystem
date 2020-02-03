@@ -1,26 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using DbUp;
-using JudoSystem.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using JudoSystem.Models.Contexts;
+
 
 namespace JudoSystem
 {
@@ -45,9 +28,8 @@ namespace JudoSystem
             ServiceExtensions.ConfigureAuthentication(services, Configuration);
             ServiceExtensions.ConfigureCors(services, MyAllowSpecificOrigins);
             ServiceExtensions.ConfigureMySql(services, Configuration);
+            ServiceExtensions.ConfigureRepositoryWrapper(services);
             ServiceExtensions.ConfigureSwagger(services);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

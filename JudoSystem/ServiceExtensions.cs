@@ -11,8 +11,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using JudoSystem.Models.Contexts;
 using Microsoft.OpenApi.Models;
+using JudoSystem.Services;
+using Entities;
+using Contracts.Interfaces;
+using Repository;
 
 namespace JudoSystem
 {
@@ -36,6 +39,10 @@ namespace JudoSystem
         {
             services.AddDbContext<JudoDbContext>(options =>
                 options.UseMySql(configuration.GetConnectionString("JudoSystem-db")));
+        }
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
         public static void ConfigureSwagger(IServiceCollection services)
         {

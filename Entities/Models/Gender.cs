@@ -5,20 +5,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JudoSystem.Models
+namespace Entities.Models
 {
-    public class DanKyu
+    public class Gender
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public int Grade { get; set; }
+        [Column(TypeName = "VARCHAR(250)")]
+        [StringLength(250)]
+        public string TextEN { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string Text { get; set; }
-        [Column(TypeName = "VARCHAR(1024)")]
-        [StringLength(1024)]
-        public string Imagepath { get; set; }
+        public string TextLT { get; set; }
+        [Required]
+        [Column(TypeName = "VARCHAR(250)")]
+        [StringLength(250)]
+        public string TextRU { get; set; }
     }
 }

@@ -1,5 +1,6 @@
-﻿using JudoSystem.Models;
-using JudoSystem.Models.Contexts;
+﻿using Entities;
+using Entities.Models;
+using JudoSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

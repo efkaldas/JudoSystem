@@ -1,4 +1,5 @@
-﻿using JudoSystem.Models;
+﻿using Entities.Models;
+using JudoSystem.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;

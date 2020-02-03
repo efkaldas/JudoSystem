@@ -1,11 +1,9 @@
-﻿using JudoSystem.Models.Contexts.Seeds;
+﻿using Entities.Models;
+using Entities.Models.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace JudoSystem.Models.Contexts
+namespace Entities
 {
     public class JudoDbContext : DbContext
     {
