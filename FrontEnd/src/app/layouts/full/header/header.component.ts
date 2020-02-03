@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,6 +8,17 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 })
 export class AppHeaderComponent {
   public config: PerfectScrollbarConfigInterface = {};
+
+  constructor(
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['en', 'lt', 'ru']);
+    translate.setDefaultLang('en');
+  }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
 
 
   // This is for Notifications

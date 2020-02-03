@@ -40,16 +40,8 @@ namespace JudoSystem.Services
             };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token");
 
-            if (user.Role == 1)
-            {
-                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserDao.ADMIN));
-                return claimsIdentity;
-            }
-            if (user.Role == 2)
-            {
-                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserDao.USER));
-                return claimsIdentity;
-            }
+            claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, user.Role.RoleNameEN));
+
             return claimsIdentity;
         }
     }

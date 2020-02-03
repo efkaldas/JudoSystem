@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DbUp;
 using JudoSystem.Models;
-using JudoSystem.SQL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using JudoSystem.Models.Contexts;
 
 namespace JudoSystem
 {
@@ -41,57 +41,12 @@ namespace JudoSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //string connectionString = Configuration.GetConnectionString("JudoSystem-db");
 
-            //DataAccess DataAccess = new DataAccess(connectionString);
+            ServiceExtensions.ConfigureAuthentication(services, Configuration);
+            ServiceExtensions.ConfigureCors(services, MyAllowSpecificOrigins);
+            ServiceExtensions.ConfigureMySql(services, Configuration);
+            ServiceExtensions.ConfigureSwagger(services);
 
-            //var upgrader = DeployChanges.To
-            //    .MySqlDatabase(connectionString)
-            //    .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
-            //    .LogToConsole()
-            //    .Build();
-
-            //var result = upgrader.PerformUpgrade();
-
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["JWT:ValidIssuer"],
-                        ValidAudience = Configuration["JWT:ValidAudience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SigningKey"]))
-                    };
-                });
-            services.AddDbContext<JudoDbContext>(options =>
-    options.UseMySql(Configuration.GetConnectionString("JudoSystem-db")));
-
-
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JudoSystem API", Version = "v1" });
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy(MyAllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("https://localhost:44340")
-                            .AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
 
         }
 

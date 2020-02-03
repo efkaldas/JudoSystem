@@ -1,5 +1,6 @@
 ﻿using System;
 using JudoSystem.Models;
+using JudoSystem.Models.Contexts;
 using JudoSystem.Models.Dto;
 using JudoSystem.Services;
 using Microsoft.AspNetCore.Authorization;

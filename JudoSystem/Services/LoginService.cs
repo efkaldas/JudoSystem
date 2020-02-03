@@ -1,8 +1,7 @@
 ﻿using JudoSystem.Helpers;
 using JudoSystem.Models;
+using JudoSystem.Models.Contexts;
 using JudoSystem.Models.Dto;
-using JudoSystem.SQL.Interfaces;
-using JudoSystem.SQL.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

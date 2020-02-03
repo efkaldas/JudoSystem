@@ -14,14 +14,14 @@ namespace JudoSystem.Models
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
+        public string TextEN { get; set; }
+        [Required]
+        [Column(TypeName = "VARCHAR(250)")]
+        [StringLength(250)]
         public string TextLT { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public int TextEN { get; set; }
-        [Required]
-        [Column(TypeName = "VARCHAR(250)")]
-        [StringLength(250)]
-        public int TextRU { get; set; }
+        public string TextRU { get; set; }
     }
 }

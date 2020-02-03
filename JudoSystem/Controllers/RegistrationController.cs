@@ -1,9 +1,8 @@
 ﻿using System;
 using JudoSystem.Helpers;
 using JudoSystem.Models;
+using JudoSystem.Models.Contexts;
 using JudoSystem.Services;
-using JudoSystem.SQL.Interfaces;
-using JudoSystem.SQL.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

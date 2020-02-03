@@ -1,6 +1,5 @@
 ﻿using JudoSystem.Models;
-using JudoSystem.SQL.Interfaces;
-using JudoSystem.SQL.Queries;
+using JudoSystem.Models.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,6 @@ namespace JudoSystem.Services
     {
         private const string MESSAGE_EMAIL_EXIST = "This email allready exists";
 
-        IUserSql userSql = new UserSql();
         public bool IsFormValid(User user, JudoDbContext db)
         {
             List<User> allUsers = db.User.ToList();

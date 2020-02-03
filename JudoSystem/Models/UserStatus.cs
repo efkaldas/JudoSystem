@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace JudoSystem.Models
 {
-    public class OrganizationType
+    public class UserStatus
     {
         [Key]
         public int Id { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string TypeNameEN { get; set; }
+        public string StatusNameEN { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string TypeNameLT { get; set; }
+        public string StatusNameLT { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string TypeNameRU { get; set; }
+        public string StatusNameRU { get; set; }
     }
 }
