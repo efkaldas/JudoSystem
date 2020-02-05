@@ -40,6 +40,7 @@ namespace JudoSystem
             services.AddDbContext<JudoDbContext>(options =>
                 options.UseMySql(configuration.GetConnectionString("JudoSystem-db")));
         }
+
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

@@ -4,6 +4,7 @@ using Entities.Models;
 using Entities.Models.Dto;
 using JudoSystem.Helpers;
 using JudoSystem.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace JudoSystem.Services
     {
         public User GetLoggedUser(UserDto userDto, IRepositoryWrapper db)
         {
-            User user = db.User.FindByCondition(x => x.Email == userDto.Email).FirstOrDefault();
+            User user = db.User.FindByCondition(x => x.Email == userDto.Email).Include(a => a.Role).FirstOrDefault();
             if (user == null)
                 throw new Exception("Incorrect email");
             else if (IsPasswordCorrect(StringHelper.HashPassword(userDto.Password), user))

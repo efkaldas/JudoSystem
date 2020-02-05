@@ -23,5 +23,7 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string RoleNameRU { get; set; }
+
+        List<User> User { get; set; }
     }
 }

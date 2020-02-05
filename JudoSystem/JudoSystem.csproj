@@ -24,21 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200129122940_AddedUser.cs" />
-    <Compile Remove="Migrations\20200129122940_AddedUser.Designer.cs" />
-    <Compile Remove="Migrations\20200129123057_addUsers.cs" />
-    <Compile Remove="Migrations\20200129123057_addUsers.Designer.cs" />
-    <Compile Remove="Migrations\20200201115549_firstMigration.cs" />
-    <Compile Remove="Migrations\20200201115549_firstMigration.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="dbup-consolescripts" Version="1.5.0" />
     <PackageReference Include="dbup-mysql" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
