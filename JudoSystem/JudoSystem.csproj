@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CryptoHelper" Version="3.0.2" />
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="dbup-consolescripts" Version="1.5.0" />
     <PackageReference Include="dbup-mysql" Version="4.2.0" />
@@ -48,8 +49,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ActionFilters\ActionFilters.csproj" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 

@@ -16,8 +16,9 @@ using JudoSystem.Services;
 using Entities;
 using Contracts.Interfaces;
 using Repository;
+using LoggerService;
 
-namespace JudoSystem
+namespace JudoSystem.Extensions
 {
     public static class ServiceExtensions
     {
@@ -74,6 +75,10 @@ namespace JudoSystem
                     };
                 });
         }
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
         public static void ConfigureDapper(IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("JudoSystem-db");
@@ -87,6 +92,7 @@ namespace JudoSystem
                 .Build();
 
             var result = upgrader.PerformUpgrade();
+            
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using ActionFilters.Filters;
 using Contracts.Interfaces;
 using Entities;
 using Entities.Models;
@@ -26,23 +28,17 @@ namespace JudoSystem.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public Response Login([FromBody]UserDto userDto)
+      //  [ServiceFilter(typeof(ValidateEntityExists<User>))]
+        public IActionResult Login([FromBody]UserDto userDto)
         {
             Response response = new Response();
             AuthService authService = new AuthService();
-            try
-            {
-                LoginService userService = new LoginService();
-                User user = userService.GetLoggedUser(userDto, db);
-                string token = authService.GenerateToken(configuration, user);
 
-                response.success(token);
-            }
-            catch (Exception e)
-            {
-                response.error(e.Message);
-            }
-            return response;
+            LoginService userService = new LoginService();
+            User user = userService.GetLoggedUser(userDto, db);
+            string token = authService.GenerateToken(configuration, user);
+
+            return Ok(token);
         }
     }
 }

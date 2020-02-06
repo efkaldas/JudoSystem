@@ -1,4 +1,5 @@
-﻿using JudoSystem.Services;
+﻿using CryptoHelper;
+using JudoSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,20 +7,21 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace JudoSystem.Helpers
 {
     public static class StringHelper
     {
-        public static string HashPassword(string passwordToHash)
+        // Method for hashing the password
+        public static string HashPassword(string password)
         {
-            MD5CryptoServiceProvider hasher = new MD5CryptoServiceProvider();
-            ASCIIEncoding encoder = new ASCIIEncoding();
+            return Crypto.HashPassword(password);
+        }
 
-            byte[] passwordinBytes = Encoding.ASCII.GetBytes(passwordToHash);
-            byte[] password = hasher.ComputeHash(passwordinBytes);
-            string hashedPassword = encoder.GetString(password);
-
-            return hashedPassword;
+        // Method to verify the password hash against the given password
+        public static bool VerifyPassword(string hash, string password)
+        {
+            return Crypto.VerifyHashedPassword(hash, password);
         }
     }
 }
