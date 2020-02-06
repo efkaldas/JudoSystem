@@ -20,18 +20,10 @@ namespace JudoSystem.Services
             User user = db.User.FindByCondition(x => x.Email == userDto.Email).Include(a => a.Role).FirstOrDefault();
             if (user == null)
                 throw new Exception("Incorrect email");
-            else if (IsPasswordCorrect(StringHelper.HashPassword(userDto.Password), user))
+            else if (StringHelper.VerifyPassword(user.Password, userDto.Password))
                 return user;
             else
-                throw new Exception("Incorrect password");
-        }
-
-        private bool IsPasswordCorrect(string password, User user)
-        {
-            if (password == user.Password)
-                return true;
-            else
-                return false;
+                throw new Exception("asd");
         }
     }
 }

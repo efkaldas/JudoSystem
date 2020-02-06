@@ -1,9 +1,15 @@
+using ActionFilters.Filters;
+using Contracts.Interfaces;
+using Entities.Models;
+using JudoSystem.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using NLog;
+using System;
+using System.IO;
 
 namespace JudoSystem
 {
@@ -11,6 +17,7 @@ namespace JudoSystem
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
         public Startup()
@@ -30,23 +37,31 @@ namespace JudoSystem
             ServiceExtensions.ConfigureMySql(services, Configuration);
             ServiceExtensions.ConfigureRepositoryWrapper(services);
             ServiceExtensions.ConfigureSwagger(services);
+            services.ConfigureLoggerService();
+
+            services.AddScoped<ValidateEntityExists<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("Staging"))
+            {
+                app.UseExceptionHandler("/Error");
+            }
 
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
-
             app.UseAuthentication();
             app.UseAuthorization();
+          //  app.ConfigureExceptionHandler(logger);
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
