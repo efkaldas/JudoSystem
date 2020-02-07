@@ -26,6 +26,10 @@ namespace Entities
                 .HasIndex(b => b.Email)
                 .IsUnique();
 
+            builder.Entity<User>()
+                .Property(b => b.StatuId)
+                .HasDefaultValue(2);
+
             DanKyuSeed.Generate(builder);
             GenderSeed.Generate(builder);
             OrganizationTypeSeed.Generate(builder);

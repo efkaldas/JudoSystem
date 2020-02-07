@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class NewMigration : Migration
+    public partial class secondMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -117,8 +117,8 @@ namespace Entities.Migrations
                     Firstname = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     Lastname = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     PhoneNumber = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
+                    StatuId = table.Column<int>(nullable: false, defaultValue: 2),
                     StatusId = table.Column<int>(nullable: true),
-                    StatuId = table.Column<int>(nullable: false),
                     OrganizationId = table.Column<int>(nullable: true),
                     Password = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false)

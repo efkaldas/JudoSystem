@@ -29,19 +29,16 @@ namespace ActionFilters.Filters
             }
             else
             {
-                context.Result = new BadRequestObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_BAD_REQUEST_CONST, "Entity with this id not found."));
+                context.Result = new BadRequestObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_BAD_REQUEST_CONST, "Bad id format given."));
                 return;
             }
 
             var entity = db.Set<T>().SingleOrDefault(x => x.Id.Equals(id));
+
             if (entity == null)
-            {
-                context.Result = new NotFoundResult();
-            }
+                context.Result = new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_NOT_FOUND_CONST, "Entity with this id not found."));
             else
-            {
                 context.HttpContext.Items.Add("entity", entity);
-            }
         }
 
         public void OnActionExecuted(ActionExecutedContext context)

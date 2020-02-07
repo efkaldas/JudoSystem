@@ -350,7 +350,9 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("StatuId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(2);
 
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");

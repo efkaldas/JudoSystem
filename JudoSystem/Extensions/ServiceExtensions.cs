@@ -17,12 +17,14 @@ using Entities;
 using Contracts.Interfaces;
 using Repository;
 using LoggerService;
+using ActionFilters.Filters;
+using Entities.Models;
 
 namespace JudoSystem.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void ConfigureCors(IServiceCollection services, string myAllowSpecificOrigins)
+        public static void ConfigureCors(this IServiceCollection services, string myAllowSpecificOrigins)
         {
             services.AddCors(options =>
             {
@@ -36,7 +38,7 @@ namespace JudoSystem.Extensions
                     });
             });
         }
-        public static void ConfigureMySql(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureMySql(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<JudoDbContext>(options =>
                 options.UseMySql(configuration.GetConnectionString("JudoSystem-db")));
@@ -46,7 +48,7 @@ namespace JudoSystem.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
-        public static void ConfigureSwagger(IServiceCollection services)
+        public static void ConfigureSwagger(this IServiceCollection services)
         {
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -54,7 +56,7 @@ namespace JudoSystem.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JudoSystem API", Version = "v1" });
             });
         }
-        public static void ConfigureAuthentication(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(opt =>
             {
@@ -74,6 +76,11 @@ namespace JudoSystem.Extensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]))
                     };
                 });
+        }
+        public static void ConfigureFilters(this IServiceCollection services)
+        {
+            services.AddScoped<ValidateEntityExists<User>>();
+            services.AddScoped<ValidateForm>();
         }
         public static void ConfigureLoggerService(this IServiceCollection services)
         {

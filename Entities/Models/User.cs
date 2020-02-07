@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,30 +12,30 @@ namespace Entities.Models
     {
         [Key]
         public int Id { get; set; }
-        public UserRole Role { get; set; }
         public int RoleId { get; set; }
+        public UserRole Role { get; set; }
         public User ParentUser { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Firstname is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Firstname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Lastname is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Lastname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "PhoneNumber is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string PhoneNumber { get; set; }
-        public UserStatus Status { get; set; }
         public int StatuId { get; set; }
-        public Organization Organization { get; set; }
+        public UserStatus Status { get; set; }
         public int? OrganizationId { get; set; }
-        [Required]
+        public Organization Organization { get; set; }
+        [Required(ErrorMessage = "Password is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Password { get; set; }
