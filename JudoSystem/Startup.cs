@@ -32,14 +32,14 @@ namespace JudoSystem
         {
             services.AddControllers();
 
-            ServiceExtensions.ConfigureAuthentication(services, Configuration);
-            ServiceExtensions.ConfigureCors(services, MyAllowSpecificOrigins);
-            ServiceExtensions.ConfigureMySql(services, Configuration);
-            ServiceExtensions.ConfigureRepositoryWrapper(services);
-            ServiceExtensions.ConfigureSwagger(services);
+            services.ConfigureAuthentication(Configuration);
+            services.ConfigureCors(MyAllowSpecificOrigins);
+            services.ConfigureMySql(Configuration);
+            services.ConfigureRepositoryWrapper();
+            services.ConfigureSwagger();
             services.ConfigureLoggerService();
 
-            services.AddScoped<ValidateEntityExists<User>>();
+            services.ConfigureFilters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +60,7 @@ namespace JudoSystem
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
-          //  app.ConfigureExceptionHandler(logger);
+            app.ConfigureExceptionHandler(logger);
             app.ConfigureCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>

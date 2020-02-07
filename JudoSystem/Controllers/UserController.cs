@@ -2,87 +2,62 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entities;
+using ActionFilters.Filters;
+using Contracts.Interfaces;
 using Entities.Models;
-using JudoSystem.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace JudoSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : ControllerBase
     {
-        private readonly JudoDbContext db;
-
-        public UserController(JudoDbContext context)
+        private ILoggerManager logger;
+        private IRepositoryWrapper db;
+        public UserController(ILoggerManager logger, IRepositoryWrapper repository)
         {
-            db = context;
+            this.logger = logger;
+            db = repository;
         }
         // GET: api/User
-        [HttpGet,Authorize]
-        public Response Get()
+        [HttpGet]
+        public IActionResult Get()
         {
-            Response res = new Response();
-            try
-            { 
-                List<User> users = db.User.ToList();
-                res.success(users);
-            }
-            catch (Exception e)
-            {
-                res.error(e.Message);
-            }
-            return res;
+            List<User> users = db.User.FindAll().ToList();
+            return Ok(users);
+        }
+
+        // GET: api/User/5
+        [HttpGet("{id}", Name = "Get")]
+        [ServiceFilter(typeof(ValidateEntityExists<User>))]
+        public IActionResult Get(int id)
+        {
+            User user = HttpContext.Items["entity"] as User;
+            return Ok(user);
         }
 
         // POST: api/User
         [HttpPost]
+        [ServiceFilter(typeof(ValidateForm))]
         public void Post([FromBody] string value)
         {
         }
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        public Response Put(int id, [FromBody] User user)
+        [ServiceFilter(typeof(ValidateForm))]
+        [ServiceFilter(typeof(ValidateEntityExists<User>))]
+        public void Put(User user)
         {
-            Response res = new Response();
-            try
-            {
-                db.Entry(user).State = EntityState.Modified;
 
-                res.success(user);
-            }
-            catch (Exception e)
-            {
-                res.error(e.Message);
-            }
-            return res;
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public Response Delete(int id)
+        public void Delete(int id)
         {
-            Response res = new Response();
-            try
-            {
-              //  db.User.Remove(id);
-                res.success("Removed");
-            }
-            catch (Exception e)
-            {
-                res.error(e.Message);
-            }
-            return res;
-        }
-        private bool UserExists(int id)
-        {
-            return db.User.Any(e => e.Id == id);
         }
     }
 }

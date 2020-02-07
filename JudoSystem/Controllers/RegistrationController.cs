@@ -1,4 +1,6 @@
 ﻿using System;
+using ActionFilters.Filters;
+using Contracts.Interfaces;
 using Entities;
 using Entities.Models;
 using JudoSystem.Helpers;
@@ -6,6 +8,8 @@ using JudoSystem.Models;
 using JudoSystem.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace JudoSystem.Controllers
 {
@@ -13,37 +17,29 @@ namespace JudoSystem.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        private readonly JudoDbContext db;
-        public RegistrationController(JudoDbContext context)
+        private IRepositoryWrapper db;
+        private readonly IConfiguration configuration;
+        public RegistrationController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
         {
-            db = context;
+            this.configuration = configuration;
+            db = repoWrapper;
         }
 
         // POST: api/Registration
         [AllowAnonymous]
         [HttpPost]
-        public Response Register([FromBody]User user)
+        [ServiceFilter(typeof(ValidateForm))]
+        public IActionResult Register([FromBody]User user)
         {
-            Response response = new Response();
-            try
-            {
-                RegistrationService service = new RegistrationService();
+            user.Password = StringHelper.HashPassword(user.Password);
 
-                user.Password = StringHelper.HashPassword(user.Password);
+            if (db.User.FindByCondition(x => x.Email == user.Email).FirstOrDefault() != null)
+                return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
-                if (service.IsFormValid(user, db))
-                {
-                    db.User.Add(user);
-                    db.SaveChanges();
-                }
+            db.User.Create(user);
+            db.Save();
 
-                response.success(user);
-            }
-            catch (Exception e)
-            {
-                response.error(e.Message);
-            }
-            return response;
+            return Ok(user);
         }
     }
 }

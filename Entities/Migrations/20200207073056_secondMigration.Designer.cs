@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    [Migration("20200205110419_NewMigration")]
-    partial class NewMigration
+    [Migration("20200207073056_secondMigration")]
+    partial class secondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -352,7 +352,9 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("StatuId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(2);
 
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
