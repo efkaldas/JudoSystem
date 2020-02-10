@@ -12,6 +12,7 @@ namespace Repository
         private JudoDbContext _repoContext;
         private IUserRepository user;
         private IOrganizationTypeRepository organizationType;
+        private IOrganizationRepository organization;
 
         public IUserRepository User
         {
@@ -23,6 +24,18 @@ namespace Repository
                 }
 
                 return user;
+            }
+        }
+        public IOrganizationRepository Organization
+        {
+            get
+            {
+                if (organization == null)
+                {
+                    organization = new OrganizationRepository(_repoContext);
+                }
+
+                return organization;
             }
         }
         public IOrganizationTypeRepository OrganizationType

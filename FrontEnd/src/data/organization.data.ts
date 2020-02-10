@@ -2,9 +2,9 @@ import { OrganizationType } from "./organization-type.data";
 
 
 export class Organization {
-    Id: number;
-    Name: string;
-    Country: string;
-    City: string;
-    OrganizationType: OrganizationType;
+    id: number;
+    name: string;
+    country: string;
+    city: string;
+    organizationType: OrganizationType;
 }

@@ -9,6 +9,7 @@ namespace Entities.Models
 {
     public class OrganizationType : IEntity
     {
+        public static readonly int TYPE_JUDGE_ASSOCIATION = 3;
         [Key]
         public int Id { get; set; }
         [Required]

@@ -9,6 +9,8 @@ namespace Entities.Models
 {
     public class UserRole
     {
+        public static readonly int ROLE_COACH = 3;
+        public static readonly int ROLE_JUDGE = 4;
         [Key]
         public int Id { get; set; }
         [Required]

@@ -40,6 +40,20 @@ namespace JudoSystem.Controllers
             if (db.User.FindByCondition(x => x.Organization.Name == user.Organization.Name).FirstOrDefault() != null)
                 return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
+            db.Organization.Create(user.Organization);
+            db.Save();
+
+            //   user.OrganizationId = user.Organization.Id;
+
+            if (user.Organization.OrganizationTypeId == OrganizationType.TYPE_JUDGE_ASSOCIATION)
+            {
+                user.RoleId = UserRole.ROLE_JUDGE;
+            }
+            else
+            {
+                user.RoleId = UserRole.ROLE_COACH;
+            }
+
             db.User.Create(user);
             db.Save();
 

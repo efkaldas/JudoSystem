@@ -23,6 +23,7 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string City { get; set; }
+        public int OrganizationTypeId { get; set; }
         public OrganizationType OrganizationType { get; set; }
     }
 }

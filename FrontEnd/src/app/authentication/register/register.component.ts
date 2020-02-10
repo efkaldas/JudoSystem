@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   userData: User= new User();
   submitted = false;
   clicked = false;
+  errorMessage: string;
   constructor(private organizationService: OrganizationTypeService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
@@ -39,39 +40,39 @@ export class RegisterComponent implements OnInit {
   private formGroup()
   {
     this.userForm = this.fb.group({
-      Firstname: [
+      firstname: [
         null,
         Validators.compose([Validators.required])
       ],
-      Lastname: [
+      lastname: [
         null,
         Validators.compose([Validators.required])
       ],
-      PhoneNumber: [
+      phoneNumber: [
         null,
         Validators.compose([Validators.required])
       ],
-      Email: [
+      email: [
         null,
         Validators.compose([Validators.required, CustomValidators.email])
       ],
-      Password: Password,
-      ConfirmPassword: ConfirmPassword
+      password: Password,
+      confirmPassword: ConfirmPassword
     });
     this.organizationForm = this.fb.group({
-      Type: [
-        0,
-        Validators.compose([Validators.required])
-      ],
-      Name: [
+      organizationTypeId: [
         null,
         Validators.compose([Validators.required])
       ],
-      Country: [
+      name: [
         null,
         Validators.compose([Validators.required])
       ],
-      City: [
+      country: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      city: [
         null,
         Validators.compose([Validators.required])
       ]
@@ -82,8 +83,8 @@ export class RegisterComponent implements OnInit {
     return this.organizationService.getOrganizationTypes()
     .subscribe(
       data => {
-        this.organizationTypes = data as OrganizationType[];
-        console.log( this.organizationTypes[0].TypeNameEN);
+        this.organizationTypes = data as any;
+        console.log( this.organizationTypes[0].id);
       })
   }
 
@@ -100,7 +101,17 @@ export class RegisterComponent implements OnInit {
 
     if (this.userForm.valid && this.organizationForm.valid) {
       return this.userService.registerUser(this.userData, this.organizationForm.value).subscribe(
-        response => console.log(response));
+        data =>
+        {
+          console.log(data); //gives an object at this point
+
+        },
+        error => 
+        {
+          this.errorMessage = error['error'].message;
+          console.log(error); //gives an object at this point
+        }
+        );
     }
   }
 }

@@ -17,7 +17,7 @@ export class UserService {
     return this.http.get(this.getAdminUsersUrl); 
   }  
   registerUser(user: User, organization: Organization) {
-    user.Organization = organization;
+    user.organization = organization;
     console.log(user);
     return this.http.post(this.registerUserUrl, user); 
   }
