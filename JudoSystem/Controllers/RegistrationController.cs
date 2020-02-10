@@ -28,7 +28,7 @@ namespace JudoSystem.Controllers
         // POST: api/Registration
         [AllowAnonymous]
         [HttpPost]
-        [ServiceFilter(typeof(ValidateForm))]
+   //     [ServiceFilter(typeof(ValidateForm))]
         public IActionResult Register([FromBody]User user)
         {
 

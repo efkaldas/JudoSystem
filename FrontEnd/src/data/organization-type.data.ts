@@ -1,6 +1,6 @@
 export class OrganizationType {
-    id: number;
-    typeNameEN: string;
-    typeNameLT: string;
-    typeNameRU: string;
+    Id: number;
+    TypeNameEN: string;
+    TypeNameLT: string;
+    TypeNameRU: string;
 }

@@ -1,13 +1,24 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
+import { User } from '../data/user.data';
+import { Organization } from '../data/organization.data';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class UserService {
   protected getAdminUsersUrl : string = environment.apiHost+"/AdminUser/GetAdminUsers";  
-  http: any;
+  protected registerUserUrl : string = environment.apiHost+"/Registration";  
 
-  getAdminUsers() {
+
+  constructor(protected http: HttpClient) {}
+
+  getUsers() {
     return this.http.get(this.getAdminUsersUrl); 
-}  
+  }  
+  registerUser(user: User, organization: Organization) {
+    user.Organization = organization;
+    console.log(user);
+    return this.http.post(this.registerUserUrl, user); 
+  }
 }

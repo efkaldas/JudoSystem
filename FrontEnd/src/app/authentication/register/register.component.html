@@ -1,122 +1,124 @@
 <div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
-  <div class="login-register-box">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-title>
-          <div class="text-center">
-            <img alt="homepage" src="assets/images/logo-icon.png">
-            <h4 class="m-t-0">Registration</h4>
-          </div>
-        </mat-card-title>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-horizontal-stepper [linear]="isLinear">
-          <mat-step [stepControl]="firstFormGroup">
-            <ng-template matStepLabel>User information</ng-template>
-              <div fxLayout="row wrap">
-                <!-- col full-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Firstname" type="text" formControlName="firstname" class="form-control">
-                  </mat-form-field>
-                  <small *ngIf="submitted && form.controls['firstname'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-                </div>
-                <!-- col full-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Lastname" type="text" formControlName="lastname" class="form-control" required>
-                  </mat-form-field>
-                  <small *ngIf="submitted && form.controls['lastname'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-                </div>
-                <!-- col full-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Phonenumber" type="text" formControlName="phonenumber" class="form-control" required>
-                  </mat-form-field>
-                  <small *ngIf="submitted && form.controls['phoneNumber'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-                </div>
-                <!-- col full-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Email address" type="email" formControlName="email" class="form-control">
-                  </mat-form-field>
-                  <small *ngIf="submitted && form.controls['email'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-                  <small *ngIf="submitted && form.controls['email'].errors?.email && form.controls['email'].touched" class="text-danger support-text">You must include a valid email address.</small>
-                </div>
-                <!-- col full-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <mat-form-field style="width: 100%">
-                    <input matInput type="password" placeholder="Password" formControlName="password" class="form-control">
-                  </mat-form-field>
-                  <small *ngIf="submitted && form.controls['password'].hasError('required') && form.controls['password'].touched" class="text-danger support-text">You must include password.</small>
-                </div>
-                <!-- col full-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" type="password">
-                  </mat-form-field>
-                  <small *ngIf="submitted && form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched" class="text-danger support-text">You must include confirm password.</small>
-                  <small *ngIf="submitted && form.controls['confirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not math.</small>
-                </div>
-                <!-- col full-->
-                <div class="text-center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                  <span>Already have an account?
+    <div class="login-register-box">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>
+                    <div class="text-center">
+                        <img alt="homepage" src="assets/images/logo-icon.png">
+                        <h4 class="m-t-0">Registration</h4>
+                    </div>
+                </mat-card-title>
+                <mat-horizontal-stepper [linear]="isLinear">
+                    <mat-step [stepControl]="userForm">
+                        <form [formGroup]="userForm">
+                            <ng-template matStepLabel>User information</ng-template>
+                            <div fxLayout="row wrap">
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Firstname" type="text" formControlName="Firstname" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['Firstname'].hasError('required')" class="text-danger support-text">You must include an email address.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Lastname" type="text" formControlName="Lastname" class="form-control" required>
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['Lastname'].hasError('required')" class="text-danger support-text">You must include an email address.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Phonenumber" type="text" formControlName="PhoneNumber" class="form-control" required>
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['PhoneNumber'].hasError('required')" class="text-danger support-text">You must include an email address.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Email address" type="Email" formControlName="Email" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['Email'].hasError('required')" class="text-danger support-text">You must include an email address.</small>
+                                    <small *ngIf="clicked && userForm.controls['Email'].errors?.email" class="text-danger support-text">You must include a valid email address.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput type="password" placeholder="Password" formControlName="Password" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['Password'].hasError('required')" class="text-danger support-text">You must include password.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Confirm Password" formControlName="ConfirmPassword" class="form-control" type="password">
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['ConfirmPassword'].hasError('required')" class="text-danger support-text">You must include confirm password.</small>
+                                    <small *ngIf="clicked && userForm.controls['ConfirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not math.</small>
+                                </div>
+                                <!-- col full-->
+                                <div class="text-center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <span>Already have an account?
                     <a [routerLink]="['/authentication/login']" class="link text-info"> Login</a>
                   </span>
-                </div>
-              </div>
-            <div>
-              <button mat-raised-button type="button" color="warn" matStepperNext>Next</button>
-            </div>
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <ng-template matStepLabel>Organization information</ng-template>
-            <div fxLayout="row wrap">
-              <!-- col full-->
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field>
-                  <mat-select placeholder="Organization type">
-                    <mat-option *ngFor="let organizationType of organizationTypes" [value]="organizationType.id">
-                      {{organizationType.typeNameEN}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <!-- col full-->
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Organization name" type="text" formControlName="organizationName" class="form-control">
-                </mat-form-field>
-                <small *ngIf="submitted && form.controls['phoneNumber'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-              </div>
-              <!-- col full-->
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field style="width: 100%">
-                  <input matInput placeholder="City" type="email" formControlName="city" class="form-control">
-                </mat-form-field>
-                <small *ngIf="submitted && form.controls['email'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-                <small *ngIf="submitted && form.controls['email'].errors?.email && form.controls['email'].touched" class="text-danger support-text">You must include a valid email address.</small>
-              </div>
-              <!-- col full-->
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-form-field style="width: 100%">
-                  <input matInput placeholder="Country" type="email" formControlName="country" class="form-control">
-                </mat-form-field>
-                <small *ngIf="submitted && form.controls['email'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">You must include an email address.</small>
-                <small *ngIf="submitted && form.controls['email'].errors?.email && form.controls['email'].touched" class="text-danger support-text">You must include a valid email address.</small>
-              </div>
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-checkbox class="font-14">I agree to the all
-                  <a href="javascript:void(0)" class="link text-info">terms</a>.</mat-checkbox>
-              </div>
-            <div>
-              <button mat-raised-button color="accent" matStepperPrevious>Back</button>
-            </div>
-            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit">Create your account</button>
-          </div>
-          </mat-step>
-        </mat-horizontal-stepper>
-      </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button mat-raised-button (click)="onUserFormSubmit()" type="button" color="warn" matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="organizationForm">
+                        <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()">
+                            <ng-template matStepLabel>
+                                <p (click)="onUserFormSubmit()">Organization information</p>
+                            </ng-template>
+                            <div fxLayout="row wrap">
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Organization type" formControlName="Type" class="form-control">
+                                            <mat-option *ngFor="let organizationType of organizationTypes" [value]="organizationType.Id">
+                                                {{organizationType.TypeNameEN}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Organization name" type="text" formControlName="Name" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="submitted && organizationForm.controls['Name'].hasError('required')" class="text-danger support-text">You must include an email address.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="City" type="texti" formControlName="City" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="submitted && organizationForm.controls['City'].hasError('required')" class="text-danger support-text">You must include a city address.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Country" type="text" formControlName="Country" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="submitted && organizationForm.controls['Country'].hasError('required')" class="text-danger support-text">You must include a country address.</small>
+                                </div>
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-checkbox class="font-14">I agree to the all
+                                        <a href="javascript:void(0)" class="link text-info">terms</a>.</mat-checkbox>
+                                </div>
+                                <div>
+                                    <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                                </div>
+                                <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit">Create your account</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

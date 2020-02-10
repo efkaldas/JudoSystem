@@ -25,33 +25,41 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<OrganizationType> users = db.OrganizationType.FindAll().ToList();
-            return Ok(users);
+            List<OrganizationType> organizationTypes = db.OrganizationType.FindAll().ToList();
+            return Ok(organizationTypes);
         }
 
-        //// GET: api/OrganizationType/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public IActionResult Get(int id)
-        //{
-        //    return Ok("value");
-        //}
+        // GET: api/OrganizationType/5
+        [HttpGet("{id}", Name = "GetOrganizationType")]
+        public IActionResult Get(int id)
+        {
+            List<OrganizationType> organizationType = db.OrganizationType.FindByCondition(x => x.Id == id).ToList();
+            return Ok(organizationType);
+        }
 
         // POST: api/OrganizationType
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] OrganizationType organizationType)
         {
+            db.OrganizationType.Create(organizationType);
+            db.Save();
+            return Ok(organizationType);
         }
 
         // PUT: api/OrganizationType/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] OrganizationType organizationType)
         {
+            db.OrganizationType.Update(organizationType);
+            db.Save();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            db.OrganizationType.Delete(db.OrganizationType.FindByCondition(x => x.Id == id).FirstOrDefault());
+            db.Save();
         }
     }
 }
