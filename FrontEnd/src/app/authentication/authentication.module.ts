@@ -6,7 +6,8 @@ import {
   MatCardModule,
   MatInputModule,
   MatCheckboxModule,
-  MatButtonModule
+  MatButtonModule,
+  MatStepperModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -17,19 +18,23 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { DemoMaterialModule } from '../demo-material-module';
+import { OrganizationTypeService } from '../../services/organization-type.service';
+import { UserService } from '../../services/user.service';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthenticationRoutes),
-    MatIconModule,
-    MatCardModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatButtonModule,
+    DemoMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule
+  ],
+  providers: [
+    OrganizationTypeService,
+    UserService
   ],
   declarations: [
     ErrorComponent,

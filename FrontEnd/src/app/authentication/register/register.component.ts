@@ -7,6 +7,10 @@ import {
   FormControl
 } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
+import { Food } from '../../forms/select/select.component';
+import { OrganizationTypeService } from '../../../services/organization-type.service';
+import { UserService } from '../../../services/user.service';
+import { OrganizationType } from '../../../data/organization-type.data';
 
 const password = new FormControl('', Validators.required);
 const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
@@ -18,9 +22,12 @@ const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
 })
 export class RegisterComponent implements OnInit {
   public form: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {}
+  organizationTypes: OrganizationType[];
+  submitted = false;
+  constructor(private organizationService: OrganizationTypeService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
+    this.getOrganizationTypes();
     this.form = this.fb.group({
       firstname: [
         null,
@@ -38,12 +45,21 @@ export class RegisterComponent implements OnInit {
         null,
         Validators.compose([Validators.required, CustomValidators.email])
       ],
-      password: password,
-      confirmPassword: confirmPassword
+      password: [null, Validators.compose([Validators.required])],
+      confirmPassword: [null, Validators.compose([Validators.required])]
     });
+  }
+  private getOrganizationTypes()
+  {
+    return this.organizationService.getOrganizationTypes()
+    .subscribe(
+      data => {
+        this.organizationTypes = data as OrganizationType[];
+        console.log( this.organizationTypes);
+      })
   }
 
   onSubmit() {
-    this.router.navigate(['/']);
+    this.submitted = true;
   }
 }

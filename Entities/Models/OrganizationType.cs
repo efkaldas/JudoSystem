@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class OrganizationType
+    public class OrganizationType : IEntity
     {
         [Key]
         public int Id { get; set; }

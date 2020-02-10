@@ -7,6 +7,7 @@ namespace Contracts.Interfaces
     public interface IRepositoryWrapper
     {
         IUserRepository User { get; }
+        IOrganizationTypeRepository OrganizationType { get; }
         void Save();
     }
 }
