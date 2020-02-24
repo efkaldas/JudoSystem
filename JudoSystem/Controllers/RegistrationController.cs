@@ -28,18 +28,27 @@ namespace JudoSystem.Controllers
         // POST: api/Registration
         [AllowAnonymous]
         [HttpPost]
-        [ServiceFilter(typeof(ValidateForm))]
+   //     [ServiceFilter(typeof(ValidateForm))]
         public IActionResult Register([FromBody]User user)
         {
+
             user.Password = StringHelper.HashPassword(user.Password);
 
             if (db.User.FindByCondition(x => x.Email == user.Email).FirstOrDefault() != null)
                 return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
+            if (db.User.FindByCondition(x => x.Organization.ExactName == user.Organization.ExactName).FirstOrDefault() != null)
+                return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
+
+            db.Organization.Create(user.Organization);
+            db.Save();
+
             db.User.Create(user);
             db.Save();
 
             return Ok(user);
+
+
         }
     }
 }

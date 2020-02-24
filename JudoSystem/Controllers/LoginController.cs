@@ -34,7 +34,7 @@ namespace JudoSystem.Controllers
         {
             AuthService authService = new AuthService();
 
-            User user = db.User.FindByCondition(x => x.Email == userDto.Email).Include(x => x.Role).FirstOrDefault();
+            User user = db.User.FindByCondition(x => x.Email == userDto.Email).Include(x => x.Roles).FirstOrDefault();
 
             if (user == null)
                 return new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_NOT_FOUND_CONST, "User with this email not exists"));

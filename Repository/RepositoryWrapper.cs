@@ -10,18 +10,44 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private JudoDbContext _repoContext;
-        private IUserRepository _user;
+        private IUserRepository user;
+        private IOrganizationTypeRepository organizationType;
+        private IOrganizationRepository organization;
 
         public IUserRepository User
         {
             get
             {
-                if (_user == null)
+                if (user == null)
                 {
-                    _user = new UserRepository(_repoContext);
+                    user = new UserRepository(_repoContext);
                 }
 
-                return _user;
+                return user;
+            }
+        }
+        public IOrganizationRepository Organization
+        {
+            get
+            {
+                if (organization == null)
+                {
+                    organization = new OrganizationRepository(_repoContext);
+                }
+
+                return organization;
+            }
+        }
+        public IOrganizationTypeRepository OrganizationType
+        {
+            get
+            {
+                if (organizationType == null)
+                {
+                    organizationType = new OrganizationTypeRepository(_repoContext);
+                }
+
+                return organizationType;
             }
         }
 

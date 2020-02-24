@@ -10,30 +10,30 @@ namespace Entities.Models.Seeds
     {
         public static void Generate(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserRole>()
+            modelBuilder.Entity<Role>()
                 .HasData(
-                    new UserRole
+                    new Role
                     {
                         Id = 1,
                         RoleNameEN = "Admin",
                         RoleNameLT = "Administratorius",
                         RoleNameRU = "Администратор"
                     },
-                    new UserRole
+                    new Role
                     {
                         Id = 2,
                         RoleNameEN = "Moderator",
                         RoleNameLT = "Moderatorius",
                         RoleNameRU = "Модератор"
                     },
-                    new UserRole
+                    new Role
                     {
                         Id = 3,
                         RoleNameEN = "Coach",
                         RoleNameLT = "Treneris",
                         RoleNameRU = "Тренер"
                     },
-                    new UserRole
+                    new Role
                     {
                         Id = 4,
                         RoleNameEN = "Judge",

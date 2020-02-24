@@ -11,16 +11,19 @@ namespace Entities.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Firstname is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Firstname { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Lastname is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Lastname { get; set; }
         public Gender Gender { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "BirthYears is required")]
         public int BirthYears { get; set; }
         public DanKyu DanKyu { get; set; }
         public User User { get; set; }

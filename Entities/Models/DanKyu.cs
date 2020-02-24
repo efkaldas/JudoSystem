@@ -11,9 +11,9 @@ namespace Entities.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Grade is required")]
         public int Grade { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Text is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Text { get; set; }

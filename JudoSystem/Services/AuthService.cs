@@ -41,7 +41,10 @@ namespace JudoSystem.Services
             };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token");
 
-            claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, user.Role.RoleNameEN));
+            foreach (Role role in user.Roles)
+            {
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.RoleNameEN));
+            }
 
             return claimsIdentity;
         }
