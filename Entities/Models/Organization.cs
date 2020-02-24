@@ -11,18 +11,26 @@ namespace Entities.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "ExactName is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string Name { get; set; }
-        [Required]
+        public string ExactName { get; set; }
+        [Required(ErrorMessage = "ShortName is required")]
+        [Column(TypeName = "VARCHAR(128)")]
+        [StringLength(250)]
+        public string ShortName { get; set; }
+        [Required(ErrorMessage = "Country is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Country { get; set; }
-        [Required]
+        [Required(ErrorMessage = "City is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string City { get; set; }
+        [Required(ErrorMessage = "Address is required")]
+        [Column(TypeName = "VARCHAR(250)")]
+        [StringLength(250)]
+        public string Address { get; set; }
         public int OrganizationTypeId { get; set; }
         public OrganizationType OrganizationType { get; set; }
     }

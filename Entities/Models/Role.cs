@@ -2,26 +2,30 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Entities.Models
 {
-    public class UserStatus
+    public partial class Role
     {
+        public Role()
+        {
+        }
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "StatusNameEN is required")]
+        [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string StatusNameEN { get; set; }
-        [Required(ErrorMessage = "StatusNameLT is required")]
+        public string RoleNameEN { get; set; }
+        [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string StatusNameLT { get; set; }
-        [Required(ErrorMessage = "StatusNameRU is required")]
+        public string RoleNameLT { get; set; }
+        [Required]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
-        public string StatusNameRU { get; set; }
+        public string RoleNameRU { get; set; }
+        public virtual ICollection<User> Users { get; set; }
+
     }
 }

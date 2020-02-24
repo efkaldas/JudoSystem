@@ -10,10 +10,13 @@ namespace Entities.Models
 {
     public class User : IEntity
     {
+        public User()
+        {
+            this.Roles = new HashSet<Role>();
+        }
         [Key]
         public int Id { get; set; }
-        public int RoleId { get; set; }
-        public UserRole Role { get; set; }
+        public ICollection<Role> Roles { get; set; }
         public User ParentUser { get; set; }
         [Required(ErrorMessage = "Email is required")]
         [Column(TypeName = "VARCHAR(250)")]

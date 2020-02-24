@@ -12,15 +12,15 @@ namespace Entities.Models
         public static readonly int TYPE_JUDGE_ASSOCIATION = 3;
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "TypeNameEN is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string TypeNameEN { get; set; }
-        [Required]
+        [Required(ErrorMessage = "TypeNameLT is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string TypeNameLT { get; set; }
-        [Required]
+        [Required(ErrorMessage = "TypeNameRU is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string TypeNameRU { get; set; }

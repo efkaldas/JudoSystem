@@ -11,15 +11,15 @@ namespace Entities.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "TextEN is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string TextEN { get; set; }
-        [Required]
+        [Required(ErrorMessage = "TextLT is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string TextLT { get; set; }
-        [Required]
+        [Required(ErrorMessage = "TextRU is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string TextRU { get; set; }
