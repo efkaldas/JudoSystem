@@ -14,7 +14,7 @@ namespace Entities
         public DbSet<OrganizationType> OrganizationType { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Role> Role { get; set; }
-      //  public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<UserRole> UserRole { get; set; }
         public DbSet<UserStatus> UserStatus { get; set; }
         public JudoDbContext(DbContextOptions<JudoDbContext> options)
             : base(options) { }
@@ -31,7 +31,21 @@ namespace Entities
                 .Property(b => b.StatuId)
                 .HasDefaultValue(2);
 
-            DanKyuSeed.Generate(builder);
+            builder.Entity<UserRole>()
+                .HasKey(bc => new { bc.UserId, bc.RoleId });
+            
+            builder.Entity<UserRole>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.UserRoles)
+                .HasForeignKey(bc => bc.UserId);
+           
+            builder.Entity<UserRole>()
+                .HasOne(bc => bc.Role)
+                .WithMany(c => c.UserRoles)
+                .HasForeignKey(bc => bc.RoleId);
+        
+
+                    DanKyuSeed.Generate(builder);
             GenderSeed.Generate(builder);
             OrganizationTypeSeed.Generate(builder);
             UserRoleSeed.Generate(builder);

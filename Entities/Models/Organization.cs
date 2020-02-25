@@ -15,7 +15,6 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string ExactName { get; set; }
-        [Required(ErrorMessage = "ShortName is required")]
         [Column(TypeName = "VARCHAR(128)")]
         [StringLength(250)]
         public string ShortName { get; set; }

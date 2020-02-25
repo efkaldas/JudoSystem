@@ -12,11 +12,11 @@ namespace Entities.Models
     {
         public User()
         {
-            this.Roles = new HashSet<Role>();
+            this.UserRoles = new HashSet<UserRole>();
         }
         [Key]
         public int Id { get; set; }
-        public ICollection<Role> Roles { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
         public User ParentUser { get; set; }
         [Required(ErrorMessage = "Email is required")]
         [Column(TypeName = "VARCHAR(250)")]
@@ -34,6 +34,8 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string PhoneNumber { get; set; }
+        public int GenderId { get; set; }
+        public Gender Gender { get; set; }
         public int StatuId { get; set; }
         public UserStatus Status { get; set; }
         public int? OrganizationId { get; set; }

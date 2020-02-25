@@ -41,7 +41,6 @@ namespace JudoSystem.Controllers
                 return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
             db.Organization.Create(user.Organization);
-            db.Save();
 
             db.User.Create(user);
             db.Save();

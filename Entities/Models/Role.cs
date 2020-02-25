@@ -25,7 +25,7 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string RoleNameRU { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<UserRole> UserRoles{ get; set; }
 
     }
 }
