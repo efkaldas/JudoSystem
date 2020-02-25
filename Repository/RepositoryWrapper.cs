@@ -13,6 +13,8 @@ namespace Repository
         private IUserRepository user;
         private IOrganizationTypeRepository organizationType;
         private IOrganizationRepository organization;
+        private IGenderRepository gender;
+        private IUserRoleRepository userRole;
 
         public IUserRepository User
         {
@@ -48,6 +50,30 @@ namespace Repository
                 }
 
                 return organizationType;
+            }
+        }
+        public IUserRoleRepository Gender
+        {
+            get
+            {
+                if (userRole == null)
+                {
+                    userRole = new UserRoleRepository(_repoContext);
+                }
+
+                return userRole;
+            }
+        }
+        public IGenderRepository UserRole
+        {
+            get
+            {
+                if (gender == null)
+                {
+                    gender = new GenderRepository(_repoContext);
+                }
+
+                return gender;
             }
         }
 

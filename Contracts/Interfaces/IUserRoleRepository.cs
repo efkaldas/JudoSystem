@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Contracts.Interfaces
 {
-    class IRoleRepository
+    public interface IUserRoleRepository : IRepositoryBase<UserRole>
     {
     }
 }
