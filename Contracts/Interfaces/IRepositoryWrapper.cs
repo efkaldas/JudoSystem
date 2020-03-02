@@ -9,6 +9,9 @@ namespace Contracts.Interfaces
         IUserRepository User { get; }
         IOrganizationRepository Organization { get; }
         IOrganizationTypeRepository OrganizationType { get; }
+        IGenderRepository Gender { get; }
+        IRoleRepository Role { get; }
+        IUserRoleRepository UserRole { get; }
         void Save();
     }
 }

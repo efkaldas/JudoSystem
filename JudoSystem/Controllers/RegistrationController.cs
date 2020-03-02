@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace JudoSystem.Controllers
 {
@@ -28,9 +29,10 @@ namespace JudoSystem.Controllers
         // POST: api/Registration
         [AllowAnonymous]
         [HttpPost]
-   //     [ServiceFilter(typeof(ValidateForm))]
+        [ServiceFilter(typeof(ValidateForm))]
         public IActionResult Register([FromBody]User user)
         {
+            List<UserRole> userRoles = new List<UserRole>();
 
             user.Password = StringHelper.HashPassword(user.Password);
 
@@ -41,13 +43,10 @@ namespace JudoSystem.Controllers
                 return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
             db.Organization.Create(user.Organization);
-
             db.User.Create(user);
             db.Save();
 
             return Ok(user);
-
-
         }
     }
 }

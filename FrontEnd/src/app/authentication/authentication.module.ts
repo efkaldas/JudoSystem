@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { DemoMaterialModule } from '../demo-material-module';
 import { OrganizationTypeService } from '../../services/organization-type.service';
 import { UserService } from '../../services/user.service';
+import { RoleService } from '../../services/role.service';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { UserService } from '../../services/user.service';
   ],
   providers: [
     OrganizationTypeService,
-    UserService
+    UserService,
+    RoleService
   ],
   declarations: [
     ErrorComponent,

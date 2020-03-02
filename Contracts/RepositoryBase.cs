@@ -32,6 +32,10 @@ namespace Contracts
         {
             this.RepositoryContext.Set<T>().Add(entity);
         }
+        public void CreateMany(List<T> entity)
+        {
+            this.RepositoryContext.Set<T>().AddRange(entity);
+        }
 
         public void Update(T entity)
         {

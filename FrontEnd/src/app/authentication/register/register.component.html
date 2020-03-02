@@ -34,6 +34,15 @@
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a phone number.</small>
                                 </div>
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <label class="m-r-20">Select roles :</label>
+                                    <mat-radio-group [formControl]="userForm.controls['userRoles']">
+                                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" *ngFor="let role of roles">
+                                        <mat-checkbox *ngIf="role.id != 1 && role.id != 2" class="example-margin" >{{role.roleNameEN}}</mat-checkbox>
+                                        </div>
+                                    </mat-radio-group>
+                                    <small *ngIf="clicked && userForm.controls['userRoles'].hasError('required')" class="mat-text-warn">You must select a role.</small>
+                                  </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">

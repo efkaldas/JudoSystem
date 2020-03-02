@@ -38,6 +38,9 @@ namespace JudoSystem
             services.ConfigureRepositoryWrapper();
             services.ConfigureSwagger();
             services.ConfigureLoggerService();
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             services.ConfigureFilters();
         }

@@ -13,6 +13,8 @@ import { UserService } from '../../../services/user.service';
 import { OrganizationType } from '../../../data/organization-type.data';
 import { Organization } from '../../../data/organization.data';
 import { User } from '../../../data/user.data';
+import { RoleService } from '../../../services/role.service';
+import { Role } from '../../../data/role.data';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -26,15 +28,19 @@ export class RegisterComponent implements OnInit {
   public userForm: FormGroup;
   public organizationForm: FormGroup;
   organizationTypes: OrganizationType[];
+  roles: Role[];
   organizationData: Organization;
   userData: User= new User();
   submitted = false;
   clicked = false;
   errorMessage: string;
-  constructor(private organizationService: OrganizationTypeService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
+
+  constructor(private organizationService: OrganizationTypeService,
+    private roleService: RoleService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.getOrganizationTypes();
+    this.getRoles();
     this.formGroup();
   }
   private formGroup()
@@ -49,6 +55,10 @@ export class RegisterComponent implements OnInit {
         Validators.compose([Validators.required])
       ],
       phoneNumber: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      userRoles: [
         null,
         Validators.compose([Validators.required])
       ],
@@ -84,7 +94,14 @@ export class RegisterComponent implements OnInit {
     .subscribe(
       data => {
         this.organizationTypes = data as any;
-        console.log( this.organizationTypes[0].id);
+      })
+  }
+  private getRoles()
+  {
+    return this.roleService.getRoles()
+    .subscribe(
+      data => {
+        this.roles = data as any;
       })
   }
 

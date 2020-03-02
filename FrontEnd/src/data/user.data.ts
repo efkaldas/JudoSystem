@@ -1,9 +1,10 @@
 import { Organization } from "./organization.data";
+import { UserRole } from "./user-role.data";
 
 export class User {
     id: number;
-    role: string;
-    parentUser: string;
+    userRole: UserRole;
+    parentUser: number;
     email: string;
     firstname: string;
     lastname: string;
