@@ -4,7 +4,8 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl
+  FormControl,
+  FormArray
 } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import { Food } from '../../forms/select/select.component';
@@ -27,6 +28,7 @@ const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
 export class RegisterComponent implements OnInit {
   public userForm: FormGroup;
   public organizationForm: FormGroup;
+  private control: FormArray;
   organizationTypes: OrganizationType[];
   roles: Role[];
   organizationData: Organization;
@@ -46,46 +48,21 @@ export class RegisterComponent implements OnInit {
   private formGroup()
   {
     this.userForm = this.fb.group({
-      firstname: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      lastname: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      phoneNumber: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      userRoles: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      email: [
-        null,
-        Validators.compose([Validators.required, CustomValidators.email])
-      ],
+      firstname: [null, Validators.compose([Validators.required])],
+      lastname: [null, Validators.compose([Validators.required])],
+      phoneNumber: [null, Validators.compose([Validators.required])],
+      userRoles: this.fb.array([this.createItem()]),
+      email: [null, Validators.compose([Validators.required, CustomValidators.email])],
       password: Password,
       confirmPassword: ConfirmPassword
     });
+
     this.organizationForm = this.fb.group({
-      organizationTypeId: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      name: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      country: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      city: [
-        null,
-        Validators.compose([Validators.required])
-      ]
+      organizationTypeId: [null, Validators.compose([Validators.required])],
+      name: [null, Validators.compose([Validators.required])],
+      country: [null, Validators.compose([Validators.required])],
+      city: [null, Validators.compose([Validators.required])],
+      address: [null, Validators.compose([Validators.required])],
     });
   }
   private getOrganizationTypes()
@@ -93,7 +70,7 @@ export class RegisterComponent implements OnInit {
     return this.organizationService.getOrganizationTypes()
     .subscribe(
       data => {
-        this.organizationTypes = data as any;
+        this.organizationTypes = data as OrganizationType[];
       })
   }
   private getRoles()
@@ -130,5 +107,11 @@ export class RegisterComponent implements OnInit {
         }
         );
     }
+  }
+  createItem(): FormGroup {
+    return this.fb.group({
+      userId: '',
+      roleId: ''
+    });
   }
 }

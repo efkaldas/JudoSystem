@@ -34,14 +34,16 @@
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a phone number.</small>
                                 </div>
-                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                                    <label class="m-r-20">Select roles :</label>
-                                    <mat-radio-group [formControl]="userForm.controls['userRoles']">
-                                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" *ngFor="let role of roles">
-                                        <mat-checkbox *ngIf="role.id != 1 && role.id != 2" class="example-margin" >{{role.roleNameEN}}</mat-checkbox>
-                                        </div>
-                                    </mat-radio-group>
-                                    <small *ngIf="clicked && userForm.controls['userRoles'].hasError('required')" class="mat-text-warn">You must select a role.</small>
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" formArrayName="userRoles"
+                                *ngFor="let item of userForm.get('userRoles').controls; let i = index;">
+                                <div [formGroupName]="i">
+                                    <mat-form-field>
+                                        <mat-label>Roles</mat-label>
+                                        <mat-select formControlName="roleId" multiple>
+                                          <mat-option *ngFor="let role of roles" [value]="role.id">{{role.roleNameEN}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>                                   
+                                    </div>
                                   </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
@@ -95,7 +97,6 @@
                                         </mat-select>
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['organizationTypeId'].hasError('required')" class="text-danger support-text">You must select an organization type.</small>
-                                                                        <small *ngIf="submitted && organizationForm.controls['organizationTypeId'].hasError('required')" class="text-danger support-text">You must select an organization type.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
@@ -107,6 +108,13 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Country" type="text" formControlName="country" class="form-control">
+                                    </mat-form-field>
+                                    <small *ngIf="submitted && organizationForm.controls['country'].hasError('required')" class="text-danger support-text">You must include a country.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
                                         <input matInput placeholder="City" type="text" formControlName="city" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['city'].hasError('required')" class="text-danger support-text">You must include a city.</small>
@@ -114,9 +122,9 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Country" type="text" formControlName="country" class="form-control">
+                                        <input matInput placeholder="Address" type="text" formControlName="address" class="form-control">
                                     </mat-form-field>
-                                    <small *ngIf="submitted && organizationForm.controls['country'].hasError('required')" class="text-danger support-text">You must include a country.</small>
+                                    <small *ngIf="submitted && organizationForm.controls['address'].hasError('required')" class="text-danger support-text">You must include an address.</small>
                                 </div>
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-checkbox class="font-14">I agree to the all
