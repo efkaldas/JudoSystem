@@ -22,6 +22,12 @@ import { DemoMaterialModule } from '../demo-material-module';
 import { OrganizationTypeService } from '../../services/organization-type.service';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
+import { GenderService } from '../../services/gender.service';
+import { LoginService } from '../../services/Login.service';
+import { NotApprovedComponent } from './error/not-approved/not-approved.component';
+import { PermissionDeniedComponent } from './error/permission-denied/permission-denied.component';
+import { LogoutComponent } from './logout/logout.component';
+import { WaitingForApprovementComponent } from './error/waiting-for-approvement/waiting-for-approvement.component';
 
 @NgModule({
   imports: [
@@ -36,14 +42,20 @@ import { RoleService } from '../../services/role.service';
   providers: [
     OrganizationTypeService,
     UserService,
-    RoleService
+    RoleService,
+    GenderService,
+    LoginService
   ],
   declarations: [
     ErrorComponent,
     ForgotComponent,
     LockscreenComponent,
     LoginComponent,
-    RegisterComponent
+    LogoutComponent,
+    RegisterComponent,
+    PermissionDeniedComponent,
+    NotApprovedComponent,
+    WaitingForApprovementComponent
   ]
 })
 export class AuthenticationModule {}

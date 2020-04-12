@@ -12,6 +12,8 @@ namespace Contracts.Interfaces
         IGenderRepository Gender { get; }
         IRoleRepository Role { get; }
         IUserRoleRepository UserRole { get; }
+        IJudokaRepository Judoka { get; }
+        IDanKyu DanKyu { get; }
         void Save();
     }
 }

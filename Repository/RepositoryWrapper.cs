@@ -16,6 +16,8 @@ namespace Repository
         private IGenderRepository gender;
         private IUserRoleRepository userRole;
         private IRoleRepository role;
+        private IJudokaRepository judoka;
+        private IDanKyu danKyu;
 
         public IUserRepository User
         {
@@ -87,6 +89,30 @@ namespace Repository
                 }
 
                 return role;
+            }
+        }
+        public IJudokaRepository Judoka
+        {
+            get
+            {
+                if (judoka == null)
+                {
+                    judoka = new JudokaRepository(_repoContext);
+                }
+
+                return judoka;
+            }
+        }
+        public IDanKyu DanKyu
+        {
+            get
+            {
+                if (danKyu == null)
+                {
+                    danKyu = new DanKyuRepository(_repoContext);
+                }
+
+                return danKyu;
             }
         }
 

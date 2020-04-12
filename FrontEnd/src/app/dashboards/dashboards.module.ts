@@ -10,6 +10,15 @@ import { ChartsModule } from 'ng2-charts';
 
 import { Dashboard1Component } from './dashboard1/dashboard1.component';
 import { Dashboard2Component } from './dashboard2/dashboard2.component';
+import { AuthGuard } from '../auth-guard/auth.guard';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+  wheelSpeed: 2,
+  wheelPropagation: true
+};
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +27,13 @@ import { Dashboard2Component } from './dashboard2/dashboard2.component';
     ChartistModule,
     ChartsModule,
     RouterModule.forChild(DashboardsRoutes)
+  ],
+  providers: [
+    AuthGuard,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   declarations: [Dashboard1Component, Dashboard2Component]
 })

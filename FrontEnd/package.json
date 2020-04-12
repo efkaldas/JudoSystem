@@ -41,6 +41,7 @@
     "extend": "^3.0.2",
     "hammerjs": "^2.0.8",
     "handlebars": "^4.3.3",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "ng-chartist": "4.1.0",

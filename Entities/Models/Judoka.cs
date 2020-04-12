@@ -22,10 +22,13 @@ namespace Entities.Models
         [StringLength(250)]
         public string Lastname { get; set; }
         public Gender Gender { get; set; }
+        public int GenderId { get; set; }
 
         [Required(ErrorMessage = "BirthYears is required")]
         public int BirthYears { get; set; }
         public DanKyu DanKyu { get; set; }
+        public int DanKyuId { get; set; }
         public User User { get; set; }
+        public int UserId { get; set; }
     }
 }

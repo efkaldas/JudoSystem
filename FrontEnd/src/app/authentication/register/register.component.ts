@@ -16,6 +16,10 @@ import { Organization } from '../../../data/organization.data';
 import { User } from '../../../data/user.data';
 import { RoleService } from '../../../services/role.service';
 import { Role } from '../../../data/role.data';
+import { UserRole } from '../../../data/user-role.data';
+import { GenderService } from '../../../services/gender.service';
+import { Gender } from '../../../data/gender.data';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -36,13 +40,17 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   clicked = false;
   errorMessage: string;
+  message: string;
+  genders: Gender[];
 
-  constructor(private organizationService: OrganizationTypeService,
-    private roleService: RoleService, private userService: UserService, private fb: FormBuilder, private router: Router) {}
+  constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
+    private roleService: RoleService, private userService: UserService, private fb: FormBuilder, private router: Router,
+    private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.getOrganizationTypes();
     this.getRoles();
+    this.getGenders();
     this.formGroup();
   }
   private formGroup()
@@ -51,15 +59,17 @@ export class RegisterComponent implements OnInit {
       firstname: [null, Validators.compose([Validators.required])],
       lastname: [null, Validators.compose([Validators.required])],
       phoneNumber: [null, Validators.compose([Validators.required])],
-      userRoles: this.fb.array([this.createItem()]),
+      roleId: [null, Validators.compose([Validators.required])],
+      genderId: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
+      StatusId: 2,
       password: Password,
       confirmPassword: ConfirmPassword
     });
 
     this.organizationForm = this.fb.group({
       organizationTypeId: [null, Validators.compose([Validators.required])],
-      name: [null, Validators.compose([Validators.required])],
+      exactName: [null, Validators.compose([Validators.required])],
       country: [null, Validators.compose([Validators.required])],
       city: [null, Validators.compose([Validators.required])],
       address: [null, Validators.compose([Validators.required])],
@@ -67,7 +77,7 @@ export class RegisterComponent implements OnInit {
   }
   private getOrganizationTypes()
   {
-    return this.organizationService.getOrganizationTypes()
+    return this.organizationService.getAll()
     .subscribe(
       data => {
         this.organizationTypes = data as OrganizationType[];
@@ -75,10 +85,18 @@ export class RegisterComponent implements OnInit {
   }
   private getRoles()
   {
-    return this.roleService.getRoles()
+    return this.roleService.getAll()
     .subscribe(
       data => {
         this.roles = data as any;
+      })
+  }
+  private getGenders()
+  {
+    return this.genderService.getAll()
+    .subscribe(
+      data => {
+        this.genders = data as any;
       })
   }
 
@@ -86,19 +104,30 @@ export class RegisterComponent implements OnInit {
   {
     this.clicked = true;
     this.userData = this.userForm.value;
+    this.userData.userRoles = new Array<UserRole>();
+    this.userForm.value.roleId.forEach(element => {
+      var userRole = new UserRole();
+      userRole.roleId = element;
+      userRole.userId = 0;
+      this.userData.userRoles.unshift(userRole);
+    })
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.userForm.valid);
-    console.log(this.organizationForm.valid);
-
     if (this.userForm.valid && this.organizationForm.valid) {
       return this.userService.registerUser(this.userData, this.organizationForm.value).subscribe(
         data =>
         {
-          console.log(data); //gives an object at this point
-
+          this.message = "Successfully registered";                
+          this.router.navigate(["/authentication/waiting-for-approvement"]);
+          this.openSnackBar(this.message, "close");   
         },
         error => 
         {
@@ -110,7 +139,6 @@ export class RegisterComponent implements OnInit {
   }
   createItem(): FormGroup {
     return this.fb.group({
-      userId: '',
       roleId: ''
     });
   }

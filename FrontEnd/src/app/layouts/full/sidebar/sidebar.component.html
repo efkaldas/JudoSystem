@@ -1,15 +1,15 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
-<div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
+<!-- <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;"> -->
     <!-- User profile image -->
-    <div class="profile-img">
-        <img src="assets/images/users/profile.png" alt="user"> </div>
+    <!-- <div class="profile-img">
+        <img src="assets/images/users/profile.png" alt="user"> </div> -->
     <!-- User profile text-->
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <div class="profile-text">
+    <!-- <div class="profile-text">
         <a [matMenuTriggerFor]="sdprofile" class=""> Markarn Doe
             <i class="ti-angle-down font-12 m-l-5"></i>
         </a>
@@ -28,7 +28,7 @@
             <mat-icon>exit_to_app</mat-icon> Sign Out
         </button>
     </mat-menu>
-</div>
+</div> -->
 
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}" (click)="scrollToTop()">

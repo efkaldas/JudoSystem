@@ -28,7 +28,7 @@ namespace Entities
                 .IsUnique();
 
             builder.Entity<User>()
-                .Property(b => b.StatuId)
+                .Property(b => b.StatusId)
                 .HasDefaultValue(2);
 
             builder.Entity<UserRole>()

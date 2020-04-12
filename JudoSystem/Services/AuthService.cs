@@ -37,7 +37,8 @@ namespace JudoSystem.Services
             Claim[] claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Actor, user.Status.StatusNameEN)
             };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token");
 

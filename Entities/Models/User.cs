@@ -33,7 +33,7 @@ namespace Entities.Models
         public string PhoneNumber { get; set; }
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
-        public int StatuId { get; set; }
+        public int StatusId { get; set; }
         public UserStatus Status { get; set; }
         public int? OrganizationId { get; set; }
         public Organization Organization { get; set; }

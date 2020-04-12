@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
@@ -26,6 +26,20 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { OrganizationTypeService } from '../services/organization-type.service';
+import { UserService } from '../services/user.service';
+import { RoleService } from '../services/role.service';
+import { GenderService } from '../services/gender.service';
+import { LoginService } from '../services/Login.service';
+import { MyJudokasComponent } from './components/my-judokas/my-judokas.component';
+import { JudokaService } from '../services/judoka.service';
+import { httpInterceptorProviders } from '../interceptors/interceptor-provider';
+import { DanKyuService } from '../services/dan-kyu.service';
+import { CoachComponent } from './components/coach/coach.component';
+import { PendingUsersComponent } from './components/pending-users/pending-users.component';
+import { PendingUserService } from '../services/pending-user.service';
+import { WaitingForApprovementComponent } from './authentication/error/waiting-for-approvement/waiting-for-approvement.component';
+import { HomeComponent } from './components/home/home.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -41,7 +55,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     AppBlankComponent,
     AppSidebarComponent,
-	AppBreadcrumbComponent
+	AppBreadcrumbComponent,
+	MyJudokasComponent,
+	CoachComponent,
+	PendingUsersComponent,
+	HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     PerfectScrollbarModule,
     SharedModule,
+    ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(AppRoutes),
     TranslateModule.forRoot({
@@ -66,7 +85,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    httpInterceptorProviders,
+    OrganizationTypeService,
+    UserService,
+    RoleService,
+    GenderService,
+    LoginService,
+    JudokaService,
+    DanKyuService,
+    PendingUserService
   ],
   bootstrap: [AppComponent]
 })
