@@ -7,7 +7,7 @@ namespace Contracts.Interfaces
 {
     public interface IRepositoryBase<T>
     {
-        IQueryable<T> FindAll();
+        List<T> FindAll();
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
         void Create(T entity);
         void CreateMany(List<T> entity);

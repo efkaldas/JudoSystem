@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { AppBlankComponent } from './layouts/blank/blank.component';
+import { MyJudokasComponent } from './components/my-judokas/my-judokas.component';
+import { AuthGuard } from './auth-guard/auth.guard';
+import { PendingUsersComponent } from './components/pending-users/pending-users.component';
+import { HomeComponent } from './components/home/home.component';
+import { Role } from '../data/user-role.enum.data';
 
 export const AppRoutes: Routes = [
   {
@@ -10,9 +15,30 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboards/dashboard1',
+        redirectTo: '/home',
         pathMatch: 'full'
       },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'myjudokas',
+        component: MyJudokasComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'My Judokas', roles: [Role.Admin, Role.Coach]}
+      },
+      {
+        path: 'pending-users',
+        component: PendingUsersComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Pending Users', roles: [Role.Admin]}
+      },
+  //     {
+  //       path: '/dashboards/dashboard1',
+  // //      redirectTo: '/dashboards/dashboard1',
+  //       pathMatch: 'full'
+  //     },
       {
         path: 'dashboards',
         loadChildren: './dashboards/dashboards.module#DashboardsModule'

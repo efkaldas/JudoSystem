@@ -30,7 +30,7 @@ namespace JudoSystem.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetUser")]
         [ServiceFilter(typeof(ValidateEntityExists<User>))]
         public IActionResult Get(int id)
         {
@@ -38,26 +38,38 @@ namespace JudoSystem.Controllers
             return Ok(user);
         }
 
+        [HttpGet("{id}/Judokas", Name = "Get")]
+        public IActionResult GetJudokas(int id)
+        {
+            Judoka judoka = db.Judoka.FindByConditionFull(x => x.Id == id).FirstOrDefault();
+            return Ok(judoka);
+        }
+
         // POST: api/User
         [HttpPost]
         [ServiceFilter(typeof(ValidateForm))]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] User user)
         {
+            db.User.Create(user);
+            db.Save();
+
+            return Ok();
         }
 
         // PUT: api/User/5
         [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidateForm))]
         [ServiceFilter(typeof(ValidateEntityExists<User>))]
-        public void Put(User user)
+        public IActionResult Put(User user)
         {
-
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            return Ok();
         }
     }
 }

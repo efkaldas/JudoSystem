@@ -34,16 +34,24 @@
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a phone number.</small>
                                 </div>
-                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" formArrayName="userRoles"
-                                *ngFor="let item of userForm.get('userRoles').controls; let i = index;">
-                                <div [formGroupName]="i">
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field>
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select formControlName="genderId">
+                                          <mat-option *ngFor="let gender of genders" [value]="gender.id">{{gender.textEN}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> 
+                                    <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select gender.</small>                                  
+                                  </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field>
                                         <mat-label>Roles</mat-label>
                                         <mat-select formControlName="roleId" multiple>
                                           <mat-option *ngFor="let role of roles" [value]="role.id">{{role.roleNameEN}}</mat-option>
                                         </mat-select>
-                                      </mat-form-field>                                   
-                                    </div>
+                                    </mat-form-field>                                   
                                   </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
@@ -101,9 +109,9 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Organization name" type="text" formControlName="name" class="form-control">
+                                        <input matInput placeholder="Organization name" type="text" formControlName="exactName" class="form-control">
                                     </mat-form-field>
-                                    <small *ngIf="submitted && organizationForm.controls['name'].hasError('required')" class="text-danger support-text">You must include an organization name.</small>
+                                    <small *ngIf="submitted && organizationForm.controls['exactName'].hasError('required')" class="text-danger support-text">You must include an organization name.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">

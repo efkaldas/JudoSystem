@@ -9,6 +9,10 @@ namespace Entities.Models
 {
     public class UserStatus
     {
+        public static readonly int STATUS_APPROVED = 1;
+        public static readonly int STATUS_NOT_APPROVED = 2;
+        public static readonly int STATUS_BLOCKED = 3;
+
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "StatusNameEN is required")]

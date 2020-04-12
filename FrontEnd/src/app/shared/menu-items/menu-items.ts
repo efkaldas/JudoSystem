@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoginService } from '../../../services/Login.service';
 
 export interface BadgeItem {
   type: string;
@@ -29,6 +30,32 @@ export interface Menu {
   saperator?: Saperator[];
   children?: ChildrenItems[];
 }
+
+const HEADERMENUITEMS = [
+ // { state: 'settings',type: 'link', name: 'Settings', icon: 'settings' },
+  { state: 'profile', type: 'link', name: 'Profile', icon: 'account_box' },
+  //{ state: 'disableNotifications', type: 'link', name: 'Disable Notifications', icon: 'notifications_off' },
+  { state: '/authentication/logout', type: 'link', name: 'Sign Out', icon: 'exit_to_app' },
+];
+
+const ADMIN_MENUITEMS = [
+  {
+    state: '',
+    name: 'Users',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: 'pending-users', name: 'Pending users', type: 'link' },
+]
+const COACH_MENUITEMS = [
+  {
+    state: '',
+    name: 'Judokas',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: 'my-judokas', name: 'My judokas', type: 'link' },
+]
 
 const MENUITEMS = [
   {
@@ -245,8 +272,11 @@ const MENUITEMS = [
 ];
 
 @Injectable()
-export class MenuItems {
+export class MenuItems extends LoginService {
   getMenuitem(): Menu[] {
     return MENUITEMS;
+  }
+  getHeaderMenuitem(): Menu[] {
+    return HEADERMENUITEMS;
   }
 }
