@@ -27,23 +27,5 @@ namespace JudoSystem.Controllers
             List<Role> roles = db.Role.FindAll().ToList();
             return Ok(roles);
         }
-
-        // POST: api/Role
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Role/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

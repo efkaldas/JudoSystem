@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ActionFilters.Filters;
 using Contracts.Interfaces;
 using Entities.Models;
+using JudoSystem.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -59,8 +60,8 @@ namespace JudoSystem.Controllers
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
             judoka.UserId = Convert.ToInt32(userId);
 
-            judoka.Firstname = textInfo.ToTitleCase(judoka.Firstname);
-            judoka.Lastname = textInfo.ToTitleCase(judoka.Lastname);
+            judoka.Firstname = StringHelper.ToTitleCase(judoka.Firstname);
+            judoka.Lastname = StringHelper.ToTitleCase(judoka.Lastname);
 
             db.Judoka.Create(judoka);
             db.Save();
@@ -75,8 +76,8 @@ namespace JudoSystem.Controllers
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
 
             judoka.Id = id;
-            judoka.Firstname = textInfo.ToTitleCase(judoka.Firstname);
-            judoka.Lastname = textInfo.ToTitleCase(judoka.Lastname);
+            judoka.Firstname = StringHelper.ToTitleCase(judoka.Firstname);
+            judoka.Lastname = StringHelper.ToTitleCase(judoka.Lastname);
 
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
             judoka.UserId = Convert.ToInt32(userId);

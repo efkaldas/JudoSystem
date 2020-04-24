@@ -42,6 +42,7 @@ namespace JudoSystem.Controllers
             if (db.User.FindByCondition(x => x.Organization.ExactName == user.Organization.ExactName).FirstOrDefault() != null)
                 return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
+            user.BirthDate = user.BirthDate.Date;
             db.Organization.Create(user.Organization);
             db.User.Create(user);
             db.Save();

@@ -14,6 +14,9 @@ namespace Contracts.Interfaces
         IUserRoleRepository UserRole { get; }
         IJudokaRepository Judoka { get; }
         IDanKyu DanKyu { get; }
+        ICompetitions Competitions { get; }
+        IAgeGroup AgeGroup { get; }
+        ICompetitionsType CompetitionsType { get; }
         void Save();
     }
 }

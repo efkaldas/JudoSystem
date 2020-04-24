@@ -12,8 +12,10 @@ namespace Entities.Models
     {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public List<UserRole> UserRoles { get; set; }
+        public int? ParentUserId { get; set; }
         public User ParentUser { get; set; }
         [Required(ErrorMessage = "Email is required")]
         [Column(TypeName = "VARCHAR(250)")]
@@ -31,8 +33,15 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "BirthDate is required")]
+        public DateTime BirthDate { get; set; }
+        public int? DanKyuId { get; set; }
+        public DanKyu DanKyu { get; set; }
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
+        [Column(TypeName = "VARCHAR(1056)")]
+        [StringLength(1056)]
+        public string Image { get; set; }
         public int StatusId { get; set; }
         public UserStatus Status { get; set; }
         public int? OrganizationId { get; set; }
@@ -45,5 +54,7 @@ namespace Entities.Models
         public DateTime DateCreated { get; set; }
         [Timestamp]
         public DateTime DateUpdated { get; set; }
+        public List<Judoka> Judokas { get; set; }
+        public List<CompetitionsJudge> Competitions { get; set; }
     }
 }

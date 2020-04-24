@@ -1,34 +1,28 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
-<!-- <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;"> -->
+<div *ngIf="user != null" class="user-profile" style="background: url(assets/images/organizations/{{user.organization.image}}) no-repeat; background-position: center; background-size:cover;">
     <!-- User profile image -->
-    <!-- <div class="profile-img">
-        <img src="assets/images/users/profile.png" alt="user"> </div> -->
+    <div class="profile-img">
+        <img src="assets/images/users/{{user.image}}" alt="user"> </div>
     <!-- User profile text-->
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <!-- <div class="profile-text">
-        <a [matMenuTriggerFor]="sdprofile" class=""> Markarn Doe
+    <div class="profile-text">
+        <a [matMenuTriggerFor]="sdprofile" class=""> {{user.firstname}} {{user.lastname}}
             <i class="ti-angle-down font-12 m-l-5"></i>
         </a>
     </div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
-            <mat-icon>settings</mat-icon> Settings
-        </button>
-        <button mat-menu-item>
             <mat-icon>account_box</mat-icon> Profile
-        </button>
-        <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon> Disable notifications
         </button>
         <button mat-menu-item>
             <mat-icon>exit_to_app</mat-icon> Sign Out
         </button>
     </mat-menu>
-</div> -->
+</div>
 
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}" (click)="scrollToTop()">

@@ -2,6 +2,7 @@
 using JudoSystem.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -22,6 +23,13 @@ namespace JudoSystem.Helpers
         public static bool VerifyPassword(string hash, string password)
         {
             return Crypto.VerifyHashedPassword(hash, password);
+        }
+
+        public static string ToTitleCase(string text)
+        {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+
+            return textInfo.ToTitleCase(text);
         }
     }
 }

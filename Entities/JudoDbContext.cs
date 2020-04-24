@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using Entities.Models.Seeds;
+using Entities.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -16,6 +17,15 @@ namespace Entities
         public DbSet<Role> Role { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<UserStatus> UserStatus { get; set; }
+        public DbSet<Competitions> Competitions { get; set; }
+        public DbSet<WeightCategory> WeightCategory { get; set; }
+        public DbSet<AgeGroup> AgeGroup { get; set; }
+        public DbSet<Competitor> Competitor { get; set; }
+        public DbSet<CompetitionsJudge> CompetitionsJudge { get; set; }
+        public DbSet<CompetitionsResults> CompetitionsResults { get; set; }
+        public DbSet<CompetitionsType> CompetitionsType { get; set; }
+        public DbSet<JudokaRank> JudokaRank { get; set; }
+
         public JudoDbContext(DbContextOptions<JudoDbContext> options)
             : base(options) { }
 
@@ -43,13 +53,27 @@ namespace Entities
                 .HasOne(bc => bc.Role)
                 .WithMany(c => c.UserRoles)
                 .HasForeignKey(bc => bc.RoleId);
-        
 
-                    DanKyuSeed.Generate(builder);
+            builder.Entity<Competitor>()
+                .HasKey(bc => new { bc.WeightCategoryId, bc.JudokaId });
+
+            builder.Entity<Competitor>()
+                .HasOne(bc => bc.WeightCategory)
+                .WithMany(b => b.Competitors)
+                .HasForeignKey(bc => bc.WeightCategoryId);
+
+            builder.Entity<Competitor>()
+                .HasOne(bc => bc.Judoka)
+                .WithMany(b => b.WeightCategories)
+                .HasForeignKey(bc => bc.JudokaId);
+
+
+            DanKyuSeed.Generate(builder);
             GenderSeed.Generate(builder);
             OrganizationTypeSeed.Generate(builder);
             UserRoleSeed.Generate(builder);
             UserStatusSeed.Generate(builder);
+            CompetitionsTypeSeed.Generate(builder);
         }
     }
 }

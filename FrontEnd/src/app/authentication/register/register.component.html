@@ -30,6 +30,13 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
+                                        <input matInput placeholder="Birth Date" type="date" formControlName="birthDate" class="form-control" required>
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['birthDate'].hasError('required')" class="text-danger support-text">You must include a birth date.</small>
+                                </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field style="width: 100%">
                                         <input matInput placeholder="Phonenumber" type="text" formControlName="phoneNumber" class="form-control" required>
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a phone number.</small>
@@ -43,6 +50,16 @@
                                         </mat-select>
                                     </mat-form-field> 
                                     <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select gender.</small>                                  
+                                  </div>
+                                <!-- col full-->
+                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                    <mat-form-field>
+                                        <mat-label>Dan/Kyu</mat-label>
+                                        <mat-select formControlName="danKyuId">
+                                          <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">{{danKyu.grade}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> 
+                                    <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select Dan/Kyu.</small>                                  
                                   </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">

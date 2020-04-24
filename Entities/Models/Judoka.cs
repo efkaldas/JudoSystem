@@ -30,5 +30,6 @@ namespace Entities.Models
         public int DanKyuId { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+        public List<Competitor> WeightCategories { get; set; }
     }
 }

@@ -40,6 +40,18 @@ import { PendingUsersComponent } from './components/pending-users/pending-users.
 import { PendingUserService } from '../services/pending-user.service';
 import { WaitingForApprovementComponent } from './authentication/error/waiting-for-approvement/waiting-for-approvement.component';
 import { HomeComponent } from './components/home/home.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CoachService } from '../services/coach.service';
+import { CoachShowComponent } from './components/coach-show/coach-show.component';
+import { CoachOrganizationComponent } from './components/coach-show/coach-organization/coach-organization.component';
+import { CoachProfileComponent } from './components/coach-show/coach-profile/coach-profile.component';
+import { CompetitionsService } from '../services/Competitions.service';
+import { NewCompetitionsComponent } from './components/new-competitions/new-competitions.component';
+import { QuillModule } from 'ngx-quill';
+import { CompetitionsTypeService } from '../services/competitions-type.service';
+import { NewAgeGroupComponent } from './components/new-age-group/new-age-group.component';
+import { CompetitionsShowComponent } from './components/competitions-show/competitions-show.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -59,7 +71,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	MyJudokasComponent,
 	CoachComponent,
 	PendingUsersComponent,
-	HomeComponent
+	HomeComponent,
+	CompetitionsComponent,
+	CoachShowComponent,
+	CoachOrganizationComponent,
+	CoachProfileComponent,
+	NewCompetitionsComponent,
+	NewAgeGroupComponent,
+	CompetitionsShowComponent,
+	ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     PerfectScrollbarModule,
     SharedModule,
+    QuillModule.forRoot(),
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(AppRoutes),
@@ -94,7 +115,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoginService,
     JudokaService,
     DanKyuService,
-    PendingUserService
+    PendingUserService,
+    CoachService,
+    CompetitionsService,
+    CompetitionsTypeService
   ],
   bootstrap: [AppComponent]
 })
