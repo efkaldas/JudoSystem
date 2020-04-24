@@ -65,5 +65,6 @@ export class LoginService {
 
   public logout() {
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("user");
   }
 }

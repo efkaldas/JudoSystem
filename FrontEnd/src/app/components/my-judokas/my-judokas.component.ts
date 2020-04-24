@@ -48,7 +48,6 @@ export class MyJudokasComponent implements OnInit {
     else{
       this.formGroup();
     } 
-    console.log(this.formEditGroup);
     this.dialog.open(templateRef);
   }
   onNoClick(){

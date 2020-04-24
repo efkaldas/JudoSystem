@@ -7,6 +7,12 @@ import { AuthGuard } from './auth-guard/auth.guard';
 import { PendingUsersComponent } from './components/pending-users/pending-users.component';
 import { HomeComponent } from './components/home/home.component';
 import { Role } from '../data/user-role.enum.data';
+import { CoachComponent } from './components/coach/coach.component';
+import { CoachShowComponent } from './components/coach-show/coach-show.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { NewCompetitionsComponent } from './components/new-competitions/new-competitions.component';
+import { CompetitionsShowComponent } from './components/competitions-show/competitions-show.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const AppRoutes: Routes = [
   {
@@ -29,10 +35,46 @@ export const AppRoutes: Routes = [
         data: {title: 'My Judokas', roles: [Role.Admin, Role.Coach]}
       },
       {
+        path: 'coaches',
+        component: CoachComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Coaches', roles: [Role.Admin, Role.Coach]}
+      },
+      {
+        path: 'coaches/:id',
+        component: CoachShowComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Coach', roles: [Role.Admin, Role.Coach]}
+      },
+      {
         path: 'pending-users',
         component: PendingUsersComponent,
         canActivate: [AuthGuard],
         data: {title: 'Pending Users', roles: [Role.Admin]}
+      },
+      {
+        path: 'competitions',
+        component: CompetitionsComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Competitions',}
+      },
+      {
+        path: 'competitions/:id',
+        component: CompetitionsShowComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Competitions',}
+      },
+      {
+        path: 'new-competitions',
+        component: NewCompetitionsComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Create Competitons',}
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Profile',}
       },
   //     {
   //       path: '/dashboards/dashboard1',
@@ -59,7 +101,7 @@ export const AppRoutes: Routes = [
       {
         path: 'tables',
         loadChildren: './tables/tables.module#TablesModule'
-      },
+      }, 
       {
         path: 'datatables',
         loadChildren: './datatables/datatables.module#DataTablesModule'

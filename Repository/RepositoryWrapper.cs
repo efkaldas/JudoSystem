@@ -18,6 +18,9 @@ namespace Repository
         private IRoleRepository role;
         private IJudokaRepository judoka;
         private IDanKyu danKyu;
+        private ICompetitions competitions;
+        private IAgeGroup ageGroup;
+        private ICompetitionsType competitionsType;
 
         public IUserRepository User
         {
@@ -113,6 +116,42 @@ namespace Repository
                 }
 
                 return danKyu;
+            }
+        }
+        public ICompetitions Competitions
+        {
+            get
+            {
+                if (competitions == null)
+                {
+                    competitions = new CompetitionsRepository(_repoContext);
+                }
+
+                return competitions;
+            }
+        }
+        public IAgeGroup AgeGroup
+        {
+            get
+            {
+                if (ageGroup == null)
+                {
+                    ageGroup = new AgeGroupRepository(_repoContext);
+                }
+
+                return ageGroup;
+            }
+        }
+        public ICompetitionsType CompetitionsType
+        {
+            get
+            {
+                if (competitionsType == null)
+                {
+                    competitionsType = new CompetitionsTypeRepository(_repoContext);
+                }
+
+                return competitionsType;
             }
         }
 

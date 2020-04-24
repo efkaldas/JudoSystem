@@ -6,8 +6,8 @@ namespace Entities.Models
 {
     public class Competitor
     {
-        public int WeightGroupId { get; set; }
-        public WeightGroup WeightGroup { get; set; }
+        public int WeightCategoryId { get; set; }
+        public WeightCategory WeightCategory { get; set; }
         public int JudokaId { get; set; }
         public Judoka Judoka { get; set; }
     }

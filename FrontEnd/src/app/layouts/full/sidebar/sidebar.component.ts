@@ -6,21 +6,25 @@ import {
   ViewChild,
   HostListener,
   Directive,
-  AfterViewInit
+  AfterViewInit,
+  OnInit
 } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 
 import { MenuItems } from '../../../shared/menu-items/menu-items';
+import { LoginService } from '../../../../services/Login.service';
+import { User } from '../../../../data/user.data';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: []
 })
-export class AppSidebarComponent implements OnDestroy {
+export class AppSidebarComponent implements OnDestroy, OnInit {
   public config: PerfectScrollbarConfigInterface = {};
   mobileQuery: MediaQueryList;
+  public user: User;
 
   private _mobileQueryListener: () => void;
   status: boolean = true;
@@ -53,7 +57,18 @@ export class AppSidebarComponent implements OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
+  ngOnInit() {
+    this.getUser();
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  getUser(){
+    if (this.menuItems.isLoggedIn()) {
+      this.user = this.menuItems.getUser();
+    }
+
   }
 }

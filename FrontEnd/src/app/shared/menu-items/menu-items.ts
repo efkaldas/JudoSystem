@@ -33,7 +33,7 @@ export interface Menu {
 
 const HEADERMENUITEMS = [
  // { state: 'settings',type: 'link', name: 'Settings', icon: 'settings' },
-  { state: 'profile', type: 'link', name: 'Profile', icon: 'account_box' },
+  { state: '/profile', type: 'link', name: 'Profile', icon: 'account_box' },
   //{ state: 'disableNotifications', type: 'link', name: 'Disable Notifications', icon: 'notifications_off' },
   { state: '/authentication/logout', type: 'link', name: 'Sign Out', icon: 'exit_to_app' },
 ];

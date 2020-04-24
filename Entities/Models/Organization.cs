@@ -30,6 +30,7 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Address { get; set; }
+        public string Image { get; set; }
         public int OrganizationTypeId { get; set; }
         public OrganizationType OrganizationType { get; set; }
     }

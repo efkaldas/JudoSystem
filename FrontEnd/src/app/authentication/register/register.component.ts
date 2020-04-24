@@ -20,6 +20,8 @@ import { UserRole } from '../../../data/user-role.data';
 import { GenderService } from '../../../services/gender.service';
 import { Gender } from '../../../data/gender.data';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DanKyuService } from '../../../services/dan-kyu.service';
+import { DanKyu } from '../../../data/DanKyu.data';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -39,17 +41,19 @@ export class RegisterComponent implements OnInit {
   userData: User= new User();
   submitted = false;
   clicked = false;
+  danKyus: DanKyu[];
   errorMessage: string;
   message: string;
   genders: Gender[];
 
   constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
-    private roleService: RoleService, private userService: UserService, private fb: FormBuilder, private router: Router,
+    private roleService: RoleService, private danKyuService: DanKyuService, private userService: UserService, private fb: FormBuilder, private router: Router,
     private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.getOrganizationTypes();
     this.getRoles();
+    this.getDanKyus();
     this.getGenders();
     this.formGroup();
   }
@@ -59,6 +63,8 @@ export class RegisterComponent implements OnInit {
       firstname: [null, Validators.compose([Validators.required])],
       lastname: [null, Validators.compose([Validators.required])],
       phoneNumber: [null, Validators.compose([Validators.required])],
+      birthDate: [null, Validators.compose([Validators.required])],
+      danKyuId: [null, Validators.compose([Validators.required])],
       roleId: [null, Validators.compose([Validators.required])],
       genderId: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
@@ -97,6 +103,14 @@ export class RegisterComponent implements OnInit {
     .subscribe(
       data => {
         this.genders = data as any;
+      })
+  }
+  private getDanKyus()
+  {
+    return this.danKyuService.getAll()
+    .subscribe(
+      data => {
+        this.danKyus = data as any;
       })
   }
 
