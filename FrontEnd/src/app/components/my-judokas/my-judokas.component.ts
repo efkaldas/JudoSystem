@@ -28,7 +28,8 @@ export class MyJudokasComponent implements OnInit {
   source : MatTableDataSource<Judoka>;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'actions'];
 
-  constructor(private danKyuService: DanKyuService, private genderService: GenderService, private judokaService: JudokaService, private router: Router, public dialog: MatDialog,
+  constructor(private danKyuService: DanKyuService, private genderService: GenderService, 
+    private judokaService: JudokaService, private router: Router, public dialog: MatDialog,
     private _snackBar: MatSnackBar, private fb: FormBuilder) {}
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -42,6 +43,7 @@ export class MyJudokasComponent implements OnInit {
   }
   openDialog(templateRef: TemplateRef<any>, element: Judoka) {
     this.selectedElement = element;
+    console.log(this.selectedElement);
     if(this.selectedElement != null) {
       this.formEditGroup();
     } 

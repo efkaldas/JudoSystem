@@ -13,11 +13,9 @@ export class UserService extends LoginService{
   protected registerUserUrl : string = environment.apiHost+"/Registration";  
 
   get(id: number) {
-    console.log(id);
     return this.http.get(this.userUrl + id);
   }  
   getFull(id: number) {
-    console.log(id);
     return this.http.get(this.userFullUrl + id);
   } 
   updateProfile(user: User) {

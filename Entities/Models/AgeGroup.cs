@@ -14,10 +14,10 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Title { get; set; }
-        public int CompetitonsId { get; set; }
+        public int CompetitionsId { get; set; }
         public Competitions Competitions { get; set; }
         public int GenderId { get; set; }
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
         [Required(ErrorMessage = "YearsFrom is required")]
         public int YearsFrom { get; set; }
         [Required(ErrorMessage = "YearsTo is required")]
@@ -29,6 +29,6 @@ namespace Entities.Models
         public DateTime CompetitionsDate { get; set; }
         public DateTime WeightInFrom { get; set; }
         public DateTime WeightInTo { get; set; }
-        List<WeightCategory> WeightCategories { get; set; }
+        public List<WeightCategory> WeightCategories { get; set; }
     }
 }

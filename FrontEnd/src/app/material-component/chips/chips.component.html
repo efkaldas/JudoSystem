@@ -23,7 +23,7 @@
 
     <mat-form-field class="demo-chip-list">
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (remove)="remove(fruit)">
+        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (remove)="removed(fruit)">
           {{fruit.name}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>

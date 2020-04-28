@@ -52,6 +52,8 @@ import { CompetitionsTypeService } from '../services/competitions-type.service';
 import { NewAgeGroupComponent } from './components/new-age-group/new-age-group.component';
 import { CompetitionsShowComponent } from './components/competitions-show/competitions-show.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AgeGroupService } from '../services/age-group.service';
+import { WeightCategoryService } from '../services/weight-category.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -118,7 +120,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PendingUserService,
     CoachService,
     CompetitionsService,
-    CompetitionsTypeService
+    CompetitionsTypeService,
+    AgeGroupService,
+    WeightCategoryService
   ],
   bootstrap: [AppComponent]
 })

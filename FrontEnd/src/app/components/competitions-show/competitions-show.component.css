@@ -4,3 +4,13 @@
 .row {
     margin: 10px;
   }
+table {
+    width: 100%;
+  }
+.mat-header-cell {
+    text-align: center;
+  }
+.button{
+    width: 115px!important;
+    min-width: unset!important;
+}
