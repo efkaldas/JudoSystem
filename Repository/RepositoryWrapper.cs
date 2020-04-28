@@ -21,6 +21,8 @@ namespace Repository
         private ICompetitions competitions;
         private IAgeGroup ageGroup;
         private ICompetitionsType competitionsType;
+        private IWeightCategory weightCategory;
+        private ICompetitorRepository competitorRepository;
 
         public IUserRepository User
         {
@@ -154,6 +156,31 @@ namespace Repository
                 return competitionsType;
             }
         }
+        public IWeightCategory WeightCategory
+        {
+            get
+            {
+                if (weightCategory == null)
+                {
+                    weightCategory = new WeightCategoryRepository(_repoContext);
+                }
+
+                return weightCategory;
+            }
+        }
+        public ICompetitorRepository Competitor
+        {
+            get
+            {
+                if (competitorRepository == null)
+                {
+                    competitorRepository = new CompetitorRepository(_repoContext);
+                }
+
+                return competitorRepository;
+            }
+        }
+
 
         public RepositoryWrapper(JudoDbContext repositoryContext)
         {

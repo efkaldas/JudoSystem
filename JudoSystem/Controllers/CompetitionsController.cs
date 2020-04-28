@@ -35,14 +35,17 @@ namespace JudoSystem.Controllers
         public IActionResult Get(int id)
         {
             Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id)
-                .Include(x => x.Judges).Include(x => x.AgeGroups).FirstOrDefault();
+                .Include(x => x.Judges)
+                .Include(x => x.AgeGroups)
+                    .ThenInclude(x => x.WeightCategories)
+                .FirstOrDefault();
             return Ok(competitions);
         }
         // GET: api/Competitions/5
         [HttpGet("{id}/AgeGroups", Name = "GetCompetitionsАgeGroups")]
         public IActionResult GetAgeGroups(int id)
         {
-            List<AgeGroup> ageGroups = db.AgeGroup.FindByCondition(x => x.CompetitonsId == id).ToList();
+            List<AgeGroup> ageGroups = db.AgeGroup.FindByCondition(x => x.CompetitionsId == id).ToList();
             return Ok(ageGroups);
         }
 

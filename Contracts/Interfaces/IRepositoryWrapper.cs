@@ -17,6 +17,8 @@ namespace Contracts.Interfaces
         ICompetitions Competitions { get; }
         IAgeGroup AgeGroup { get; }
         ICompetitionsType CompetitionsType { get; }
+        IWeightCategory WeightCategory { get; }
+        ICompetitorRepository Competitor { get; }
         void Save();
     }
 }

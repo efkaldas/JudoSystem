@@ -1,6 +1,7 @@
 import { Gender } from "./gender.data";
 import { DanKyu } from "./DanKyu.data";
 import { User } from "./user.data";
+import { WeightCategory } from "./weight-category.data";
 
 export class Judoka {
     id: number;
@@ -10,4 +11,5 @@ export class Judoka {
     birthYears: number;
     danKyu: DanKyu;
     user: User;
+    weightCategories: Array<WeightCategory>;
 }

@@ -16,7 +16,7 @@ namespace Entities.Models
         public string Title { get; set; }
         public int AgeGroupId { get; set; }
         public AgeGroup AgeGroup { get; set; }
-        public List<Competitor> Competitors { get; set; }
+        public virtual List<Competitor> Competitors { get; set; }
         public List<CompetitionsResults> Results { get; set; }
     }
 }
