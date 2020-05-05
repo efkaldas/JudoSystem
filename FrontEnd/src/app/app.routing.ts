@@ -13,6 +13,8 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 import { NewCompetitionsComponent } from './components/new-competitions/new-competitions.component';
 import { CompetitionsShowComponent } from './components/competitions-show/competitions-show.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserCoachesComponent } from './components/user-coaches/user-coaches.component';
+import { OrganizationsComponent } from './components/organizations/organizations.component';
 
 export const AppRoutes: Routes = [
   {
@@ -35,8 +37,14 @@ export const AppRoutes: Routes = [
         data: {title: 'My Judokas', roles: [Role.Admin, Role.Coach]}
       },
       {
-        path: 'coaches',
+        path: 'my-coaches',
         component: CoachComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Coaches', roles: [Role.Admin, Role.Coach]}
+      },
+      {
+        path: 'coaches',
+        component: UserCoachesComponent,
         canActivate: [AuthGuard],
         data: {title: 'Coaches', roles: [Role.Admin, Role.Coach]}
       },
@@ -75,6 +83,12 @@ export const AppRoutes: Routes = [
         component: ProfileComponent,
         canActivate: [AuthGuard],
         data: {title: 'Profile',}
+      },
+      {
+        path: 'organizations',
+        component: OrganizationsComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Organizations',}
       },
   //     {
   //       path: '/dashboards/dashboard1',

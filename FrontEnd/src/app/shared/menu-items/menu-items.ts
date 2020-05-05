@@ -45,16 +45,23 @@ const ADMIN_MENUITEMS = [
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'pending-users', name: 'Pending users', type: 'link' },
+  { state: 'pending-users', name: 'Pending users', type: 'link',     icon: 'av_timer' },
 ]
-const COACH_MENUITEMS = [
+const COACH_ADMINISTRATOR_MENUITEMS = [
   {
     state: '',
     name: 'Judokas',
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'my-judokas', name: 'My judokas', type: 'link' },
+  { state: 'my-judokas', name: 'My judokas', type: 'link',     icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Competitions',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: 'competitions', name: 'Competitions List', type: 'link',     icon: 'av_timer' },
 ]
 
 const MENUITEMS = [
@@ -275,6 +282,12 @@ const MENUITEMS = [
 export class MenuItems extends LoginService {
   getMenuitem(): Menu[] {
     return MENUITEMS;
+  }
+  getOrganizationAdminMenuitem(): Menu[] {
+    return COACH_ADMINISTRATOR_MENUITEMS;
+  }
+  getAdministratorMenuitem(): Menu[] {
+    return ADMIN_MENUITEMS;
   }
   getHeaderMenuitem(): Menu[] {
     return HEADERMENUITEMS;

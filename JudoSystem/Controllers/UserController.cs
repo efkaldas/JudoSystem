@@ -30,7 +30,13 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<User> users = db.User.FindAll().ToList();
+            List<User> users = db.User.FindAll()
+                .Include(x => x.Gender)
+                .Include(x => x.Status)
+                .Include(x => x.Organization)
+                .Include(x => x.UserRoles)
+                    .ThenInclude(x => x.Role).ToList();
+
             return Ok(users);
         }
 

@@ -82,7 +82,7 @@ export class CoachComponent implements OnInit {
   }
 
   private getCoaches() {
-    return this.coachService.getAll()
+    return this.coachService.getMy()
       .subscribe(
         data => {
           this.coaches = data as User[];
@@ -99,8 +99,7 @@ export class CoachComponent implements OnInit {
   }
   public blockConfirm()
   {
-    this.selectedElement.statusId = 3;
-    return this.coachService.update(this.selectedElement.id, this.selectedElement)
+    return this.coachService.block(this.selectedElement.id)
       .subscribe(
         data => {
           this.openSnackBar("Coach has been blocked", 'CLOSE');
