@@ -16,6 +16,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { LoginService } from '../../../../services/Login.service';
 import { User } from '../../../../data/user.data';
+import { Role } from '../../../../data/user-role.enum.data';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -25,6 +26,7 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
   public config: PerfectScrollbarConfigInterface = {};
   mobileQuery: MediaQueryList;
   public user: User;
+  userMenu: any[];
 
   private _mobileQueryListener: () => void;
   status: boolean = true;
@@ -59,10 +61,19 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.getUser();
+    this.getMenuItems();
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+  public getMenuItems(): any[]
+  {
+    if(this.user.userRoles.some(x => Role.Admin) === true) {
+      return this.menuItems.getAdminMenuitem();
+    }
+    return null;
+  
   }
 
   getUser(){

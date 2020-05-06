@@ -39,7 +39,10 @@ namespace JudoSystem.Controllers
         [ServiceFilter(typeof(ValidateEntityExists<User>))]
         public IActionResult Get(int id)
         {
-            User user = db.User.FindByCondition(x => x.Id == id).Include(x => x.Organization).FirstOrDefault();
+            User user = db.User.FindByCondition(x => x.Id == id)
+                .Include(x => x.Organization)
+                .Include(x => x.UserRoles)
+                    .ThenInclude(x => x.Role).FirstOrDefault();
            // User user = HttpContext.Items["entity"] as User;
             return Ok(user);
         }
