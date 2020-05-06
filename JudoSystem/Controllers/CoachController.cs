@@ -29,9 +29,31 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
-            List<User> coaches = db.User.FindByCondition(x => x.ParentUserId == userId).Include(x => x.DanKyu).Include(x => x.Gender)
+            List<User> users = db.User.FindAll()
+                .Include(x => x.UserRoles)
+                    .ThenInclude(x => x.Role)
+                .Include(x => x.DanKyu)
+                .Include(x => x.Gender)
                 .Include(x => x.Status).ToList();
+
+            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.RoleId == UserRole.COACH) != null).ToList();
+
+            return Ok(coaches);
+        }
+        [HttpGet("My", Name = "GetMyCoach")]
+        public IActionResult GetMy()
+        {
+            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
+
+            List<User> users = db.User.FindByCondition(x => x.ParentUserId == userId)
+                .Include(x => x.UserRoles)
+                    .ThenInclude(x => x.Role)
+                .Include(x => x.DanKyu)
+                .Include(x => x.Gender)
+                .Include(x => x.Status).ToList();
+
+            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.RoleId == UserRole.COACH) != null).ToList();
+
             return Ok(coaches);
         }
 
@@ -73,6 +95,27 @@ namespace JudoSystem.Controllers
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
             user.StatusId = coach.StatusId;
+            db.User.Update(user);
+            db.Save();
+            return Ok();
+        }
+
+        // PUT: api/Coach/5
+        [HttpPut("{id}/Block", Name = "BlockCoach")]
+        public IActionResult Block(int id)
+        {
+            User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
+            user.StatusId = UserStatus.STATUS_BLOCKED;
+            db.User.Update(user);
+            db.Save();
+            return Ok();
+        }
+
+        [HttpPut("{id}/UnBlock", Name = "UnBlock")]
+        public IActionResult UnBlock(int id)
+        {
+            User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
+            user.StatusId = UserStatus.STATUS_APPROVED;
             db.User.Update(user);
             db.Save();
             return Ok();

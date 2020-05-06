@@ -26,7 +26,7 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<Competitions> competitions = db.Competitions.FindAll();
+            List<Competitions> competitions = db.Competitions.FindAll().ToList();
             return Ok(competitions);
         }
 

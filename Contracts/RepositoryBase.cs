@@ -18,9 +18,9 @@ namespace Contracts
             this.RepositoryContext = repositoryContext;
         }
 
-        public List<T> FindAll()
+        public IQueryable<T> FindAll()
         {
-            return this.RepositoryContext.Set<T>().AsNoTracking().ToList();
+            return this.RepositoryContext.Set<T>().AsNoTracking();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
