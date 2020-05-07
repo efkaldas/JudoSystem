@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
   public organizationForm: FormGroup;
   private control: FormArray;
   organizationTypes: OrganizationType[];
-  roles: Role[];
   organizationData: Organization;
   userData: User= new User();
   submitted = false;
@@ -52,7 +51,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.getOrganizationTypes();
-    this.getRoles();
     this.getDanKyus();
     this.getGenders();
     this.formGroup();
@@ -65,7 +63,6 @@ export class RegisterComponent implements OnInit {
       phoneNumber: [null, Validators.compose([Validators.required])],
       birthDate: [null, Validators.compose([Validators.required])],
       danKyuId: [null, Validators.compose([Validators.required])],
-      roleId: [null, Validators.compose([Validators.required])],
       genderId: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
       StatusId: 2,
@@ -89,14 +86,6 @@ export class RegisterComponent implements OnInit {
         this.organizationTypes = data as OrganizationType[];
       })
   }
-  private getRoles()
-  {
-    return this.roleService.getAll()
-    .subscribe(
-      data => {
-        this.roles = data as any;
-      })
-  }
   private getGenders()
   {
     return this.genderService.getAll()
@@ -118,13 +107,6 @@ export class RegisterComponent implements OnInit {
   {
     this.clicked = true;
     this.userData = this.userForm.value;
-    this.userData.userRoles = new Array<UserRole>();
-    this.userForm.value.roleId.forEach(element => {
-      var userRole = new UserRole();
-      userRole.roleId = element;
-      userRole.userId = 0;
-      this.userData.userRoles.unshift(userRole);
-    })
   }
 
   openSnackBar(message: string, action: string) {

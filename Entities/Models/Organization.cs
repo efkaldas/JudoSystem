@@ -9,6 +9,9 @@ namespace Entities.Models
 {
     public class Organization
     {
+        public static readonly int TYPE_CLUB = 1;
+        public static readonly int TYPE_SPORTS_CENTER = 2;
+        public static readonly int TYPE_JUDGE_ASSOCIATION = 3;
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "ExactName is required")]

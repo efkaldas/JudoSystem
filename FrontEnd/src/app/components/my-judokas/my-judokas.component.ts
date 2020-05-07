@@ -103,6 +103,7 @@ export class MyJudokasComponent implements OnInit {
   }
   public addJudoka()
   {
+    console.log(this.judokaForm);
     if(this.judokaForm.valid)    
     {
     return this.judokaService.create(this.judokaForm.value)

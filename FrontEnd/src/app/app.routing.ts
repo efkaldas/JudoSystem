@@ -9,12 +9,12 @@ import { HomeComponent } from './components/home/home.component';
 import { Role } from '../data/user-role.enum.data';
 import { CoachComponent } from './components/coach/coach.component';
 import { CoachShowComponent } from './components/coach-show/coach-show.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
-import { NewCompetitionsComponent } from './components/new-competitions/new-competitions.component';
-import { CompetitionsShowComponent } from './components/competitions-show/competitions-show.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserCoachesComponent } from './components/user-coaches/user-coaches.component';
 import { OrganizationsComponent } from './components/organizations/organizations.component';
+import { NewCompetitionsComponent } from './components/Competitons/new-competitions/new-competitions.component';
+import { CompetitionsShowComponent } from './components/Competitons/competitions-show/competitions-show.component';
+import { CompetitionsComponent } from './components/Competitons/competitions/competitions.component';
 
 export const AppRoutes: Routes = [
   {

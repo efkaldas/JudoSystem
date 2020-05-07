@@ -17,7 +17,7 @@ namespace JudoSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize (Roles = "Coach")]
+    [Authorize (Roles = "Admin, Coach")]
     public class JudokaController : ControllerBase
     {
         private IRepositoryWrapper db;

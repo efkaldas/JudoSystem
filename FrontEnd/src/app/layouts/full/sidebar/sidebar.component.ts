@@ -68,8 +68,8 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   public getMenuItems(): any[]
-  {
-    if(this.user != null && this.user.userRoles.some(x => Role.Admin) === true) {
+  { 
+    if(this.user != null && this.user.userRoles.some(x => Role.Admin)) {
       return this.menuItems.getAdminMenuitem();
     }
     else {

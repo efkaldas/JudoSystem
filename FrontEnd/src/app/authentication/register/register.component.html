@@ -46,30 +46,21 @@
                                     <mat-form-field>
                                         <mat-label>Gender</mat-label>
                                         <mat-select formControlName="genderId">
-                                          <mat-option *ngFor="let gender of genders" [value]="gender.id">{{gender.textEN}}</mat-option>
+                                            <mat-option *ngFor="let gender of genders" [value]="gender.id">{{gender.textEN}}</mat-option>
                                         </mat-select>
-                                    </mat-form-field> 
-                                    <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select gender.</small>                                  
-                                  </div>
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select gender.</small>
+                                </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field>
                                         <mat-label>Dan/Kyu</mat-label>
                                         <mat-select formControlName="danKyuId">
-                                          <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">{{danKyu.grade}}</mat-option>
+                                            <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">{{danKyu.text}}</mat-option>
                                         </mat-select>
-                                    </mat-form-field> 
-                                    <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select Dan/Kyu.</small>                                  
-                                  </div>
-                                <!-- col full-->
-                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                                    <mat-form-field>
-                                        <mat-label>Roles</mat-label>
-                                        <mat-select formControlName="roleId" multiple>
-                                          <mat-option *ngFor="let role of roles" [value]="role.id">{{role.roleNameEN}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>                                   
-                                  </div>
+                                    </mat-form-field>
+                                    <small *ngIf="clicked && userForm.controls['genderId'].hasError('required')" class="text-danger support-text">You must select Dan/Kyu.</small>
+                                </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
