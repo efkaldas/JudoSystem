@@ -17,7 +17,10 @@ export class UserService extends LoginService{
   }  
   getFull(id: number) {
     return this.http.get(this.userFullUrl + id);
-  } 
+  }
+  getAll() {
+    return this.http.get(this.userFullUrl);
+  }  
   updateProfile(user: User) {
     return this.http.put(this.userFullUrl, user);
   }   

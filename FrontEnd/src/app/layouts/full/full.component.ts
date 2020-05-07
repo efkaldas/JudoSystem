@@ -62,5 +62,6 @@ export class FullComponent implements OnDestroy {
   }
 
 
+
   // Mini sidebar
 }

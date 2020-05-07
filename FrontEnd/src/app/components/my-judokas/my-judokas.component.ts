@@ -43,7 +43,6 @@ export class MyJudokasComponent implements OnInit {
   }
   openDialog(templateRef: TemplateRef<any>, element: Judoka) {
     this.selectedElement = element;
-    console.log(this.selectedElement);
     if(this.selectedElement != null) {
       this.formEditGroup();
     } 
@@ -63,11 +62,8 @@ export class MyJudokasComponent implements OnInit {
    //   horizontalPosition: 'end',
     });
   }
-  compareGenderFunction(o1: any, o2: any) {
-    return (o1.textEN == o2.textEN && o1.id == o2.id);
-   }
-  compareDanKyuFunction(o1: any, o2: any) {
-    return (o1.text == o2.text && o1.id == o2.id);
+  compare(o1: any, o2: any) {
+    return (o1 == o2);
    }
   private formGroup()
   {
@@ -107,6 +103,8 @@ export class MyJudokasComponent implements OnInit {
   }
   public addJudoka()
   {
+    if(this.judokaForm.valid)    
+    {
     return this.judokaService.create(this.judokaForm.value)
       .subscribe(
         data => {
@@ -120,10 +118,12 @@ export class MyJudokasComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+    }
   }
   public editJudoka()
   {
-    console.log(this.judokaEditForm.value);
+    if(this.judokaEditForm.valid && this.selectedElement != null)   
+    { 
     return this.judokaService.update(this.selectedElement.id, this.judokaEditForm.value)
       .subscribe(
         data => {
@@ -137,6 +137,7 @@ export class MyJudokasComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+    }
   }
   private getJudokas() {
     return this.judokaService.getMyJudokas()
