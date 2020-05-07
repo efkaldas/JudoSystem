@@ -61,6 +61,15 @@ const ADMIN_MENUITEMS = [
     icon: 'av_timer'
   },
   { state: 'competitions', name: 'Competitions', type: 'link', icon: 'av_timer' },
+  { state: 'new-competitions', name: 'New Competitions', type: 'link', icon: 'av_timer' },
+  // { state: 'competitions', 
+  //   name: 'Competitions', 
+  //   type: 'sub', 
+  //   icon: 'av_timer',
+  //   children: [
+  //     { state: '', name: 'Competitions', type: 'link' },
+  //     { state: 'new-competitions', name: 'New Competitions', type: 'link' }
+  //   ] },
 ]
 const GUEST_MENUITEMS = [
   {

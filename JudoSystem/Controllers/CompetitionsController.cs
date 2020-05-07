@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using JudoSystem.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,29 @@ namespace JudoSystem.Controllers
         {
             List<Competitions> competitions = db.Competitions.FindAll().ToList();
             return Ok(competitions);
+        }
+
+        [HttpGet("{id}/Competitors-list.csv", Name = "GetCompetitorsList")]
+        public IActionResult GetCompetitors(int id)
+        {
+            Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id)
+                    .Include(x => x.AgeGroups)
+                        .ThenInclude(x => x.WeightCategories)
+                            .ThenInclude(x => x.Competitors)
+                                .ThenInclude(x => x.Judoka)
+                                    .ThenInclude(x => x.User)
+                                        .ThenInclude(x => x.Organization)
+                     .Include(x => x.AgeGroups)
+                        .ThenInclude(x => x.WeightCategories)
+                            .ThenInclude(x => x.Competitors)
+                                .ThenInclude(x => x.Judoka)
+                                    .ThenInclude(x => x.Gender).FirstOrDefault();
+
+            CompetitorsListService export = new CompetitorsListService();
+            string file = export.Execute(competitions);
+
+            return File(System.IO.File.OpenRead(file), "text/csv");
+
         }
 
         // GET: api/Competitions/5

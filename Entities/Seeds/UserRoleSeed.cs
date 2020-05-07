@@ -22,9 +22,9 @@ namespace Entities.Models.Seeds
                     new Role
                     {
                         Id = 2,
-                        RoleNameEN = "Moderator",
-                        RoleNameLT = "Moderatorius",
-                        RoleNameRU = "Модератор"
+                        RoleNameEN = "Organization admin",
+                        RoleNameLT = "Organizacijos administratorius",
+                        RoleNameRU = "Администратор организации"
                     },
                     new Role
                     {

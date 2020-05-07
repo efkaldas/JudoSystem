@@ -1,19 +1,19 @@
 import { Component, OnInit, TemplateRef, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Competitions } from '../../../data/competitions.data';
-import { CompetitionsService } from '../../../services/Competitions.service';
+import { Competitions } from '../../../../data/competitions.data';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatSnackBar, MatChipInputEvent, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { AgeGroup } from '../../../data/age-group.data';
-import { DanKyuService } from '../../../services/dan-kyu.service';
-import { GenderService } from '../../../services/gender.service';
-import { DanKyu } from '../../../data/DanKyu.data';
-import { Gender } from '../../../data/gender.data';
+import { AgeGroup } from '../../../../data/age-group.data';
+import { DanKyuService } from '../../../../services/dan-kyu.service';
+import { GenderService } from '../../../../services/gender.service';
+import { DanKyu } from '../../../../data/DanKyu.data';
+import { Gender } from '../../../../data/gender.data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ENTER, COMMA, SPACE } from '@angular/cdk/keycodes';
-import { WeightCategory } from '../../../data/weight-category.data';
-import { AgeGroupService } from '../../../services/age-group.service';
-import { Judoka } from '../../../data/judoka.data';
-import { WeightCategoryService } from '../../../services/weight-category.service';
+import { WeightCategory } from '../../../../data/weight-category.data';
+import { AgeGroupService } from '../../../../services/age-group.service';
+import { Judoka } from '../../../../data/judoka.data';
+import { WeightCategoryService } from '../../../../services/weight-category.service';
+import { CompetitionsService } from '../../../../services/Competitions.service';
 
 @Component({
   selector: 'app-competitions-show',

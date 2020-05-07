@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="CryptoHelper" Version="3.0.2" />
+    <PackageReference Include="CsvHelper" Version="15.0.5" />
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="dbup-consolescripts" Version="1.5.0" />
     <PackageReference Include="dbup-mysql" Version="4.3.0" />

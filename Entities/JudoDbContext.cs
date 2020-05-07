@@ -74,6 +74,8 @@ namespace Entities
             UserRoleSeed.Generate(builder);
             UserStatusSeed.Generate(builder);
             CompetitionsTypeSeed.Generate(builder);
+            UserSeed.Generate(builder);
+            AdminUserRolesSeed.Generate(builder);
         }
     }
 }

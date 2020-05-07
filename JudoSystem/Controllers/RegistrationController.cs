@@ -42,10 +42,30 @@ namespace JudoSystem.Controllers
             if (db.User.FindByCondition(x => x.Organization.ExactName == user.Organization.ExactName).FirstOrDefault() != null)
                 return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_ENTITY_EXISTS);
 
+            if (user.UserRoles != null)
+            {
+                return new ConflictObjectResult(ErrorDetails.HTTP_STATUS_BAD_REQUEST);
+            }
+
+            user.UserRoles = new List<UserRole>();
+            user.UserRoles.Add(new UserRole { RoleId = Role.ORGANIZATION_ADMIN });
+
+            if (user.Organization.OrganizationTypeId == Organization.TYPE_CLUB || user.Organization.OrganizationTypeId == Organization.TYPE_SPORTS_CENTER)
+            {
+                user.UserRoles.Add(new UserRole { RoleId = Role.COACH });
+            }
+            else if(user.Organization.OrganizationTypeId == Organization.TYPE_CLUB)
+            {
+                user.UserRoles.Add(new UserRole { RoleId = Role.JUDGE });
+            }
+
             user.BirthDate = user.BirthDate.Date;
             db.Organization.Create(user.Organization);
             db.User.Create(user);
             db.Save();
+
+            RegistrationService registrationService = new RegistrationService();
+            registrationService.SendMessage(user);
 
             return Ok(user);
         }

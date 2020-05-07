@@ -1,8 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button (click)="openDialog(addEventModal)" color="primary">+<mat-icon>event</mat-icon> Add Event </button>
-</div><br>
-
-<div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let competition of competitions" >
+<div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let competition of competitions">
     <!-- column -->
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
         <mat-card [routerLink]="'/competitions/'+competition.id">
@@ -10,25 +6,25 @@
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="end center">
                     <button mat-raised-button (click)="openDialog(addGroupModal, event.id)" color="primary"><mat-icon>group_add</mat-icon> Add Age Group </button>
-                </div>                
+                </div>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start wrap" calss="row-height">
                     <h1>{{competition.title}}</h1>
-                </div>                
+                </div>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start start" calss="row-height">
                     <small>{{competition.place}}, {{competition.competitionsDate}}</small>
-                </div>                
+                </div>
                 <!-- Row -->
                 <div *ngIf="registrationStatus(competition) == 'not_started'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
                     <p style="color: blue">Registration starts: {{competition.registrationStart}}</p>
-                </div> 
+                </div>
                 <div *ngIf="registrationStatus(competition) == 'ended'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
                     <p style="color: green">Registration ended!</p>
-                </div> 
-                <div  *ngIf="registrationStatus(competition) == 'in_progress'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
+                </div>
+                <div *ngIf="registrationStatus(competition) == 'in_progress'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
                     <p style="color: red">Regstration ends: {{competition.registrationStart}}</p>
-                </div>            
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
