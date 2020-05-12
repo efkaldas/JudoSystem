@@ -46,7 +46,7 @@ namespace JudoSystem.Controllers
         {
             User dbUser = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
             dbUser.StatusId = user.StatusId;
-            db.User.Update(user);
+            db.User.Update(dbUser);
             db.Save();
 
             return Ok();

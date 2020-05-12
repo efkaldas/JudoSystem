@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
@@ -67,11 +68,68 @@ namespace JudoSystem.Controllers
             return Ok(competitions);
         }
         // GET: api/Competitions/5
+        [HttpGet("{id}/MyCompetitors", Name = "GetMyCompetitors")]
+        public IActionResult GetMyCompetitors(int id)
+        {
+            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
+
+            Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id)
+                .Include(x => x.AgeGroups).FirstOrDefault();
+
+            List<int> weightCatoriesIds = db.WeightCategory.FindByCondition(x => competitions.AgeGroups.Where(x => x.Id == id) != null).Select(x => x.Id).ToList();
+
+            List<Judoka> myJudokas = db.Judoka.FindByCondition(x => x.UserId == userId)
+                .Include(x => x.WeightCategories)
+                    .Include(x => x.WeightCategories)
+                        .ToList()
+
+            List<Judoka> competitor = new List<Judoka>();
+
+            foreach (var ageGroup in competitions.AgeGroups)
+            {
+                competitor.Add(ageGroup.WeightCategories.Select(x => x.Competitors.Where(x => myJudokas.Contains(x.Judoka))
+                .Select(x => x.Judoka)).ToList())
+            }
+
+            List<Judoka> myCompetitors = Judokas
+
+
+
+            return Ok(competitions);
+        }
+        // GET: api/Competitions/5
         [HttpGet("{id}/AgeGroups", Name = "GetCompetitionsАgeGroups")]
         public IActionResult GetAgeGroups(int id)
         {
             List<AgeGroup> ageGroups = db.AgeGroup.FindByCondition(x => x.CompetitionsId == id).ToList();
             return Ok(ageGroups);
+        }
+        [HttpPost("{id}/ResultsFile", Name = "ImportResultsFile")]
+        public IActionResult ImportResultsFile(int id, [FromHeader]IFormFile file)
+        {
+            var httpRequest = HttpContext.Request;
+            if (httpRequest.Form.Files.Count == 0)
+            {
+                return null;
+            }
+            string localFileLocation = Path.GetTempPath() + file.FileName;
+
+            if (System.IO.File.Exists(localFileLocation))
+                System.IO.File.Delete(localFileLocation);
+
+            if (file.ContentType.ToString() == "application/pdf")
+            {
+                using (var fileStream = new FileStream(localFileLocation, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+            }
+
+            if (System.IO.File.Exists(localFileLocation))
+            {
+                return Ok();
+            }
+            return null;
         }
 
         // POST: api/Competitions

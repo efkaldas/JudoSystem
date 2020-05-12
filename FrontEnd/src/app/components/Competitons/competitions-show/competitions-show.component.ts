@@ -14,6 +14,7 @@ import { AgeGroupService } from '../../../../services/age-group.service';
 import { Judoka } from '../../../../data/judoka.data';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
 import { CompetitionsService } from '../../../../services/Competitions.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-competitions-show',
@@ -46,6 +47,7 @@ export class CompetitionsShowComponent implements OnInit {
   competitors:any;
   selectedAgeGroup: number;
   source : MatTableDataSource<Judoka>;
+  file = null;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category', 'actions'];
   displayedColumnsCompetitors: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'organization', 'country'];
 
@@ -87,7 +89,7 @@ export class CompetitionsShowComponent implements OnInit {
       weightInFromTime: [null, Validators.compose([Validators.required])],
       weightInTo: [null, Validators.compose([Validators.required])],
       weightInToTime: [null, Validators.compose([Validators.required])],
-      weightCategories: [null, Validators.compose([Validators.required])],
+     // weightCategories: [null, Validators.compose([Validators.required])],
 
     });
   }
@@ -157,10 +159,41 @@ export class CompetitionsShowComponent implements OnInit {
         }
       );
   }
+  resultsFileUpload() {
+    if (this.file == null) {
+    } else if (this.file.name.substr(this.file.name.length - 4) != ".pdf") {
+      this.errorMessage = "File format must be *.pdf";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else {
+      this.competitionsService.importResultsFile(this.file, this.competitionsId).subscribe(
+        data => {
+          this.errorMessage = "File has successfully been uploaded";
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+        );
+    }  
+  }
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+        this.file = fileList[0]; 
+    }
+    else {
+
+    }
+  }
   public addAgeGroup()
   {
     this.normalizeDate();
     this.ageGroupForm.value.weightCategories = this.categories;
+    if(this.ageGroupForm.valid)
+    {
+      console.log("asd");
     return this.ageGroupService.create(this.ageGroupForm.value)
       .subscribe(
         data => {
@@ -175,6 +208,7 @@ export class CompetitionsShowComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+    }
   }
   remove(category: any): void {
     const index = this.categories.indexOf(category);
