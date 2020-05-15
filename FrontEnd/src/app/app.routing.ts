@@ -15,6 +15,8 @@ import { OrganizationsComponent } from './components/organizations/organizations
 import { NewCompetitionsComponent } from './components/Competitons/new-competitions/new-competitions.component';
 import { CompetitionsShowComponent } from './components/Competitons/competitions-show/competitions-show.component';
 import { CompetitionsComponent } from './components/Competitons/competitions/competitions.component';
+import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
+import { JudokasRatingComponent } from './components/Competitons/judokas-rating/judokas-rating.component';
 
 export const AppRoutes: Routes = [
   {
@@ -81,6 +83,18 @@ export const AppRoutes: Routes = [
         component: ProfileComponent,
         canActivate: [AuthGuard],
         data: {title: 'Profile',}
+      },
+      {
+        path: 'judoka/:id',
+        component: JudokaProfileComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Judoka',}
+      },
+      {
+        path: 'judokas/rating',
+        component: JudokasRatingComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Judokas Rating',}
       },
       {
         path: 'organizations',

@@ -1,0 +1,16 @@
+.title> ::ng-deep figure {
+    justify-content: flex-start !important;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-header-cell {
+    text-align: center;
+}
+
+.edit-button {
+    margin-right: 40px;
+    margin-top: 20px;
+}

@@ -7,6 +7,7 @@ import { Judoka } from '../data/judoka.data';
 export class JudokaService extends LoginService {
     protected judokaUrl : string = environment.apiHost+"/Judoka/";
     protected myJudokasUrl : string = "MyJudokas";
+    protected byRankUrl : string = "ByRank";
 
     get(id: number) {
       return this.http.get(this.judokaUrl + id); 
@@ -16,7 +17,10 @@ export class JudokaService extends LoginService {
     }
     getMyJudokas() {
         return this.http.get(this.judokaUrl + this.myJudokasUrl); 
-      }
+    }
+    getByRank(id: number) {
+      return this.http.get(this.judokaUrl + this.byRankUrl, {params: { genderId: id.toString() }}) ; 
+    }
     delete(id: number) {
       return this.http.delete(this.judokaUrl + id); 
     } 

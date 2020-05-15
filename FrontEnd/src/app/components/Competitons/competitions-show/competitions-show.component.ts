@@ -43,9 +43,11 @@ export class CompetitionsShowComponent implements OnInit {
   weightCategoryId: number;
   dataSource = new MatTableDataSource;
   dataSourceCompetitors = new MatTableDataSource;
+  dataSourceMyCompetitors = new MatTableDataSource;
   ageGroupId: number;
   competitors:any;
   selectedAgeGroup: number;
+  myCompetitors: Judoka[];
   source : MatTableDataSource<Judoka>;
   file = null;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category', 'actions'];
@@ -271,7 +273,28 @@ export class CompetitionsShowComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.JudokasToRegister);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-          console.log(this.JudokasToRegister);
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          console.log(error); //gives an object at this point
+        }
+      );
+  }
+  public getData($event)
+  {
+    if($event.tab.textLabel == "My Competitors")
+    {
+      this.getMyCompetitors();
+    }
+  }
+  public getMyCompetitors() {
+    return this.competitionsService.getMyCompetitors(this.competitionsId)
+      .subscribe(
+        data => {
+          this.myCompetitors = data as Judoka[];
+          this.dataSourceMyCompetitors = new MatTableDataSource(this.myCompetitors);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         },
         error => {
           this.errorMessage = error["error"].message;

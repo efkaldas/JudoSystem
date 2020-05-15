@@ -7,9 +7,5 @@ namespace JudoSystem.Services
 {
     public class MyCompetitorsToPdfService
     {
-        public string execute()
-        {
-
-        }
     }
 }

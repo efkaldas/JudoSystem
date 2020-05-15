@@ -31,5 +31,6 @@ namespace Entities.Models
         public User User { get; set; }
         public int UserId { get; set; }
         public virtual List<Competitor> WeightCategories { get; set; }
+        public  List<JudokaRank> rating { get; set; }
     }
 }

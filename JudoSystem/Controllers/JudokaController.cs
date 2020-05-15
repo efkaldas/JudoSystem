@@ -11,6 +11,7 @@ using JudoSystem.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace JudoSystem.Controllers
@@ -35,11 +36,26 @@ namespace JudoSystem.Controllers
             return Ok(judokas);
         }
 
+        [HttpGet("ByRank", Name = "GetJudokasByRank")]
+        public IActionResult GetJudokasByRank(int genderId)
+        {
+            List<Judoka> judokas = db.Judoka.FindByConditionFull(x => x.GenderId == genderId)
+                    .Include(x => x.User)
+                        .ThenInclude(x => x.Organization).ToList();
+
+            return Ok(judokas);
+        }
+
+
         // GET: api/Judoka/5
         [HttpGet("{id}", Name = "GetJudoka")]
         public IActionResult Get(int id)
         {
-            Judoka judoka = db.Judoka.FindByConditionFull(x => x.Id == id).FirstOrDefault();
+            Judoka judoka = db.Judoka.FindByConditionFull(x => x.Id == id)
+                .Include(x => x.User)
+                    .ThenInclude(x => x.Organization)
+                        .ThenInclude(x => x.OrganizationType).FirstOrDefault();
+
             return Ok(judoka);
         }
         // GET: api/Judoka/5

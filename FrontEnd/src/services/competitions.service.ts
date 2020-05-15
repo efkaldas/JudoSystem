@@ -10,6 +10,7 @@ export class CompetitionsService extends LoginService {
   protected ageGroupUrl : string = "/AgeGroup";
   protected printCompetitorsUrl : string = "/Competitors-list.csv";
   protected importResultsUrl : string = "/ResultsFile"; 
+  protected myCompetitorsUrl : string = "/MyCompetitors"; 
 
   getAll() {
     return this.http.get(this.competitionsUrl); 
@@ -26,6 +27,9 @@ export class CompetitionsService extends LoginService {
   } 
   create(competitions: Competitions) {
     return this.http.post(this.competitionsUrl, competitions); 
+  }
+  getMyCompetitors(id:number) {
+    return this.http.get(this.competitionsUrl + id + this.myCompetitorsUrl); 
   }
   print(id: number) {
     return this.http.get(this.competitionsUrl + id + '/' + this.printCompetitorsUrl); 
