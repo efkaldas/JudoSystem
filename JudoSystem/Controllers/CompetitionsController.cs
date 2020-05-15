@@ -74,28 +74,42 @@ namespace JudoSystem.Controllers
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
             Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id)
-                .Include(x => x.AgeGroups).FirstOrDefault();
+                .Include(x => x.AgeGroups)
+                    .ThenInclude(x => x.WeightCategories)
+                        .ThenInclude(x => x.Competitors)
+                            .ThenInclude(x => x.Judoka)
+                                .ThenInclude(x => x.Gender)
+                 .Include(x => x.AgeGroups)
+                    .ThenInclude(x => x.WeightCategories)
+                        .ThenInclude(x => x.Competitors)
+                            .ThenInclude(x => x.Judoka)
+                                .ThenInclude(x => x.DanKyu).FirstOrDefault();
 
-            List<int> weightCatoriesIds = db.WeightCategory.FindByCondition(x => competitions.AgeGroups.Where(x => x.Id == id) != null).Select(x => x.Id).ToList();
+            List<Judoka> competitors = competitions.AgeGroups.SelectMany(x => x.WeightCategories).SelectMany(x => x.Competitors).Where(x => x.Judoka.UserId == userId).Select(x => x.Judoka).ToList();
 
-            List<Judoka> myJudokas = db.Judoka.FindByCondition(x => x.UserId == userId)
-                .Include(x => x.WeightCategories)
-                    .Include(x => x.WeightCategories)
-                        .ToList()
+            return Ok(competitors);
+        }
+        // GET: api/Competitions/5
+        [HttpGet("{id}/MyCompetitors.pdf", Name = "GetMyCompetitorsPdf")]
+        public IActionResult GetMyCompetitorsPdf(int id)
+        {
+            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
-            List<Judoka> competitor = new List<Judoka>();
+            Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id)
+                .Include(x => x.AgeGroups)
+                    .ThenInclude(x => x.WeightCategories)
+                        .ThenInclude(x => x.Competitors)
+                            .ThenInclude(x => x.Judoka)
+                                .ThenInclude(x => x.Gender)
+                 .Include(x => x.AgeGroups)
+                    .ThenInclude(x => x.WeightCategories)
+                        .ThenInclude(x => x.Competitors)
+                            .ThenInclude(x => x.Judoka)
+                                .ThenInclude(x => x.DanKyu).FirstOrDefault();
 
-            foreach (var ageGroup in competitions.AgeGroups)
-            {
-                competitor.Add(ageGroup.WeightCategories.Select(x => x.Competitors.Where(x => myJudokas.Contains(x.Judoka))
-                .Select(x => x.Judoka)).ToList())
-            }
+            List<Judoka> competitors = competitions.AgeGroups.SelectMany(x => x.WeightCategories).SelectMany(x => x.Competitors).Where(x => x.Judoka.UserId == userId).Select(x => x.Judoka).ToList();
 
-            List<Judoka> myCompetitors = Judokas
-
-
-
-            return Ok(competitions);
+            return Ok(competitors);
         }
         // GET: api/Competitions/5
         [HttpGet("{id}/AgeGroups", Name = "GetCompetitionsАgeGroups")]
