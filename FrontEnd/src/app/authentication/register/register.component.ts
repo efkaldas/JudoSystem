@@ -8,7 +8,6 @@ import {
   FormArray
 } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { Food } from '../../forms/select/select.component';
 import { OrganizationTypeService } from '../../../services/organization-type.service';
 import { UserService } from '../../../services/user.service';
 import { OrganizationType } from '../../../data/organization-type.data';

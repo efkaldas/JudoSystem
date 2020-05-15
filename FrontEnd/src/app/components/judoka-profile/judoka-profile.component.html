@@ -1,0 +1,68 @@
+<div fxLayout="row wrap">
+    <!-- Card column -->
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Judoka Information</mat-card-title>
+            </mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="Profile">
+                    <mat-grid-list cols="5" rowHeight="100px">
+                        <mat-grid-tile [colspan]="1" [rowspan]="4">
+                            <img [src]="no_user_image" />
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Firstname and lastname: </b>
+                                <p>{{judoka.firstname}} {{judoka.lastname}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Gender: </b>
+                                <p>{{judoka.gender.textEN}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Birth Years: </b>
+                                <p>{{judoka.birthYears}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Dan/Kyu: </b>
+                                <p>{{judoka.danKyu.text}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-tab>
+                <mat-tab label="Organization">
+                    <mat-card-content>
+                        <mat-grid-list cols="5" rowHeight="100px">
+                            <mat-grid-tile [colspan]="1" [rowspan]="4">
+                                <img [src]="judoka.user.organization.image" />
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Organization name: </b>
+                                    <p>{{judoka.user.organization.exactName}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Type: </b>
+                                    <p>{{judoka.user.organization.organizationType.typeNameEN}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Coach: </b>
+                                    <p>{{judoka.user.firstname}} {{judoka.user.lastname}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Address: </b>
+                                    <p>{{judoka.user.organization.country}}, {{judoka.user.organization.city}}, {{judoka.user.organization.address}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </mat-card-content>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>

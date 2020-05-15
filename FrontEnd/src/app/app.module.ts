@@ -57,6 +57,9 @@ import { WeightCategoryService } from '../services/weight-category.service';
 import { UserCoachesComponent } from './components/user-coaches/user-coaches.component';
 import { OrganizationsComponent } from './components/organizations/organizations.component';
 import { OrganizationService } from '../services/organization.service';
+import { CompetitionsMyCompetitorsComponent } from './components/Competitons/competitions-my-competitors/competitions-my-competitors.component';
+import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
+import { JudokasRatingComponent } from './components/Competitons/judokas-rating/judokas-rating.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -86,7 +89,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	CompetitionsShowComponent,
 	ProfileComponent,
 	UserCoachesComponent,
-	OrganizationsComponent
+	OrganizationsComponent,
+	CompetitionsMyCompetitorsComponent,
+	JudokaProfileComponent,
+	JudokasRatingComponent
   ],
   imports: [
     BrowserModule,

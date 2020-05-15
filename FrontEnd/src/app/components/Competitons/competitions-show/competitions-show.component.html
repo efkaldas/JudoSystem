@@ -8,7 +8,7 @@
                     <small style="font-weight: normal;">{{competitions.place}}, {{competitions.competitionsDate}}</small>
                 </mat-card-title>
             </mat-card-content>
-            <mat-tab-group>
+            <mat-tab-group (selectedTabChange)="getData($event)">
                 <mat-tab label="Information">
                     <div fxFlex.gt-sm="100" fxFlex="100">
                         <!-- Row -->
@@ -42,22 +42,87 @@
                 </mat-tab>
                 <mat-tab label="My Competitors">
                     <mat-card-content>
-                        <mat-grid-list cols="5" rowHeight="100px">
-                            <mat-grid-tile [colspan]="1" [rowspan]="4">
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <table mat-table matSort [dataSource]="dataSourceMyCompetitors" class="mat-elevation-z8">
 
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+                            </ng-container>
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="firstname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+                            </ng-container>
 
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="lastname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+                            </ng-container>
 
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="birthYears">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
+                                <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
+                            </ng-container>
 
-                            </mat-grid-tile>
-                        </mat-grid-list>
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="gender">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                                <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="color:red" *ngIf="element.weightCategories.length < 1">Not Registered </div>
+                                    <div style="color:green" *ngIf="element.weightCategories.length > 0">Registered </div>
+                                </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="danKyu">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
+                                <td mat-cell *matCellDef="let element"> {{element.danKyu.text}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="category">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-select [(ngModel)]="selectedCategory[element.id]" *ngIf="element.weightCategories.length < 1" placeholder="Select category..." floatlLabel="never">
+                                        <mat-option *ngFor="let weightCategory of ageGroup.weightCategories" [value]="weightCategory.id">
+                                            {{weightCategory.title}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <div *ngIf="element.weightCategories.length > 0">
+                                        {{element.weightCategories[0].weightCategory.title}}
+
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="actions">
+                                <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+                                        <div xFlex="100px" *ngIf="element.weightCategories.length < 1">
+                                            <button class="button" mat-raised-button (click)="registerCompetitor(element)" color="accent"><mat-icon>check</mat-icon> Register </button>
+                                        </div>
+                                        <div xFlex="100px" *ngIf="element.weightCategories.length > 0">
+                                            <button class="button" mat-raised-button (click)="cancelRegistration(element)" color="warn"><mat-icon>clear</mat-icon> Cancel </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
                     </mat-card-content>
                 </mat-tab>
                 <mat-tab label="Age Groups">

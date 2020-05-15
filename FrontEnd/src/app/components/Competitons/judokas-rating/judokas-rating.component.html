@@ -1,0 +1,122 @@
+<div fxLayout="row wrap">
+    <!-- Card column -->
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Judokas Rating</mat-card-title>
+            </mat-card-content>
+            <mat-tab-group (selectedTabChange)="getData($event)">
+                <mat-tab label="Male">
+                    <mat-card-content>
+                        <table mat-table matSort [dataSource]="source" class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+                            </ng-container>
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="firstname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="lastname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="birthYears">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
+                                <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="danKyu">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
+                                <td mat-cell *matCellDef="let element"> {{element.danKyu.text}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="coach">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Coach </th>
+                                <td mat-cell *matCellDef="let element"> {{element.user.firstname}} {{element.user.lastname}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="organization">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Organization </th>
+                                <td mat-cell *matCellDef="let element"> {{element.user.organization.shortName}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="points">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
+                                <td mat-cell *matCellDef="let element"> 0 </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+                    </mat-card-content>
+                </mat-tab>
+                <mat-tab label="Female">
+                    <mat-card-content>
+                        <table mat-table matSort [dataSource]="source" class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+                            </ng-container>
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="firstname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="lastname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="birthYears">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
+                                <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="danKyu">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
+                                <td mat-cell *matCellDef="let element"> {{element.danKyu.text}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="coach">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Coach </th>
+                                <td mat-cell *matCellDef="let element"> {{element.user.firstname}} {{element.user.lastname}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="organization">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Organization </th>
+                                <td mat-cell *matCellDef="let element"> {{element.user.organization.shortName}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="points">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
+                                <td mat-cell *matCellDef="let element"> 0 </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+                    </mat-card-content>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>
