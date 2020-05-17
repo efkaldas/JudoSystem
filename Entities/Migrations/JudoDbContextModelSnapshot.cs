@@ -397,6 +397,9 @@ namespace Entities.Migrations
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
 
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -409,25 +412,6 @@ namespace Entities.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Judoka");
-                });
-
-            modelBuilder.Entity("Entities.Models.JudokaRank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("JudokaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JudokaId");
-
-                    b.ToTable("JudokaRank");
                 });
 
             modelBuilder.Entity("Entities.Models.Organization", b =>
@@ -664,15 +648,15 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2020, 5, 7, 12, 8, 12, 153, DateTimeKind.Local).AddTicks(1653),
-                            DateCreated = new DateTime(2020, 5, 7, 12, 8, 12, 153, DateTimeKind.Local).AddTicks(2744),
-                            DateUpdated = new DateTime(2020, 5, 7, 12, 8, 12, 153, DateTimeKind.Local).AddTicks(3248),
+                            BirthDate = new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(306),
+                            DateCreated = new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(1288),
+                            DateUpdated = new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(1759),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             GenderId = 1,
                             Image = "Admin_Image",
-                            Lastname = "Kuslevic",
-                            Password = "AQAAAAEAACcQAAAAEOb8eaaH5Xa4Dng9RWEtql+DN7SCJc1OwAnMUEOD5mcLA+TfNzt85/STAJM2fvzoyQ==",
+                            Lastname = "Kušlevič",
+                            Password = "AQAAAAEAACcQAAAAEIi6mkBBDRVE/jYakeCr3AGu0/yZz3WzP4nTWZDNyvpigD8HDhm2MuoCBef8oD4eeQ==",
                             PhoneNumber = "+37060477292",
                             StatusId = 1
                         });
@@ -856,15 +840,6 @@ namespace Entities.Migrations
                     b.HasOne("Entities.Models.User", "User")
                         .WithMany("Judokas")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Entities.Models.JudokaRank", b =>
-                {
-                    b.HasOne("Entities.Models.Judoka", "Judoka")
-                        .WithMany()
-                        .HasForeignKey("JudokaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

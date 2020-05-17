@@ -9,6 +9,7 @@ import { Judoka } from '../data/judoka.data';
 export class WeightCategoryService extends LoginService{
   protected weightCategoryUrl : string = environment.apiHost+"/WeightCategory/";  
   protected competitorUrl : string = "/Competitors"; 
+  protected resultsUrl : string = "/Results"; 
 
   registerCompetitor(id: number, judoka: Judoka) {
     return this.http.post(this.weightCategoryUrl + id + this.competitorUrl, judoka);
@@ -18,5 +19,8 @@ export class WeightCategoryService extends LoginService{
   }
   getCompetitors(id: number) {
     return this.http.get(this.weightCategoryUrl + id + this.competitorUrl);
-  }   
+  }  
+  getResults(id: number) {
+    return this.http.get(this.weightCategoryUrl + id + this.resultsUrl);
+  }  
 }

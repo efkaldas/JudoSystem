@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    [Migration("20200414070015_alterTableOrganization")]
-    partial class alterTableOrganization
+    [Migration("20200517131307_firstCommit")]
+    partial class firstCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,10 +25,10 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompetitionsId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CompetitionsDate")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CompetitonsId")
+                    b.Property<int>("CompetitionsId")
                         .HasColumnType("int");
 
                     b.Property<int>("DanKyuFrom")
@@ -44,6 +44,12 @@ namespace Entities.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
+
+                    b.Property<DateTime>("WeightInFrom")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("WeightInTo")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("YearsFrom")
                         .HasColumnType("int");
@@ -69,10 +75,31 @@ namespace Entities.Migrations
                     b.Property<bool>("CardPayment")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("CompetitionsDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("CompetitionsTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
+
+                    b.Property<decimal?>("EntryFee")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<string>("Place")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("RegistrationEnd")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("RegistrationStart")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Regulations")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -84,7 +111,89 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompetitionsTypeId");
+
                     b.ToTable("Competitions");
+                });
+
+            modelBuilder.Entity("Entities.Models.CompetitionsJudge", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompetitionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JudgeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("CompetitionsId");
+
+                    b.HasIndex("JudgeId");
+
+                    b.ToTable("CompetitionsJudge");
+                });
+
+            modelBuilder.Entity("Entities.Models.CompetitionsResults", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("JudokaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Place")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeightCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JudokaId");
+
+                    b.HasIndex("WeightCategoryId");
+
+                    b.ToTable("CompetitionsResults");
+                });
+
+            modelBuilder.Entity("Entities.Models.CompetitionsType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("VARCHAR(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CompetitionsType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Points = 20,
+                            Title = "National"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Points = 30,
+                            Title = "International"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Competitor", b =>
@@ -290,6 +399,9 @@ namespace Entities.Migrations
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
 
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -432,9 +544,9 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 2,
-                            RoleNameEN = "Moderator",
-                            RoleNameLT = "Moderatorius",
-                            RoleNameRU = "Модератор"
+                            RoleNameEN = "Organization admin",
+                            RoleNameLT = "Organizacijos administratorius",
+                            RoleNameRU = "Администратор организации"
                         },
                         new
                         {
@@ -533,6 +645,23 @@ namespace Entities.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDate = new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(306),
+                            DateCreated = new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(1288),
+                            DateUpdated = new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(1759),
+                            Email = "judosystem.info@gmail.com",
+                            Firstname = "Evaldas",
+                            GenderId = 1,
+                            Image = "Admin_Image",
+                            Lastname = "Kušlevič",
+                            Password = "AQAAAAEAACcQAAAAEIi6mkBBDRVE/jYakeCr3AGu0/yZz3WzP4nTWZDNyvpigD8HDhm2MuoCBef8oD4eeQ==",
+                            PhoneNumber = "+37060477292",
+                            StatusId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.UserRole", b =>
@@ -548,6 +677,13 @@ namespace Entities.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.UserStatus", b =>
@@ -624,11 +760,52 @@ namespace Entities.Migrations
                 {
                     b.HasOne("Entities.Models.Competitions", "Competitions")
                         .WithMany("AgeGroups")
-                        .HasForeignKey("CompetitionsId");
+                        .HasForeignKey("CompetitionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Entities.Models.Gender", "gender")
+                    b.HasOne("Entities.Models.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.Competitions", b =>
+                {
+                    b.HasOne("Entities.Models.CompetitionsType", "ComppetitionsType")
+                        .WithMany()
+                        .HasForeignKey("CompetitionsTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.CompetitionsJudge", b =>
+                {
+                    b.HasOne("Entities.Models.Competitions", "Competitions")
+                        .WithMany("Judges")
+                        .HasForeignKey("CompetitionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.User", "Judge")
+                        .WithMany("Competitions")
+                        .HasForeignKey("JudgeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.CompetitionsResults", b =>
+                {
+                    b.HasOne("Entities.Models.Judoka", "Judoka")
+                        .WithMany()
+                        .HasForeignKey("JudokaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.WeightCategory", "WeightCategory")
+                        .WithMany("Results")
+                        .HasForeignKey("WeightCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -723,7 +900,7 @@ namespace Entities.Migrations
             modelBuilder.Entity("Entities.Models.WeightCategory", b =>
                 {
                     b.HasOne("Entities.Models.AgeGroup", "AgeGroup")
-                        .WithMany()
+                        .WithMany("WeightCategories")
                         .HasForeignKey("AgeGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

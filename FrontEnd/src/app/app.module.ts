@@ -59,7 +59,7 @@ import { OrganizationsComponent } from './components/organizations/organizations
 import { OrganizationService } from '../services/organization.service';
 import { CompetitionsMyCompetitorsComponent } from './components/Competitons/competitions-my-competitors/competitions-my-competitors.component';
 import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
-import { JudokasRatingComponent } from './components/Competitons/judokas-rating/judokas-rating.component';
+import { JudokasRatingComponent } from './components/judokas-rating/judokas-rating.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,

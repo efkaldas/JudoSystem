@@ -30,6 +30,7 @@ namespace JudoSystem.Controllers
         }
         // GET: api/Judoka
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             List<Judoka> judokas = db.Judoka.FindAllFull().ToList();
@@ -37,18 +38,22 @@ namespace JudoSystem.Controllers
         }
 
         [HttpGet("ByRank", Name = "GetJudokasByRank")]
+        [Authorize]
         public IActionResult GetJudokasByRank(int genderId)
         {
             List<Judoka> judokas = db.Judoka.FindByConditionFull(x => x.GenderId == genderId)
                     .Include(x => x.User)
+                    .Include(x => x.User)
                         .ThenInclude(x => x.Organization).ToList();
 
-            return Ok(judokas);
+
+            return Ok(judokas.OrderBy(x => x.Points));
         }
 
 
         // GET: api/Judoka/5
         [HttpGet("{id}", Name = "GetJudoka")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             Judoka judoka = db.Judoka.FindByConditionFull(x => x.Id == id)
@@ -60,6 +65,7 @@ namespace JudoSystem.Controllers
         }
         // GET: api/Judoka/5
         [HttpGet("MyJudokas", Name = "MyJudokas")]
+        [Authorize(Roles = "Admin, Coach")]
         public IActionResult GetMyJudokas()
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
@@ -69,6 +75,7 @@ namespace JudoSystem.Controllers
 
         // POST: api/Judoka
         [HttpPost]
+        [Authorize(Roles = "Admin, Coach")]
         public IActionResult Post([FromBody] Judoka judoka)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
@@ -78,6 +85,7 @@ namespace JudoSystem.Controllers
 
             judoka.Firstname = StringHelper.ToTitleCase(judoka.Firstname);
             judoka.Lastname = StringHelper.ToTitleCase(judoka.Lastname);
+            judoka.Points = 0;
 
             db.Judoka.Create(judoka);
             db.Save();
@@ -87,6 +95,7 @@ namespace JudoSystem.Controllers
 
         // PUT: api/Judoka/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Coach")]
         public IActionResult Put(int id, [FromBody] Judoka judoka)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
@@ -105,6 +114,7 @@ namespace JudoSystem.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Coach")]
         public IActionResult Delete(int id)
         {
             Judoka judokaToDelete = db.Judoka.FindByCondition(x => id == x.Id).FirstOrDefault();

@@ -24,7 +24,6 @@ namespace Entities
         public DbSet<CompetitionsJudge> CompetitionsJudge { get; set; }
         public DbSet<CompetitionsResults> CompetitionsResults { get; set; }
         public DbSet<CompetitionsType> CompetitionsType { get; set; }
-        public DbSet<JudokaRank> JudokaRank { get; set; }
 
         public JudoDbContext(DbContextOptions<JudoDbContext> options)
             : base(options) { }

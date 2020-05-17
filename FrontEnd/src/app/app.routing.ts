@@ -16,7 +16,7 @@ import { NewCompetitionsComponent } from './components/Competitons/new-competiti
 import { CompetitionsShowComponent } from './components/Competitons/competitions-show/competitions-show.component';
 import { CompetitionsComponent } from './components/Competitons/competitions/competitions.component';
 import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
-import { JudokasRatingComponent } from './components/Competitons/judokas-rating/judokas-rating.component';
+import { JudokasRatingComponent } from './components/judokas-rating/judokas-rating.component';
 
 export const AppRoutes: Routes = [
   {

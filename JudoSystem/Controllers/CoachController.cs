@@ -15,7 +15,6 @@ namespace JudoSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Coach")]
     public class CoachController : ControllerBase
     {
         private IRepositoryWrapper db;
@@ -23,10 +22,12 @@ namespace JudoSystem.Controllers
         public CoachController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
         {
             this.configuration = configuration;
+            this.configuration = configuration;
             db = repoWrapper;
         }
         // GET: api/Coach
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             List<User> users = db.User.FindAll()
@@ -41,6 +42,7 @@ namespace JudoSystem.Controllers
             return Ok(coaches);
         }
         [HttpGet("My", Name = "GetMyCoach")]
+        [Authorize(Roles = "Admin, Organization admin")]
         public IActionResult GetMy()
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
@@ -59,6 +61,7 @@ namespace JudoSystem.Controllers
 
         // GET: api/Coach/5
         [HttpGet("{id}", Name = "GetCoach")]
+        [Authorize]
         public IActionResult Get(int id)
         {
            User coach = db.User.FindByCondition(x => x.Id == id)
@@ -78,6 +81,7 @@ namespace JudoSystem.Controllers
 
         // POST: api/Coach
         [HttpPost]
+        [Authorize(Roles = "Admin, Organization admin")]
         public IActionResult Post([FromBody] User coach)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
@@ -91,6 +95,7 @@ namespace JudoSystem.Controllers
 
         // PUT: api/Coach/5
         [HttpPut("{id}/Block", Name = "BlockCoach")]
+        [Authorize(Roles = "Admin, Organization admin")]
         public IActionResult Block(int id)
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
@@ -101,6 +106,7 @@ namespace JudoSystem.Controllers
         }
 
         [HttpPut("{id}/UnBlock", Name = "UnBlock")]
+        [Authorize(Roles = "Admin, Organization admin")]
         public IActionResult UnBlock(int id)
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();

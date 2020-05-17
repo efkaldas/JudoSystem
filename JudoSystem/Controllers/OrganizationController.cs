@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace JudoSystem.Controllers
             db = repoWrapper;
         }
         // GET: api/Organization
+        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
@@ -32,6 +34,7 @@ namespace JudoSystem.Controllers
 
 
         // PUT: api/Organization/5
+        [Authorize(Roles = "Admin, Organization admin")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Organization value)
         {

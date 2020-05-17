@@ -68,6 +68,7 @@
     "@angular/compiler-cli": "^8.1.0",
     "@angular/language-service": "^8.1.0",
     "@types/chartist": "0.9.46",
+    "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.3.13",
     "@types/jasminewd2": "~2.0.6",
     "@types/jquery": "^3.3.30",

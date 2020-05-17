@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
 using JudoSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ namespace JudoSystem.Controllers
             List<Competitions> competitions = db.Competitions.FindAll().ToList();
             return Ok(competitions);
         }
+        [Authorize(Roles = "Admin")]
 
         [HttpGet("{id}/Competitors-list.csv", Name = "GetCompetitorsList")]
         public IActionResult GetCompetitors(int id)
@@ -52,7 +54,7 @@ namespace JudoSystem.Controllers
             CompetitorsListService export = new CompetitorsListService();
             string file = export.Execute(competitions);
 
-            return File(System.IO.File.OpenRead(file), "text/csv");
+            return File(System.IO.File.OpenRead(file), "text/csv;charset=utf-8");
 
         }
 
@@ -68,30 +70,9 @@ namespace JudoSystem.Controllers
             return Ok(competitions);
         }
         // GET: api/Competitions/5
+        [Authorize(Roles = "Admin, Coach")]
         [HttpGet("{id}/MyCompetitors", Name = "GetMyCompetitors")]
         public IActionResult GetMyCompetitors(int id)
-        {
-            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
-
-            Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id)
-                .Include(x => x.AgeGroups)
-                    .ThenInclude(x => x.WeightCategories)
-                        .ThenInclude(x => x.Competitors)
-                            .ThenInclude(x => x.Judoka)
-                                .ThenInclude(x => x.Gender)
-                 .Include(x => x.AgeGroups)
-                    .ThenInclude(x => x.WeightCategories)
-                        .ThenInclude(x => x.Competitors)
-                            .ThenInclude(x => x.Judoka)
-                                .ThenInclude(x => x.DanKyu).FirstOrDefault();
-
-            List<Judoka> competitors = competitions.AgeGroups.SelectMany(x => x.WeightCategories).SelectMany(x => x.Competitors).Where(x => x.Judoka.UserId == userId).Select(x => x.Judoka).ToList();
-
-            return Ok(competitors);
-        }
-        // GET: api/Competitions/5
-        [HttpGet("{id}/MyCompetitors.pdf", Name = "GetMyCompetitorsPdf")]
-        public IActionResult GetMyCompetitorsPdf(int id)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
@@ -118,6 +99,7 @@ namespace JudoSystem.Controllers
             List<AgeGroup> ageGroups = db.AgeGroup.FindByCondition(x => x.CompetitionsId == id).ToList();
             return Ok(ageGroups);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id}/ResultsFile", Name = "ImportResultsFile")]
         public IActionResult ImportResultsFile(int id, [FromHeader]IFormFile file)
         {
@@ -141,6 +123,9 @@ namespace JudoSystem.Controllers
 
             if (System.IO.File.Exists(localFileLocation))
             {
+                ResultsFileReaderService service = new ResultsFileReaderService();
+                service.execute(db, id, localFileLocation);
+
                 return Ok();
             }
             return null;
@@ -148,6 +133,7 @@ namespace JudoSystem.Controllers
 
         // POST: api/Competitions
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Post([FromBody] Competitions competitions)
         {
             competitions.DateCreated = DateTime.Now;
@@ -158,6 +144,7 @@ namespace JudoSystem.Controllers
 
         // PUT: api/Competitions/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Put(int id, [FromBody] string value)
         {
             return Ok();
@@ -165,8 +152,12 @@ namespace JudoSystem.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
+            Competitions competitions = db.Competitions.FindByCondition(x => x.Id == id).FirstOrDefault();
+            db.Competitions.Delete(competitions);
+            db.Save();
             return Ok();
         }
     }
