@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { JudokaService } from '../../../../services/judoka.service';
-import { Judoka } from '../../../../data/judoka.data';
+import { JudokaService } from '../../../services/judoka.service';
+import { Judoka } from '../../../data/judoka.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({

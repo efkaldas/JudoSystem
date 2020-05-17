@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,21 +24,8 @@ namespace JudoSystem.Controllers
             this.configuration = configuration;
             db = repoWrapper;
         }
-        // GET: api/WeightCategory
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET: api/WeightCategory/5
-        [HttpGet("{id}", Name = "GetWeightCategory")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // GET: api/WeightCategory/5
         [HttpGet("{id}/Competitors", Name = "GetCompetitors")]
         public IActionResult GetCompetitors(int id)
         {
@@ -64,7 +52,21 @@ namespace JudoSystem.Controllers
 
             return Ok(competitors);
         }
+        [HttpGet("{id}/Results", Name = "GetWeightResults")]
+        public IActionResult GetResults(int id)
+        {
+            List<CompetitionsResults> categoryResults = db.CompetitionsResults.FindByCondition(x => x.WeightCategoryId == id)
+                .Include(x => x.Judoka)
+                    .ThenInclude(x => x.Gender)
+                .Include(x => x.Judoka)
+                    .ThenInclude(x => x.DanKyu)
+                .Include(x => x.Judoka)
+                    .ThenInclude(x => x.User)
+                        .ThenInclude(x => x.Organization).ToList();
 
+            return Ok(categoryResults.OrderBy(x => x.Place));
+        }
+        [Authorize(Roles = "Admin, Coach")]
         [HttpPost("{id}/Competitors", Name = "InsertCompetitors")]
         public IActionResult PostCompetitors(int id, [FromBody]Judoka competitor)
         {
@@ -79,6 +81,7 @@ namespace JudoSystem.Controllers
             db.Save();
             return Ok();
         }
+        [Authorize(Roles = "Admin, Coach")]
         [HttpPut("{id}/Competitors", Name = "DeleteCompetitors")]
         public IActionResult DeleteCompetitors(int id, [FromBody]Judoka competitor)
         {
@@ -88,7 +91,7 @@ namespace JudoSystem.Controllers
             db.Save();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin, Coach")]
         [HttpDelete("{id}/Competitors", Name = "DeleteCompetitors")]
         public IActionResult DeleteCompetitors(int judokaId)
         {
@@ -96,16 +99,5 @@ namespace JudoSystem.Controllers
         }
 
 
-        // PUT: api/WeightCategory/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -31,8 +31,12 @@ export class CompetitionsService extends LoginService {
   getMyCompetitors(id:number) {
     return this.http.get(this.competitionsUrl + id + this.myCompetitorsUrl); 
   }
+
   print(id: number) {
-    return this.http.get(this.competitionsUrl + id + '/' + this.printCompetitorsUrl); 
+    let headers = new HttpHeaders(); 
+    headers.append('Accept','text/csv;charset=utf-8');
+
+    return this.http.get(this.competitionsUrl + id  + this.printCompetitorsUrl, {headers: headers, responseType: 'blob' }); 
   }  
   public importResultsFile(file, id : number) {
     const formData = new FormData();

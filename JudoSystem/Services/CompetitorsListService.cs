@@ -26,21 +26,24 @@ namespace JudoSystem.Services
 
             foreach (var ageGroup in competitions.AgeGroups)
             {
-                CompetitorDto newCompetitor = new CompetitorDto();
-                newCompetitor.AgeGroup = ageGroup.Title;
+                string ageGroupTitle = ageGroup.Title;
                 foreach (var weightCategory in ageGroup.WeightCategories)
                 {
-                    newCompetitor.WeightCategory = weightCategory.Title;
+                    string weightCategoryTitle = weightCategory.Title;
                     foreach (var competitor in weightCategory.Competitors)
                     {
-                        newCompetitor.Id = competitor.Judoka.Id;
-                        newCompetitor.Firstname = competitor.Judoka.Firstname;
-                        newCompetitor.Lastname = competitor.Judoka.Lastname;
-                        newCompetitor.Gender = competitor.Judoka.Gender.TextEN;
-                        newCompetitor.Country = competitor.Judoka.User.Organization.Country;
-                        newCompetitor.City = competitor.Judoka.User.Organization.City;
-                        newCompetitor.Club = competitor.Judoka.User.Organization.ShortName;
-                        competitors.Add(newCompetitor);
+                        competitors.Add(new CompetitorDto
+                        {
+                            Id = competitor.Judoka.Id,
+                            Firstname = competitor.Judoka.Firstname,
+                            Lastname = competitor.Judoka.Lastname,
+                            Gender = competitor.Judoka.Gender.TextEN,
+                            Country = competitor.Judoka.User.Organization.Country,
+                            City = competitor.Judoka.User.Organization.City,
+                            Club = competitor.Judoka.User.Organization.ShortName,
+                            AgeGroup = ageGroupTitle,
+                            WeightCategory = weightCategoryTitle
+                        });
                     }
                 }
             }

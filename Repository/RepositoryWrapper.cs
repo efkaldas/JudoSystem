@@ -23,6 +23,7 @@ namespace Repository
         private ICompetitionsType competitionsType;
         private IWeightCategory weightCategory;
         private ICompetitorRepository competitorRepository;
+        private ICompetitionsResults competitionsResultsRepository;
 
         public IUserRepository User
         {
@@ -178,6 +179,18 @@ namespace Repository
                 }
 
                 return competitorRepository;
+            }
+        }
+        public ICompetitionsResults CompetitionsResults
+        {
+            get
+            {
+                if (competitionsResultsRepository == null)
+                {
+                    competitionsResultsRepository = new CompetitionsResultsRepository(_repoContext);
+                }
+
+                return competitionsResultsRepository;
             }
         }
 

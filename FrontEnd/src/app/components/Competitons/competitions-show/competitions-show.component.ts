@@ -39,18 +39,22 @@ export class CompetitionsShowComponent implements OnInit {
   ageGroups: AgeGroup[];
   competitorCategory: number;
   JudokasToRegister: Judoka[];
+  JudokasResults: Judoka[];
   weightCategories: WeightCategory[];
   weightCategoryId: number;
   dataSource = new MatTableDataSource;
   dataSourceCompetitors = new MatTableDataSource;
   dataSourceMyCompetitors = new MatTableDataSource;
+  dataSourceResults = new MatTableDataSource;
   ageGroupId: number;
   competitors:any;
   selectedAgeGroup: number;
   myCompetitors: Judoka[];
   source : MatTableDataSource<Judoka>;
   file = null;
+  ageGroupIdresult: number;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category', 'actions'];
+  displayedColumnsMy: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category'];
   displayedColumnsCompetitors: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'organization', 'country'];
 
   separatorKeysCodes = [ENTER, COMMA, SPACE];
@@ -153,6 +157,45 @@ export class CompetitionsShowComponent implements OnInit {
           this.openSnackBar("Registration has been canceled", 'CLOSE');
           this.getJudokasToRegister();
           this.changeDetectorRefs.detectChanges();
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+      );
+  }
+  public getWeightResults($event)
+  {
+    let weightCategoryId = this.competitions.ageGroups[this.ageGroupIdresult].weightCategories.find(x => x.title == $event.tab.textLabel).id;
+    return this.weightCategorySerivce.getResults(weightCategoryId)
+      .subscribe(
+        data => {
+          this.JudokasResults = data as any;
+          this.dataSourceResults = new MatTableDataSource(this.JudokasResults);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.changeDetectorRefs.detectChanges();
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+      );
+  }
+  public printCompetitiors()
+  {
+    return this.competitionsService.print(this.competitionsId)
+      .subscribe(
+        data => {
+          console.log(data);
+          if (data != null)  {
+            saveAs(data, "Contestants.csv");
+            this.openSnackBar("File has been generated", 'CLOSE');
+          } else {
+            this.openSnackBar("File was not generated", 'CLOSE');
+          }
         },
         error => {
           this.errorMessage = error["error"].message;
@@ -320,6 +363,11 @@ export class CompetitionsShowComponent implements OnInit {
   {
     let selectedGroup = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel);
     this.ageGroupId = this.competitions.ageGroups.indexOf(selectedGroup);
+  }
+  public setAgeGroupIdresult($event)
+  {
+    let selectedGroup = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel);
+    this.ageGroupIdresult = this.competitions.ageGroups.indexOf(selectedGroup);
   }
   public getCompetitors($event) {
    this.weightCategoryId = this.competitions.ageGroups[this.ageGroupId].weightCategories.find(x => x.title == $event.tab.textLabel).id;

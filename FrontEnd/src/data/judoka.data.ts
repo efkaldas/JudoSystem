@@ -11,5 +11,6 @@ export class Judoka {
     birthYears: number;
     danKyu: DanKyu;
     user: User;
+    points: number;
     weightCategories: Array<WeightCategory>;
 }

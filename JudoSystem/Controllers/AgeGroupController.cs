@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,21 +24,10 @@ namespace JudoSystem.Controllers
             this.configuration = configuration;
             db = repoWrapper;
         }
-        // GET: api/AgeGroup
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok();
-        }
 
         // GET: api/AgeGroup/5
-        [HttpGet("{id}", Name = "GetAgeGroup")]
-        public IActionResult Get(int id)
-        {
-            return Ok();
-        }
-        // GET: api/AgeGroup/5
         [HttpGet("{id}/Judokas", Name = "GetAgeGroupUserJudokas")]
+        [Authorize(Roles = "Admin, coach")]
         public IActionResult GetAgeGroupUserJudokas(int id)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
@@ -70,6 +60,7 @@ namespace JudoSystem.Controllers
 
         // POST: api/AgeGroup
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Post([FromBody] AgeGroup ageGroup)
         {
             db.AgeGroup.Create(ageGroup);
@@ -79,14 +70,21 @@ namespace JudoSystem.Controllers
 
         // PUT: api/AgeGroup/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Authorize(Roles = "Admin")]
+        public void Put(int id, [FromBody] AgeGroup ageGroup)
         {
+            AgeGroup ageGroupDB = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
+            db.AgeGroup.Update(ageGroup);
         }
+        [Authorize(Roles = "Admin")]
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
+            db.AgeGroup.Delete(ageGroup);
+            db.Save();
         }
     }
 }
