@@ -1,125 +1,114 @@
 <div fxLayout="row wrap">
     <!-- Card column -->
     <div fxFlex.gt-sm="100%" fxFlex="100">
-      <mat-card>
-        <mat-card-content>
-          <mat-card-title>User Information</mat-card-title>
-        </mat-card-content>
-        <mat-tab-group>
-          <mat-tab label="Profile">
-            <mat-grid-list cols = "5" rowHeight="100px"> 
-                <mat-grid-tile 
-                [colspan] = "1"
-                [rowspan] = "4">
-                <img [src]="userImage" />
-                </mat-grid-tile>
-                <mat-grid-tile  class="title" 
-                [colspan] = "4"
-                [rowspan] = "1">
-                <h5><b>Firstname and lastname: </b>
-                <p>{{coach.firstname}} {{coach.lastname}}</p></h5>
-                </mat-grid-tile>
-                <mat-grid-tile  class="title"
-                [colspan] = "4"
-                [rowspan] = "1">
-                <h5><b>Gender: </b>
-                <p>{{coach.gender.textEN}}</p></h5>
-                </mat-grid-tile>
-                <mat-grid-tile  class="title"
-                [colspan] = "4"
-                [rowspan] = "1">
-                <h5><b>Birth Date: </b>
-                <p>{{coach.birthDate}}</p></h5>
-                </mat-grid-tile>
-                <mat-grid-tile  class="title"
-                [colspan] = "4"
-                [rowspan] = "1">
-                <h5><b>Dan/Kyu: </b>
-                <p *ngIf="coach.dankyu != null">{{coach.dankyu.grade}}</p></h5>
-                </mat-grid-tile>
-           </mat-grid-list>
-          </mat-tab>
-          <mat-tab label="Organization">
+        <mat-card>
             <mat-card-content>
-                <mat-grid-list cols = "5" rowHeight="100px"> 
-                    <mat-grid-tile 
-                    [colspan] = "1"
-                    [rowspan] = "4">
-                    <img [src]="organizationlogo" />
-                    </mat-grid-tile>
-                    <mat-grid-tile  class="title" 
-                    [colspan] = "4"
-                    [rowspan] = "1">
-                    <h5><b>Organization name: </b>
-                    <p>{{coach.organization.exactName}}</p></h5>
-                    </mat-grid-tile>
-                    <mat-grid-tile  class="title"
-                    [colspan] = "4"
-                    [rowspan] = "1">
-                    <h5><b>Type: </b>
-                    <p>{{coach.organization.organizationType.typeNameEN}}</p></h5>
-                    </mat-grid-tile>
-                    <mat-grid-tile  class="title"
-                    [colspan] = "4"
-                    [rowspan] = "1">
-                    <h5><b>Administrator: </b>
-                    <p>{{coach.parentUser.firstname}} {{coach.parentUser.lastname}}</p></h5>
-                    </mat-grid-tile>
-                    <mat-grid-tile  class="title"
-                    [colspan] = "4"
-                    [rowspan] = "1">
-                    <h5><b>Address: </b>
-                    <p>{{coach.organization.country}}, {{coach.organization.city}}, {{coach.organization.address}}</p></h5>
-                    </mat-grid-tile>
-               </mat-grid-list>
+                <mat-card-title>User Information</mat-card-title>
             </mat-card-content>
-          </mat-tab>
-          <mat-tab label="Judokas">
-            <mat-card-content>
-              <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+            <mat-tab-group>
+                <mat-tab label="Profile">
+                    <mat-grid-list cols="5" rowHeight="100px">
+                        <mat-grid-tile [colspan]="1" [rowspan]="4">
+                            <img [src]="userImage" />
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Firstname and lastname: </b>
+                                <p>{{coach.firstname}} {{coach.lastname}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Gender: </b>
+                                <p>{{coach.gender.textEN}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Birth Date: </b>
+                                <p>{{coach.birthDate}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <h5><b>Dan/Kyu: </b>
+                                <p *ngIf="coach.dankyu">{{coach.dankyu.grade}}</p>
+                            </h5>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-tab>
+                <mat-tab label="Organization">
+                    <mat-card-content>
+                        <mat-grid-list cols="5" rowHeight="100px">
+                            <mat-grid-tile [colspan]="1" [rowspan]="4">
+                                <img [src]="organizationlogo" />
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Organization name: </b>
+                                    <p>{{coach.organization.exactName}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Type: </b>
+                                    <p>{{coach.organization.organizationType.typeNameEN}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Administrator: </b>
+                                    <p *ngIf="coach.parentUser">{{coach.parentUser.firstname}} {{coach.parentUser.lastname}}</p>
+                                    <p *ngIf="!coach.parentUser">{{coach.firstname}} {{coach.lastname}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                                <h5><b>Address: </b>
+                                    <p>{{coach.organization.country}}, {{coach.organization.city}}, {{coach.organization.address}}</p>
+                                </h5>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </mat-card-content>
+                </mat-tab>
+                <mat-tab label="Judokas">
+                    <mat-card-content>
+                        <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
-                <ng-container matColumnDef="position">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                    <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
-                </ng-container>
-                <!-- Position Column -->
-                <ng-container matColumnDef="firstname">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
-                  <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-                </ng-container>
-              
-                <!-- Name Column -->
-                <ng-container matColumnDef="lastname">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
-                  <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-                </ng-container>
-            
-                    <!-- Symbol Column -->
-                <ng-container matColumnDef="birthYears">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
-                  <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
-                </ng-container>
-              
-                <!-- Weight Column -->
-                <ng-container matColumnDef="gender">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                  <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
-                </ng-container>
-              
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="danKyu">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
-                  <td mat-cell *matCellDef="let element"> {{element.danKyu.text}} </td>
-                </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
+                            <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+                            </ng-container>
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="firstname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+                            </ng-container>
 
-              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            </mat-card-content>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="lastname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+                                <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="birthYears">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
+                                <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
+                            </ng-container>
+
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="gender">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                                <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="danKyu">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
+                                <td mat-cell *matCellDef="let element"> {{element.danKyu.text}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    </mat-card-content>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
     </div>
-  </div>
+</div>

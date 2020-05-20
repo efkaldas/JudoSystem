@@ -42,19 +42,19 @@ export const AppRoutes: Routes = [
         path: 'my-coaches',
         component: CoachComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Coaches', roles: [Role.Admin, Role.Coach]}
+        data: {title: 'Coaches', roles: [Role.Admin, Role.Organization_Admin]}
       },
       {
         path: 'coaches',
         component: UserCoachesComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Coaches', roles: [Role.Admin, Role.Coach]}
+        data: {title: 'Coaches', roles: [Role.Admin]}
       },
       {
         path: 'coaches/:id',
         component: CoachShowComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Coach', roles: [Role.Admin, Role.Coach]}
+        data: {title: 'Coach'}
       },
       {
         path: 'pending-users',
@@ -65,42 +65,42 @@ export const AppRoutes: Routes = [
       {
         path: 'competitions',
         component: CompetitionsComponent,
-        data: {title: 'Competitions',}
+        data: {title: 'Competitions'}
       },
       {
         path: 'competitions/:id',
         component: CompetitionsShowComponent,
-        data: {title: 'Competitions',}
+        data: {title: 'Competitions'}
       },
       {
         path: 'new-competitions',
         component: NewCompetitionsComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Create Competitons',}
+        data: {title: 'Create Competitons', roles: [Role.Admin]}
       },
       {
         path: 'profile',
         component: ProfileComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Profile',}
+        data: {title: 'Profile'}
       },
       {
         path: 'judoka/:id',
         component: JudokaProfileComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Judoka',}
+        data: {title: 'Judoka'}
       },
       {
         path: 'judokas/rating',
         component: JudokasRatingComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Judokas Rating',}
+        data: {title: 'Judokas Rating'}
       },
       {
         path: 'organizations',
         component: OrganizationsComponent,
         canActivate: [AuthGuard],
-        data: {title: 'Organizations', roles: [Role.Admin]}
+        data: {title: 'Organizations', roles: [Role.Admin, Role.Organization_Admin]}
       },
   //     {
   //       path: '/dashboards/dashboard1',

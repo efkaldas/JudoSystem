@@ -1,7 +1,7 @@
 <!--<mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field> -->
-<div fxLayout="row" fxLayoutAlign="end center" >
+<div fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button (click)="openDialog(addCoachModal, null)" color="primary"><mat-icon>person_add</mat-icon> Register Coach </button>
 </div><br>
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
@@ -9,43 +9,43 @@
     <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
         <td mat-cell *matCellDef="let element; let i = index">{{i+1}}
-          <a fxFlexFill [routerLink]="'/coaches/'+element.id" class="mat-row-link"></a>
         </td>
     </ng-container>
 
     <!-- Position Column -->
     <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
     </ng-container>
 
-        <!-- Symbol Column -->
-    <ng-container matColumnDef="birthDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
     </ng-container>
-  
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+    </ng-container>
+
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-      <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="danKyu">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
         <td mat-cell *matCellDef="let element">
-          <div *ngIf="element.dankyu != null">
-            {{element.danKyu.grade}}
-          </div> </td>
+            <div *ngIf="element.dankyu != null">
+                {{element.danKyu.grade}}
+            </div>
+        </td>
     </ng-container>
-    
+
     <!-- Position Column -->
     <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
@@ -64,119 +64,119 @@
         <td mat-cell *matCellDef="let element"> {{element.status.statusNameEN}} </td>
     </ng-container>
 
-        <!-- Symbol Column -->
+    <!-- Symbol Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
-      <td mat-cell *matCellDef="let element"> 
-        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-          <div fxFlex="100px">
-                <button mat-raised-button (click)="openDialog(blockCoachModal, element)" color="warn"><mat-icon>block</mat-icon> Block </button>
-              </div>
+        <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+                <div fxFlex="100px">
+                    <button mat-raised-button (click)="openDialog(blockCoachModal, element)" color="warn"><mat-icon>block</mat-icon> Block </button>
+                </div>
             </div>
-      </td>
+        </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+</table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #addCoachModal>
-  <h1 mat-dialog-title>Register Coach</h1>
-<div mat-dialog-content>
-  <form [formGroup]="userForm" novalidate (ngSubmit)="registerCoach()" color="accent">
-    <div fxLayout="row wrap">
+    <h1 mat-dialog-title>Register Coach</h1>
+    <div mat-dialog-content>
+        <form [formGroup]="userForm" novalidate (ngSubmit)="registerCoach()" color="accent">
+            <div fxLayout="row wrap">
 
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-form-field>
-            <input autofocus type="email" matInput placeholder="Email" required formControlName="email">
-        </mat-form-field>
-        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <input autofocus type="email" matInput placeholder="Email" required formControlName="email">
+                    </mat-form-field>
+                    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
+                        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
+                        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <input autofocus type="text" matInput placeholder="Phone number" required formControlName="phoneNumber">
+                        <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <input autofocus type="date" matInput placeholder="Birth Date" required formControlName="birthDate">
+                        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <mat-label>Select gender</mat-label>
+                        <mat-select formControlName="genderId" required>
+                            <mat-option *ngFor="let gender of genders" [value]="gender.id">
+                                {{gender.textEN}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field>
+                        <mat-label>Select dan/kyu</mat-label>
+                        <mat-select formControlName="danKyuId" required>
+                            <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
+                                {{danKyu.grade}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
+                </div>
+
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field style="width: 100%">
+                        <input matInput type="password" placeholder="Password" formControlName="password" class="form-control">
+                    </mat-form-field>
+                    <small *ngIf="clicked && userForm.controls['password'].hasError('required')" class="text-danger support-text">You must include password.</small>
+                </div>
+                <!-- col full-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field style="width: 100%">
+                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" type="password">
+                    </mat-form-field>
+                    <small *ngIf="clicked && userForm.controls['confirmPassword'].hasError('required')" class="text-danger support-text">You must include confirm password.</small>
+                    <small *ngIf="clicked && userForm.controls['confirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not match.</small>
+                </div>
+
+                <div mat-dialog-actions>
+                    <button type="submit" mat-raised-button color="primary">Accept</button>
+                    <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-    <mat-form-field>
-      <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
-      <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
-    </mat-form-field>
-</div>
-
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-    <mat-form-field>
-      <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
-      <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
-    </mat-form-field>
-</div>
-
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-    <mat-form-field>
-        <input autofocus type="text" matInput placeholder="Phone number" required formControlName="phoneNumber">
-        <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
-    </mat-form-field>
-</div>
-
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-    <mat-form-field>
-        <input autofocus type="date" matInput placeholder="Birth Date" required formControlName="birthDate">
-        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
-    </mat-form-field>
-</div>
-
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-    <mat-form-field>
-      <mat-label>Select gender</mat-label>
-       <mat-select formControlName="genderId" required>
-         <mat-option *ngFor="let gender of genders" [value]="gender.id" >            
-          {{gender.textEN}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
-</div>
-
-<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-  <mat-form-field>
-    <mat-label>Select dan/kyu</mat-label>
-     <mat-select formControlName="danKyuId" required>
-       <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id" >            
-        {{danKyu.grade}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
-</div>
-
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-form-field style="width: 100%">
-            <input matInput type="password" placeholder="Password" formControlName="password" class="form-control">
-        </mat-form-field>
-        <small *ngIf="clicked && userForm.controls['password'].hasError('required')" class="text-danger support-text">You must include password.</small>
-    </div>
-    <!-- col full-->
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-form-field style="width: 100%">
-            <input matInput placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" type="password">
-        </mat-form-field>
-        <small *ngIf="clicked && userForm.controls['confirmPassword'].hasError('required')" class="text-danger support-text">You must include confirm password.</small>
-        <small *ngIf="clicked && userForm.controls['confirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not match.</small>
-    </div>
-    
-      <div mat-dialog-actions>
-          <button type="submit" mat-raised-button color="primary">Accept</button>
-          <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-      </div>
-    </div>
-  </form>
-</div>
 </ng-template>
-  
-  <ng-template #blockCoachModal>
+
+<ng-template #blockCoachModal>
     <h1 mat-dialog-title>Are you sure you want to block?</h1>
-  <div mat-dialog-content>
-      <div mat-dialog-actions>
-        <button type="submit" mat-raised-button color="primary" (click)="blockConfirm()">Accept</button>
-        <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-      </div>
-  </div>
-    </ng-template>
+    <div mat-dialog-content>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary" (click)="blockConfirm()">Accept</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+        </div>
+    </div>
+</ng-template>

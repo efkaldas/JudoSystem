@@ -72,7 +72,6 @@ namespace JudoSystem.Controllers
                     .ThenInclude(x => x.Gender)
                 .Include(x => x.Judokas)
                     .ThenInclude(x => x.DanKyu)
-                .Include(x => x.ParentUser)
                 .Include(x => x.Organization.OrganizationType)
                 .FirstOrDefault();
 

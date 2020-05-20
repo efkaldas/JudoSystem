@@ -1,98 +1,97 @@
 <div fxLayout="row wrap">
     <div fxFlex.gt-sm="100" fxFlex="100">
-      <mat-card>
-        <mat-card-content>
-          <mat-card-title>Form Basic Layouts</mat-card-title>
-          <!-- ============================================================== -->
-          <!-- column -->
-          <!-- ============================================================== -->
-          <form [formGroup]="competitionsForm" novalidate (ngSubmit)="addCompetitions()" color="accent">
-            <div fxLayout="row wrap">
-              <!-- column -->
-              <div fxFlex.gt-md="100" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="text" matInput placeholder="Title" required formControlName="title">
-                </mat-form-field>
-              </div>                                
-              <!-- col full-->
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="p-10">
-                  <mat-form-field>
-                      <mat-label>Type</mat-label>
-                      <mat-select formControlName="competitionsTypeId">
-                        <mat-option *ngFor="let competitionsType of competitionsTypes" [value]="competitionsType.id">{{competitionsType.title}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>                              
-                </div>
-            <!-- column -->
-            <div fxFlex.gt-md="100" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="text" matInput placeholder="Place" required formControlName="place">
-                </mat-form-field>
-            </div>               
-              <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="date" matInput placeholder="Competitions date" required formControlName="competitionsDate">
-                </mat-form-field>
-              </div>              
-              <!-- column -->
-              <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="time" matInput placeholder="Time" required formControlName="competitionsTime">
-                </mat-form-field>
-              </div>             
-              <!-- column -->
-              <div fxFlex.gt-md="100" fxFlex="100" class="p-10">
-                  <mat-form-field>
-                      <input autofocus type="number" matInput placeholder="Entry fee" required formControlName="entryFee">
-                  </mat-form-field>
-              </div>              
-              <!-- column -->
-              <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="date" matInput placeholder="Registration start" required formControlName="registrationStart">
-                </mat-form-field>
-              </div>              
-              <!-- column -->
-              <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="time" matInput placeholder="Time" required formControlName="registrationStartTime">
-                </mat-form-field>
-              </div>              
-              <!-- column -->
-              <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="date" matInput placeholder="Registration end" required formControlName="registrationEnd">
-                </mat-form-field>
-              </div>              
-              <!-- column -->
-              <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
-                <mat-form-field>
-                    <input autofocus type="time" matInput placeholder="Time" required formControlName="registrationEndTime">
-                </mat-form-field>
-              </div>                                                                  
-              <!-- column -->
-              <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
-                <mat-label>Regulations</mat-label>
-                <input class="form-control b-b" placeholder="file" type="file">
-              </div>              
-              <!-- column -->
-              <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
-                    <mat-checkbox formControlName="cardPayment">Card Payment Allowed</mat-checkbox>
-              </div>             
-              <!-- column -->
-              <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
-                    <quill-editor [style]="{height: '500px'}" formControlName="description"></quill-editor>
-              </div>             
-              <!-- column -->
-              <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
-              </div>                    
-              <!-- column -->
-              <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
-                <button mat-raised-button color="primary">Submit</button>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
+        <mat-card>
+            <mat-card-content>
+                <!-- ============================================================== -->
+                <!-- column -->
+                <!-- ============================================================== -->
+                <form [formGroup]="competitionsForm" novalidate (ngSubmit)="addCompetitions()" color="accent">
+                    <div fxLayout="row wrap">
+                        <!-- column -->
+                        <div fxFlex.gt-md="100" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="text" matInput placeholder="Title" required formControlName="title">
+                            </mat-form-field>
+                        </div>
+                        <!-- col full-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <mat-label>Type</mat-label>
+                                <mat-select formControlName="competitionsTypeId">
+                                    <mat-option *ngFor="let competitionsType of competitionsTypes" [value]="competitionsType.id">{{competitionsType.title}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="100" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="text" matInput placeholder="Place" required formControlName="place">
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="date" matInput placeholder="Competitions date" required formControlName="competitionsDate">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="time" matInput placeholder="Time" required formControlName="competitionsTime">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="100" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="number" matInput placeholder="Entry fee" required formControlName="entryFee">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="date" matInput placeholder="Registration start" required formControlName="registrationStart">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="time" matInput placeholder="Time" required formControlName="registrationStartTime">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="date" matInput placeholder="Registration end" required formControlName="registrationEnd">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                            <mat-form-field>
+                                <input autofocus type="time" matInput placeholder="Time" required formControlName="registrationEndTime">
+                            </mat-form-field>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                            <mat-label>Regulations</mat-label>
+                            <input class="form-control b-b" placeholder="file" type="file">
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                            <mat-checkbox formControlName="cardPayment">Card Payment Allowed</mat-checkbox>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                            <quill-editor [style]="{height: '500px'}" formControlName="description"></quill-editor>
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                        </div>
+                        <!-- column -->
+                        <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
+                            <button mat-raised-button color="primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
     </div>
-  </div>
+</div>
