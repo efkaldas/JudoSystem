@@ -72,15 +72,31 @@ const GUEST_MENUITEMS = [
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'competitions', name: 'Competitions', type: 'link', icon: 'av_timer' }
+  { state: '/competitions', name: 'Competitions', type: 'link', icon: 'av_timer' }
 ]
 const COACH_ADMINISTRATOR_MENUITEMS = [
   {
     state: '',
-    name: 'Judokas',
+    name: 'Organization',
     type: 'saperator',
     icon: 'av_timer'
   },
+  { state: '/my-coaches', name: 'My Coaches', type: 'link', icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Coach',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: '/myjudokas', name: 'My Judokas', type: 'link', icon: 'av_timer' },
+  { state: '/judokas/rating', name: 'Judokas Rating', type: 'link', icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Events',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: '/competitions', name: 'Competitions', type: 'link', icon: 'av_timer' },
 ]
 const MENUITEMS = [
   {

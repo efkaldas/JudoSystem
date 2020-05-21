@@ -15,6 +15,7 @@ import { Judoka } from '../../../../data/judoka.data';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
 import { CompetitionsService } from '../../../../services/Competitions.service';
 import { saveAs } from 'file-saver';
+import { Role } from '../../../../data/user-role.enum.data';
 
 @Component({
   selector: 'app-competitions-show',
@@ -27,6 +28,7 @@ export class CompetitionsShowComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  isAdmin = false;
 
   competitions: Competitions;
   errorMessage: string;
@@ -78,6 +80,7 @@ export class CompetitionsShowComponent implements OnInit {
     this.getGenders();
     this.getCompetitions();
     this.formGroup();
+    this.isUserAdmin();
   }
   private formGroup()
   {
@@ -99,7 +102,11 @@ export class CompetitionsShowComponent implements OnInit {
 
     });
   }
-  
+  private isUserAdmin()
+  {
+    if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin))
+      this.isAdmin = true;
+  }
 
   openDialog(templateRef: TemplateRef<any>, element: AgeGroup) {
     this.selectedElement = element;
@@ -385,6 +392,37 @@ export class CompetitionsShowComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+  }
+  public isRegistrationOpened()
+  {
+    let regStart = new Date(this.competitions.registrationStart);
+    let regEnd = new Date(this.competitions.registrationEnd);
+    let currentTime = new Date(Date.now());
+
+    if(regStart > currentTime) {
+      return true;
+    } else if(regEnd < currentTime)  {
+      return true;
+    } else if(regStart < currentTime && regEnd > currentTime)  {
+      return false;
+    }
+  }
+  public stringDate(date) 
+  {
+    return new Date(date);
+  }
+  public registrationStatus() : string {
+    let regStart = new Date(this.competitions.registrationStart);
+    let regEnd = new Date(this.competitions.registrationEnd);
+    let currentTime = new Date(Date.now());
+
+    if(regStart > currentTime) {
+      return "not_started"
+    } else if(regEnd < currentTime)  {
+      return "ended"
+    } else if(regStart < currentTime && regEnd > currentTime)  {
+      return "in_progress"
+    }
   }
   private getCompetitions() {
     return this.competitionsService.get(this.competitionsId)

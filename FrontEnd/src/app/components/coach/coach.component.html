@@ -92,34 +92,29 @@
                     <mat-form-field>
                         <input autofocus type="email" matInput placeholder="Email" required formControlName="email">
                     </mat-form-field>
-                    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
                         <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
-                        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
                         <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
-                        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
                         <input autofocus type="text" matInput placeholder="Phone number" required formControlName="phoneNumber">
-                        <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
                         <input autofocus type="date" matInput placeholder="Birth Date" required formControlName="birthDate">
-                        <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                     </mat-form-field>
                 </div>
 
@@ -132,7 +127,6 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
@@ -140,11 +134,10 @@
                         <mat-label>Select dan/kyu</mat-label>
                         <mat-select formControlName="danKyuId" required>
                             <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
-                                {{danKyu.grade}}
+                                {{danKyu.text}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">

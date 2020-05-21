@@ -9,6 +9,8 @@ import { CustomValidators } from 'ng2-validation';
 import { User } from '../../../data/user.data';
 import { CoachService } from '../../../services/coach.service';
 import { LoginService } from '../../../services/Login.service';
+import { DanKyuService } from '../../../services/dan-kyu.service';
+import { DanKyu } from '../../../data/DanKyu.data';
 
 
 const Password = new FormControl('', Validators.required);
@@ -31,6 +33,7 @@ export class CoachComponent implements OnInit {
   selectedElement: any;
   errorMessage: string;
   message: string;
+  danKyus: DanKyu[];
   coaches: User[];
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<User>;
@@ -39,12 +42,13 @@ export class CoachComponent implements OnInit {
   displayedColumns: string[] = ['position','firstname', 'lastname', 'birthDate', 'gender','email', 'danKyu',
    'phoneNumber', 'status', 'actions'];
 
-  constructor(private loginService: LoginService, private genderService: GenderService, private coachService: CoachService,
+  constructor(private danKyuService: DanKyuService, private loginService: LoginService, private genderService: GenderService, private coachService: CoachService,
      private fb: FormBuilder, private router: Router,public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
     this.getGenders();
+    this.getDanKyus();
     this.getCoaches();
     this.formGroup();
   }
@@ -143,6 +147,14 @@ export class CoachComponent implements OnInit {
     .subscribe(
       data => {
         this.genders = data as any;
+      })
+  }
+  private getDanKyus()
+  {
+    return this.danKyuService.getAll()
+    .subscribe(
+      data => {
+        this.danKyus = data as any;
       })
   }
 

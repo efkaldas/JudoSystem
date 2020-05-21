@@ -31,6 +31,10 @@ export class CompetitionsComponent implements OnInit {
       return "in_progress"
     }
   }
+  public stringDate(date) 
+  {
+    return new Date(date);
+  }
 
   private getCompetitions() {
     return this.competitionsService.getAll()
