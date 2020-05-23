@@ -1,7 +1,7 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
-<div *ngIf="user != null" class="user-profile" style="background: url(assets/images/organizations/{{user.organization.image}}) no-repeat; background-position: center; background-size:cover;">
+<div *ngIf="user != null" class="user-profile" [style.background]="'url(../../../../../../assets/images/organizations/' + user.organization.image + ')'" [style.backgroundSize]="cover" [style.backgroundPosition]="center">
     <!-- User profile image -->
     <div class="profile-img">
         <img src="assets/images/users/{{user.image}}" alt="user"> </div>
@@ -10,18 +10,18 @@
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
     <div class="profile-text">
-        <a [matMenuTriggerFor]="sdprofile" class=""> {{user.firstname}} {{user.lastname}}
-            <i class="ti-angle-down font-12 m-l-5"></i>
+        <a class=""> {{user.firstname}} {{user.lastname}}
+            <!-- <i class="ti-angle-down font-12 m-l-5"></i> -->
         </a>
     </div>
-    <mat-menu #sdprofile="matMenu" class="mymegamenu">
+    <!-- <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
             <mat-icon>account_box</mat-icon> Profile
         </button>
         <button mat-menu-item>
             <mat-icon>exit_to_app</mat-icon> Sign Out
         </button>
-    </mat-menu>
+    </mat-menu> -->
 </div>
 
 <mat-nav-list appAccordion>

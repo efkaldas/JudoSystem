@@ -26,7 +26,7 @@ export class MyJudokasComponent implements OnInit {
   message: string;
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
-  displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'actions'];
+  displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'birthYears', 'danKyu', 'actions'];
 
   constructor(private danKyuService: DanKyuService, private genderService: GenderService, 
     private judokaService: JudokaService, private router: Router, public dialog: MatDialog,

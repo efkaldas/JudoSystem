@@ -28,6 +28,7 @@ import { NotApprovedComponent } from './error/not-approved/not-approved.componen
 import { PermissionDeniedComponent } from './error/permission-denied/permission-denied.component';
 import { LogoutComponent } from './logout/logout.component';
 import { WaitingForApprovementComponent } from './error/waiting-for-approvement/waiting-for-approvement.component';
+import { UserBlockedComponent } from './error/user-blocked/user-blocked.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import { WaitingForApprovementComponent } from './error/waiting-for-approvement/
     RegisterComponent,
     PermissionDeniedComponent,
     NotApprovedComponent,
-    WaitingForApprovementComponent
+    WaitingForApprovementComponent,
+    UserBlockedComponent
   ]
 })
 export class AuthenticationModule {}

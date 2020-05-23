@@ -3,14 +3,16 @@ using System;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    partial class JudoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200523104327_defaultValuesForImages")]
+    partial class defaultValuesForImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -653,15 +655,15 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(1063),
-                            DateCreated = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(2070),
-                            DateUpdated = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(2543),
+                            BirthDate = new DateTime(2020, 5, 23, 13, 43, 26, 830, DateTimeKind.Local).AddTicks(6186),
+                            DateCreated = new DateTime(2020, 5, 23, 13, 43, 26, 830, DateTimeKind.Local).AddTicks(7200),
+                            DateUpdated = new DateTime(2020, 5, 23, 13, 43, 26, 830, DateTimeKind.Local).AddTicks(7714),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             GenderId = 1,
-                            Image = "admin_image.png",
+                            Image = "Admin_Image",
                             Lastname = "Kušlevič",
-                            Password = "AQAAAAEAACcQAAAAEF86PBDmAJBHAtIHm7S+Ku/NcQ6nAAb3N3d3FGuA6kDhzVBv4KnNg+FihTUGJQYTxg==",
+                            Password = "AQAAAAEAACcQAAAAEFJFZH64liHecFIfINW7iBKk25Xz5v1F/OntfRw8ICdAg5MMv3pvdBS6BnD3VrGJLg==",
                             PhoneNumber = "+37060477292",
                             StatusId = 1
                         });

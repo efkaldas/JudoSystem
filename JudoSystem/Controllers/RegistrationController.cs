@@ -54,12 +54,13 @@ namespace JudoSystem.Controllers
             {
                 user.UserRoles.Add(new UserRole { RoleId = Role.COACH });
             }
-            else if(user.Organization.OrganizationTypeId == Organization.TYPE_CLUB)
+            else if(user.Organization.OrganizationTypeId == Organization.TYPE_JUDGE_ASSOCIATION)
             {
                 user.UserRoles.Add(new UserRole { RoleId = Role.JUDGE });
             }
 
             user.BirthDate = user.BirthDate.Date;
+            user.Organization.ShortName = user.Organization.ExactName;
             db.Organization.Create(user.Organization);
             db.User.Create(user);
             db.Save();

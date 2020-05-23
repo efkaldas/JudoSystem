@@ -45,7 +45,7 @@ export const AppRoutes: Routes = [
         data: {title: 'Coaches', roles: [Role.Admin, Role.Organization_Admin]}
       },
       {
-        path: 'coaches',
+        path: 'users',
         component: UserCoachesComponent,
         canActivate: [AuthGuard],
         data: {title: 'Coaches', roles: [Role.Admin]}

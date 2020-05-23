@@ -48,6 +48,7 @@ const ADMIN_MENUITEMS = [
   { state: '/pending-users', name: 'Pending users', type: 'link', icon: 'av_timer' },
   { state: '/users', name: 'Users list', type: 'link', icon: 'av_timer' },
   { state: '/my-coaches', name: 'My Coaches', type: 'link', icon: 'av_timer' },
+  { state: '/organizations', name: 'Organizations', type: 'link', icon: 'av_timer' },
   {
     state: '',
     name: 'Coach',
@@ -82,6 +83,23 @@ const COACH_ADMINISTRATOR_MENUITEMS = [
     icon: 'av_timer'
   },
   { state: '/my-coaches', name: 'My Coaches', type: 'link', icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Coach',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: '/myjudokas', name: 'My Judokas', type: 'link', icon: 'av_timer' },
+  { state: '/judokas/rating', name: 'Judokas Rating', type: 'link', icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Events',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: '/competitions', name: 'Competitions', type: 'link', icon: 'av_timer' },
+];
+const COACH_MENUITEMS = [
   {
     state: '',
     name: 'Coach',
@@ -328,5 +346,8 @@ export class MenuItems extends LoginService {
   }
   getAdminMenuitem(): Menu[] {
     return ADMIN_MENUITEMS;
+  }
+  getCoachMenuitem(): Menu[] {
+    return COACH_MENUITEMS;
   }
 }

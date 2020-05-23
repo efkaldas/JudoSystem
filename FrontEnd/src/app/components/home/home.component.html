@@ -1,13 +1,15 @@
-
-    <mat-card class="main-card">
-        <mat-card-content> 
-            <mat-card-title>
-                <h1 align="center">Welcome to the judo competitions organization system</h1>
-                <p align="center">To fully use system you should sign in first.</p>
-                <button align="center" type="submit" mat-raised-button color="primary">Accept</button>
-                <button align="center" type="submit" mat-raised-button color="primary">Accept</button>
-            </mat-card-title>
-        </mat-card-content> 
-    </mat-card>
-
-
+<mat-card class="main-card">
+    <mat-card-content>
+        <mat-card-title>
+            <h1 align="center">Welcome to the judo competitions organization system</h1>
+            <p *ngIf="!isLoggedIn()" align="center">In order to use system, you should sign in first.</p>
+            <br>
+            <div class="container">
+                <div class="center" *ngIf="!isLoggedIn()">
+                    <button style="margin-right:15px; padding-left: 22px; padding-right: 22px" routerLink="/authentication/login" mat-raised-button color="accent">Sign In</button>
+                    <button mat-raised-button color="primary" routerLink="/authentication/register">Register</button>
+                </div>
+            </div>
+        </mat-card-title>
+    </mat-card-content>
+</mat-card>

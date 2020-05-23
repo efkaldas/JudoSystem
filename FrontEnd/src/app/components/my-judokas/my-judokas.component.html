@@ -145,10 +145,9 @@
 
 <ng-template #deleteJudokaModal>
     <h1 mat-dialog-title>Are you sure you want to delete?</h1>
-    <div mat-dialog-content>
-        <div mat-dialog-actions>
-            <button type="submit" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
-            <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-        </div>
+    <br>
+    <div mat-dialog-content class="center">
+        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
+        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
     </div>
 </ng-template>

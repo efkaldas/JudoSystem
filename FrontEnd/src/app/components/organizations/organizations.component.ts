@@ -43,8 +43,7 @@ export class OrganizationsComponent implements OnInit {
       organizationTypeId: this.selectedElement.organizationType.id,
     });
   }
-
-  public updateOrganization()
+  public update()
   {
     if(this.organizationForm.valid)    
     {

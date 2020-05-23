@@ -9,67 +9,65 @@
     </ng-container>
     <!-- Position Column -->
     <ng-container matColumnDef="exactName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Exact Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.exactName}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Exact Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.exactName}} </td>
     </ng-container>
-  
+
     <!-- Name Column -->
     <ng-container matColumnDef="shortName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Short Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.shortName}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Short Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.shortName}} </td>
     </ng-container>
-  
+
     <!-- Weight Column -->
     <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
-      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+        <td mat-cell *matCellDef="let element"> {{element.country}} </td>
     </ng-container>
 
     <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.city}}, {{element.address}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.city}}, {{element.address}} </td>
     </ng-container>
 
     <ng-container matColumnDef="phoneNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
-      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-      <td mat-cell *matCellDef="let element"> {{element.organizationType.typeNameEN}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.organizationType.typeNameEN}} </td>
     </ng-container>
 
-        <!-- Symbol Column -->
+    <!-- Symbol Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
-      <td mat-cell *matCellDef="let element"> 
-        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-          <div fxFlex="100px">
-                <button mat-raised-button (click)="openDialog(updateOrganization, element)" color="accent"><mat-icon>edit</mat-icon> Update </button>
-              </div>
- 
+        <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+                <div fxFlex="100px">
+                    <button mat-raised-button (click)="openDialog(updateOrganization, element)" color="accent"><mat-icon>edit</mat-icon> Update </button>
+                </div>
+
             </div>
-      </td>
+        </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+</table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #updateOrganization>
     <h1 mat-dialog-title>Update Short Name</h1>
-  <div mat-dialog-content>
-    <form  [formGroup]="organizationForm" novalidate (ngSubmit)="updateOrganization()" color="accent">
-        <mat-form-field>
-            <input autofocus type="text" matInput placeholder="Short Name" required formControlName="shortName">
-          </mat-form-field>
-        <div mat-dialog-actions>
-            <button type="submit" mat-raised-button color="primary">Accept</button>
+    <div mat-dialog-content>
+        <form [formGroup]="organizationForm" novalidate (ngSubmit)="update()" color="accent">
+            <mat-form-field>
+                <input autofocus type="text" matInput placeholder="Short Name" formControlName="shortName">
+            </mat-form-field>
+            <button type="submit" style="margin-right: 15px;" mat-raised-button color="primary">Accept</button>
             <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-        </div>
-    </form>
-  </div>
-  </ng-template>
+        </form>
+    </div>
+</ng-template>
