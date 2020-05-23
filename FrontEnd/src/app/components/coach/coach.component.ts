@@ -9,13 +9,10 @@ import { CustomValidators } from 'ng2-validation';
 import { User } from '../../../data/user.data';
 import { CoachService } from '../../../services/coach.service';
 import { LoginService } from '../../../services/Login.service';
-<<<<<<< HEAD
 import { DanKyu } from '../../../data/DanKyu.data';
 import { DanKyuService } from '../../../services/dan-kyu.service';
-=======
-import { DanKyuService } from '../../../services/dan-kyu.service';
-import { DanKyu } from '../../../data/DanKyu.data';
->>>>>>> 6ccc7aa7784679dd6bec532329a96e832cfd7f9b
+
+
 
 
 const Password = new FormControl('', Validators.required);
@@ -39,7 +36,6 @@ export class CoachComponent implements OnInit {
   selectedElement: any;
   errorMessage: string;
   message: string;
-  danKyus: DanKyu[];
   coaches: User[];
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<User>;
