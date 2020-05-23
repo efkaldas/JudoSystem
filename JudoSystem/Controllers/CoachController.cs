@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using JudoSystem.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -72,7 +73,6 @@ namespace JudoSystem.Controllers
                     .ThenInclude(x => x.Gender)
                 .Include(x => x.Judokas)
                     .ThenInclude(x => x.DanKyu)
-                .Include(x => x.ParentUser)
                 .Include(x => x.Organization.OrganizationType)
                 .FirstOrDefault();
 
@@ -88,6 +88,8 @@ namespace JudoSystem.Controllers
             User user = db.User.FindByCondition(x => x.Id == userId).Include(x => x.Organization).FirstOrDefault();
             coach.OrganizationId = user.Organization.Id;
             coach.ParentUserId = user.Id;
+            coach.Password = StringHelper.HashPassword(coach.Password);
+            user.UserRoles.Add(new UserRole { RoleId = Role.COACH });
             db.User.Create(coach);
             db.Save();
             return Ok();

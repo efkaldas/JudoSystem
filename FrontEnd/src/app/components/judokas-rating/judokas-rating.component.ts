@@ -38,6 +38,7 @@ export class JudokasRatingComponent implements OnInit {
             this.source = new MatTableDataSource(this.maleJudokas);
             this.source.sort = this.sort;
             this.source.paginator = this.paginator;
+            console.log(this.maleJudokas);
           } else if(gender == 2) {
             this.femaleJudokas = data as Judoka[];
             this.source = new MatTableDataSource(this.femaleJudokas);

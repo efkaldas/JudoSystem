@@ -45,31 +45,25 @@ const ADMIN_MENUITEMS = [
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'pending-users', name: 'Pending users', type: 'link', icon: 'av_timer' },
-  { state: 'users', name: 'Users list', type: 'link', icon: 'av_timer' },
+  { state: '/pending-users', name: 'Pending users', type: 'link', icon: 'av_timer' },
+  { state: '/users', name: 'Users list', type: 'link', icon: 'av_timer' },
+  { state: '/my-coaches', name: 'My Coaches', type: 'link', icon: 'av_timer' },
   {
     state: '',
     name: 'Coach',
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'myjudokas', name: 'My Judokas', type: 'link', icon: 'av_timer' },
+  { state: '/myjudokas', name: 'My Judokas', type: 'link', icon: 'av_timer' },
+  { state: '/judokas/rating', name: 'Judokas Rating', type: 'link', icon: 'av_timer' },
   {
     state: '',
     name: 'Events',
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'competitions', name: 'Competitions', type: 'link', icon: 'av_timer' },
-  { state: 'new-competitions', name: 'New Competitions', type: 'link', icon: 'av_timer' },
-  // { state: 'competitions', 
-  //   name: 'Competitions', 
-  //   type: 'sub', 
-  //   icon: 'av_timer',
-  //   children: [
-  //     { state: '', name: 'Competitions', type: 'link' },
-  //     { state: 'new-competitions', name: 'New Competitions', type: 'link' }
-  //   ] },
+  { state: '/competitions', name: 'Competitions', type: 'link', icon: 'av_timer' },
+  { state: '/new-competitions', name: 'New Competitions', type: 'link', icon: 'av_timer' }
 ]
 const GUEST_MENUITEMS = [
   {
@@ -78,15 +72,31 @@ const GUEST_MENUITEMS = [
     type: 'saperator',
     icon: 'av_timer'
   },
-  { state: 'competitions', name: 'Competitions', type: 'link', icon: 'av_timer' }
+  { state: '/competitions', name: 'Competitions', type: 'link', icon: 'av_timer' }
 ]
 const COACH_ADMINISTRATOR_MENUITEMS = [
   {
     state: '',
-    name: 'Judokas',
+    name: 'Organization',
     type: 'saperator',
     icon: 'av_timer'
   },
+  { state: '/my-coaches', name: 'My Coaches', type: 'link', icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Coach',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: '/myjudokas', name: 'My Judokas', type: 'link', icon: 'av_timer' },
+  { state: '/judokas/rating', name: 'Judokas Rating', type: 'link', icon: 'av_timer' },
+  {
+    state: '',
+    name: 'Events',
+    type: 'saperator',
+    icon: 'av_timer'
+  },
+  { state: '/competitions', name: 'Competitions', type: 'link', icon: 'av_timer' },
 ]
 const MENUITEMS = [
   {
