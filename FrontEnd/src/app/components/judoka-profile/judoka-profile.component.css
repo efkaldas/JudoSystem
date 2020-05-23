@@ -14,3 +14,7 @@ table {
     margin-right: 40px;
     margin-top: 20px;
 }
+
+a {
+    color: inherit;
+}

@@ -4,7 +4,7 @@
             <mat-card-content>
                 <mat-card-title>
                     <div class="text-center">
-                        <img alt="homepage" src="assets/images/logo-icon.png">
+                        <img height="200" alt="homepage" src="assets/images/logo-icon.png">
                         <h4 class="m-t-0">Registration</h4>
                     </div>
                 </mat-card-title>
@@ -142,10 +142,10 @@
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['address'].hasError('required')" class="text-danger support-text">You must include an address.</small>
                                 </div>
-                                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <!-- <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-checkbox class="font-14">I agree to the all
                                         <a href="javascript:void(0)" class="link text-info">terms</a>.</mat-checkbox>
-                                </div>
+                                </div> -->
                                 <div>
                                     <button mat-raised-button color="accent" matStepperPrevious>Back</button>
                                 </div>

@@ -413,6 +413,12 @@ export class CompetitionsShowComponent implements OnInit {
   {
     return new Date(date);
   }
+  public isLoggedIn()
+  {
+    if(this.ageGroupService.isLoggedIn())
+      return true;
+    else return false
+  }
   public registrationStatus() : string {
     let regStart = new Date(this.competitions.registrationStart);
     let regEnd = new Date(this.competitions.registrationEnd);

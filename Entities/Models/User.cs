@@ -39,8 +39,8 @@ namespace Entities.Models
         public DanKyu DanKyu { get; set; }
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
-        [Column(TypeName = "VARCHAR(1056)")]
-        [StringLength(1056)]
+        [Column(TypeName = "VARCHAR(250)")]
+        [StringLength(250)]
         public string Image { get; set; }
         public int StatusId { get; set; }
         public UserStatus Status { get; set; }

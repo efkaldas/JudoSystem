@@ -9,6 +9,7 @@ import { PermissionDeniedComponent } from './error/permission-denied/permission-
 import { NotApprovedComponent } from './error/not-approved/not-approved.component';
 import { LogoutComponent } from './logout/logout.component';
 import { WaitingForApprovementComponent } from './error/waiting-for-approvement/waiting-for-approvement.component';
+import { UserBlockedComponent } from './error/user-blocked/user-blocked.component';
 export const AuthenticationRoutes: Routes = [
   {
     path: '',
@@ -28,6 +29,10 @@ export const AuthenticationRoutes: Routes = [
       {
         path: 'permission-denied',
         component: PermissionDeniedComponent
+      },
+      {
+        path: 'user-blocked',
+        component: UserBlockedComponent
       },
       {
         path: 'forgot',

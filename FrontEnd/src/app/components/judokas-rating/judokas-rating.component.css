@@ -18,3 +18,7 @@ table {
     width: 115px!important;
     min-width: unset!important;
 }
+
+a {
+    color: inherit;
+}

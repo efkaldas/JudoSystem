@@ -3,14 +3,16 @@ using System;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    partial class JudoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200523104234_changeOrganizationImageType")]
+    partial class changeOrganizationImageType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -441,10 +443,8 @@ namespace Entities.Migrations
                         .HasMaxLength(250);
 
                     b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250)
-                        .HasDefaultValue("no_organization_image.png");
+                        .HasMaxLength(250);
 
                     b.Property<int>("OrganizationTypeId")
                         .HasColumnType("int");
@@ -601,10 +601,8 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250)
-                        .HasDefaultValue("no_user_image.png");
+                        .HasMaxLength(250);
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -653,15 +651,15 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(1063),
-                            DateCreated = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(2070),
-                            DateUpdated = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(2543),
+                            BirthDate = new DateTime(2020, 5, 23, 13, 42, 34, 76, DateTimeKind.Local).AddTicks(3361),
+                            DateCreated = new DateTime(2020, 5, 23, 13, 42, 34, 76, DateTimeKind.Local).AddTicks(4366),
+                            DateUpdated = new DateTime(2020, 5, 23, 13, 42, 34, 76, DateTimeKind.Local).AddTicks(4848),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             GenderId = 1,
-                            Image = "admin_image.png",
+                            Image = "Admin_Image",
                             Lastname = "Kušlevič",
-                            Password = "AQAAAAEAACcQAAAAEF86PBDmAJBHAtIHm7S+Ku/NcQ6nAAb3N3d3FGuA6kDhzVBv4KnNg+FihTUGJQYTxg==",
+                            Password = "AQAAAAEAACcQAAAAEE4KcWYLR1m0Wr5orYJESDnWXqIZlSTi2r3ZZ97JBnRVRnnuuLTv77hSzrR/v1j5+Q==",
                             PhoneNumber = "+37060477292",
                             StatusId = 1
                         });

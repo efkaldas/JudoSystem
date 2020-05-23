@@ -1,15 +1,20 @@
-.title > ::ng-deep figure {
+.title> ::ng-deep figure {
     justify-content: flex-start !important;
 }
+
 table {
     width: 100%;
-  }
-  
-  .mat-header-cell {
+}
+
+.mat-header-cell {
     text-align: center;
-  }
-  .edit-button
-  {
+}
+
+.edit-button {
     margin-right: 40px;
     margin-top: 20px;
-  }
+}
+
+a {
+    color: inherit;
+}

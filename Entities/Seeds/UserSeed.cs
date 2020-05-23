@@ -21,7 +21,7 @@ namespace Entities.Seeds
                         Lastname = "Kušlevič",
                         OrganizationId = null,
                         DanKyuId = null,
-                        Image = "Admin_Image",
+                        Image = "admin_image.png",
                         Email = "judosystem.info@gmail.com",
                         PhoneNumber = "+37060477292",
                         StatusId = UserStatus.STATUS_APPROVED,

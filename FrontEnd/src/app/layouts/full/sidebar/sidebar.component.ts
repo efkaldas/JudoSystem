@@ -72,8 +72,11 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
     if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Admin)) {
       return this.menuItems.getAdminMenuitem();
     }
-    else if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Coach)) {
+    else if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Organization_Admin)) {
       return this.menuItems.getOrganizationAdminMenuitem();
+    }
+    else if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Coach)) {
+      return this.menuItems.getCoachMenuitem();
     }
     else {
       return this.menuItems.getGuestMenuitem();

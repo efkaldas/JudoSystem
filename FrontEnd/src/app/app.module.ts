@@ -92,7 +92,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	OrganizationsComponent,
 	CompetitionsMyCompetitorsComponent,
 	JudokaProfileComponent,
-	JudokasRatingComponent
+	JudokasRatingComponent,
   ],
   imports: [
     BrowserModule,

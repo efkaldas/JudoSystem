@@ -86,10 +86,11 @@ namespace JudoSystem.Controllers
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
             User user = db.User.FindByCondition(x => x.Id == userId).Include(x => x.Organization).FirstOrDefault();
+            coach.UserRoles = new List<UserRole>();
             coach.OrganizationId = user.Organization.Id;
             coach.ParentUserId = user.Id;
             coach.Password = StringHelper.HashPassword(coach.Password);
-            user.UserRoles.Add(new UserRole { RoleId = Role.COACH });
+            coach.UserRoles.Add(new UserRole { RoleId = Role.COACH });
             db.User.Create(coach);
             db.Save();
             return Ok();

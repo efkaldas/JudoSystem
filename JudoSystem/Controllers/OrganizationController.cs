@@ -39,6 +39,7 @@ namespace JudoSystem.Controllers
         public IActionResult Put(int id, [FromBody] Organization value)
         {
             db.Organization.Update(value);
+            db.Save();
             return Ok();
         }
     }
