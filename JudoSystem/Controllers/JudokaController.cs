@@ -47,7 +47,7 @@ namespace JudoSystem.Controllers
                         .ThenInclude(x => x.Organization).ToList();
 
 
-            return Ok(judokas.OrderBy(x => x.Points));
+            return Ok(judokas.OrderByDescending(x => x.Points));
         }
 
 

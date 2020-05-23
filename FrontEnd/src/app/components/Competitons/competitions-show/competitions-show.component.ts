@@ -167,6 +167,7 @@ export class CompetitionsShowComponent implements OnInit {
   }
   public getWeightResults($event)
   {
+    console.log(this.ageGroupIdresult);
     let weightCategoryId = this.competitions.ageGroups[this.ageGroupIdresult].weightCategories.find(x => x.title == $event.tab.textLabel).id;
     return this.weightCategorySerivce.getResults(weightCategoryId)
       .subscribe(
@@ -368,6 +369,7 @@ export class CompetitionsShowComponent implements OnInit {
   {
     let selectedGroup = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel);
     this.ageGroupIdresult = this.competitions.ageGroups.indexOf(selectedGroup);
+    console.log(this.ageGroupIdresult);
   }
   public getCompetitors($event) {
    this.weightCategoryId = this.competitions.ageGroups[this.ageGroupId].weightCategories.find(x => x.title == $event.tab.textLabel).id;
