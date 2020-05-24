@@ -60,6 +60,7 @@ import { OrganizationService } from '../services/organization.service';
 import { CompetitionsMyCompetitorsComponent } from './components/Competitons/competitions-my-competitors/competitions-my-competitors.component';
 import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
 import { JudokasRatingComponent } from './components/judokas-rating/judokas-rating.component';
+import { MyContestantsExportComponent } from './components/Competitons/competitions-show/my-contestants-export/my-contestants-export.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,

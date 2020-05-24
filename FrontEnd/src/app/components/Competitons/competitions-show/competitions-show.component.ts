@@ -156,6 +156,22 @@ export class CompetitionsShowComponent implements OnInit {
       this.openSnackBar("Please select category", 'CLOSE');
     }
   }
+  public deletionConfirm()
+  {
+    return this.ageGroupService.delete(this.selectedElement.id)
+      .subscribe(
+        data => {
+          this.openSnackBar("Age Group has been removed", 'CLOSE');
+          this.getCompetitions();
+          this.onNoClick();
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+      );
+  }
   public cancelRegistration(element: any)
   {
     return this.weightCategorySerivce.deleteCompetitor(element.weightCategories[0].weightCategoryId, element)
@@ -252,7 +268,7 @@ export class CompetitionsShowComponent implements OnInit {
         data => {
           this.openSnackBar("New age group has been created", 'CLOSE');
           this.categories = [];
-    //      this.getJudokas();
+          this.getCompetitions();
           this.onNoClick();
         },
         error => {

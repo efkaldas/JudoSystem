@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Competitions } from '../../../../data/competitions.data';
 import { CompetitionsService } from '../../../../services/Competitions.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { Role } from '../../../../data/user-role.enum.data';
 
 @Component({
   selector: 'app-competitions',
@@ -11,12 +13,51 @@ export class CompetitionsComponent implements OnInit {
 
   public competitions : Competitions[];
   public errorMessage: string;
+  selectedElement: number;
+  isAdmin = false;
 
 
-  constructor(private competitionsService: CompetitionsService) { }
+  constructor(private competitionsService: CompetitionsService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getCompetitions();
+    this.isUserAdmin();
+  }
+  openDialog(templateRef: TemplateRef<any>, element: number) {
+    this.selectedElement = element;
+    this.dialog.open(templateRef);
+  }
+  onNoClick(){
+    this.selectedElement = null;
+    this.dialog.closeAll()
+  }
+  private isUserAdmin()
+  {
+    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin))
+      this.isAdmin = true;
+  }
+  public openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+   //   horizontalPosition: 'end',
+    });
+  }
+  public deletionConfirm()
+  {
+    return this.competitionsService.delete(this.selectedElement)
+      .subscribe(
+        data => {
+          this.openSnackBar("Competitions has been removed", 'CLOSE');
+          this.getCompetitions();
+          this.onNoClick();
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+      );
   }
   public registrationStatus(competition: Competitions) : string {
     let regStart = new Date(competition.registrationStart);

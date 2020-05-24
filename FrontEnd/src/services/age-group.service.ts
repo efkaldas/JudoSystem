@@ -28,4 +28,7 @@ export class AgeGroupService extends LoginService {
   create(ageGroup: AgeGroup) {
     return this.http.post(this.ageGroupUrl, ageGroup); 
   } 
+  delete(id: number) {
+    return this.http.delete(this.ageGroupUrl + id); 
+  } 
 }

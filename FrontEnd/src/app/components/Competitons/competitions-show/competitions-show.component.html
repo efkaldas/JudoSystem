@@ -17,7 +17,7 @@
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-                            <h4><b>Date: </b> {{competitions.competitionsDate}}</h4>
+                            <h4><b>Date: </b>Registration starts: {{stringDate(competitions.competitionsDate) | date:'yyyy/MM/dd h:mm'}}</h4>
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
@@ -124,37 +124,40 @@
                                     <mat-tab-group (selectedTabChange)="getTabRecords($event)">
                                         <mat-tab *ngFor="let ageGroup of competitions.ageGroups" label="{{ageGroup.title}}">
                                             <mat-card-content *ngIf="isLoggedIn()">
+                                                <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
+                                                    <button mat-raised-button (click)="openDialog(deleteModal, ageGroup)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
+                                                </div> <br/>
                                                 <table mat-table matSort [dataSource]="dataSource " class="mat-elevation-z8 ">
 
-                                                    <ng-container matColumnDef="position ">
+                                                    <ng-container matColumnDef="position">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
                                                         <td mat-cell *matCellDef="let element; let i=i ndex ">{{i+1}}</td>
                                                     </ng-container>
                                                     <!-- Position Column -->
-                                                    <ng-container matColumnDef="firstname ">
+                                                    <ng-container matColumnDef="firstname">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
                                                         <td mat-cell *matCellDef="let element "><a fxFlexFill [routerLink]=" '/judoka/'+element.id " class="mat-row-link ">{{element.firstname}}</a> </td>
                                                     </ng-container>
 
                                                     <!-- Name Column -->
-                                                    <ng-container matColumnDef="lastname ">
+                                                    <ng-container matColumnDef="lastname">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
                                                         <td mat-cell *matCellDef="let element "><a fxFlexFill [routerLink]=" '/judoka/'+element.id " class="mat-row-link ">{{element.lastname}}</a> </td>
                                                     </ng-container>
 
                                                     <!-- Symbol Column -->
-                                                    <ng-container matColumnDef="birthYears ">
+                                                    <ng-container matColumnDef="birthYears">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
                                                         <td mat-cell *matCellDef="let element "> {{element.birthYears}} </td>
                                                     </ng-container>
 
                                                     <!-- Weight Column -->
-                                                    <ng-container matColumnDef="gender ">
+                                                    <ng-container matColumnDef="gender">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
                                                         <td mat-cell *matCellDef="let element "> {{element.gender.textEN}} </td>
                                                     </ng-container>
 
-                                                    <ng-container matColumnDef="status ">
+                                                    <ng-container matColumnDef="status">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                                                         <td mat-cell *matCellDef="let element ">
                                                             <div style="color:red " *ngIf="element.weightCategories.length < 1 ">Not Registered </div>
@@ -489,5 +492,13 @@
                 </div>
             </div>
         </form>
+    </div>
+</ng-template>
+<ng-template #deleteModal>
+    <h1 mat-dialog-title>Are you sure you want to delete?</h1>
+    <br>
+    <div mat-dialog-content class="center">
+        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
+        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
     </div>
 </ng-template>

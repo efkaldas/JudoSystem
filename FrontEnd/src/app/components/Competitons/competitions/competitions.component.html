@@ -1,11 +1,14 @@
 <div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let competition of competitions">
     <!-- column -->
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card [routerLink]="'/competitions/'+competition.id">
+        <mat-card>
             <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
+                    <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
+                </div>   
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start wrap" calss="row-height">
-                    <h1>{{competition.title}}</h1>
+                    <a [routerLink]="'/competitions/'+competition.id"><h1>{{competition.title}}</h1></a>
                 </div>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start start" calss="row-height">
@@ -24,4 +27,12 @@
             </mat-card-content>
         </mat-card>
     </div>
+    <ng-template #deleteModal>
+        <h1 mat-dialog-title>Are you sure you want to delete?</h1>
+        <br>
+        <div mat-dialog-content class="center">
+            <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
+            <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+        </div>
+    </ng-template>
 </div>

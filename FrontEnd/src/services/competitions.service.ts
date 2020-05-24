@@ -25,6 +25,9 @@ export class CompetitionsService extends LoginService {
   update(id: number, competitions: Competitions) {
     return this.http.put(this.competitionsUrl + id, competitions); 
   } 
+  delete(id: number) {
+    return this.http.delete(this.competitionsUrl + id); 
+  } 
   create(competitions: Competitions) {
     return this.http.post(this.competitionsUrl, competitions); 
   }
