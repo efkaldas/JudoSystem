@@ -1,9 +1,11 @@
 using ActionFilters.Filters;
 using Contracts.Interfaces;
+using Entities;
 using Entities.Models;
 using JudoSystem.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -55,6 +57,11 @@ namespace JudoSystem
             if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("Staging"))
             {
                 app.UseExceptionHandler("/Error");
+            }
+
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<JudoDbContext>().Database.Migrate();
             }
 
             app.UseStaticFiles();
