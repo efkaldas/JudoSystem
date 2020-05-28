@@ -20,6 +20,8 @@ export class AgeGroupService extends LoginService {
     return this.http.get(this.ageGroupUrl + id + this.weightCategoryUrl); 
   }  
   getJudokasToRegister(id: number) {
+    console.log(id);
+    console.log("asdasdasssssssssssssssssssssssssssssssssssssssdasd");
     return this.http.get(this.ageGroupUrl + id + this.judokasToRegisterUrl); 
   } 
   update(id: number, ageGroup: AgeGroup) {

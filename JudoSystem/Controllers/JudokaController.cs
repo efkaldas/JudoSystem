@@ -64,6 +64,18 @@ namespace JudoSystem.Controllers
             return Ok(judoka);
         }
         // GET: api/Judoka/5
+        [HttpGet("{id}/History", Name = "GetJudokaHistory")]
+        [Authorize]
+        public IActionResult GetHistory(int id)
+        {
+            List<CompetitionsResults> results = db.CompetitionsResults.FindByCondition(x => x.JudokaId == id)
+                .Include(x => x.WeightCategory)
+                    .ThenInclude(x => x.AgeGroup)
+                        .ThenInclude(x => x.Competitions).ToList();
+
+            return Ok(results);
+        }
+        // GET: api/Judoka/5
         [HttpGet("MyJudokas", Name = "MyJudokas")]
         [Authorize(Roles = "Admin, Coach")]
         public IActionResult GetMyJudokas()

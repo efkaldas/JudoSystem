@@ -4,11 +4,14 @@
         <mat-card>
             <mat-card-content>
                 <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
-                    <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
-                </div>   
+                    <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
+                    <button style="margin-left: 20px" mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
+                </div>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start wrap" calss="row-height">
-                    <a [routerLink]="'/competitions/'+competition.id"><h1>{{competition.title}}</h1></a>
+                    <a [routerLink]="'/competitions/'+competition.id">
+                        <h1>{{competition.title}}</h1>
+                    </a>
                 </div>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start start" calss="row-height">

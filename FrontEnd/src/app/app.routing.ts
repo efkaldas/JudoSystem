@@ -26,11 +26,13 @@ export const AppRoutes: Routes = [
       {
         path: '',
         redirectTo: '/home',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        data: {title: 'Home'}
       },
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        data: {title: 'Home'}
       },
       {
         path: 'myjudokas',

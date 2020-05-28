@@ -32,13 +32,14 @@ namespace JudoSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.ConfigureAuthentication(Configuration);
             services.ConfigureCors(MyAllowSpecificOrigins);
             services.ConfigureMySql(Configuration);
             services.ConfigureRepositoryWrapper();
             services.ConfigureSwagger();
+            services.AddMvc().AddNewtonsoftJson();
             services.ConfigureLoggerService();
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

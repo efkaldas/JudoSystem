@@ -8,6 +8,7 @@ import { DanKyuService } from '../../../services/dan-kyu.service';
 import { GenderService } from '../../../services/gender.service';
 import { DanKyu } from '../../../data/DanKyu.data';
 import { Gender } from '../../../data/gender.data';
+import { Role } from '../../../data/user-role.enum.data';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
   genders: Gender[];
   errorMessage: string;
   public userEditForm: FormGroup;
+  isAdmin = false;
   
   constructor(private danKyuService: DanKyuService,private genderService: GenderService, private userService: UserService,
      private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog) { }
@@ -33,6 +35,12 @@ export class ProfileComponent implements OnInit {
     this.getUser();
     this.getDanKyus();
     this.getGenders();
+    this.isOrganizationAdminOrAdmin()
+  }
+  private isOrganizationAdminOrAdmin()
+  {
+   if(this.danKyuService.getUser() != null && this.danKyuService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin ||  x.role.roleNameEN == Role.Organization_Admin))
+      this.isAdmin = true;
   }
   private formEditGroup()
   {

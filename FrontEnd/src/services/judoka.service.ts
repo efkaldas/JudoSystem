@@ -8,6 +8,7 @@ export class JudokaService extends LoginService {
     protected judokaUrl : string = environment.apiHost+"/Judoka/";
     protected myJudokasUrl : string = "MyJudokas";
     protected byRankUrl : string = "ByRank";
+    protected historyUrl : string = "/History";
 
     get(id: number) {
       return this.http.get(this.judokaUrl + id); 
@@ -20,6 +21,9 @@ export class JudokaService extends LoginService {
     }
     getByRank(id: number) {
       return this.http.get(this.judokaUrl + this.byRankUrl, {params: { genderId: id.toString() }}) ; 
+    }
+    getJudokasHistory(id: number) {
+      return this.http.get(this.judokaUrl + id + this.historyUrl) ; 
     }
     delete(id: number) {
       return this.http.delete(this.judokaUrl + id); 

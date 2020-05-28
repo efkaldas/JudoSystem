@@ -31,7 +31,7 @@ namespace JudoSystem.Extensions
                 options.AddPolicy(myAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("https://localhost:44340")
+                        builder
                             .AllowAnyOrigin()
                             .AllowAnyHeader()
                             .AllowAnyMethod();

@@ -17,7 +17,7 @@
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-                            <h4><b>Date: </b>Registration starts: {{stringDate(competitions.competitionsDate) | date:'yyyy/MM/dd h:mm'}}</h4>
+                            <h4><b>Date: </b>{{stringDate(competitions.competitionsDate) | date:'yyyy/MM/dd h:mm'}}</h4>
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
@@ -121,17 +121,18 @@
                                             </div>
                                         </mat-card-title>
                                     </mat-card-content>
-                                    <mat-tab-group (selectedTabChange)="getTabRecords($event)">
+                                    <mat-tab-group [selectedIndex]="0" (selectedTabChange)="getTabRecords($event)">
                                         <mat-tab *ngFor="let ageGroup of competitions.ageGroups" label="{{ageGroup.title}}">
                                             <mat-card-content *ngIf="isLoggedIn()">
                                                 <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
-                                                    <button mat-raised-button (click)="openDialog(deleteModal, ageGroup)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
+                                                    <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
+                                                    <button style="margin-left: 20px" mat-raised-button (click)="openDialog(deleteModal, ageGroup)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
                                                 </div> <br/>
                                                 <table mat-table matSort [dataSource]="dataSource " class="mat-elevation-z8 ">
 
                                                     <ng-container matColumnDef="position">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                                                        <td mat-cell *matCellDef="let element; let i=i ndex ">{{i+1}}</td>
+                                                        <td mat-cell *matCellDef="let element; let i=index ">{{i+1}}</td>
                                                     </ng-container>
                                                     <!-- Position Column -->
                                                     <ng-container matColumnDef="firstname">
@@ -193,10 +194,10 @@
                                                         <td mat-cell *matCellDef="let element">
                                                             <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
                                                                 <div xFlex="100px" *ngIf="element.weightCategories.length < 1">
-                                                                    <button class="button" [disabled]="isRegistrationOpened" mat-raised-button (click)="registerCompetitor(element)" color="accent"><mat-icon>check</mat-icon> Register </button>
+                                                                    <button class="button" [disabled]="isRegistrationOpened()" mat-raised-button (click)="registerCompetitor(element)" color="accent"><mat-icon>check</mat-icon> Register </button>
                                                                 </div>
                                                                 <div xFlex="100px" *ngIf="element.weightCategories.length > 0">
-                                                                    <button class="button" [disabled]="isRegistrationOpened" mat-raised-button (click)="cancelRegistration(element)" color="warn"><mat-icon>clear</mat-icon> Cancel </button>
+                                                                    <button class="button" [disabled]="isRegistrationOpened()" mat-raised-button (click)="cancelRegistration(element)" color="warn"><mat-icon>clear</mat-icon> Cancel </button>
                                                                 </div>
                                                             </div>
                                                         </td>

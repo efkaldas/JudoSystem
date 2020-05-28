@@ -328,6 +328,7 @@ export class CompetitionsShowComponent implements OnInit {
   }
   public getTabRecords($event)
   {
+    console.log("asdasdasdasdasd");
     this.ageGroupId = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel).id;
     this.getJudokasToRegister();
   }
