@@ -47,6 +47,7 @@ export class CoachShowComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.userImage = require("../../../assets/images/users/" + this.coach.image);
           this.organizationlogo = require("../../../assets/images/organizations/" + this.coach.organization.image);
+          console.log(this.organizationlogo);
         },
         error => {
           this.errorMessage = error["error"].message;

@@ -2,6 +2,7 @@
 using Entities.Models;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,57 +43,65 @@ namespace JudoSystem.Services
         private List<CompetitionsResults> GetResults(List<string> pages, Competitions competitions, IRepositoryWrapper db)
         {
             List<CompetitionsResults> result = new List<CompetitionsResults>();
-            foreach (var page in pages)
+
+            try
             {
-                bool isTable = false;
-                string[] rows = page.Split('\n');
-                string category = rows.First().Split(' ').Last();
-                int count = 0;
-
-                foreach (var row in rows)
+                foreach (var page in pages)
                 {
-                    if (isTable)
+                    bool isTable = false;
+                    string[] rows = page.Split('\n');
+                    string category = rows.First().Split(' ').Last();
+                    int count = 0;
+
+                    foreach (var row in rows)
                     {
-                        string[] judokasData = row.Split(' ');
-                        string club = row.Split(',').Last();
-
-
-                        if (judokasData.Length > 3 && count < 2)
+                        if (isTable)
                         {
-                            Competitor competitor = FindCompetitor(competitions, judokasData);
-                            if (competitor == null)
-                                continue;
+                            string[] judokasData = row.Split(' ');
+                            string club = row.Split(',').Last();
 
-                            CompetitionsResults newResults = new CompetitionsResults
+
+                            if (judokasData.Length > 3 && count < 2)
                             {
-                                WeightCategoryId = competitor.WeightCategoryId,
-                                JudokaId = competitor.JudokaId,
-                                Place = int.Parse(judokasData[0]),
-                                Points = CalculatePoints(int.Parse(judokasData[0]), competitions)
-                            };
+                                Competitor competitor = FindCompetitor(competitions, judokasData);
+                                if (competitor == null)
+                                    continue;
 
-                            result.Add(newResults);
+                                CompetitionsResults newResults = new CompetitionsResults
+                                {
+                                    WeightCategoryId = competitor.WeightCategoryId,
+                                    JudokaId = competitor.JudokaId,
+                                    Place = int.Parse(judokasData[0]),
+                                    Points = CalculatePoints(int.Parse(judokasData[0]), competitions)
+                                };
 
-                            Judoka updatePoints = db.Judoka.FindByCondition(x => x.Id == competitor.JudokaId).FirstOrDefault();
-                            updatePoints.Points = updatePoints.Points + newResults.Points;
-                            db.Judoka.Update(updatePoints);
-                            db.Save();
+                                result.Add(newResults);
+
+                                Judoka updatePoints = db.Judoka.FindByCondition(x => x.Id == competitor.JudokaId).FirstOrDefault();
+                                updatePoints.Points = updatePoints.Points + newResults.Points;
+                                db.Judoka.Update(updatePoints);
+                            }
+                            else if (count < 1)
+                            {
+                                count++;
+                            }
+                            else
+                            {
+                                isTable = false;
+                                count = 0;
+                            }
                         }
-                        else if (count < 1)
-                        {
-                            count++;
-                        }
-                        else
-                        {
-                            isTable = false;
-                            count = 0;
-                        }
+                        if (row.Equals("Pos Name"))
+                            isTable = true;
                     }
-                    if (row.Equals("Pos Name"))
-                        isTable = true;
                 }
+                db.Save();
+                return result;
             }
-            return result;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
         private int CalculatePoints(int place, Competitions competitions)
         {

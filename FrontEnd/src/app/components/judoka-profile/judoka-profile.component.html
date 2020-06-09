@@ -74,31 +74,31 @@
                             <!-- Position Column -->
                             <ng-container matColumnDef="competitions">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Competitions </th>
-                                <td mat-cell *matCellDef="let element"> {{element.WeightCategory.AgeGroup.Competitions}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.weightCategory.ageGroup.competitions.title}} </td>
                             </ng-container>
 
                             <!-- Name Column -->
                             <ng-container matColumnDef="ageGroup">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Age Group </th>
-                                <td mat-cell *matCellDef="let element"> {{element.WeightCategory.AgeGroup}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.weightCategory.ageGroup.title}} </td>
                             </ng-container>
 
                             <!-- Symbol Column -->
                             <ng-container matColumnDef="date">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                                <td mat-cell *matCellDef="let element"> {{element.WeightCategory.AgeGroup.Competitions.CompetitionsDate}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.weightCategory.ageGroup.competitions.competitionsDate}} </td>
                             </ng-container>
 
                             <!-- Weight Column -->
                             <ng-container matColumnDef="place">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
-                                <td mat-cell *matCellDef="let element"> {{element.Place}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.place}} </td>
                             </ng-container>
 
                             <!-- Symbol Column -->
                             <ng-container matColumnDef="points">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
-                                <td mat-cell *matCellDef="let element"> {{element.Points}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.points}} </td>
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

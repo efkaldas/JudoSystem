@@ -23,7 +23,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
                             <h5><b>Birth Date: </b>
-                                <p>{{coach.birthDate}}</p>
+                                <p>{{coach.birthDate | date:'yyyy/MM/dd h:mm'}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">

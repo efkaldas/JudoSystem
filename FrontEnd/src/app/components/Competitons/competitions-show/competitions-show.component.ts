@@ -104,7 +104,7 @@ export class CompetitionsShowComponent implements OnInit {
   }
   private isUserAdmin()
   {
-    if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin))
+    if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
       this.isAdmin = true;
   }
 

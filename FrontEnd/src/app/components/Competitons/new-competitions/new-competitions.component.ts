@@ -77,7 +77,8 @@ export class NewCompetitionsComponent implements OnInit {
     return this.competitionsService.create(this.competitionsForm.value)
       .subscribe(
         data => {
-          this.openSnackBar("New judoka added", 'CLOSE');
+          this.openSnackBar("New competitions have been created", 'CLOSE');
+          this.router.navigateByUrl('/competitions');
         },
         error => {
           this.errorMessage = error["error"].message;

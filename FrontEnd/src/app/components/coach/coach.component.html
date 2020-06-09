@@ -27,7 +27,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="birthDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.birthDate | date:'yyyy/MM/dd h:mm'}} </td>
     </ng-container>
 
     <!-- Weight Column -->
@@ -41,7 +41,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
         <td mat-cell *matCellDef="let element">
             <div *ngIf="element.dankyu != null">
-                {{element.danKyu.grade}}
+                {{element.danKyu.text}}
             </div>
         </td>
     </ng-container>

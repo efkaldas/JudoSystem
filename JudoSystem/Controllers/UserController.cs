@@ -37,6 +37,8 @@ namespace JudoSystem.Controllers
                 .Include(x => x.UserRoles)
                     .ThenInclude(x => x.Role).ToList();
 
+            users.Remove(users.Find(x => x.Id == 1));
+
             return Ok(users);
         }
 

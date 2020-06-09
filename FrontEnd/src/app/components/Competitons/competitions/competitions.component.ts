@@ -33,7 +33,7 @@ export class CompetitionsComponent implements OnInit {
   }
   private isUserAdmin()
   {
-    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin))
+    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
       this.isAdmin = true;
   }
   public openSnackBar(message: string, action: string) {
@@ -48,7 +48,7 @@ export class CompetitionsComponent implements OnInit {
     return this.competitionsService.delete(this.selectedElement)
       .subscribe(
         data => {
-          this.openSnackBar("Competitions has been removed", 'CLOSE');
+          this.openSnackBar("Competitions have been removed", 'CLOSE');
           this.getCompetitions();
           this.onNoClick();
         },

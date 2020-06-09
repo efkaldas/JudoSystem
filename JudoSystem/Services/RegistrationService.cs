@@ -41,7 +41,7 @@ namespace JudoSystem.Services
                 List<string> recipients = new List<string>();
                 recipients.Add(user.Email);
 
-                sendMail.sendEmail(DateTime.Now.ToString("yyyy-MM-dd") + "Registracijos forma sėkmingai pateikta!", message, null, recipients);
+                sendMail.sendEmail(DateTime.Now.ToString("yyyy-MM-dd") + " Registracijos forma sėkmingai pateikta!", message, null, recipients);
             }
         }
         private void SendAdministratorMessage(User user)
@@ -53,7 +53,7 @@ namespace JudoSystem.Services
             List<string> recipients = new List<string>();
             recipients.Add(EmailSendHelper.ADMIN_LOGIN);
 
-            sendMail.sendEmail(DateTime.Now.ToString("yyyy-MM-dd") + "Pateikta nauja registracijos forma!", message, null, recipients);
+            sendMail.sendEmail(DateTime.Now.ToString("yyyy-MM-dd") + " Pateikta nauja registracijos forma!", message, null, recipients);
         }
     }
 }
