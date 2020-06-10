@@ -13,7 +13,6 @@ export class OrganizationService extends LoginService {
       return this.http.get(this.organizationUrl); 
     }
     update(id: number, organization: Organization) {
-      console.log("asd");
       return this.http.put(this.organizationUrl + id, organization); 
     }  
 }

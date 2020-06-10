@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { Competitions } from '../../../../data/competitions.data';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatSnackBar, MatChipInputEvent, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
@@ -16,6 +16,9 @@ import { WeightCategoryService } from '../../../../services/weight-category.serv
 import { CompetitionsService } from '../../../../services/Competitions.service';
 import { saveAs } from 'file-saver';
 import { Role } from '../../../../data/user-role.enum.data';
+import * as jspdf from 'jspdf';      
+import html2canvas from 'html2canvas';  
+
 
 @Component({
   selector: 'app-competitions-show',
@@ -52,6 +55,7 @@ export class CompetitionsShowComponent implements OnInit {
   competitors:any;
   selectedAgeGroup: number;
   myCompetitors: Judoka[];
+  render = false;
   source : MatTableDataSource<Judoka>;
   file = null;
   ageGroupIdresult: number;
@@ -65,6 +69,7 @@ export class CompetitionsShowComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild('htmlData',{static: true}) htmlData:ElementRef;
 
   constructor(private weightCategorySerivce: WeightCategoryService, private genderService: GenderService, private danKyuService: DanKyuService, 
     private competitionsService: CompetitionsService, private route: ActivatedRoute,
@@ -101,6 +106,23 @@ export class CompetitionsShowComponent implements OnInit {
      // weightCategories: [null, Validators.compose([Validators.required])],
 
     });
+  }
+  public downloadPDF():void {
+    let DATA = this.htmlData.nativeElement;
+    console.log(DATA);
+    // Get the element to export into pdf
+    let pdfContent = window.document.getElementById("htmlData");
+    pdfContent.style.display = 'block';
+
+    // Use html2canvas to apply CSS settings
+    html2canvas(pdfContent).then(function (canvas)
+    {
+      var img = canvas.toDataURL("image/png");
+      var doc = new jspdf();
+      doc.addImage(img, 'png', 20, 20);
+      doc.save('test.pdf');
+    });
+    pdfContent.style.display = 'none';
   }
   private isUserAdmin()
   {
@@ -190,7 +212,6 @@ export class CompetitionsShowComponent implements OnInit {
   }
   public getWeightResults($event)
   {
-    console.log(this.ageGroupIdresult);
     let weightCategoryId = this.competitions.ageGroups[this.ageGroupIdresult].weightCategories.find(x => x.title == $event.tab.textLabel).id;
     return this.weightCategorySerivce.getResults(weightCategoryId)
       .subscribe(
@@ -213,7 +234,6 @@ export class CompetitionsShowComponent implements OnInit {
     return this.competitionsService.print(this.competitionsId)
       .subscribe(
         data => {
-          console.log(data);
           if (data != null)  {
             saveAs(data, "Contestants.csv");
             this.openSnackBar("File has been generated", 'CLOSE');
@@ -262,7 +282,6 @@ export class CompetitionsShowComponent implements OnInit {
     this.ageGroupForm.value.weightCategories = this.categories;
     if(this.ageGroupForm.valid)
     {
-      console.log("asd");
     return this.ageGroupService.create(this.ageGroupForm.value)
       .subscribe(
         data => {
@@ -328,7 +347,6 @@ export class CompetitionsShowComponent implements OnInit {
   }
   public getTabRecords($event)
   {
-    console.log("asdasdasdasdasd");
     this.ageGroupId = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel).id;
     this.getJudokasToRegister();
   }
@@ -393,7 +411,6 @@ export class CompetitionsShowComponent implements OnInit {
   {
     let selectedGroup = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel);
     this.ageGroupIdresult = this.competitions.ageGroups.indexOf(selectedGroup);
-    console.log(this.ageGroupIdresult);
   }
   public getCompetitors($event) {
    this.weightCategoryId = this.competitions.ageGroups[this.ageGroupId].weightCategories.find(x => x.title == $event.tab.textLabel).id;
@@ -401,7 +418,6 @@ export class CompetitionsShowComponent implements OnInit {
       .subscribe(
         data => {
           this.competitors = data as any[];
-          console.log( this.competitors );
           this.dataSourceCompetitors = new MatTableDataSource(this.competitors);
           this.dataSourceCompetitors.sort = this.sort;
           this.dataSourceCompetitors.paginator = this.paginator;
@@ -437,6 +453,8 @@ export class CompetitionsShowComponent implements OnInit {
     else return false
   }
   public registrationStatus() : string {
+    if(this.competitions)
+    {
     let regStart = new Date(this.competitions.registrationStart);
     let regEnd = new Date(this.competitions.registrationEnd);
     let currentTime = new Date(Date.now());
@@ -448,6 +466,7 @@ export class CompetitionsShowComponent implements OnInit {
     } else if(regStart < currentTime && regEnd > currentTime)  {
       return "in_progress"
     }
+  }
   }
   private getCompetitions() {
     return this.competitionsService.get(this.competitionsId)
