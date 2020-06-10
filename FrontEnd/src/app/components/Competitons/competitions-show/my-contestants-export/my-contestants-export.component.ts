@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CompetitionsShowComponent } from '../competitions-show.component';
+import * as jspdf from 'jspdf';     
 
 @Component({
   selector: 'app-my-contestants-export',
@@ -8,6 +9,8 @@ import { CompetitionsShowComponent } from '../competitions-show.component';
 })
 export class MyContestantsExportComponent {
 
+  @ViewChild('htmlData', {static:true}) htmlData:ElementRef;
+  
   ngOnInit() {
   }
 

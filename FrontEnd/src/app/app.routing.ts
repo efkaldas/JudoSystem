@@ -17,6 +17,7 @@ import { CompetitionsShowComponent } from './components/Competitons/competitions
 import { CompetitionsComponent } from './components/Competitons/competitions/competitions.component';
 import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
 import { JudokasRatingComponent } from './components/judokas-rating/judokas-rating.component';
+import { MyContestantsExportComponent } from './components/Competitons/competitions-show/my-contestants-export/my-contestants-export.component';
 
 export const AppRoutes: Routes = [
   {
@@ -73,6 +74,11 @@ export const AppRoutes: Routes = [
         path: 'competitions/:id',
         component: CompetitionsShowComponent,
         data: {title: 'Competitions'}
+      },
+      {
+        path: 'competitions/:id/competitors-export',
+        component: MyContestantsExportComponent,
+        data: {title: 'Export'}
       },
       {
         path: 'new-competitions',

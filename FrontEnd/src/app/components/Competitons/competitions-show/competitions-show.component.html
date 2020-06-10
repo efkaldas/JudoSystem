@@ -4,8 +4,8 @@
         <mat-card>
             <mat-card-content>
                 <mat-card-title>
-                    <h1>{{competitions.title}}</h1>
-                    <small style="font-weight: normal;">{{competitions.place}}, {{stringDate(competitions.competitionsDate) | date:'yyyy/MM/dd h:mm'}}</small>
+                    <h1>{{competitions?.title}}</h1>
+                    <small style="font-weight: normal;">{{competitions?.place}}, {{competitions?.competitionsDate | date:'yyyy/MM/dd h:mm'}}</small>
                 </mat-card-title>
             </mat-card-content>
             <mat-tab-group (selectedTabChange)="getData($event)">
@@ -13,25 +13,28 @@
                     <div fxFlex.gt-sm="100" fxFlex="100">
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-                            <h4><b>Place: </b> {{competitions.place}}</h4>
+                            <h4><b>Place: </b> {{competitions?.place}}</h4>
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-                            <h4><b>Date: </b>{{stringDate(competitions.competitionsDate) | date:'yyyy/MM/dd h:mm'}}</h4>
+                            <h4><b>Date: </b>{{competitions?.competitionsDate | date:'yyyy/MM/dd h:mm'}}</h4>
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-                            <h4><b>Entry Fee: </b> {{competitions.entryFee}} €</h4>
+                            <h4><b>Entry Fee: </b> {{competitions?.entryFee}} €</h4>
                         </div>
                         <!-- Row -->
                         <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
                             <h4><b>Description: </b></h4>
-                            <div style="padding-left: 10px; padding-top: 7px;" [innerHTML]="competitions.description"></div>
+                            <div style="padding-left: 10px; padding-top: 7px;" [innerHTML]="competitions?.description"></div>
                         </div>
                     </div>
                 </mat-tab>
                 <mat-tab *ngIf="isLoggedIn()" label="My Competitors">
                     <mat-card-content>
+                        <div style="margin-bottom: 50px;">
+                            <button class="pull-right" mat-raised-button (click)="downloadPDF()" color="primary"><mat-icon>print</mat-icon> Download PDF </button>
+                        </div>
                         <table mat-table matSort [dataSource]="dataSourceMyCompetitors" class="mat-elevation-z8">
 
                             <ng-container matColumnDef="position">
@@ -111,18 +114,18 @@
                                             <h1>Age Groups</h1>
                                             <button *ngIf="isAdmin" mat-raised-button (click)="openDialog(addGroupModal)" color="primary">+<mat-icon>event</mat-icon> Add age group </button>
                                             <div *ngIf="registrationStatus() == 'not_started'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
-                                                <p style="color: blue">Registration starts: {{stringDate(competitions.registrationStart) | date:'yyyy/MM/dd h:mm'}}</p>
+                                                <p style="color: blue">Registration starts: {{competitions?.registrationStart | date:'yyyy/MM/dd h:mm'}}</p>
                                             </div>
                                             <div *ngIf="registrationStatus() == 'ended'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
                                                 <p style="color: green">Registration ended!</p>
                                             </div>
                                             <div *ngIf="registrationStatus() == 'in_progress'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
-                                                <p style="color: red">Regstration ends: {{stringDate(competitions.registrationEnd) | date:'yyyy/MM/dd h:mm'}}</p>
+                                                <p style="color: red">Regstration ends: {{competitions?.registrationEnd | date:'yyyy/MM/dd h:mm'}}</p>
                                             </div>
                                         </mat-card-title>
                                     </mat-card-content>
                                     <mat-tab-group [selectedIndex]="0" (selectedTabChange)="getTabRecords($event)">
-                                        <mat-tab *ngFor="let ageGroup of competitions.ageGroups" label="{{ageGroup.title}}">
+                                        <mat-tab *ngFor="let ageGroup of competitions?.ageGroups" label="{{ageGroup?.title}}">
                                             <mat-card-content *ngIf="isLoggedIn()">
                                                 <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
                                                     <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
@@ -231,7 +234,7 @@
                                         </mat-card-title>
                                     </mat-card-content>
                                     <mat-tab-group (selectedTabChange)="setAgeGroupId($event)">
-                                        <mat-tab *ngFor="let ageGroup of competitions.ageGroups" label="{{ageGroup.title}}">
+                                        <mat-tab *ngFor="let ageGroup of competitions?.ageGroups" label="{{ageGroup?.title}}">
                                             <mat-card-content>
                                                 <mat-tab-group (selectedTabChange)="getCompetitors($event)">
                                                     <mat-tab *ngFor="let weightCategory of ageGroup.weightCategories" label="{{weightCategory.title}}">
@@ -323,7 +326,7 @@
                                         </mat-card-title>
                                     </mat-card-content>
                                     <mat-tab-group (selectedTabChange)="setAgeGroupIdresult($event)">
-                                        <mat-tab *ngFor="let ageGroup of competitions.ageGroups" label="{{ageGroup.title}}">
+                                        <mat-tab *ngFor="let ageGroup of competitions?.ageGroups" label="{{ageGroup?.title}}">
                                             <mat-card-content>
                                                 <mat-tab-group (selectedTabChange)="getWeightResults($event)">
                                                     <mat-tab *ngFor="let weightCategory of ageGroup.weightCategories" label="{{weightCategory.title}}">
@@ -503,3 +506,34 @@
         <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
     </div>
 </ng-template>
+<div hidden id="htmlData" #htmlData>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <div style="page-break-before:always" *ngFor="let competitor of myCompetitors">
+        <div>
+            <h1>{{competitions.title}}</h1>
+            <p>Date and place: {{competitions?.competitionsDate | date:'yyyy/MM/dd h:mm'}}, {{competitions.place}}</p>
+            <p>Registration fee: {{competitions.entryFee}} €</p>
+            <h3>Age Group: {{competitor.weightCategories[0].weightCategory.ageGroup.title}}</h3>
+            <p>Weight in time: {{competitor.weightCategories[0].weightCategory.ageGroup.weightInFrom | date:'yyyy/MM/dd h:mm'}} - {{competitor.weightCategories[0].weightCategory.ageGroup.weightInTo | date:'yyyy/MM/dd h:mm'}}</p>
+            Weight categories:
+            <span *ngFor="let category of competitor.weightCategories[0].weightCategory.ageGroup.weightCategories;  let isLast=last">
+                {{category.title}}{{isLast ? '' : ', '}}
+             </span>
+            <h2>Competitior information:</h2>
+            <div class="row">
+                <div style="list-style-type: none;" class="col-md-6">
+                    <li>Firstname and lastname: {{competitor.firstname}} {{competitor.lastname}}</li>
+                    <li>Gender: {{competitor.gender.textEN}}</li>
+                    <li>Weight category: {{competitor.weightCategories[0].weightCategory.title}}</li>
+                </div>
+                <div style="margin-left: 400px" class="col-md-6">
+                    <img height="300px" height="300px" src="../../../../assets/images/system-logo.png" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
