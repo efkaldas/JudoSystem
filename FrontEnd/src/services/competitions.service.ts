@@ -7,7 +7,7 @@ import { Competitions } from '../data/competitions.data';
 @Injectable()
 export class CompetitionsService extends LoginService {
   protected competitionsUrl : string = environment.apiHost+"/Competitions/";
-  protected ageGroupUrl : string = "/AgeGroup";
+  protected ageGroupUrl : string = "/AgeGroups";
   protected printCompetitorsUrl : string = "/Competitors-list.csv";
   protected importResultsUrl : string = "/ResultsFile"; 
   protected myCompetitorsUrl : string = "/MyCompetitors"; 

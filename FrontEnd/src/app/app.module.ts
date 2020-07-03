@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -60,6 +59,24 @@ import { OrganizationService } from '../services/organization.service';
 import { JudokaProfileComponent } from './components/judoka-profile/judoka-profile.component';
 import { JudokasRatingComponent } from './components/judokas-rating/judokas-rating.component';
 import { MyContestantsExportComponent } from './components/Competitons/competitions-show/my-contestants-export/my-contestants-export.component';
+import { AppRoutingModule } from './app.routing';
+import { ErrorComponent } from './authentication/error/error.component';
+import { ForgotComponent } from './authentication/forgot/forgot.component';
+import { LockscreenComponent } from './authentication/lockscreen/lockscreen.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { PermissionDeniedComponent } from './authentication/error/permission-denied/permission-denied.component';
+import { NotApprovedComponent } from './authentication/error/not-approved/not-approved.component';
+import { LogoutComponent } from './authentication/logout/logout.component';
+import { UserBlockedComponent } from './authentication/error/user-blocked/user-blocked.component';
+import { CompetitionsTabsComponent } from './components/Competitons/competitions-show/competitions-tabs/competitions-tabs.component';
+import { CompetitionsInfoComponent } from './components/Competitons/competitions-show/competitions-info/competitions-info.component';
+import { CompetitionsMyCompetitorsComponent } from './components/Competitons/competitions-show/competitions-my-competitors/competitions-my-competitors.component';
+import { CompetitionsAgeGroupsComponent } from './components/Competitons/competitions-show/competitions-age-groups/competitions-age-groups.component';
+import { CompetitionsCompetitorsComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors.component';
+import { CompetitionsResultsComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results.component';
+import { CompetitionsResultsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-categories/competitions-results-weight-categories.component';
+import { CompetitionsResultsWeightCategoryShowComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-category-show/competitions-results-weight-category-show.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -75,24 +92,44 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     AppBlankComponent,
     AppSidebarComponent,
-	AppBreadcrumbComponent,
-	MyJudokasComponent,
-	CoachComponent,
-	PendingUsersComponent,
-	HomeComponent,
-	CompetitionsComponent,
-	CoachShowComponent,
-	CoachOrganizationComponent,
-	CoachProfileComponent,
-	NewCompetitionsComponent,
-	NewAgeGroupComponent,
-	CompetitionsShowComponent,
-	ProfileComponent,
-	UserCoachesComponent,
-	OrganizationsComponent,
-	JudokaProfileComponent,
-  JudokasRatingComponent,
-  MyContestantsExportComponent
+    AppBreadcrumbComponent,
+    MyJudokasComponent,
+    CoachComponent,
+    PendingUsersComponent,
+    HomeComponent,
+    CompetitionsComponent,
+    CoachShowComponent,
+    CoachOrganizationComponent,
+    CoachProfileComponent,
+    NewCompetitionsComponent,
+    NewAgeGroupComponent,
+    CompetitionsShowComponent,
+    ProfileComponent,
+    UserCoachesComponent,
+    OrganizationsComponent,
+    JudokaProfileComponent,
+    JudokasRatingComponent,
+    MyContestantsExportComponent,
+    ErrorComponent,
+    ForgotComponent,
+    LockscreenComponent,
+    LoginComponent,
+    ForgotComponent,
+    RegisterComponent,
+    PermissionDeniedComponent,
+    NotApprovedComponent,
+    WaitingForApprovementComponent,
+    UserCoachesComponent,
+    LogoutComponent,
+    UserBlockedComponent,
+    CompetitionsTabsComponent,
+    CompetitionsInfoComponent,
+    CompetitionsMyCompetitorsComponent,
+    CompetitionsAgeGroupsComponent,
+    CompetitionsCompetitorsComponent,
+    CompetitionsResultsComponent,
+    CompetitionsResultsWeightCategoriesComponent,
+    CompetitionsResultsWeightCategoryShowComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +143,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuillModule.forRoot(),
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
-    RouterModule.forRoot(AppRoutes),
+    AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

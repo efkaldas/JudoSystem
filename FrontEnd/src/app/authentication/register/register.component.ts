@@ -121,7 +121,7 @@ export class RegisterComponent implements OnInit {
         data =>
         {
           this.message = "Successfully registered";                
-          this.router.navigate(["/authentication/waiting-for-approvement"]);
+          this.router.navigate(["/waiting-for-approvement"]);
           this.openSnackBar(this.message, "close");   
         },
         error => 
