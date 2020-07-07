@@ -1,0 +1,32 @@
+.row-height {
+    height: 50%
+}
+
+.row {
+    margin: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-header-cell {
+    text-align: center;
+}
+
+.button {
+    width: 115px!important;
+    min-width: unset!important;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+a {
+    color: inherit;
+}

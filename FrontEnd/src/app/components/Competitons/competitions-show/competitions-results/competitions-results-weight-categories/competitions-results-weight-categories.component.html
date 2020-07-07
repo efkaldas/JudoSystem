@@ -1,19 +1,19 @@
 <div class="container-fluid">
     <div>
         <div class="row">
-            <div style="float: left;" class="col-sm-2" style="background-color: blue;">
+            <div class="flex-row rounded bg-info" style="padding: 0 10px;">
                 <div *ngFor="let link of catLinks; let i = index">
                     <div class="row" *ngIf="i%2 == 0">
-                        <div style="padding: 5px;">
-                            <button [routerLink]="catLinks[i].link" mat-stroked-button class="fixed-size" color="primary">{{catLinks[i].label}}</button>
+                        <div style="padding: 5px 5px;">
+                            <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button class="fixed-size" color="primary">{{catLinks[i].label}}</button>
                         </div>
-                        <div style="padding: 5px;">
-                            <button [routerLink]="catLinks[i].link" mat-stroked-button *ngIf="catLinks[i + 1]" class="fixed-size" color="primary">{{catLinks[i + 1].label}}</button>
+                        <div style="padding: 5px 5px;">
+                            <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button *ngIf="catLinks[i + 1]" class="fixed-size" color="primary">{{catLinks[i + 1].label}}</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-10">
+            <div style="margin-left: 30px;" class="flex-row">
                 <router-outlet></router-outlet>
             </div>
         </div>

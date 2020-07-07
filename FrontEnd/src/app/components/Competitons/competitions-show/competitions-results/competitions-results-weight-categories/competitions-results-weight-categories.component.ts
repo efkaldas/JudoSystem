@@ -25,7 +25,6 @@ export class CompetitionsResultsWeightCategoriesComponent implements OnInit {
 
     this.routeSub = this.route.params.subscribe(params => {
       this.ageGroupId = params['groupId'] as number;
-
     });
 
     this.getWeightCategories();
