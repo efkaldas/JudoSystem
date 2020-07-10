@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div>
         <div class="row">
-            <div class="flex-row rounded bg-info" style="padding: 0 10px;">
+            <div class="rounded bg-info" style="padding: 0 10px;">
                 <div *ngFor="let link of catLinks; let i = index">
                     <div class="row" *ngIf="i%2 == 0">
                         <div style="padding: 5px 5px;">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-left: 30px;" class="flex-row">
+            <div style="margin-left: 30px;">
                 <router-outlet></router-outlet>
             </div>
         </div>

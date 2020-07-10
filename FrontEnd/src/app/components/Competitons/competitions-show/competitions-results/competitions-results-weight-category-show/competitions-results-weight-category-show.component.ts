@@ -31,12 +31,12 @@ export class CompetitionsResultsWeightCategoryShowComponent implements OnInit {
 
     this.routeSub = this.route.params.subscribe(params => {
       this.weightCategoryId = params['categoryId'] as number;
+      this.dataSource = null;
+      this.getWeightResults();
     });
   }
 
   ngOnInit() {
-    this.dataSource = null;
-    this.getWeightResults();
   }
 
   public openSnackBar(message: string, action: string) {
@@ -57,7 +57,6 @@ export class CompetitionsResultsWeightCategoryShowComponent implements OnInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.changeDetectorRefs.detectChanges();
-          console.log(this.Judokas);
         },
         error => {
           this.errorMessage = error["error"].message;
