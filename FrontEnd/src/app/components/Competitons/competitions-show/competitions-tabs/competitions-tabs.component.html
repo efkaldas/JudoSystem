@@ -1,10 +1,15 @@
-<mat-card>
-    <nav mat-tab-nav-bar>
-        <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+<div fxLayout="row wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <nav mat-tab-nav-bar>
+                <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
             {{link.label}}
         </a>
-    </nav>
-    <mat-card-content>
-        <router-outlet></router-outlet>
-    </mat-card-content>
-</mat-card>
+            </nav>
+            <mat-card-content>
+                <router-outlet></router-outlet>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>

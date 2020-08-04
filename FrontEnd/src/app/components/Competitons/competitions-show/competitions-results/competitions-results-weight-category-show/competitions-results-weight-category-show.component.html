@@ -1,5 +1,5 @@
 <div class="responsive-table">
-    <mat-table matSort [dataSource]="dataSource " class="mat-elevation-z8">
+    <mat-table #table matSort [dataSource]="dataSource " matSort style="max-height: 500px; overflow:auto;">
 
         <ng-container matColumnDef="position">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Place </mat-header-cell>
