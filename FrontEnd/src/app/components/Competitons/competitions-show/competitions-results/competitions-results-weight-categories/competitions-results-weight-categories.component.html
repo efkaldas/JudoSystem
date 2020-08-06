@@ -1,19 +1,23 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile>
-        <div class="rounded bg-info" style="padding: 0 10px;">
-            <div *ngFor="let link of catLinks; let i = index">
-                <div class="row" *ngIf="i%2 == 0">
-                    <div style="padding: 5px 5px;">
-                        <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button class="fixed-size" color="primary">{{catLinks[i].label}}</button>
-                    </div>
-                    <div style="padding: 5px 5px;">
-                        <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button *ngIf="catLinks[i + 1]" class="fixed-size" color="primary">{{catLinks[i + 1].label}}</button>
+<div class="container-fluid">
+    <div class="flex-container" fxLayout="row">
+        <div class="child-1" fxFlex>
+            <div style="margin-right: 40px; margin-top: 20px">
+                <div class="rounded bg-info">
+                    <div *ngFor="let link of catLinks; let i = index">
+                        <div class="flex-container" fxLayout="row" *ngIf="i%2 == 0">
+                            <div style="padding: 5px 5px;">
+                                <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button class="fixed-size" color="primary">{{catLinks[i].label}}</button>
+                            </div>
+                            <div style="padding: 5px 5px;">
+                                <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button *ngIf="catLinks[i + 1]" class="fixed-size" color="primary">{{catLinks[i + 1].label}}</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <router-outlet></router-outlet>
-    </mat-grid-tile>
-</mat-grid-list>
+        <div class="child-2" fxFlex="2 1 0 auto">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
