@@ -42,7 +42,7 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean {
-    return this.getToken() != null;
+  return this.getToken() != null;
   }
   public get currentUserValue(): LoggedInUser {
     this.currentUserSubject = new BehaviorSubject<LoggedInUser>(this.getDecodedAccessToken(localStorage.getItem('jwtToken')));

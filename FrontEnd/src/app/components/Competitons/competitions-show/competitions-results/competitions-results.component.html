@@ -1,3 +1,10 @@
+<h1>Results</h1><br/>
+<div class="flex-container" fxLayout="row">
+    <div class="child-1" fxFlex>
+        <input  class="form-control" class="form-control-file" type="file" (change)="fileChange($event)" accept="text/csv" /><br/>
+        <button  mat-raised-button (click)="resultsFileUpload()" color="primary"><mat-icon>check</mat-icon> Upload results file </button>
+    </div>
+</div><br/>
 <nav mat-tab-nav-bar>
     <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
             {{link.label}}

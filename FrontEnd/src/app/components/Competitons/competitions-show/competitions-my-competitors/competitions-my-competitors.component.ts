@@ -32,6 +32,7 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
     });
   }
 
+  
   ngOnInit() {
     this.getMyCompetitors();
   }

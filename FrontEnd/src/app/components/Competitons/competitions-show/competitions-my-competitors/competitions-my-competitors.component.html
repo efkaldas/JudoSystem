@@ -4,22 +4,22 @@
             <button pull-right mat-raised-button (click)="downloadPDF()" color="primary"><mat-icon>print</mat-icon> Download PDF </button>
         </div>
     </div>
-    <div class="row">
+        <div class="responsive-table" style="width: 100%;">
         <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="position">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+                <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
             </ng-container>
             <!-- Position Column -->
             <ng-container matColumnDef="firstname">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
-                <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/judoka/'+element.id" class="mat-row-link">{{element.firstname}}</a></td>
+                <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/judoka/'+element.id" class="mat-row-link"> {{element.firstname}} </a></td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="lastname">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
-                <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/judoka/'+element.id" class="mat-row-link">{{element.lastname}}</a> </td>
+                <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/judoka/'+element.id" class="mat-row-link"> {{element.lastname}} </a> </td>
             </ng-container>
 
             <!-- Symbol Column -->
@@ -68,10 +68,10 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
-<div hidden id="htmlData" #htmlData>
+<!-- <div hidden id="htmlData" #htmlData>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
     <div style="page-break-before:always" *ngFor="let competitor of myCompetitors">
@@ -98,4 +98,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
