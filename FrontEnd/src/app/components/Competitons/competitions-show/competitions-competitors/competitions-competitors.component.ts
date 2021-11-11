@@ -3,6 +3,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { AgeGroup } from '../../../../../data/age-group.data';
 import { Competitions } from '../../../../../data/competitions.data';
+import { Judoka } from '../../../../../data/judoka.data';
 import { AgeGroupService } from '../../../../../services/age-group.service';
 import { CompetitionsService } from '../../../../../services/Competitions.service';
 import { WeightCategoryService } from '../../../../../services/weight-category.service';
@@ -14,7 +15,6 @@ import { WeightCategoryService } from '../../../../../services/weight-category.s
 })
 export class CompetitionsCompetitorsComponent implements OnInit {
 
-  dataSource= new MatTableDataSource;
   routeSub: any;
   competitionsId: number;
   errorMessage: any;
@@ -24,6 +24,8 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   competitors: unknown[];
 
   displayedColumnsCompetitors: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'organization', 'country'];
+
+  dataSource = new MatTableDataSource;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -62,7 +64,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
      return this.weightCategorySerivce.getCompetitors(this.weightCategoryId)
        .subscribe(
          data => {
-           this.competitors = data as any[];
+           this.competitors = data as Judoka[];
            this.dataSource = new MatTableDataSource(this.competitors);
            this.dataSource.sort = this.sort;
            this.dataSource.paginator = this.paginator;

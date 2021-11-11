@@ -37,6 +37,7 @@ import { CompetitionsCompetitorsComponent } from './components/Competitons/compe
 import { CompetitionsResultsComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results.component';
 import { CompetitionsResultsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-categories/competitions-results-weight-categories.component';
 import { CompetitionsResultsWeightCategoryShowComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-category-show/competitions-results-weight-category-show.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 export const routes: Routes = [
   {
@@ -45,7 +46,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full', data: {title: 'Home'} },
       { path: 'home', component: HomeComponent, data: {title: 'Home'} },
-      { path: 'myjudokas', component: MyJudokasComponent, canActivate: [AuthGuard], data: {title: 'My Judokas', roles: [Role.Admin, Role.Coach]} },
+      { path: 'myjudokas', component: MyJudokasComponent, canActivate: [AuthGuard], data: {title: 'MyJudokas', roles: [Role.Admin, Role.Coach]} },
       { path: 'my-coaches', component: CoachComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [Role.Admin, Role.Organization_Admin]} },
       { path: 'users', component: UserCoachesComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [Role.Admin]} },
       { path: 'coaches/:id', component: CoachShowComponent, canActivate: [AuthGuard], data: {title: 'Coach'} },
@@ -86,7 +87,7 @@ export const routes: Routes = [
   { path: 'lockscreen', component: LockscreenComponent }
 ];
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [ RouterModule.forRoot(routes), TranslateModule ],
+  exports: [ RouterModule, TranslateModule ]
 })
 export class AppRoutingModule {}

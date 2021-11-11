@@ -2,7 +2,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field> -->
 <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button (click)="openDialog(addJudokaModal, null)" color="primary"><mat-icon>person_add</mat-icon> Add Judoka </button>
+    <button mat-raised-button (click)="openDialog(addJudokaModal, null)" color="primary"><mat-icon>person_add</mat-icon> {{ 'AddJudoka' | translate }} </button>
 </div><br>
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -12,44 +12,44 @@
     </ng-container>
     <!-- Position Column -->
     <ng-container matColumnDef="firstname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Firstname' | translate }} </th>
         <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/judoka/'+element.id" class="mat-row-link">{{element.firstname}}</a> </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="lastname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Lastname' | translate }} </th>
         <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/judoka/'+element.id" class="mat-row-link">{{element.lastname}}</a> </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="birthYears">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Years </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'BirthYears' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.birthYears}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Gender' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="danKyu">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'DanKyu' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.danKyu.text}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
+        <th mat-header-cell *matHeaderCellDef align="center"> {{ 'Actions' | translate }} </th>
         <td mat-cell *matCellDef="let element">
             <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
                 <div fxFlex="100px">
-                    <button mat-raised-button (click)="openDialog(editJudokaModal, element)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
+                    <button mat-raised-button (click)="openDialog(editJudokaModal, element)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                 </div>
                 <div fxFlex="100px">
-                    <button mat-raised-button (click)="openDialog(deleteJudokaModal, element)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
+                    <button mat-raised-button (click)="openDialog(deleteJudokaModal, element)" color="warn"><mat-icon>remove_circle_outline</mat-icon>{{ 'Delete' | translate }} </button>
                 </div>
             </div>
         </td>
@@ -62,19 +62,19 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #addJudokaModal>
-    <h1 mat-dialog-title>Add judoka</h1>
+    <h1 mat-dialog-title>{{ 'AddJudoka' | translate }}</h1>
     <div mat-dialog-content>
         <form [formGroup]="judokaForm" novalidate (ngSubmit)="addJudoka()" color="accent">
             <mat-form-field>
-                <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
+                <input autofocus type="text" matInput placeholder="{{ 'Firstname' | translate }}" required formControlName="firstname">
             </mat-form-field>
 
             <mat-form-field>
-                <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
+                <input autofocus type="text" matInput placeholder="{{ 'Lastname' | translate }}" required formControlName="lastname">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Select gender</mat-label>
+                <mat-label>{{ 'Gender' | translate }}</mat-label>
                 <mat-select formControlName="genderId" required>
                     <mat-option *ngFor="let gender of genders" [value]="gender.id">
                         {{gender.textEN}}
@@ -83,7 +83,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Select DAN/KYU</mat-label>
+                <mat-label>{{ 'DanKyu' | translate }}</mat-label>
                 <mat-select formControlName="dankyuId" required>
                     <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
                         {{danKyu.text}}
@@ -92,30 +92,30 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input autofocus type="number" matInput placeholder="Birth Years" required formControlName="birthYears">
+                <input autofocus type="number" matInput placeholder="{{ 'BirthYears' | translate }}" required formControlName="birthYears">
             </mat-form-field>
             <div mat-dialog-actions>
-                <button type="submit" mat-raised-button color="primary">Accept</button>
-                <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+                <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+                <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
             </div>
         </form>
     </div>
 </ng-template>
 
 <ng-template #editJudokaModal>
-    <h1 mat-dialog-title>Edit judoka</h1>
+    <h1 mat-dialog-title>{{ 'EditJudoka' | translate }}</h1>
     <div mat-dialog-content>
         <form [formGroup]="judokaEditForm" novalidate (ngSubmit)="editJudoka()" color="accent">
             <mat-form-field>
-                <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
+                <input autofocus type="text" matInput placeholder="{{ 'Firstname' | translate }}" required formControlName="firstname">
             </mat-form-field>
 
             <mat-form-field>
-                <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
+                <input autofocus type="text" matInput placeholder="{{ 'Lastname' | translate }}" required formControlName="lastname">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Select gender</mat-label>
+                <mat-label>{{ 'Gender' | translate }}</mat-label>
                 <mat-select [compareWith]="compare" formControlName="genderId" required>
                     <mat-option *ngFor="let gender of genders" [value]="gender.id">
                         {{gender.textEN}}
@@ -124,7 +124,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Select DAN/KYU</mat-label>
+                <mat-label>{{ 'DanKyu' | translate }}</mat-label>
                 <mat-select [compareWith]="compare" formControlName="dankyuId" required>
                     <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
                         {{danKyu.text}}
@@ -136,18 +136,18 @@
                 <input autofocus type="number" matInput placeholder="Birth Years" required formControlName="birthYears">
             </mat-form-field>
             <div mat-dialog-actions>
-                <button type="submit" mat-raised-button color="primary">Accept</button>
-                <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+                <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+                <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
             </div>
         </form>
     </div>
 </ng-template>
 
 <ng-template #deleteJudokaModal>
-    <h1 mat-dialog-title>Are you sure you want to delete?</h1>
+    <h1 mat-dialog-title>{{ 'AreYouSureWantToDelete' | translate }}</h1>
     <br>
     <div mat-dialog-content class="center">
-        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
-        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">{{ 'Accept' | translate }}</button>
+        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
     </div>
 </ng-template>
