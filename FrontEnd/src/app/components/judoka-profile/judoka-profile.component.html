@@ -12,59 +12,59 @@
                             <img src="../../../assets/images//judokas/judoka-icon.png" />
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Firstname and lastname: </b>
+                            <h5><b>{{ 'FirstnameAndLastname' | translate }}: </b>
                                 <p>{{judoka.firstname}} {{judoka.lastname}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Gender: </b>
+                            <h5><b>{{ 'Gender' | translate }}: </b>
                                 <p>{{judoka.gender.textEN}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Birth Years: </b>
+                            <h5><b>{{ 'BirthYears' | translate }}: </b>
                                 <p>{{judoka.birthYears}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Dan/Kyu: </b>
+                            <h5><b>{{ 'DanKyu' | translate }}: </b>
                                 <p>{{judoka.danKyu.text}}</p>
                             </h5>
                         </mat-grid-tile>
                     </mat-grid-list>
                 </mat-tab>
-                <mat-tab label="Organization">
+                <mat-tab label="{{ 'Organization' | translate }}">
                     <mat-card-content>
                         <mat-grid-list cols="5" rowHeight="100px">
                             <mat-grid-tile [colspan]="1" [rowspan]="4">
                                 <img [src]="judoka.user.organization.image" />
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Organization name: </b>
+                                <h5><b>{{ 'OrganizationName' | translate }}: </b>
                                     <p>{{judoka.user.organization.exactName}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Type: </b>
+                                <h5><b>{{ 'Type' | translate }}: </b>
                                     <p>{{judoka.user.organization.organizationType.typeNameEN}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Coach: </b>
+                                <h5><b>{{ 'Coach' | translate }}: </b>
                                     <p>{{judoka.user.firstname}} {{judoka.user.lastname}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Address: </b>
+                                <h5><b>{{ 'Address' | translate }}: </b>
                                     <p>{{judoka.user.organization.country}}, {{judoka.user.organization.city}}, {{judoka.user.organization.address}}</p>
                                 </h5>
                             </mat-grid-tile>
                         </mat-grid-list>
                     </mat-card-content>
                 </mat-tab>
-                <mat-tab label="Achevements">
+                <mat-tab label="{{ 'Achevements' | translate }}">
                     <mat-card-content>
-                        <h5><b>Curent points: </b>{{judoka.points}}
+                        <h5><b>{{ 'CurrentPoints' | translate }}: </b>{{judoka.points}}
                         </h5>
                         <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
                             <ng-container matColumnDef="position">
@@ -73,31 +73,31 @@
                             </ng-container>
                             <!-- Position Column -->
                             <ng-container matColumnDef="competitions">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Competitions </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Competitions' | translate }} </th>
                                 <td mat-cell *matCellDef="let element"> {{element.weightCategory.ageGroup.competitions.title}} </td>
                             </ng-container>
 
                             <!-- Name Column -->
                             <ng-container matColumnDef="ageGroup">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Age Group </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'AgeGroup' | translate }} </th>
                                 <td mat-cell *matCellDef="let element"> {{element.weightCategory.ageGroup.title}} </td>
                             </ng-container>
 
                             <!-- Symbol Column -->
                             <ng-container matColumnDef="date">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Date' | translate }} </th>
                                 <td mat-cell *matCellDef="let element"> {{element.weightCategory.ageGroup.competitions.competitionsDate | date:'yyyy/MM/dd h:mm'}} </td>
                             </ng-container>
 
                             <!-- Weight Column -->
                             <ng-container matColumnDef="place">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Place' | translate }} </th>
                                 <td mat-cell *matCellDef="let element"> {{element.place}} </td>
                             </ng-container>
 
                             <!-- Symbol Column -->
                             <ng-container matColumnDef="points">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Points' | translate }} </th>
                                 <td mat-cell *matCellDef="let element"> {{element.points}} </td>
                             </ng-container>
 

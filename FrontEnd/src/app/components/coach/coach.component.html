@@ -2,7 +2,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field> -->
 <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button (click)="openDialog(addCoachModal, null)" color="primary"><mat-icon>person_add</mat-icon> Register Coach </button>
+    <button mat-raised-button (click)="openDialog(addCoachModal, null)" color="primary"><mat-icon>person_add</mat-icon> {{ 'RegisterCoach' | translate }} </button>
 </div><br>
 <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -14,31 +14,31 @@
 
     <!-- Position Column -->
     <ng-container matColumnDef="firstname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Firstname' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="lastname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Lastname' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="birthDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Date </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'BirthDate' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.birthDate | date:'yyyy/MM/dd h:mm'}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Gender' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="danKyu">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dan/Kyu </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'DanKyu' | translate }} </th>
         <td mat-cell *matCellDef="let element">
             <div *ngIf="element.dankyu != null">
                 {{element.danKyu.text}}
@@ -48,29 +48,29 @@
 
     <!-- Position Column -->
     <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Email' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
 
     <!-- Position Column -->
     <ng-container matColumnDef="phoneNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PhoneNumber' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
     </ng-container>
 
     <!-- Position Column -->
     <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Status' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.status.statusNameEN}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef align="center"> Actions </th>
+        <th mat-header-cell *matHeaderCellDef align="center"> {{ 'Actions' | translate }} </th>
         <td mat-cell *matCellDef="let element">
             <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
                 <div fxFlex="100px">
-                    <button mat-raised-button style="padding-left: 22px; padding-right: 22px" (click)="openDialog(blockCoachModal, element)" color="warn"><mat-icon>block</mat-icon> Block </button>
+                    <button mat-raised-button style="padding-left: 22px; padding-right: 22px" (click)="openDialog(blockCoachModal, element)" color="warn"><mat-icon>block</mat-icon> {{ 'Block' | translate }} </button>
                 </div>
             </div>
         </td>
@@ -83,44 +83,44 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #addCoachModal>
-    <h1 mat-dialog-title>Register Coach</h1>
+    <h1 mat-dialog-title>{{ 'RegisterCoach' | translate }}</h1>
     <div mat-dialog-content>
         <form [formGroup]="userForm" novalidate (ngSubmit)="registerCoach()" color="accent">
             <div fxLayout="row wrap">
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <input autofocus type="email" matInput placeholder="Email" required formControlName="email">
+                        <input autofocus type="email" matInput placeholder="{{ 'Email' | translate }}" required formControlName="email">
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
+                        <input autofocus type="text" matInput placeholder="{{ 'Firstname' | translate }}" required formControlName="firstname">
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
+                        <input autofocus type="text" matInput placeholder="{{ 'Lastname' | translate }}" required formControlName="lastname">
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <input autofocus type="text" matInput placeholder="Phone number" required formControlName="phoneNumber">
+                        <input autofocus type="text" matInput placeholder="{{ 'PhoneNumber' | translate }}" required formControlName="phoneNumber">
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <input autofocus type="date" matInput placeholder="Birth Date" required formControlName="birthDate">
+                        <input autofocus type="date" matInput placeholder="{{ 'BirthDate' | translate }}" required formControlName="birthDate">
                     </mat-form-field>
                 </div>
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <mat-label>Select gender</mat-label>
+                        <mat-label>{{ 'Gender' | translate }}</mat-label>
                         <mat-select formControlName="genderId" required>
                             <mat-option *ngFor="let gender of genders" [value]="gender.id">
                                 {{gender.textEN}}
@@ -131,7 +131,7 @@
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                        <mat-label>Select dan/kyu</mat-label>
+                        <mat-label>{{ 'DanKyu' | translate }}</mat-label>
                         <mat-select formControlName="danKyuId" required>
                             <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
                                 {{danKyu.text}}
@@ -142,22 +142,22 @@
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field style="width: 100%">
-                        <input matInput type="password" placeholder="Password" formControlName="password" class="form-control">
+                        <input matInput type="password" placeholder="{{ 'Password' | translate }}" formControlName="password" class="form-control">
                     </mat-form-field>
                     <small *ngIf="clicked && userForm.controls['password'].hasError('required')" class="text-danger support-text">You must include password.</small>
                 </div>
                 <!-- col full-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field style="width: 100%">
-                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" type="password">
+                        <input matInput placeholder="{{ 'ConfirmPassword' | translate }}" formControlName="confirmPassword" class="form-control" type="password">
                     </mat-form-field>
                     <small *ngIf="clicked && userForm.controls['confirmPassword'].hasError('required')" class="text-danger support-text">You must include confirm password.</small>
                     <small *ngIf="clicked && userForm.controls['confirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not match.</small>
                 </div>
 
                 <div mat-dialog-actions>
-                    <button type="submit" mat-raised-button color="primary">Accept</button>
-                    <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+                    <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+                    <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
                 </div>
             </div>
         </form>
@@ -165,10 +165,10 @@
 </ng-template>
 
 <ng-template #blockCoachModal>
-    <h1 mat-dialog-title>Are you sure you want to block?</h1>
+    <h1 mat-dialog-title>{{ 'AreYouSureYouWantToBlock' | translate }}</h1>
     <br>
     <div mat-dialog-content class="center">
-        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="blockConfirm()">Accept</button>
-        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="blockConfirm()">{{ 'Accept' | translate }}</button>
+        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
     </div>
 </ng-template>

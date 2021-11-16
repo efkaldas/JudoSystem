@@ -3,12 +3,12 @@
         <mat-card>
             <nav mat-tab-nav-bar>
                 <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
-            {{link.label}}
+            {{ link.label | translate }}
         </a>
             </nav>
-                <mat-card-content>
-                    <router-outlet></router-outlet>
-                </mat-card-content>
+            <mat-card-content>
+                <router-outlet></router-outlet>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

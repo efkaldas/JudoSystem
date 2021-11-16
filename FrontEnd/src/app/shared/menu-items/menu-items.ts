@@ -35,7 +35,7 @@ const HEADERMENUITEMS = [
  // { state: 'settings',type: 'link', name: 'Settings', icon: 'settings' },
   { state: '/profile', type: 'link', name: 'Profile', icon: 'account_box' },
   //{ state: 'disableNotifications', type: 'link', name: 'Disable Notifications', icon: 'notifications_off' },
-  { state: '/logout', type: 'link', name: 'Sign Out', icon: 'exit_to_app' },
+  { state: '/logout', type: 'link', name: 'SignOut', icon: 'exit_to_app' },
 ];
 
 const ADMIN_MENUITEMS = [

@@ -3,76 +3,76 @@
     <div fxFlex.gt-sm="100%" fxFlex="100">
         <mat-card>
             <mat-card-content>
-                <mat-card-title>User Information</mat-card-title>
+                <mat-card-title>{{ 'UserInformation' | translate }}</mat-card-title>
             </mat-card-content>
             <mat-tab-group>
                 <mat-tab label="Profile">
                     <div fxLayout="row" fxLayoutAlign="end center" class="edit-button">
-                        <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
+                        <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                     </div>
                     <mat-grid-list cols="5" rowHeight="100px">
                         <mat-grid-tile [colspan]="1" [rowspan]="6">
                             <img [src]="user.image" />
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Firstname and lastname: </b>
+                            <h5><b>{{ 'FirstnameAndLastname' | translate }}: </b>
                                 <p>{{user.firstname}} {{user.lastname}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Gender: </b>
+                            <h5><b>{{ 'Gender' | translate }}: </b>
                                 <p>{{user.gender.textEN}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Birth Date: </b>
+                            <h5><b>{{ 'BirthDate' | translate }}: </b>
                                 <p>{{user.birthDate}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Dan/Kyu: </b>
+                            <h5><b>{{ 'DanKyu' | translate }}: </b>
                                 <p *ngIf="user.danKyu != null">{{user.danKyu.text}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Email: </b>
+                            <h5><b>{{ 'Email' | translate }}: </b>
                                 <p>{{user.email}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                            <h5><b>Phone number: </b>
+                            <h5><b>{{ 'PhoneNumber' | translate }}: </b>
                                 <p>{{user.phoneNumber}}</p>
                             </h5>
                         </mat-grid-tile>
                     </mat-grid-list>
                 </mat-tab>
-                <mat-tab label="Organization">
+                <mat-tab label="{{ 'Organization' | translate }}">
                     <mat-card-content>
                         <div *ngIf="isAdmin" fxLayout="row" fxLayoutAlign="end center" class="edit-button">
-                            <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
+                            <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                         </div>
                         <mat-grid-list cols="5" rowHeight="100px">
                             <mat-grid-tile [colspan]="1" [rowspan]="4">
                                 <img [src]="user.organization.image" />
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Organization name: </b>
+                                <h5><b>{{ 'OrganizationName' | translate }}: </b>
                                     <p>{{user.organization.exactName}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Type: </b>
+                                <h5><b>{{ 'Type' | translate }}: </b>
                                     <p>{{user.organization.organizationType.typeNameEN}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Administrator: </b>
+                                <h5><b>{{ 'Administrator' | translate }}: </b>
                                     <p *ngIf="user.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
                                     <p *ngIf="!user.parentUser">{{user.firstname}} {{user.lastname}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
-                                <h5><b>Address: </b>
+                                <h5><b>{{ 'Address' | translate }}: </b>
                                     <p>{{user.organization.country}}, {{user.organization.city}}, {{user.organization.address}}</p>
                                 </h5>
                             </mat-grid-tile>
@@ -84,20 +84,20 @@
     </div>
 </div>
 <ng-template #editUserModal>
-    <h1 mat-dialog-title>Edit profile</h1>
+    <h1 mat-dialog-title>{{ 'EditProfile' | translate }}</h1>
     <div mat-dialog-content>
         <form [formGroup]="userEditForm" novalidate (ngSubmit)="editUser()" color="accent">
             <div fxLayout="row wrap">
                 <mat-form-field>
-                    <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
+                    <input autofocus type="text" matInput placeholder="{{ 'Firstname' | translate }}" required formControlName="firstname">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input autofocus type="text" matInput placeholder="Lastname" required formControlName="lastname">
+                    <input autofocus type="text" matInput placeholder="{{ 'Lastname' | translate }}" required formControlName="lastname">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>Select gender</mat-label>
+                    <mat-label>{{ 'Gender' | translate }}</mat-label>
                     <mat-select [compareWith]="compareGenderFunction" formControlName="genderId" required>
                         <mat-option *ngFor="let gender of genders" [value]="gender.id">
                             {{gender.textEN}}
@@ -106,7 +106,7 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>Select DAN/KYU</mat-label>
+                    <mat-label>{{ 'DanKyu' | translate }}</mat-label>
                     <mat-select [compareWith]="compareDanKyuFunction" formControlName="dankyuId" required>
                         <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
                             {{danKyu.text}}
@@ -115,28 +115,28 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input autofocus type="date" value="{{ user.birthDate | date:'yyyy-MM-dd' }}" matInput placeholder="Birth Date" required formControlName="BirthDate">
+                    <input autofocus type="date" value="{{ user.birthDate | date:'yyyy-MM-dd' }}" matInput placeholder="{{ 'BirthDate' | translate }}" required formControlName="BirthDate">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input autofocus type="text" matInput placeholder="Phone Number" required formControlName="phoneNumber">
+                    <input autofocus type="text" matInput placeholder="{{ 'PhoneNumber' | translate }}" required formControlName="phoneNumber">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input autofocus type="email" matInput placeholder="Email" required formControlName="email">
+                    <input autofocus type="email" matInput placeholder="{{ 'Email' | translate }}" required formControlName="email">
                 </mat-form-field>
 
                 <mat-form-field style="width: 100%">
-                    <input matInput type="password" placeholder="Password" formControlName="password" class="form-control">
+                    <input matInput type="password" placeholder="{{ 'Password' | translate }}" formControlName="password" class="form-control">
                 </mat-form-field>
 
                 <mat-form-field style="width: 100%">
-                    <input matInput placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" type="password">
+                    <input matInput placeholder="{{ 'ConfirmPassword' | translate }}" formControlName="confirmPassword" class="form-control" type="password">
                 </mat-form-field>
 
                 <div mat-dialog-actions>
-                    <button type="submit" mat-raised-button color="primary">Accept</button>
-                    <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+                    <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+                    <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
                 </div>
             </div>
         </form>

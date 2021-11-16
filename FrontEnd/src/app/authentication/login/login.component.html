@@ -5,14 +5,14 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="text-center">
                         <img height="300" alt="homepage" src="assets/images/logo-icon.png">
-                        <h4 class="m-t-0">Login to App</h4>
+                        <h4 class="m-t-0">{{ 'LoginToApp' | translate }}</h4>
                     </div>
 
                     <div fxLayout="row wrap">
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <mat-form-field>
-                                <input matInput placeholder="Email" [formControl]="loginForm.controls['email']">
+                                <input matInput placeholder="{{ 'Email' | translate }}" [formControl]="loginForm.controls['email']">
                             </mat-form-field>
                             <small *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['password'].touched" class="text-danger support-text">You must include an email address.</small>
                             <small *ngIf="loginForm.controls['email'].errors?.email && loginForm.controls['password'].touched" class="text-danger support-text">You must include a valid email address.</small>
@@ -20,13 +20,13 @@
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <mat-form-field>
-                                <input matInput type="password" placeholder="Password" [formControl]="loginForm.controls['password']">
+                                <input matInput type="password" placeholder="{{ 'Password' | translate }}" [formControl]="loginForm.controls['password']">
                             </mat-form-field>
                             <small *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="text-danger support-text">Password is required.</small>
                         </div>
                         <!-- col half-->
                         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
-                            <mat-checkbox color="warn">Remember me</mat-checkbox>
+                            <mat-checkbox color="warn">{{ 'RememberMe' | translate }}</mat-checkbox>
                         </div>
                         <!-- col half-->
                         <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="text-right">
@@ -34,12 +34,12 @@
                         </div> -->
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!loginForm.valid">Login</button>
+                            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!loginForm.valid">{{ 'Login' | translate }}</button>
                         </div>
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="text-center">
-                            <span>Don't have an account?
-                                <a [routerLink]="['/register']" class="text-info link">Register</a>
+                            <span>{{ 'DontHaveAnAccount' | translate }}
+                                <a [routerLink]="['/register']" class="text-info link">{{ 'Register' | translate }}</a>
                             </span>
                         </div>
                     </div>

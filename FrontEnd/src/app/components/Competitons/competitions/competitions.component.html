@@ -3,9 +3,13 @@
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
         <mat-card>
             <mat-card-content>
-                <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
-                    <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
-                    <button style="margin-left: 20px" mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="warn"><mat-icon>remove_circle_outline</mat-icon> Delete </button>
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end center" *ngIf="isAdmin">
+                    <div>
+                        <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
+                    </div>
+                    <div>
+                        <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="warn"><mat-icon>remove_circle_outline</mat-icon> {{ 'Delete' | translate }} </button>
+                    </div>
                 </div>
                 <!-- Row -->
                 <div fxLayout="row" fxLayoutAlign="start wrap" calss="row-height">
@@ -19,23 +23,23 @@
                 </div>
                 <!-- Row -->
                 <div *ngIf="registrationStatus(competition) == 'not_started'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
-                    <p style="color: blue">Registration starts: {{stringDate(competition.registrationStart) | date:'yyyy/MM/dd h:mm'}}</p>
+                    <p style="color: blue">{{ 'RegistrationStart' | translate }}: {{stringDate(competition.registrationStart) | date:'yyyy/MM/dd h:mm'}}</p>
                 </div>
                 <div *ngIf="registrationStatus(competition) == 'ended'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
-                    <p style="color: green">Registration ended!</p>
+                    <p style="color: green">{{ 'RegistrationEnded' | translate }}!</p>
                 </div>
                 <div *ngIf="registrationStatus(competition) == 'in_progress'" fxLayout="row" fxLayoutAlign="start start" calss="row-height">
-                    <p style="color: red">Regstration ends: {{stringDate(competition.registrationStart) | date:'yyyy/MM/dd h:mm'}}</p>
+                    <p style="color: red">{{ 'RegistrationEnd' | translate }}: {{stringDate(competition.registrationStart) | date:'yyyy/MM/dd h:mm'}}</p>
                 </div>
             </mat-card-content>
         </mat-card>
     </div>
     <ng-template #deleteModal>
-        <h1 mat-dialog-title>Are you sure you want to delete?</h1>
+        <h1 mat-dialog-title>{{ 'AreYouSureWantToDelete' | translate }}</h1>
         <br>
         <div mat-dialog-content class="center">
-            <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
-            <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+            <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">{{ 'Accept' | translate }}</button>
+            <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
         </div>
     </ng-template>
 </div>

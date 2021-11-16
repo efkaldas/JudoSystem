@@ -23,9 +23,9 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   weightCategoryId: any;
   competitors: unknown[];
 
-  displayedColumnsCompetitors: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'organization', 'country'];
-
   dataSource = new MatTableDataSource;
+
+  displayedColumnsCompetitors: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'organization', 'country'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

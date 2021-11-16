@@ -44,11 +44,11 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef align="center"> {{ 'Actions' | translate }} </th>
         <td mat-cell *matCellDef="let element">
-            <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-                <div fxFlex="100px">
+            <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="center">
+                <div>
                     <button mat-raised-button (click)="openDialog(editJudokaModal, element)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                 </div>
-                <div fxFlex="100px">
+                <div>
                     <button mat-raised-button (click)="openDialog(deleteJudokaModal, element)" color="warn"><mat-icon>remove_circle_outline</mat-icon>{{ 'Delete' | translate }} </button>
                 </div>
             </div>

@@ -20,12 +20,12 @@ export class CompetitionsTabsComponent implements OnInit {
         index: 0
       },
       {
-        label: 'My Competitors',
+        label: 'MyJudokas',
         link: './my-competitors',
         index: 1
       }, 
       {
-        label: 'Age Groups',
+        label: 'AgeGroups',
         link: './age-groups',
         index: 2
       }, 

@@ -1,19 +1,19 @@
 <div fxFlex.gt-sm="100" fxFlex="100">
     <!-- Row -->
     <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-        <h4><b>Place: </b> {{competitions?.place}}</h4>
+        <h4><b>{{ 'Place' | translate }}: </b> {{competitions?.place}}</h4>
     </div>
     <!-- Row -->
     <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-        <h4><b>Date: </b>{{competitions?.competitionsDate | date:'yyyy/MM/dd h:mm'}}</h4>
+        <h4><b>{{ 'Date' | translate }}: </b>{{competitions?.competitionsDate | date:'yyyy/MM/dd h:mm'}}</h4>
     </div>
     <!-- Row -->
     <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-        <h4><b>Entry Fee: </b> {{competitions?.entryFee}} €</h4>
+        <h4><b>{{ 'EntryFee' | translate }}: </b> {{competitions?.entryFee}} €</h4>
     </div>
     <!-- Row -->
     <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
-        <h4><b>Description: </b></h4>
+        <h4><b>{{ 'Description' | translate }}: </b></h4>
         <div style="padding-left: 10px; padding-top: 7px;" [innerHTML]="competitions?.description"></div>
     </div>
 </div>

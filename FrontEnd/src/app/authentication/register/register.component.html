@@ -5,46 +5,46 @@
                 <mat-card-title>
                     <div class="text-center">
                         <img height="200" alt="homepage" src="assets/images/logo-icon.png">
-                        <h4 class="m-t-0">Registration</h4>
+                        <h4 class="m-t-0">{{ 'Registration' | translate }}</h4>
                     </div>
                 </mat-card-title>
                 <mat-horizontal-stepper [linear]="isLinear">
                     <mat-step [stepControl]="userForm">
                         <form [formGroup]="userForm">
-                            <ng-template matStepLabel>User information</ng-template>
+                            <ng-template matStepLabel> {{ 'UserInformation' | translate }}</ng-template>
                             <div fxLayout="row wrap">
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Firstname" type="text" formControlName="firstname" class="form-control">
+                                        <input matInput placeholder="{{ 'Firstname' | translate }}" type="text" formControlName="firstname" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['firstname'].hasError('required')" class="text-danger support-text">You must include a firstname.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Lastname" type="text" formControlName="lastname" class="form-control" required>
+                                        <input matInput placeholder="{{ 'Lastname' | translate }}" type="text" formControlName="lastname" class="form-control" required>
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['lastname'].hasError('required')" class="text-danger support-text">You must include a lastname.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Birth Date" type="date" formControlName="birthDate" class="form-control" required>
+                                        <input matInput placeholder="{{ 'BirthDate' | translate }}" type="date" formControlName="birthDate" class="form-control" required>
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['birthDate'].hasError('required')" class="text-danger support-text">You must include a birth date.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Phonenumber" type="text" formControlName="phoneNumber" class="form-control" required>
+                                        <input matInput placeholder="{{ 'PhoneNumber' | translate }}" type="text" formControlName="phoneNumber" class="form-control" required>
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['phoneNumber'].hasError('required')" class="text-danger support-text">You must include a phone number.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field>
-                                        <mat-label>Gender</mat-label>
+                                        <mat-label>{{ 'Gender' | translate }}</mat-label>
                                         <mat-select formControlName="genderId">
                                             <mat-option *ngFor="let gender of genders" [value]="gender.id">{{gender.textEN}}</mat-option>
                                         </mat-select>
@@ -54,7 +54,7 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field>
-                                        <mat-label>Dan/Kyu</mat-label>
+                                        <mat-label>{{ 'DanKyu' | translate }}</mat-label>
                                         <mat-select formControlName="danKyuId">
                                             <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">{{danKyu.text}}</mat-option>
                                         </mat-select>
@@ -64,7 +64,7 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Email address" type="Email" formControlName="email" class="form-control">
+                                        <input matInput placeholder="{{ 'Email' | translate }}" type="Email" formControlName="email" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['email'].hasError('required')" class="text-danger support-text">You must include an email address.</small>
                                     <small *ngIf="clicked && userForm.controls['email'].errors?.email" class="text-danger support-text">You must include a valid email address.</small>
@@ -73,40 +73,40 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput type="password" placeholder="Password" formControlName="password" class="form-control">
+                                        <input matInput type="password" placeholder="{{ 'Password' | translate }}" formControlName="password" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['password'].hasError('required')" class="text-danger support-text">You must include password.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" class="form-control" type="password">
+                                        <input matInput placeholder="{{ 'ConfirmPassword' | translate }}" formControlName="confirmPassword" class="form-control" type="password">
                                     </mat-form-field>
                                     <small *ngIf="clicked && userForm.controls['confirmPassword'].hasError('required')" class="text-danger support-text">You must include confirm password.</small>
                                     <small *ngIf="clicked && userForm.controls['confirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not match.</small>
                                 </div>
                                 <!-- col full-->
                                 <div class="text-center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                                    <span>Already have an account?
-                    <a [routerLink]="['/login']" class="link text-info"> Login</a>
+                                    <span>{{ 'AlreadyHaveAnAccount' | translate }}
+                    <a [routerLink]="['/login']" class="link text-info"> {{ 'Login' | translate }} </a>
                   </span>
                                 </div>
                             </div>
                             <div>
-                                <button mat-raised-button (click)="onUserFormSubmit()" type="button" color="warn" matStepperNext>Next</button>
+                                <button mat-raised-button (click)="onUserFormSubmit()" type="button" color="warn" matStepperNext>{{ 'Next' | translate }}</button>
                             </div>
                         </form>
                     </mat-step>
                     <mat-step [stepControl]="organizationForm">
                         <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()">
                             <ng-template matStepLabel>
-                                <p (click)="onUserFormSubmit()">Organization information</p>
+                                <p (click)="onUserFormSubmit()">{{ 'OrganizationInformation' | translate }}</p>
                             </ng-template>
                             <div fxLayout="row wrap">
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field>
-                                        <mat-select placeholder="Organization type" formControlName="organizationTypeId" class="form-control">
+                                        <mat-select placeholder="{{ 'OrganizationType' | translate }}" formControlName="organizationTypeId" class="form-control">
                                             <mat-option *ngFor="let organizationType of organizationTypes" [value]="organizationType.id">
                                                 {{organizationType.typeNameEN}}
                                             </mat-option>
@@ -117,28 +117,28 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Organization name" type="text" formControlName="exactName" class="form-control">
+                                        <input matInput placeholder="{{ 'OrganizationName' | translate }}" type="text" formControlName="exactName" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['exactName'].hasError('required')" class="text-danger support-text">You must include an organization name.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Country" type="text" formControlName="country" class="form-control">
+                                        <input matInput placeholder="{{ 'Country' | translate }}" type="text" formControlName="country" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['country'].hasError('required')" class="text-danger support-text">You must include a country.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="City" type="text" formControlName="city" class="form-control">
+                                        <input matInput placeholder="{{ 'City' | translate }}" type="text" formControlName="city" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['city'].hasError('required')" class="text-danger support-text">You must include a city.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
-                                        <input matInput placeholder="Address" type="text" formControlName="address" class="form-control">
+                                        <input matInput placeholder="{{ 'Address' | translate }}" type="text" formControlName="address" class="form-control">
                                     </mat-form-field>
                                     <small *ngIf="submitted && organizationForm.controls['address'].hasError('required')" class="text-danger support-text">You must include an address.</small>
                                 </div>
@@ -147,9 +147,9 @@
                                         <a href="javascript:void(0)" class="link text-info">terms</a>.</mat-checkbox>
                                 </div> -->
                                 <div>
-                                    <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                                    <button mat-raised-button color="accent" matStepperPrevious>{{ 'Back' | translate }}</button>
                                 </div>
-                                <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit">Create your account</button>
+                                <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit">{{ 'CreateAccount' | translate }}</button>
                             </div>
                         </form>
                     </mat-step>
