@@ -148,7 +148,6 @@ export class MyJudokasComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.myJudokas);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-          console.log(this.dataSource);
         },
         error => {
           this.errorMessage = error["error"].message;

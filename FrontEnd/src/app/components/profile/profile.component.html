@@ -10,36 +10,38 @@
                     <div fxLayout="row" fxLayoutAlign="end center" class="edit-button">
                         <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                     </div>
-                    <mat-grid-list cols="5" rowHeight="100px">
-                        <mat-grid-tile [colspan]="1" [rowspan]="6">
-                            <img [src]="user.image" />
+                    <mat-grid-list cols="12" rowHeight="75px">
+                        <mat-grid-tile [colspan]="3" [rowspan]="6">
+                            <div class="image-container" fxLayoutAlign="center">
+                                <img class="image" [src]="user.image" />
+                            </div>
                         </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'FirstnameAndLastname' | translate }}: </b>
                                 <p>{{user.firstname}} {{user.lastname}}</p>
                             </h5>
                         </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'Gender' | translate }}: </b>
                                 <p>{{user.gender.textEN}}</p>
                             </h5>
                         </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'BirthDate' | translate }}: </b>
                                 <p>{{user.birthDate}}</p>
                             </h5>
                         </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'DanKyu' | translate }}: </b>
                                 <p *ngIf="user.danKyu != null">{{user.danKyu.text}}</p>
                             </h5>
                         </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'Email' | translate }}: </b>
                                 <p>{{user.email}}</p>
                             </h5>
                         </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'PhoneNumber' | translate }}: </b>
                                 <p>{{user.phoneNumber}}</p>
                             </h5>
@@ -51,27 +53,29 @@
                         <div *ngIf="isAdmin" fxLayout="row" fxLayoutAlign="end center" class="edit-button">
                             <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                         </div>
-                        <mat-grid-list cols="5" rowHeight="100px">
-                            <mat-grid-tile [colspan]="1" [rowspan]="4">
-                                <img [src]="user.organization.image" />
+                        <mat-grid-list cols="12" rowHeight="75px">
+                            <mat-grid-tile [colspan]="3" [rowspan]="4">
+                                <div class="image-container" fxLayoutAlign="center">
+                                    <img class="image" [src]="user.organization.image" />
+                                </div>
                             </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                                 <h5><b>{{ 'OrganizationName' | translate }}: </b>
                                     <p>{{user.organization.exactName}}</p>
                                 </h5>
                             </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                                 <h5><b>{{ 'Type' | translate }}: </b>
                                     <p>{{user.organization.organizationType.typeNameEN}}</p>
                                 </h5>
                             </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                                 <h5><b>{{ 'Administrator' | translate }}: </b>
                                     <p *ngIf="user.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
                                     <p *ngIf="!user.parentUser">{{user.firstname}} {{user.lastname}}</p>
                                 </h5>
                             </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
+                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                                 <h5><b>{{ 'Address' | translate }}: </b>
                                     <p>{{user.organization.country}}, {{user.organization.city}}, {{user.organization.address}}</p>
                                 </h5>
@@ -84,9 +88,9 @@
     </div>
 </div>
 <ng-template #editUserModal>
-    <h1 mat-dialog-title>{{ 'EditProfile' | translate }}</h1>
-    <div mat-dialog-content>
-        <form [formGroup]="userEditForm" novalidate (ngSubmit)="editUser()" color="accent">
+    <form [formGroup]="userEditForm" novalidate (ngSubmit)="editUser()" color="accent">
+        <h1 mat-dialog-title>{{ 'EditProfile' | translate }}</h1>
+        <div mat-dialog-content>
             <div fxLayout="row wrap">
                 <mat-form-field>
                     <input autofocus type="text" matInput placeholder="{{ 'Firstname' | translate }}" required formControlName="firstname">
@@ -115,7 +119,7 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input autofocus type="date" value="{{ user.birthDate | date:'yyyy-MM-dd' }}" matInput placeholder="{{ 'BirthDate' | translate }}" required formControlName="BirthDate">
+                    <input autofocus type="date" value="{{ user.birthDate | date:'yyyy-MM-dd' }}" matInput placeholder="{{ 'BirthDate' | translate }}" required formControlName="birthDate">
                 </mat-form-field>
 
                 <mat-form-field>
@@ -133,12 +137,11 @@
                 <mat-form-field style="width: 100%">
                     <input matInput placeholder="{{ 'ConfirmPassword' | translate }}" formControlName="confirmPassword" class="form-control" type="password">
                 </mat-form-field>
-
-                <div mat-dialog-actions>
-                    <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
-                    <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
-                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
+        </div>
+    </form>
 </ng-template>

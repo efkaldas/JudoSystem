@@ -12,8 +12,8 @@ import { Judoka } from '../../../../../../data/judoka.data';
 })
 export class CompetitionsResultsWeightCategoryShowComponent implements OnInit {
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild('htmlData',{static: true}) htmlData:ElementRef;
 
   weightCategoryId: number;
@@ -23,7 +23,7 @@ export class CompetitionsResultsWeightCategoryShowComponent implements OnInit {
   dataSource = new MatTableDataSource;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'organization', 'country'];
 
-  Judokas: Judoka[];
+  judokas: Judoka[] = [];
   errorMessage: string;
 
   constructor(private weightCategoryService: WeightCategoryService, private router: Router, private _snackBar: MatSnackBar,
@@ -52,8 +52,8 @@ export class CompetitionsResultsWeightCategoryShowComponent implements OnInit {
     return this.weightCategoryService.getResults(this.weightCategoryId)
       .subscribe(
         data => {
-          this.Judokas = data as any;
-          this.dataSource = new MatTableDataSource(this.Judokas);
+          this.judokas = data as any;
+          this.dataSource = new MatTableDataSource(this.judokas);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.changeDetectorRefs.detectChanges();

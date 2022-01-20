@@ -1,0 +1,18 @@
+enum DanKyu {
+    KYU6 = 1,
+    KYU5 = 2,
+    KYU4 = 3,
+    KYU3 = 4,
+    KYU2 = 5,
+    KYU1 = 6,
+    DAN1 = 7,
+    DAN2 = 8,
+    DAN3 = 9,
+    DAN4 = 10,
+    DAN5 = 11,
+    DAN6 = 12,
+    DAN7 = 13,
+    DAN8 = 14,
+    DAN9 = 15,
+    DAN10 = 16,
+}

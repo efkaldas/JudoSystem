@@ -103,3 +103,101 @@
         </mat-card-content>
     </mat-tab>
 </mat-tab-group>
+
+<ng-template #addGroupModal>
+    <form [formGroup]="ageGroupForm" novalidate (ngSubmit)="addAgeGroup()" color="accent">
+        <div mat-dialog-content>
+            <h1 mat-dialog-title>Add Age Group</h1>
+            <div fxLayout="row wrap">
+                <mat-form-field>
+                    <input autofocus type="text" matInput placeholder="Title" required formControlName="title">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Select gender</mat-label>
+                    <mat-select formControlName="genderId" required>
+                        <mat-option *ngFor="let gender of genders" [value]="gender.id">
+                            {{gender.textEN}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input autofocus type="number" matInput placeholder="yearsFrom" required formControlName="yearsFrom">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input autofocus type="number" matInput placeholder="yearsTo" required formControlName="yearsTo">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Select Dan/Kyu From</mat-label>
+                    <mat-select formControlName="danKyuFrom" required>
+                        <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
+                            {{danKyu.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Select Dan/Kyu To</mat-label>
+                    <mat-select formControlName="danKyuTo" required>
+                        <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
+                            {{danKyu.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input autofocus type="date" matInput placeholder="Comppetitons date" required formControlName="competitionsDate">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input autofocus type="time" matInput placeholder="time" required formControlName="competitionsTime">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input autofocus type="date" matInput placeholder="Weight in start date" required formControlName="weightInFrom">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input autofocus type="time" matInput placeholder="time" required formControlName="weightInFromTime">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input autofocus type="date" matInput placeholder="Weight in end date" required formControlName="weightInTo">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex.gt-md="50" fxFlex="100" class="p-10">
+                    <mat-form-field>
+                        <input autofocus type="time" matInput placeholder="time" required formControlName="weightInToTime">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field class="demo-chip-list">
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let category of categories" [selectable]="selectable" [removable]="removable" (removed)="remove(category)">
+                            {{category.title}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="New category..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">Accept</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+        </div>
+    </form>
+</ng-template>

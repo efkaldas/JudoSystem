@@ -18,6 +18,8 @@ export class NewCompetitionsComponent implements OnInit {
   public errorMessage: string;
   public competitionsTypes: CompetitionsType[];
 
+  file = null;
+
   constructor(private competitionsService: CompetitionsService, private fb: FormBuilder, 
     private competitionsTypeService: CompetitionsTypeService, private router: Router, private _snackBar: MatSnackBar) { }
 
@@ -34,7 +36,7 @@ export class NewCompetitionsComponent implements OnInit {
       competitionsDate: [null, Validators.compose([Validators.required])],
       competitionsTime: [null, Validators.compose([Validators.required])],
       entryFee: [false, Validators.compose([Validators.required])],
-      cardPayment: [null, Validators.compose([Validators.required])],
+      cardPayment: [false, Validators.compose([Validators.required])],
       competitionsTypeId: [null, Validators.compose([Validators.required])],
       registrationStart: [null, Validators.compose([Validators.required])],
       registrationStartTime: [null, Validators.compose([Validators.required])],
@@ -72,10 +74,10 @@ export class NewCompetitionsComponent implements OnInit {
   public addCompetitions()
   {
     this.normalizeDate();
-    if(this.competitionsForm.valid)   
+    if(this.competitionsForm.valid && this.resultsFileUpload())   
     { 
-    return this.competitionsService.create(this.competitionsForm.value)
-      .subscribe(
+    return this.competitionsService.create(this.competitionsForm.value, this.file)
+      .then(
         data => {
           this.openSnackBar("New competitions have been created", 'CLOSE');
           this.router.navigateByUrl('/competitions');
@@ -86,6 +88,26 @@ export class NewCompetitionsComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+    }
+  }
+  private resultsFileUpload() {
+    if (this.file == null) {
+      this.errorMessage = "Select file first";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else if (this.file.name.substr(this.file.name.length - 4) != ".pdf") {
+      this.errorMessage = "File format must be *.pdf";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else {
+      return true;
+    } 
+    return false;
+  }
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+        this.file = fileList[0]; 
+    }
+    else {
     }
   }
 

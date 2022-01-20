@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
 using System.IO;
+using System.Text;
 
 namespace JudoSystem
 {
@@ -38,12 +39,14 @@ namespace JudoSystem
             services.ConfigureCors(MyAllowSpecificOrigins);
             services.ConfigureMySql(Configuration);
             services.ConfigureRepositoryWrapper();
+            services.InitilizeObjects();
             services.ConfigureSwagger();
             services.AddMvc().AddNewtonsoftJson();
             services.ConfigureLoggerService();
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             services.ConfigureFilters();
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Judoka } from '../../../../../data/judoka.data';
 import { CompetitionsService } from '../../../../../services/Competitions.service';
 import { AgeGroup } from '../../../../../data/age-group.data';
@@ -21,8 +21,10 @@ export class CompetitionsResultsComponent implements OnInit {
   
   ageGroups: AgeGroup[];
   errorMessage: string;
+  file = null;
 
-  constructor(private competitionsService: CompetitionsService, private route: ActivatedRoute, private titleService: Title) { 
+  constructor(private competitionsService: CompetitionsService, private route: ActivatedRoute,
+     private titleService: Title, private snackBar: MatSnackBar) { 
 
     this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
@@ -32,6 +34,14 @@ export class CompetitionsResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+   //   horizontalPosition: 'end',
+    });
   }
 
   private getAgeGroups() {
@@ -50,6 +60,37 @@ export class CompetitionsResultsComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+  }
+
+  resultsFileUpload() {
+    if (this.file == null) {
+      this.errorMessage = "Select file first";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else if (this.file.name.substr(this.file.name.length - 4) != ".pdf") {
+      this.errorMessage = "File format must be *.pdf";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else {
+      this.competitionsService.importResultsFile(this.file, this.competitionsId).subscribe(
+        data => {
+          this.errorMessage = "File has successfully been uploaded";
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+        );
+    }  
+  }
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+        this.file = fileList[0]; 
+    }
+    else {
+
+    }
   }
 
 }

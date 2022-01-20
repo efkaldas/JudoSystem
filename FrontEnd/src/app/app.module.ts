@@ -77,6 +77,8 @@ import { CompetitionsCompetitorsComponent } from './components/Competitons/compe
 import { CompetitionsResultsComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results.component';
 import { CompetitionsResultsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-categories/competitions-results-weight-categories.component';
 import { CompetitionsResultsWeightCategoryShowComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-category-show/competitions-results-weight-category-show.component';
+import { CompetitionsCompetitorsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors-weight-categories/competitions-competitors-weight-categories.component';
+import { CompetitionsCompetitorsWeightCategoriesShowComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors-weight-categories-show/competitions-competitors-weight-categories-show.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -129,7 +131,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompetitionsCompetitorsComponent,
     CompetitionsResultsComponent,
     CompetitionsResultsWeightCategoriesComponent,
-    CompetitionsResultsWeightCategoryShowComponent
+    CompetitionsResultsWeightCategoryShowComponent,
+    CompetitionsCompetitorsWeightCategoriesComponent,
+    CompetitionsCompetitorsWeightCategoriesShowComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JudoSystem.Interfaces;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,9 +9,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace JudoSystem.Helpers
+namespace JudoSystem.Services
 {
-    public class EmailSendHelper
+    public class EmailSendService : IEmailSendService
     {
         NetworkCredential login;
         SmtpClient client;
@@ -17,24 +19,18 @@ namespace JudoSystem.Helpers
         bool process;
         int repeat;
         TimeSpan time = new TimeSpan(0, 0, 1, 0);
-        public static readonly string ADMIN_LOGIN = "judosystem.info@gmail.com";
-        public static readonly string ADMIN_PASSWORD = "adminJudo1337";
+        public readonly string ADMIN_LOGIN = "judosystem.info@gmail.com";
+        public readonly string ADMIN_PASSWORD = "gq9ECcs9ZCg7QaxE";
 
-        public void sendEmail(string title, string message, string fileToAttach, List<string> recipients)
+        public void SendEmail(string title, string message, List<string> recipients, string fileToAttach = null)
         {
             process = true;
             repeat = 0;
 
             while (process && repeat < 5)
             {
-
                 try
                 {
-                    login = new NetworkCredential(ADMIN_LOGIN, ADMIN_PASSWORD);
-                    client = new SmtpClient("smtp.gmail.com");
-                    client.Port = 587;
-                    client.EnableSsl = true;
-                    client.Credentials = login;
                     msg = new MailMessage { From = new MailAddress(ADMIN_LOGIN, "Judo System Admin", Encoding.UTF8) };
 
                     foreach (string recipient in recipients)
@@ -53,7 +49,13 @@ namespace JudoSystem.Helpers
                         msg.Attachments.Add(attachment);
                     }
 
-                    client.Send(msg);
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.EnableSsl = true;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential(ADMIN_LOGIN, ADMIN_PASSWORD);
+                        smtp.Send(msg);
+                    }
                     process = false;
                 }
                 catch (Exception e)
@@ -62,6 +64,10 @@ namespace JudoSystem.Helpers
                     Thread.Sleep(time);
                 }
             }
+        }
+        public string GetAdminEmail()
+        {
+            return ADMIN_LOGIN;
         }
     }
 }

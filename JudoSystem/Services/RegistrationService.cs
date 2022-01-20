@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using JudoSystem.Helpers;
+using JudoSystem.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace JudoSystem.Services
 {
-    public class RegistrationService
+    public class RegistrationService : IRegistrationService
     {
+        private readonly IEmailSendService _emailSendService;
+        public RegistrationService(IEmailSendService emailSendService)
+        {
+            _emailSendService = emailSendService;
+        }
         private string userMessageEN = "<p>Hello,</p>" +
                     "<p>you have successfully pushed registration form!</p>" +
                     "<p>Now you need to wait till administrators review your account.</p>" +
@@ -33,7 +39,6 @@ namespace JudoSystem.Services
         }
         private void SendUserMessage(User user)
         {
-            EmailSendHelper sendMail = new EmailSendHelper();
             if (!string.IsNullOrEmpty(user.Email))
             {
                 string message = userMessageLT + userMessageEN + userMessageRU;
@@ -41,19 +46,17 @@ namespace JudoSystem.Services
                 List<string> recipients = new List<string>();
                 recipients.Add(user.Email);
 
-                sendMail.sendEmail(DateTime.Now.ToString("yyyy-MM-dd") + " Registracijos forma sėkmingai pateikta!", message, null, recipients);
+                _emailSendService.SendEmail(DateTime.Now.ToString("yyyy-MM-dd") + " Registracijos forma sėkmingai pateikta!", message, recipients);
             }
         }
         private void SendAdministratorMessage(User user)
         {
-            EmailSendHelper sendMail = new EmailSendHelper();
-
             string message = "<p>Buvo pateikta nauja registacijos forma</p>";
 
             List<string> recipients = new List<string>();
-            recipients.Add(EmailSendHelper.ADMIN_LOGIN);
+            recipients.Add(_emailSendService.GetAdminEmail());
 
-            sendMail.sendEmail(DateTime.Now.ToString("yyyy-MM-dd") + " Pateikta nauja registracijos forma!", message, null, recipients);
+            _emailSendService.SendEmail(DateTime.Now.ToString("yyyy-MM-dd") + " Pateikta nauja registracijos forma!", message, recipients);
         }
     }
 }

@@ -62,7 +62,8 @@ namespace JudoSystem.Controllers
                     .ThenInclude(x => x.DanKyu)
                 .Include(x => x.Judoka)
                     .ThenInclude(x => x.User)
-                        .ThenInclude(x => x.Organization).ToList();
+                        .ThenInclude(x => x.Organization)
+                .Include(x => x.WeightCategory).ToList();
 
             return Ok(categoryResults.OrderBy(x => x.Place));
         }

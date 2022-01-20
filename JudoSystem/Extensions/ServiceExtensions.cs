@@ -19,6 +19,7 @@ using Repository;
 using LoggerService;
 using ActionFilters.Filters;
 using Entities.Models;
+using JudoSystem.Interfaces;
 
 namespace JudoSystem.Extensions
 {
@@ -47,6 +48,11 @@ namespace JudoSystem.Extensions
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+        public static void InitilizeObjects(this IServiceCollection services)
+        {
+            services.AddScoped<IEmailSendService, EmailSendService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {

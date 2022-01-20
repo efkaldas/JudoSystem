@@ -10,7 +10,9 @@ export class CompetitionsService extends LoginService {
   protected ageGroupUrl : string = "/AgeGroups";
   protected printCompetitorsUrl : string = "/Competitors-list.csv";
   protected importResultsUrl : string = "/ResultsFile"; 
+  protected importRegulationsUrl : string = "/RegulationsFile"; 
   protected myCompetitorsUrl : string = "/MyCompetitors"; 
+  protected pdf : string = "/PDF"; 
 
   getAll() {
     return this.http.get(this.competitionsUrl); 
@@ -28,11 +30,40 @@ export class CompetitionsService extends LoginService {
   delete(id: number) {
     return this.http.delete(this.competitionsUrl + id); 
   } 
-  create(competitions: Competitions) {
-    return this.http.post(this.competitionsUrl, competitions); 
+
+  async create(competitions: Competitions, file) {
+    var newCompetitions: Competitions;
+    var response = null;
+
+    await this.http.post(this.competitionsUrl, competitions)
+    .toPromise()
+    .then(
+      data => {
+        newCompetitions = data as Competitions;
+        return this.importRegulationsFile(file, newCompetitions.id)
+    });
+    console.log(response);
+     return response;
   }
+
+  public importRegulationsFile(file, id : number) {
+    const formData = new FormData();
+    formData.append('file', file, file.name); 
+
+    let headers = new HttpHeaders(); 
+    headers.append('Accept','text/pdf');
+    
+    return this.http.post(this.competitionsUrl + id + this.importRegulationsUrl, formData, {headers: headers, responseType: 'blob' }).toPromise();  
+  }
+
   getMyCompetitors(id:number) {
     return this.http.get(this.competitionsUrl + id + this.myCompetitorsUrl); 
+  }
+  getMycompetitorsPDF(id:number) {
+    let headers = new HttpHeaders(); 
+    headers.append('Accept','application/pdf;charset=utf-8');
+
+    return this.http.get(this.competitionsUrl + id + this.myCompetitorsUrl + this.pdf, {headers: headers, responseType: 'blob' }); 
   }
 
   print(id: number) {

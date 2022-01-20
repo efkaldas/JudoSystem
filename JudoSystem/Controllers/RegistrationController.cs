@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Collections.Generic;
+using JudoSystem.Interfaces;
 
 namespace JudoSystem.Controllers
 {
@@ -20,10 +21,12 @@ namespace JudoSystem.Controllers
     {
         private IRepositoryWrapper db;
         private readonly IConfiguration configuration;
-        public RegistrationController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
+        private readonly IRegistrationService _registrationService;
+        public RegistrationController(IConfiguration configuration, IRepositoryWrapper repoWrapper, IRegistrationService registrationService)
         {
             this.configuration = configuration;
             db = repoWrapper;
+            _registrationService = registrationService;
         }
 
         // POST: api/Registration
@@ -65,8 +68,7 @@ namespace JudoSystem.Controllers
             db.User.Create(user);
             db.Save();
 
-            RegistrationService registrationService = new RegistrationService();
-            registrationService.SendMessage(user);
+            _registrationService.SendMessage(user);
 
             return Ok(user);
         }

@@ -8,8 +8,7 @@
 
     <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-        <td mat-cell *matCellDef="let element; let i = index">{{i+1}}
-        </td>
+        <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
     </ng-container>
 
     <!-- Position Column -->
@@ -83,9 +82,9 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #addCoachModal>
-    <h1 mat-dialog-title>{{ 'RegisterCoach' | translate }}</h1>
-    <div mat-dialog-content>
-        <form [formGroup]="userForm" novalidate (ngSubmit)="registerCoach()" color="accent">
+    <form [formGroup]="userForm" novalidate (ngSubmit)="registerCoach()" color="accent">
+        <div mat-dialog-content>
+            <h1 mat-dialog-title>{{ 'RegisterCoach' | translate }}</h1>
             <div fxLayout="row wrap">
 
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
@@ -154,21 +153,19 @@
                     <small *ngIf="clicked && userForm.controls['confirmPassword'].hasError('required')" class="text-danger support-text">You must include confirm password.</small>
                     <small *ngIf="clicked && userForm.controls['confirmPassword'].errors?.equalTo" class="text-danger support-text">Passwords do not match.</small>
                 </div>
-
-                <div mat-dialog-actions>
-                    <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
-                    <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
-                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
+        </div>
+    </form>
 </ng-template>
 
 <ng-template #blockCoachModal>
     <h1 mat-dialog-title>{{ 'AreYouSureYouWantToBlock' | translate }}</h1>
-    <br>
-    <div mat-dialog-content class="center">
-        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="blockConfirm()">{{ 'Accept' | translate }}</button>
-        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
+    <div mat-dialog-actions fxLayoutAlign="center">
+        <button type="submit" mat-raised-button color="primary" (click)="blockConfirm()">{{ 'Accept' | translate }}</button>
+        <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
     </div>
 </ng-template>

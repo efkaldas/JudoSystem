@@ -64,9 +64,9 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 <ng-template #addJudokaModal>
-    <h1 mat-dialog-title>Add judoka</h1>
-    <div mat-dialog-content>
-        <form [formGroup]="judokaForm" novalidate (ngSubmit)="addJudoka()" color="accent">
+    <form [formGroup]="judokaForm" novalidate (ngSubmit)="addJudoka()" color="accent">
+        <div mat-dialog-content>
+            <h1 mat-dialog-title>Add judoka</h1>
             <mat-form-field>
                 <input autofocus type="text" matInput placeholder="Firstname" required formControlName="firstname">
             </mat-form-field>
@@ -96,27 +96,25 @@
             <mat-form-field>
                 <input autofocus type="number" matInput placeholder="Birth Years" required formControlName="birthYears">
             </mat-form-field>
-            <div mat-dialog-actions>
-                <button type="submit" mat-raised-button color="primary">Accept</button>
-                <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">Accept</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+        </div>
+    </form>
 </ng-template>
 
 <ng-template #blockUserModal>
     <h1 mat-dialog-title>Are you sure you want to block?</h1>
-    <br>
-    <div mat-dialog-content class="center">
-        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="blockConfirm()">Accept</button>
-        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+    <div mat-dialog-actions fxLayoutAlign="center">
+        <button type="submit" mat-raised-button color="primary" (click)="blockConfirm()">Accept</button>
+        <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
     </div>
 </ng-template>
 <ng-template #unBlockUserModal>
     <h1 mat-dialog-title>Are you sure you want to un block?</h1>
-    <br>
-    <div mat-dialog-content class="center">
-        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="unBlockConfirm()">Accept</button>
-        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+    <div mat-dialog-actions fxLayoutAlign="center">
+        <button type="submit" mat-raised-button color="primary" (click)="unBlockConfirm()">Accept</button>
+        <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
     </div>
 </ng-template>

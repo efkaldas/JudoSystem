@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { AgeGroup } from '../../../../../data/age-group.data';
 import { Competitions } from '../../../../../data/competitions.data';
@@ -21,7 +21,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   ageGroupId: any;
   competitions: any;
   weightCategoryId: any;
-  competitors: unknown[];
+  competitors: Judoka[];
 
   dataSource = new MatTableDataSource;
 
@@ -38,6 +38,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
 
   ngOnInit() {
     this.getCompetitions();
+    this.dataSource = new MatTableDataSource(this.competitors)
   }
 
   public setAgeGroupId($event)
@@ -64,7 +65,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
      return this.weightCategorySerivce.getCompetitors(this.weightCategoryId)
        .subscribe(
          data => {
-           this.competitors = data as Judoka[];
+           this.competitors = data as Judoka[];         
            this.dataSource = new MatTableDataSource(this.competitors);
            this.dataSource.sort = this.sort;
            this.dataSource.paginator = this.paginator;

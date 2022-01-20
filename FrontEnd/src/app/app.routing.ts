@@ -54,10 +54,17 @@ export const routes: Routes = [
       { path: 'competitions', component: CompetitionsComponent, data: {title: 'Competitions'} },
       { path: 'competitions/:id', component: CompetitionsTabsComponent, data: {title: 'Competitions'}, 
         children: [
+          { path: '', redirectTo: 'info', pathMatch: 'full', data: {title: 'Home'} },
           { path: 'info', component: CompetitionsInfoComponent, data: {title: 'Competitions Information'} },
           { path: 'my-competitors', component: CompetitionsMyCompetitorsComponent, data: {title: 'Competitions My Competitiors'} },
           { path: 'age-groups', component: CompetitionsAgeGroupsComponent, data: {title: 'Competitions Age Groups'} },
-          { path: 'competitors', component: CompetitionsCompetitorsComponent, data: {title: 'Competitors'} },
+          { path: 'competitors', component: CompetitionsCompetitorsComponent, data: {title: 'Competitors'},
+            children: [
+              { path: 'group/:groupId', component: CompetitionsResultsWeightCategoriesComponent, data: {title: 'Competitors'},
+                children: [
+                  { path: 'weight-category/:categoryId', component: CompetitionsResultsWeightCategoryShowComponent, data: {title: 'Competitors'} }
+                ] }
+              ] },
           { path: 'results', component: CompetitionsResultsComponent, data: {title: 'Competitions Results'},
             children: [
               { path: 'group/:groupId', component: CompetitionsResultsWeightCategoriesComponent, data: {title: 'Competitions Age Groups'},
@@ -84,7 +91,10 @@ export const routes: Routes = [
   { path: 'not-approved', component: NotApprovedComponent },
   { path: 'permission-denied', component: PermissionDeniedComponent },
   { path: 'user-blocked', component: UserBlockedComponent },
-  { path: 'lockscreen', component: LockscreenComponent }
+  { path: 'lockscreen', component: LockscreenComponent },
+      //Wild Card Route for 404 request
+      { path: '**', pathMatch: 'full', 
+      component: ErrorComponent },
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes), TranslateModule ],

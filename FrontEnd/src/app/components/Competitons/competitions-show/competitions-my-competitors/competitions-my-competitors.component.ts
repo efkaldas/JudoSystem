@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import { Judoka } from '../../../../../data/judoka.data';
 import { CompetitionsService } from '../../../../../services/Competitions.service';
 import { ActivatedRoute } from '@angular/router';
@@ -26,7 +26,8 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category'];
   
-  constructor(private competitionsService: CompetitionsService, private route: ActivatedRoute) { 
+  constructor(private competitionsService: CompetitionsService, private route: ActivatedRoute,
+     private snackBar: MatSnackBar) { 
     this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
@@ -53,22 +54,49 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
       );
   }
 
-  public downloadPDF():void {
-    let DATA = this.htmlData.nativeElement;
-    console.log(DATA);
-    // Get the element to export into pdf
-    let pdfContent = window.document.getElementById("htmlData");
-    pdfContent.style.display = 'block';
-
-    // Use html2canvas to apply CSS settings
-    html2canvas(pdfContent).then(function (canvas)
-    {
-      var img = canvas.toDataURL("image/png");
-      var doc = new jspdf();
-      doc.addImage(img, 'png', 20, 20);
-      doc.save('test.pdf');
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+   //   horizontalPosition: 'end',
     });
-    pdfContent.style.display = 'none';
   }
+
+  public downloadPDF() {
+    return this.competitionsService.getMycompetitorsPDF(this.competitionsId)
+    .subscribe(
+      data => {
+        if (data != null)  {
+          saveAs(data, "MyCompetitors.csv");
+          this.openSnackBar("File has been generated", 'CLOSE');
+        } else {
+          this.openSnackBar("File was not generated", 'CLOSE');
+        }
+      },
+      error => {
+        this.errorMessage = error["error"].message;
+        this.openSnackBar(this.errorMessage, 'CLOSE');
+        console.log(error); //gives an object at this point
+      }
+    );
+  }
+  
+  // public downloadPDF():void {
+  //   let DATA = this.htmlData.nativeElement;
+  //   console.log(DATA);
+  //   // Get the element to export into pdf
+  //   let pdfContent = window.document.getElementById("htmlData");
+  //   pdfContent.style.display = 'block';
+
+  //   // Use html2canvas to apply CSS settings
+  //   html2canvas(pdfContent).then(function (canvas)
+  //   {
+  //     var img = canvas.toDataURL("image/png");
+  //     var doc = new jspdf();
+  //     doc.addImage(img, 'png', 20, 20);
+  //     doc.save('test.pdf');
+  //   });
+  //   pdfContent.style.display = 'none';
+  // }
 
 }

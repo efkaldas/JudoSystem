@@ -400,10 +400,11 @@
         </mat-card>
     </div>
 </div>
+
 <ng-template #addGroupModal>
-    <h1 mat-dialog-title>Add Age Group</h1>
-    <div mat-dialog-content>
-        <form [formGroup]="ageGroupForm" novalidate (ngSubmit)="addAgeGroup()" color="accent">
+    <form [formGroup]="ageGroupForm" novalidate (ngSubmit)="addAgeGroup()" color="accent">
+        <div mat-dialog-content>
+            <h1 mat-dialog-title>Add Age Group</h1>
             <div fxLayout="row wrap">
                 <mat-form-field>
                     <input autofocus type="text" matInput placeholder="Title" required formControlName="title">
@@ -489,23 +490,23 @@
                         <input placeholder="New category..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
                     </mat-chip-list>
                 </mat-form-field>
-
-                <div mat-dialog-actions>
-                    <button type="submit" mat-raised-button color="primary">Accept</button>
-                    <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">Accept</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+        </div>
+    </form>
 </ng-template>
+
 <ng-template #deleteModal>
     <h1 mat-dialog-title>Are you sure you want to delete?</h1>
-    <br>
-    <div mat-dialog-content class="center">
-        <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
-        <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">Close</button>
+    <div mat-dialog-actions fxLayoutAlign="center">
+        <button type="submit" mat-raised-button color="primary" (click)="deletionConfirm()">Accept</button>
+        <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
     </div>
 </ng-template>
+
 <div hidden id="htmlData" #htmlData>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 

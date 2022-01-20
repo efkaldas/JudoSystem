@@ -25,9 +25,8 @@ export class CompetitionsResultsWeightCategoriesComponent implements OnInit {
 
     this.routeSub = this.route.params.subscribe(params => {
       this.ageGroupId = params['groupId'] as number;
+      this.getWeightCategories();
     });
-
-    this.getWeightCategories();
 
   }
   ngOnInit() {
@@ -35,6 +34,7 @@ export class CompetitionsResultsWeightCategoriesComponent implements OnInit {
   }
 
   private getWeightCategories() {
+    this.catLinks = [];
     return this.ageGroupService.getWeightCategories(this.ageGroupId)
       .subscribe(
         data => {

@@ -72,7 +72,7 @@
                         <!-- column -->
                         <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">
                             <mat-label>Regulations</mat-label>
-                            <input class="form-control b-b" placeholder="file" type="file">
+                            <input class="form-control b-b" placeholder="file" type="file" (change)="fileChange($event)" accept="application/pdf">
                         </div>
                         <!-- column -->
                         <div fxFlex.gt-sm="100" fxFlex="100" class="p-10">

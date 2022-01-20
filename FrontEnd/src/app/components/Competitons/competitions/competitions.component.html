@@ -34,12 +34,12 @@
             </mat-card-content>
         </mat-card>
     </div>
+
     <ng-template #deleteModal>
         <h1 mat-dialog-title>{{ 'AreYouSureWantToDelete' | translate }}</h1>
-        <br>
-        <div mat-dialog-content class="center">
-            <button type="submit" style="margin-right: 20px;" mat-raised-button color="primary" (click)="deletionConfirm()">{{ 'Accept' | translate }}</button>
-            <button mat-raised-button style="padding-left: 22px; padding-right: 22px" color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
+        <div mat-dialog-actions fxLayoutAlign="center">
+            <button type="submit" mat-raised-button color="primary" (click)="deletionConfirm()">{{ 'Accept' | translate }}</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
         </div>
     </ng-template>
 </div>

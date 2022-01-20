@@ -9,7 +9,7 @@
                                 <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button class="fixed-size" color="primary">{{catLinks[i].label}}</button>
                             </div>
                             <div style="padding: 5px 5px;">
-                                <button style="background-color: white;" [routerLink]="catLinks[i].link" mat-stroked-button *ngIf="catLinks[i + 1]" class="fixed-size" color="primary">{{catLinks[i + 1].label}}</button>
+                                <button style="background-color: white;" [routerLink]="catLinks[i + 1].link" mat-stroked-button *ngIf="catLinks[i + 1]" class="fixed-size" color="primary">{{catLinks[i + 1].label}}</button>
                             </div>
                         </div>
                     </div>
