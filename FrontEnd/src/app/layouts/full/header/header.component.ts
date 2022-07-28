@@ -23,12 +23,14 @@ export class AppHeaderComponent implements OnInit{
     public translate: TranslateService, private loginService : LoginService, public menuItems: MenuItems
   ) {
     translate.addLangs(['en', 'lt', 'ru']);
-    translate.setDefaultLang('en');
+    translate.setDefaultLang('lt');
   }
 
-  switchLang(lang: string) {
-    this.translate.use(lang);
-  }
+  changeLang(language: string) {  
+    localStorage.setItem('locale', language);  
+    this.translate.use(language);  
+    window.location.reload();
+  } 
   signOut() {
     this.loginService.logout();
   }

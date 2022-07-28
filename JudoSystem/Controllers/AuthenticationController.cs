@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using ActionFilters.Filters;
+using System.Threading.Tasks;
 using Contracts.Interfaces;
-using Entities;
 using Entities.Models;
 using Entities.Models.Dto;
 using JudoSystem.Helpers;
 using JudoSystem.Interfaces;
-using JudoSystem.Models;
-using JudoSystem.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +14,16 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-
 namespace JudoSystem.Controllers
 {
-    [Route("api/[controller]")]
-    public class LoginController : ControllerBase
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class AuthenticationController : ControllerBase
     {
         private readonly IRepositoryWrapper db;
         private readonly IConfiguration configuration;
         private readonly IAuthService _authService;
-        public LoginController(IConfiguration configuration, IRepositoryWrapper repoWrapper, IAuthService authService)
+        public AuthenticationController(IConfiguration configuration, IRepositoryWrapper repoWrapper, IAuthService authService)
         {
             this.configuration = configuration;
             db = repoWrapper;
@@ -46,10 +42,42 @@ namespace JudoSystem.Controllers
 
             if (!StringHelper.VerifyPassword(user.Password, userDto.Password))
                 return new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_BAD_REQUEST_CONST, "Neteisingas slaptažodis"));
-  
+
             string token = _authService.GenerateToken(configuration, user);
 
             return Ok(new JwtToken(token));
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ForgotPassword([FromBody]ForgotPasswordRequest forgotPasssword)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _authService.ForgotPassword(forgotPasssword);
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ResetPassword([FromBody]ResetPasswordRequest resetPassword)
+        {
+            var user = db.User.FindByCondition(x => x.ResetToken == resetPassword.Token && x.ResetTokenExpires > DateTime.UtcNow).FirstOrDefault();
+
+            if (user == null)
+                return new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_BAD_REQUEST_CONST, "Invalid Token"));
+
+            // update password and remove reset token
+            user.Password = StringHelper.HashPassword(resetPassword.Password);
+            user.ResetToken = null;
+            user.ResetTokenExpires = null;
+
+            db.User.Update(user);
+            db.Save();
+
+            return Ok();
         }
     }
 }

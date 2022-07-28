@@ -18,7 +18,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
                             <h5><b>{{ 'Gender' | translate }}: </b>
-                                <p>{{coach.gender.textEN}}</p>
+                                <p>{{ gender[coach.gender] | translate }}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
@@ -28,7 +28,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="4" [rowspan]="1">
                             <h5><b>{{ 'DanKyu' | translate }}: </b>
-                                <p *ngIf="coach.dankyu">{{coach.dankyu.grade}}</p>
+                                <p *ngIf="coach.danKyu">{{coach.danKyu.grade}}</p>
                             </h5>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -92,7 +92,7 @@
                             <!-- Weight Column -->
                             <ng-container matColumnDef="gender">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Gender' | translate }} </th>
-                                <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+                                <td mat-cell *matCellDef="let element"> {{ gender[element.gender] | translate }} </td>
                             </ng-container>
 
                             <!-- Symbol Column -->

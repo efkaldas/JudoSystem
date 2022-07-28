@@ -19,7 +19,7 @@ export class JudokaProfileComponent implements OnInit {
 
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
-  displayedColumns: string[] = ['position', 'competitions', 'ageGroup', 'date', 'place', 'points'];
+  displayedColumns: string[] = ['position', 'competitions', 'ageGroup', 'date', 'place'];
 
   constructor(private judokaService: JudokaService, private route: ActivatedRoute) { }
 

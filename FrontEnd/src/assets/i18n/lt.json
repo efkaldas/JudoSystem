@@ -95,5 +95,9 @@
     "Update": "Atnaujinti",
     "AgeGroup": "Amžiaus grupė",
     "CurrentPoints": "Dabartiniai taškai",
-    "Achevements": "Pasiekimai"
+    "Achevements": "Pasiekimai",
+    "ForgotPasssword": "Pamiršote slaptažodį?",
+    "EnterEmailAndWeSendPassword": "Įveskite el-paštą kuriuo norėtumete gauti slaptažodžio atkurimo nuorodą.",
+    "RecoverPassword": "Slaptažodžio atkurimas",
+    "ResetPassword": "Sukurti naują slaptažodį"
 }

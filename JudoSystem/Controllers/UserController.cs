@@ -31,7 +31,6 @@ namespace JudoSystem.Controllers
         public IActionResult Get()
         {
             List<User> users = db.User.FindAll()
-                .Include(x => x.Gender)
                 .Include(x => x.Status)
                 .Include(x => x.Organization)
                 .Include(x => x.UserRoles)
@@ -61,7 +60,6 @@ namespace JudoSystem.Controllers
         {
             User user = db.User.FindByCondition(x => x.Id == id)
                 .Include(x => x.DanKyu)
-                .Include(x => x.Gender)
                 .Include(x => x.UserRoles)
                 .Include(x => x.Organization)
                     .ThenInclude(x => x.OrganizationType).FirstOrDefault();
@@ -105,7 +103,7 @@ namespace JudoSystem.Controllers
             updateUser.Firstname = StringHelper.ToTitleCase(user.Firstname);
             updateUser.Lastname = StringHelper.ToTitleCase(user.Lastname);
             updateUser.BirthDate = user.BirthDate;
-            updateUser.GenderId = user.GenderId;
+            updateUser.Gender = user.Gender;
             updateUser.DanKyuId = user.DanKyuId;
             updateUser.Email = user.Email;
             updateUser.PhoneNumber = user.PhoneNumber;

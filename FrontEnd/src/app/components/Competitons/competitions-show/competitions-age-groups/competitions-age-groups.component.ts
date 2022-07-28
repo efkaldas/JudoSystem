@@ -11,10 +11,10 @@ import { Role } from '../../../../../data/user-role.enum.data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WeightCategory } from '../../../../../data/weight-category.data';
 import { GenderService } from '../../../../../services/gender.service';
-import { Gender } from '../../../../../data/gender.data';
 import { DanKyuService } from '../../../../../services/dan-kyu.service';
 import { DanKyu } from '../../../../../data/DanKyu.data';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
+import { Gender } from '../../../../../enums/gender.enum';
 
 @Component({
   selector: 'app-competitions-age-groups',
@@ -41,8 +41,10 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
   ageGroupId: number;
   selectedCategory: number[] = [];
   categories : WeightCategory[] = [];
-  genders: Gender[];
   danKyus: DanKyu[];
+
+  genders = [];
+  gender = Gender;
 
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category', 'actions'];
 
@@ -58,13 +60,13 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
     this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
+    this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
    }
 
   ngOnInit() {
     this.isUserAdmin();
     this.formGroup();
     this.getAgeGroups();
-    this.getGenders();
     this.getDanKyus();
   }
 
@@ -80,7 +82,7 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
     this.ageGroupForm = this.fb.group({
       title: [null, Validators.compose([Validators.required])],
       competitionsId: Number(this.competitionsId),
-      genderId: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
       yearsFrom: [null, Validators.compose([Validators.required])],
       yearsTo: [null, Validators.compose([Validators.required])],
       danKyuFrom: [null, Validators.compose([Validators.required])],
@@ -288,14 +290,7 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
     + this.ageGroupForm.value.weightInToTime;
   }
 
-  private getGenders()
-  {
-    return this.genderService.getAll()
-    .subscribe(
-      data => {
-        this.genders = data as any;
-      })
-  }
+
   private getDanKyus()
   {
     return this.danKyuService.getAll()

@@ -20,7 +20,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="8" [rowspan]="1">
                             <h5><b>{{ 'Gender' | translate }}: </b>
-                                <p>{{judoka.gender.textEN}}</p>
+                                <p>{{gender[judoka.gender]}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="8" [rowspan]="1">
@@ -68,8 +68,8 @@
                 </mat-tab>
                 <mat-tab label="{{ 'Achevements' | translate }}">
                     <mat-card-content>
-                        <h5><b>{{ 'CurrentPoints' | translate }}: </b>{{judoka.points}}
-                        </h5>
+                        <!-- <h5><b>{{ 'CurrentPoints' | translate }}: </b>{{judoka.points}}
+                        </h5> -->
                         <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
                             <ng-container matColumnDef="position">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
@@ -100,10 +100,10 @@
                             </ng-container>
 
                             <!-- Symbol Column -->
-                            <ng-container matColumnDef="points">
+                            <!-- <ng-container matColumnDef="points">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Points' | translate }} </th>
                                 <td mat-cell *matCellDef="let element"> {{element.points}} </td>
-                            </ng-container>
+                            </ng-container> -->
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

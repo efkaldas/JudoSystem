@@ -1,5 +1,6 @@
 ﻿using CryptoHelper;
 using Entities.Models;
+using Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Entities.Seeds
                         Password = Crypto.HashPassword("adminJudo1337"),
                         UserRoles = new List<UserRole>(),
                         BirthDate = DateTime.Now,
-                        GenderId = 1,
+                        Gender = Gender.Male,
                         DateCreated = DateTime.Now,
                         DateUpdated = DateTime.Now
                     }

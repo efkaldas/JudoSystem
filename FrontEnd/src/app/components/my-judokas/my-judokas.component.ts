@@ -4,10 +4,9 @@ import { Judoka } from "../../../data/judoka.data";
 import { JudokaService } from "../../../services/judoka.service";
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
-import { Gender } from "../../../data/gender.data";
-import { GenderService } from "../../../services/gender.service";
 import { DanKyu } from "../../../data/DanKyu.data";
 import { DanKyuService } from "../../../services/dan-kyu.service";
+import { Gender } from "../../../enums/gender.enum";
 
 @Component({
   selector: "app-my-judokas",
@@ -19,7 +18,8 @@ export class MyJudokasComponent implements OnInit {
   public judokaForm: FormGroup;
   public judokaEditForm: FormGroup;
   myJudokas: Judoka[];
-  genders: Gender[];
+  genders = [];
+  gender = Gender;
   danKyus: DanKyu[];
   selectedElement: any;
   errorMessage: string;
@@ -28,16 +28,17 @@ export class MyJudokasComponent implements OnInit {
   source : MatTableDataSource<Judoka>;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'birthYears', 'danKyu', 'actions'];
 
-  constructor(private danKyuService: DanKyuService, private genderService: GenderService, 
+  constructor(private danKyuService: DanKyuService, 
     private judokaService: JudokaService, private router: Router, public dialog: MatDialog,
-    private _snackBar: MatSnackBar, private fb: FormBuilder) {}
+    private _snackBar: MatSnackBar, private fb: FormBuilder) {
+     this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+    }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
     this.getJudokas();
-    this.getGenders();
     this.getDanKyus();
     this.formGroup();
   }
@@ -70,7 +71,7 @@ export class MyJudokasComponent implements OnInit {
     this.judokaForm = this.fb.group({
       firstname: [null, Validators.compose([Validators.required])],
       lastname: [null, Validators.compose([Validators.required])],
-      genderId: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
       birthYears: [null, Validators.compose([Validators.required])],
       dankyuId: [null, Validators.compose([Validators.required])]
     });
@@ -80,7 +81,7 @@ export class MyJudokasComponent implements OnInit {
     this.judokaEditForm = this.fb.group({
       firstname: [this.selectedElement.firstname, Validators.compose([Validators.required])],
       lastname: [this.selectedElement.lastname, Validators.compose([Validators.required])],
-      genderId: [this.selectedElement.genderId, Validators.compose([Validators.required])],
+      gender: [this.selectedElement.gender, Validators.compose([Validators.required])],
       birthYears: [this.selectedElement.birthYears, Validators.compose([Validators.required])],
       dankyuId: [this.selectedElement.danKyuId, Validators.compose([Validators.required])]
     });
@@ -155,14 +156,7 @@ export class MyJudokasComponent implements OnInit {
         }
       );
   }
-  private getGenders()
-  {
-    return this.genderService.getAll()
-    .subscribe(
-      data => {
-        this.genders = data as any;
-      })
-  }
+
   private getDanKyus()
   {
     return this.danKyuService.getAll()

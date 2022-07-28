@@ -1,4 +1,4 @@
-import { Gender } from "./gender.data";
+import { Gender } from "../enums/gender.enum";
 import { DanKyu } from "./DanKyu.data";
 import { User } from "./user.data";
 import { WeightCategory } from "./weight-category.data";

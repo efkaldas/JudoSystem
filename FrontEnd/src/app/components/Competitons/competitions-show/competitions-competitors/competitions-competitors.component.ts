@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AgeGroup } from '../../../../../data/age-group.data';
 import { Competitions } from '../../../../../data/competitions.data';
 import { Judoka } from '../../../../../data/judoka.data';
+import { Role } from '../../../../../data/user-role.enum.data';
 import { AgeGroupService } from '../../../../../services/age-group.service';
 import { CompetitionsService } from '../../../../../services/Competitions.service';
 import { WeightCategoryService } from '../../../../../services/weight-category.service';
@@ -22,6 +23,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   competitions: any;
   weightCategoryId: any;
   competitors: Judoka[];
+  isAdmin = false;
 
   dataSource = new MatTableDataSource;
 
@@ -37,8 +39,15 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isUserAdmin();
     this.getCompetitions();
     this.dataSource = new MatTableDataSource(this.competitors)
+  }
+
+  private isUserAdmin()
+  {
+    if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
+      this.isAdmin = true;
   }
 
   public setAgeGroupId($event)

@@ -96,5 +96,9 @@
     "Update": "Update",
     "AgeGroup": "Age Group",
     "CurrentPoints": "Current Points",
-    "Achevements": "Achevements"
+    "Achevements": "Achevements",
+    "ForgotPasssword": "Forgot Passsword?",
+    "EnterEmailAndWeSendPassword": "Enter your email and we'll send you the password reset link.",
+    "RecoverPassword": "Recover Password",
+    "ResetPassword": "ResetPassword"
 }

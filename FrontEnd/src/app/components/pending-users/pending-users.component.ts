@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { PendingUserService } from '../../../services/pending-user.service';
 import { User } from '../../../data/user.data';
-import { Gender } from '../../../data/gender.data';
 import { Organization } from '../../../data/organization.data';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
 import { GenderService } from '../../../services/gender.service';
 import { Router } from '@angular/router';
+import { Gender } from '../../../enums/gender.enum';
 
 
 @Component({
@@ -17,13 +17,15 @@ import { Router } from '@angular/router';
 export class PendingUsersComponent implements OnInit {
 
   pengingUsers: User[];
-  genders: Gender[];
   organization: Organization;
   selectedElement: any;
   errorMessage: string;
   message: string;
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<User>;
+
+  genders = [];
+  gender = Gender;
 
   displayedColumns: string[] = ['position','firstname', 'lastname', 'phoneNumber', 'email', 'organizationName', 
    'organizationType', 'address', 'actions'];
@@ -32,7 +34,9 @@ export class PendingUsersComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private pendingUserService : PendingUserService, private genderService: GenderService,
-     private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+     private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) { 
+      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+     }
 
   ngOnInit() {
     this.getPendingUsers();

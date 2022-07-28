@@ -31,13 +31,12 @@ namespace JudoSystem.Controllers
         public IActionResult GetAgeGroupUserJudokas(int id)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
-            AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == id).Include(x => x.Gender).FirstOrDefault();
+            AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
 
             List<Judoka> judokas = db.Judoka.FindByCondition(x => x.UserId == userId
-            && x.GenderId == ageGroup.GenderId && x.BirthYears <= ageGroup.YearsTo && x.BirthYears >= ageGroup.YearsFrom
+            && x.Gender== ageGroup.Gender && x.BirthYears <= ageGroup.YearsTo && x.BirthYears >= ageGroup.YearsFrom
             && x.DanKyuId <= ageGroup.DanKyuTo && x.DanKyuId >= ageGroup.DanKyuFrom)
                 .Include(x => x.DanKyu)
-                .Include(x => x.Gender)
                 .Include(x => x.WeightCategories)
                     .ThenInclude(x => x.WeightCategory)
                 .ToList();

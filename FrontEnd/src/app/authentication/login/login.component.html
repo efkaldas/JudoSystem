@@ -26,12 +26,12 @@
                         </div>
                         <!-- col half-->
                         <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
-                            <mat-checkbox color="warn">{{ 'RememberMe' | translate }}</mat-checkbox>
+                            <!-- <mat-checkbox color="warn">{{ 'RememberMe' | translate }}</mat-checkbox> -->
                         </div>
                         <!-- col half-->
-                        <!-- <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="text-right">
-                            <a [routerLink]="['/forgot']" class="link">Forgot pwd?</a>
-                        </div> -->
+                        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="text-right">
+                            <a [routerLink]="['/forgot']" class="link">{{ 'ForgotPasssword' | translate }}</a>
+                        </div>
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!loginForm.valid">{{ 'Login' | translate }}</button>

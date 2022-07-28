@@ -31,7 +31,7 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Gender' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+        <td mat-cell *matCellDef="let element"> {{ gender[element.gender] | translate }} </td>
     </ng-container>
 
     <!-- Symbol Column -->
@@ -75,9 +75,9 @@
 
             <mat-form-field>
                 <mat-label>{{ 'Gender' | translate }}</mat-label>
-                <mat-select formControlName="genderId" required>
-                    <mat-option *ngFor="let gender of genders" [value]="gender.id">
-                        {{gender.textEN}}
+                <mat-select formControlName="gender" required>
+                    <mat-option *ngFor="let genderId of genders" [value]="genderId">
+                        {{ gender[genderId] | translate }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -116,9 +116,9 @@
 
             <mat-form-field>
                 <mat-label>{{ 'Gender' | translate }}</mat-label>
-                <mat-select [compareWith]="compare" formControlName="genderId" required>
-                    <mat-option *ngFor="let gender of genders" [value]="gender.id">
-                        {{gender.textEN}}
+                <mat-select [compareWith]="compare" formControlName="gender" required>
+                    <mat-option *ngFor="let genderId of genders" [value]="genderId">
+                        {{ gender[genderId] | translate }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

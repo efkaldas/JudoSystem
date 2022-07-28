@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -37,7 +38,6 @@ namespace Entities.Models
         public DateTime BirthDate { get; set; }
         public int? DanKyuId { get; set; }
         public DanKyu DanKyu { get; set; }
-        public int GenderId { get; set; }
         public Gender Gender { get; set; }
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
@@ -50,6 +50,8 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Password { get; set; }
+        public string ResetToken { get; set; }
+        public DateTime? ResetTokenExpires { get; set; }
         [Timestamp]
         public DateTime DateCreated { get; set; }
         [Timestamp]

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ActionFilters.Filters;
 using Contracts.Interfaces;
 using Entities.Models;
+using Enums;
 using JudoSystem.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -39,9 +40,9 @@ namespace JudoSystem.Controllers
 
         [HttpGet("ByRank", Name = "GetJudokasByRank")]
         [Authorize]
-        public IActionResult GetJudokasByRank(int genderId)
+        public IActionResult GetJudokasByRank(Gender gender)
         {
-            List<Judoka> judokas = db.Judoka.FindByConditionFull(x => x.GenderId == genderId)
+            List<Judoka> judokas = db.Judoka.FindByConditionFull(x => x.Gender == gender)
                     .Include(x => x.User)
                     .Include(x => x.User)
                         .ThenInclude(x => x.Organization).ToList();
@@ -134,7 +135,7 @@ namespace JudoSystem.Controllers
             if (judokaToDelete != null)
                 db.Judoka.Delete(judokaToDelete);
             else
-                return new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_NOT_FOUND_CONST, "Judoka not Found"));
+                return new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_NOT_FOUND_CONST, "Sportininkas nerastas"));
 
             db.Save();
 

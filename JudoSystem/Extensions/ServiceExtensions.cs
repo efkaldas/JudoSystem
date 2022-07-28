@@ -53,6 +53,7 @@ namespace JudoSystem.Extensions
         {
             services.AddScoped<IEmailSendService, EmailSendService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {

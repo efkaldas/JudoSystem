@@ -1,5 +1,5 @@
+import { Gender } from "../enums/gender.enum";
 import { Competitions } from "./competitions.data";
-import { Gender } from "./gender.data";
 import { WeightCategory } from "./weight-category.data";
 
 export class AgeGroup {

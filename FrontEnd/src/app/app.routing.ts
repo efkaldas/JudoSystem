@@ -38,6 +38,7 @@ import { CompetitionsResultsComponent } from './components/Competitons/competiti
 import { CompetitionsResultsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-categories/competitions-results-weight-categories.component';
 import { CompetitionsResultsWeightCategoryShowComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-category-show/competitions-results-weight-category-show.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -79,12 +80,12 @@ export const routes: Routes = [
       { path: 'judoka/:id', component: JudokaProfileComponent, canActivate: [AuthGuard], data: {title: 'Judoka'} },
       { path: 'judokas/rating', component: JudokasRatingComponent, canActivate: [AuthGuard], data: {title: 'Judokas Rating'} },
       { path: 'organizations', component: OrganizationsComponent, canActivate: [AuthGuard], data: {title: 'Organizations', roles: [Role.Admin, Role.Organization_Admin]} },
-      { path: 'forgot', component: ForgotComponent, canActivate: [AuthGuard], data: {title: 'Forgot'} },
     ]
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ForgotComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'logout', component: LogoutComponent },
   { path: '404', component: ErrorComponent },
   { path: 'waiting-for-approvement', component: WaitingForApprovementComponent },

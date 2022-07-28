@@ -37,7 +37,7 @@ namespace JudoSystem.Services
                             Id = competitor.Judoka.Id,
                             Firstname = competitor.Judoka.Firstname,
                             Lastname = competitor.Judoka.Lastname,
-                            Gender = competitor.Judoka.Gender.TextEN,
+                            Gender = competitor.Judoka.Gender.ToString(),
                             Country = competitor.Judoka.User.Organization.Country,
                             City = competitor.Judoka.User.Organization.City,
                             Club = competitor.Judoka.User.Organization.ShortName,

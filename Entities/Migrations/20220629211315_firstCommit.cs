@@ -38,21 +38,6 @@ namespace Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Gender",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TextEN = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
-                    TextLT = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
-                    TextRU = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Gender", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrganizationType",
                 columns: table => new
                 {
@@ -137,7 +122,7 @@ namespace Entities.Migrations
                     Country = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     City = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     Address = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
-                    Image = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: true, defaultValue: "no_organization_image.png"),
                     OrganizationTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -159,7 +144,7 @@ namespace Entities.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     CompetitionsId = table.Column<int>(nullable: false),
-                    GenderId = table.Column<int>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
                     YearsFrom = table.Column<int>(nullable: false),
                     YearsTo = table.Column<int>(nullable: false),
                     DanKyuFrom = table.Column<int>(nullable: false),
@@ -177,12 +162,6 @@ namespace Entities.Migrations
                         principalTable: "Competitions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AgeGroup_Gender_GenderId",
-                        column: x => x.GenderId,
-                        principalTable: "Gender",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,11 +177,13 @@ namespace Entities.Migrations
                     PhoneNumber = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false),
                     DanKyuId = table.Column<int>(nullable: true),
-                    GenderId = table.Column<int>(nullable: false),
-                    Image = table.Column<string>(type: "VARCHAR(1056)", maxLength: 1056, nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    Image = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: true, defaultValue: "no_user_image.png"),
                     StatusId = table.Column<int>(nullable: false, defaultValue: 2),
                     OrganizationId = table.Column<int>(nullable: true),
                     Password = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
+                    ResetToken = table.Column<string>(nullable: true),
+                    ResetTokenExpires = table.Column<DateTime>(nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     DateUpdated = table.Column<DateTime>(nullable: false)
@@ -217,12 +198,6 @@ namespace Entities.Migrations
                         principalTable: "DanKyu",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_User_Gender_GenderId",
-                        column: x => x.GenderId,
-                        principalTable: "Gender",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_User_Organization_OrganizationId",
                         column: x => x.OrganizationId,
@@ -297,7 +272,7 @@ namespace Entities.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Firstname = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     Lastname = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
-                    GenderId = table.Column<int>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
                     BirthYears = table.Column<int>(nullable: false),
                     DanKyuId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
@@ -310,12 +285,6 @@ namespace Entities.Migrations
                         name: "FK_Judoka_DanKyu_DanKyuId",
                         column: x => x.DanKyuId,
                         principalTable: "DanKyu",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Judoka_Gender_GenderId",
-                        column: x => x.GenderId,
-                        principalTable: "Gender",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -419,28 +388,19 @@ namespace Entities.Migrations
                     { 16, 16, null, "10 DAN" },
                     { 15, 15, null, "9 DAN" },
                     { 14, 14, null, "8 DAN" },
-                    { 12, 12, null, "6 DAN" },
+                    { 13, 13, null, "7 DAN" },
                     { 11, 11, null, "5 DAN" },
                     { 10, 10, null, "4 DAN" },
                     { 9, 9, null, "3 DAN" },
-                    { 13, 13, null, "7 DAN" },
+                    { 12, 12, null, "6 DAN" },
                     { 7, 7, null, "1 DAN" },
                     { 6, 5, null, "1 KYU" },
                     { 5, 5, null, "2 KYU" },
                     { 4, 4, null, "3 KYU" },
-                    { 8, 8, null, "2 DAN" },
                     { 3, 3, null, "4 KYU" },
                     { 2, 2, null, "5 KYU" },
-                    { 1, 1, null, "6 KYU" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Gender",
-                columns: new[] { "Id", "TextEN", "TextLT", "TextRU" },
-                values: new object[,]
-                {
-                    { 2, "Female", "Moteris", "Женщина" },
-                    { 1, "Male", "Vyras", "Mужчина" }
+                    { 1, 1, null, "6 KYU" },
+                    { 8, 8, null, "2 DAN" }
                 });
 
             migrationBuilder.InsertData(
@@ -448,9 +408,9 @@ namespace Entities.Migrations
                 columns: new[] { "Id", "TypeNameEN", "TypeNameLT", "TypeNameRU" },
                 values: new object[,]
                 {
+                    { 3, "Judges Association", "Teisėjų Asociacija", "Ассоциация Судей" },
                     { 1, "Club", "Klubas", "Клуб" },
-                    { 2, "Sports Center", "Sporto Centras", "Спортивный Центр" },
-                    { 3, "Judges Association", "Teisėjų Asociacija", "Ассоциация Судей" }
+                    { 2, "Sports Center", "Sporto Centras", "Спортивный Центр" }
                 });
 
             migrationBuilder.InsertData(
@@ -476,8 +436,8 @@ namespace Entities.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "BirthDate", "DanKyuId", "Email", "Firstname", "GenderId", "Image", "Lastname", "OrganizationId", "ParentUserId", "Password", "PhoneNumber", "StatusId" },
-                values: new object[] { 1, new DateTime(2020, 5, 17, 16, 13, 6, 640, DateTimeKind.Local).AddTicks(306), null, "judosystem.info@gmail.com", "Evaldas", 1, "Admin_Image", "Kušlevič", null, null, "AQAAAAEAACcQAAAAEIi6mkBBDRVE/jYakeCr3AGu0/yZz3WzP4nTWZDNyvpigD8HDhm2MuoCBef8oD4eeQ==", "+37060477292", 1 });
+                columns: new[] { "Id", "BirthDate", "DanKyuId", "Email", "Firstname", "Gender", "Image", "Lastname", "OrganizationId", "ParentUserId", "Password", "PhoneNumber", "ResetToken", "ResetTokenExpires", "StatusId" },
+                values: new object[] { 1, new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(5818), null, "judosystem.info@gmail.com", "Evaldas", 1, "admin_image.png", "Kušlevič", null, null, "AQAAAAEAACcQAAAAEGkFMggZOvu2l9nFT9h1o7VLde+i5yGV4dnHL6J9o7327Gycl+fv3CgUdoE5+WXzgQ==", "+37060477292", null, null, 1 });
 
             migrationBuilder.InsertData(
                 table: "UserRole",
@@ -488,11 +448,6 @@ namespace Entities.Migrations
                 name: "IX_AgeGroup_CompetitionsId",
                 table: "AgeGroup",
                 column: "CompetitionsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AgeGroup_GenderId",
-                table: "AgeGroup",
-                column: "GenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Competitions_CompetitionsTypeId",
@@ -530,11 +485,6 @@ namespace Entities.Migrations
                 column: "DanKyuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Judoka_GenderId",
-                table: "Judoka",
-                column: "GenderId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Judoka_UserId",
                 table: "Judoka",
                 column: "UserId");
@@ -554,11 +504,6 @@ namespace Entities.Migrations
                 table: "User",
                 column: "Email",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_GenderId",
-                table: "User",
-                column: "GenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_OrganizationId",
@@ -626,9 +571,6 @@ namespace Entities.Migrations
 
             migrationBuilder.DropTable(
                 name: "Competitions");
-
-            migrationBuilder.DropTable(
-                name: "Gender");
 
             migrationBuilder.DropTable(
                 name: "OrganizationType");

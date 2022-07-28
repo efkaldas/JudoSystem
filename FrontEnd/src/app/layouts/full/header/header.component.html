@@ -1,5 +1,10 @@
 <ng-container *ngIf="user != null; then loggedIn; else loggedOut">
 </ng-container>
+<mat-select (selectionChange)="changeLang($event.value)" [(value)]="translate.currentLang">
+    <mat-option *ngFor="let language of translate.getLangs()" [value]="language">
+        {{language}}
+    </mat-option>
+</mat-select>
 
 <ng-template #loggedIn>
     <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <img src="assets/images/users/{{user.image}}" alt="user" class="profile-pic"> </button>

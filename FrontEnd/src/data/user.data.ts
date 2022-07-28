@@ -1,9 +1,9 @@
 import { Organization } from "./organization.data";
 import { UserRole } from "./user-role.data";
 import { UserStatus } from "./userStatus.data";
-import { Gender } from "./gender.data";
 import { DanKyu } from "./DanKyu.data";
 import { Judoka } from "./judoka.data";
+import { Gender } from "../enums/gender.enum";
 
 export class User {
     id: number;

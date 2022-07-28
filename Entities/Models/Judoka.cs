@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,7 +23,6 @@ namespace Entities.Models
         [StringLength(250)]
         public string Lastname { get; set; }
         public Gender Gender { get; set; }
-        public int GenderId { get; set; }
 
         [Required(ErrorMessage = "BirthYears is required")]
         public int BirthYears { get; set; }

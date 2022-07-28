@@ -6,7 +6,6 @@ import { AgeGroup } from '../../../../data/age-group.data';
 import { DanKyuService } from '../../../../services/dan-kyu.service';
 import { GenderService } from '../../../../services/gender.service';
 import { DanKyu } from '../../../../data/DanKyu.data';
-import { Gender } from '../../../../data/gender.data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ENTER, COMMA, SPACE } from '@angular/cdk/keycodes';
 import { WeightCategory } from '../../../../data/weight-category.data';
@@ -18,6 +17,7 @@ import { saveAs } from 'file-saver';
 import { Role } from '../../../../data/user-role.enum.data';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  
+import { Gender } from '../../../../enums/gender.enum';
 
 
 @Component({
@@ -38,7 +38,6 @@ export class CompetitionsShowComponent implements OnInit {
   competitionsId: number;
   routeSub: any;
   selectedElement: any;
-  genders: Gender[];
   danKyus: DanKyu[]
   ageGroupForm: FormGroup;
   ageGroups: AgeGroup[];
@@ -58,6 +57,10 @@ export class CompetitionsShowComponent implements OnInit {
   render = false;
   source : MatTableDataSource<Judoka>;
   file = null;
+
+  genders = [];
+  gender = Gender;
+
   ageGroupIdresult: number;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category', 'actions'];
   displayedColumnsMy: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category'];
@@ -75,14 +78,15 @@ export class CompetitionsShowComponent implements OnInit {
     private competitionsService: CompetitionsService, private route: ActivatedRoute,
     private ageGroupService: AgeGroupService,
     private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar, private fb: FormBuilder,
-    private changeDetectorRefs: ChangeDetectorRef) { }
+    private changeDetectorRefs: ChangeDetectorRef) {
+      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+     }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
     this.getDanKyus();
-    this.getGenders();
     this.getCompetitions();
     this.formGroup();
     this.isUserAdmin();
@@ -92,7 +96,7 @@ export class CompetitionsShowComponent implements OnInit {
     this.ageGroupForm = this.fb.group({
       title: [null, Validators.compose([Validators.required])],
       competitionsId: Number(this.competitionsId),
-      genderId: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
       yearsFrom: [null, Validators.compose([Validators.required])],
       yearsTo: [null, Validators.compose([Validators.required])],
       danKyuFrom: [null, Validators.compose([Validators.required])],
@@ -123,7 +127,7 @@ export class CompetitionsShowComponent implements OnInit {
       doc.save('test.pdf');
     });
     pdfContent.style.display = 'none';
-  }
+  } 
   private isUserAdmin()
   {
     if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
@@ -316,14 +320,7 @@ export class CompetitionsShowComponent implements OnInit {
     this.ageGroupForm.value.weightInTo = this.ageGroupForm.value.weightInTo + " " 
     + this.ageGroupForm.value.weightInToTime;
   }
-  private getGenders()
-  {
-    return this.genderService.getAll()
-    .subscribe(
-      data => {
-        this.genders = data as any;
-      })
-  }
+  
   private getDanKyus()
   {
     return this.danKyuService.getAll()

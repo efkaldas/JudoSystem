@@ -23,7 +23,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'Gender' | translate }}: </b>
-                                <p>{{user.gender.textEN}}</p>
+                                <p>{{ gender[user.gender] | translate }}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
@@ -102,9 +102,9 @@
 
                 <mat-form-field>
                     <mat-label>{{ 'Gender' | translate }}</mat-label>
-                    <mat-select [compareWith]="compareGenderFunction" formControlName="genderId" required>
-                        <mat-option *ngFor="let gender of genders" [value]="gender.id">
-                            {{gender.textEN}}
+                    <mat-select [compareWith]="compareGenderFunction" formControlName="gender" required>
+                        <mat-option *ngFor="let genderId of genders" [value]="genderId">
+                            {{ gender[genderId] | translate }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

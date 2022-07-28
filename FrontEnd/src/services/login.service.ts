@@ -6,10 +6,15 @@ import { LoggedInUser } from "../data/LoggedInUser.data";
 import { BehaviorSubject, Observable } from "rxjs";
 import * as jwt_decode from "jwt-decode";
 import { User } from "../data/user.data";
+import { ForgotPassword } from "../data/forgotPassword.data";
+import { ResetPassword } from "../data/resetPassword.data";
 
 @Injectable()
 export class LoginService {
-  protected loginUrl: string = environment.apiHost + "/Login";
+  protected authUrl: string = environment.apiHost + "/Authentication"
+  protected loginUrl: string = this.authUrl + "/Login";
+  protected forgotPasswordUrl: string = this.authUrl + "/ForgotPassword";
+  protected resetPasswordUrl: string = this.authUrl + "/ResetPassword";
 
   constructor(protected http: HttpClient) {}
 
@@ -20,6 +25,14 @@ export class LoginService {
   login(login: Login) {
     return this.http.post(this.loginUrl, login);
   }
+
+  forgotPassword(forgotPassword: ForgotPassword) {
+    return this.http.post(this.forgotPasswordUrl, forgotPassword);
+   }
+
+   resetPassword(resetPassword: ResetPassword) {
+    return this.http.post(this.resetPasswordUrl, resetPassword);
+   }
 
   public getToken(): string {
     let result = localStorage.getItem("jwtToken");

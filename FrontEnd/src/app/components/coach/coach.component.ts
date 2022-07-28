@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { GenderService } from '../../../services/gender.service';
-import { Gender } from '../../../data/gender.data';
 import { MatSnackBar, MatTableDataSource, MatDialog, MatSort, MatPaginator } from '@angular/material';
 import { UserService } from '../../../services/user.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
@@ -11,6 +10,7 @@ import { CoachService } from '../../../services/coach.service';
 import { LoginService } from '../../../services/Login.service';
 import { DanKyu } from '../../../data/DanKyu.data';
 import { DanKyuService } from '../../../services/dan-kyu.service';
+import { Gender } from '../../../enums/gender.enum';
 
 
 
@@ -31,7 +31,6 @@ export class CoachComponent implements OnInit {
 
   public judokaForm: FormGroup;
   public judokaEditForm: FormGroup;
-  genders: Gender[];
   danKyus: DanKyu[];
   selectedElement: any;
   errorMessage: string;
@@ -41,15 +40,20 @@ export class CoachComponent implements OnInit {
   source : MatTableDataSource<User>;
   currentUser: User;
   clicked = false;
+
+  genders = [];
+  gender = Gender;
+
   displayedColumns: string[] = ['position','firstname', 'lastname', 'birthDate', 'gender','email', 'danKyu',
    'phoneNumber', 'status', 'actions'];
 
   constructor(private danKyuService: DanKyuService, private loginService: LoginService, private genderService: GenderService, private coachService: CoachService,
-     private fb: FormBuilder, private router: Router,public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+     private fb: FormBuilder, private router: Router,public dialog: MatDialog, private _snackBar: MatSnackBar) {
+      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+      }
 
 
   ngOnInit() {
-    this.getGenders();
     this.getDanKyus();
     this.getCoaches();
     this.formGroup();
@@ -78,7 +82,7 @@ export class CoachComponent implements OnInit {
       phoneNumber: [null, Validators.compose([Validators.required])],
       birthDate: [null, Validators.compose([Validators.required])],
       roleId: 2,
-      genderId: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
       danKyuId: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
       statusId: 1,
@@ -143,14 +147,6 @@ export class CoachComponent implements OnInit {
     }
   }
 
-  private getGenders()
-  {
-    return this.genderService.getAll()
-    .subscribe(
-      data => {
-        this.genders = data as any;
-      })
-  }
   private getDanKyus()
   {
     return this.danKyuService.getAll()

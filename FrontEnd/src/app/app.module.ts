@@ -79,6 +79,7 @@ import { CompetitionsResultsWeightCategoriesComponent } from './components/Compe
 import { CompetitionsResultsWeightCategoryShowComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-category-show/competitions-results-weight-category-show.component';
 import { CompetitionsCompetitorsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors-weight-categories/competitions-competitors-weight-categories.component';
 import { CompetitionsCompetitorsWeightCategoriesShowComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors-weight-categories-show/competitions-competitors-weight-categories-show.component';
+import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -116,7 +117,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotComponent,
     LockscreenComponent,
     LoginComponent,
-    ForgotComponent,
     RegisterComponent,
     PermissionDeniedComponent,
     NotApprovedComponent,
@@ -133,7 +133,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompetitionsResultsWeightCategoriesComponent,
     CompetitionsResultsWeightCategoryShowComponent,
     CompetitionsCompetitorsWeightCategoriesComponent,
-    CompetitionsCompetitorsWeightCategoriesShowComponent
+    CompetitionsCompetitorsWeightCategoriesShowComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

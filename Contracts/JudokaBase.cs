@@ -18,13 +18,11 @@ namespace Contracts
         public IQueryable<Judoka> FindByConditionFull(Expression<Func<Judoka, bool>> expression)
         {
             return this.RepositoryContext.Set<Judoka>().Where(expression).AsNoTracking()
-                .Include(x => x.Gender)
                 .Include(x => x.DanKyu);
         }
         public List<Judoka> FindAllFull()
         {
             return this.RepositoryContext.Set<Judoka>().AsNoTracking()
-                .Include(x => x.Gender)
                 .Include(x => x.DanKyu).ToList();
         }
     }

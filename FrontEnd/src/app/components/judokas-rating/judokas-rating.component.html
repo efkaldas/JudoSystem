@@ -48,10 +48,10 @@
                                 <td mat-cell *matCellDef="let element"> <a fxFlexFill [routerLink]="'/coaches/'+element.user.id" class="mat-row-link">{{element.user.organization.shortName}}</a> </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="points">
+                            <!-- <ng-container matColumnDef="points">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
                                 <td mat-cell *matCellDef="let element"> {{element.points}} </td>
-                            </ng-container>
+                            </ng-container> -->
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -103,10 +103,10 @@
                                 <td mat-cell *matCellDef="let element"><a fxFlexFill [routerLink]="'/coaches/'+element.user.id" class="mat-row-link">{{element.user.organization.shortName}}</a></td>
                             </ng-container>
 
-                            <ng-container matColumnDef="points">
+                            <!-- <ng-container matColumnDef="points">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
                                 <td mat-cell *matCellDef="let element"> {{element.points}} </td>
-                            </ng-container>
+                            </ng-container> -->
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

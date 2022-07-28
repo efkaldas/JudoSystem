@@ -13,7 +13,6 @@ namespace Repository
         private IUserRepository user;
         private IOrganizationTypeRepository organizationType;
         private IOrganizationRepository organization;
-        private IGenderRepository gender;
         private IUserRoleRepository userRole;
         private IRoleRepository role;
         private IJudokaRepository judoka;
@@ -61,18 +60,7 @@ namespace Repository
                 return organizationType;
             }
         }
-        public IGenderRepository Gender
-        {
-            get
-            {
-                if (gender == null)
-                {
-                    gender = new GenderRepository(_repoContext);
-                }
 
-                return gender;
-            }
-        }
         public IUserRoleRepository UserRole
         {
             get

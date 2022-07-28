@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +17,6 @@ namespace Entities.Models
         public string Title { get; set; }
         public int CompetitionsId { get; set; }
         public Competitions Competitions { get; set; }
-        public int GenderId { get; set; }
         public Gender Gender { get; set; }
         [Required(ErrorMessage = "YearsFrom is required")]
         public int YearsFrom { get; set; }

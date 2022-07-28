@@ -62,7 +62,7 @@
                             <!-- Weight Column -->
                             <ng-container matColumnDef="gender">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                                <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+                                <td mat-cell *matCellDef="let element"> {{ gender[element.gender] | translate }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="status">
@@ -158,7 +158,7 @@
                                                     <!-- Weight Column -->
                                                     <ng-container matColumnDef="gender">
                                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                                                        <td mat-cell *matCellDef="let element "> {{element.gender.textEN}} </td>
+                                                        <td mat-cell *matCellDef="let element "> {{ gender[element.gender] | translate }} </td>
                                                     </ng-container>
 
                                                     <ng-container matColumnDef="status">
@@ -266,7 +266,7 @@
                                                                 <!-- Weight Column -->
                                                                 <ng-container matColumnDef="gender">
                                                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                                                                    <td mat-cell *matCellDef="let element"> {{element.gender.textEN}} </td>
+                                                                    <td mat-cell *matCellDef="let element"> {{ gender[element.gender] | translate }} </td>
                                                                 </ng-container>
 
                                                                 <ng-container matColumnDef="status">
@@ -358,7 +358,7 @@
                                                                 <!-- Weight Column -->
                                                                 <ng-container matColumnDef="gender">
                                                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                                                                    <td mat-cell *matCellDef="let element "> {{element.judoka.gender.textEN}} </td>
+                                                                    <td mat-cell *matCellDef="let element "> {{ gender[element.judoka.gender] }} </td>
                                                                 </ng-container>
 
                                                                 <!-- Symbol Column -->
@@ -412,9 +412,9 @@
 
                 <mat-form-field>
                     <mat-label>Select gender</mat-label>
-                    <mat-select formControlName="genderId" required>
-                        <mat-option *ngFor="let gender of genders" [value]="gender.id">
-                            {{gender.textEN}}
+                    <mat-select formControlName="gender" required>
+                        <mat-option *ngFor="let genderId of genders" [value]="genderId">
+                            {{ gender[genderId] | translate }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -525,7 +525,7 @@
             <div class="row">
                 <div style="list-style-type: none;" class="col-md-6">
                     <li>Firstname and lastname: {{competitor.firstname}} {{competitor.lastname}}</li>
-                    <li>Gender: {{competitor.gender.textEN}}</li>
+                    <li>Gender: {{ gender[competitor.gender] }}</li>
                     <li>Weight category: {{competitor.weightCategories[0].weightCategory.title}}</li>
                 </div>
                 <div style="margin-left: 400px" class="col-md-6">

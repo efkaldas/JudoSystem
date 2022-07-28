@@ -7,8 +7,8 @@ import { CustomValidators } from 'ng2-validation';
 import { DanKyuService } from '../../../services/dan-kyu.service';
 import { GenderService } from '../../../services/gender.service';
 import { DanKyu } from '../../../data/DanKyu.data';
-import { Gender } from '../../../data/gender.data';
 import { Role } from '../../../data/user-role.enum.data';
+import { Gender } from '../../../enums/gender.enum';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -20,21 +20,23 @@ const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
 })
 export class ProfileComponent implements OnInit {
   
-
   user: User;
   danKyus: DanKyu[];
-  genders: Gender[];
   errorMessage: string;
   public userEditForm: FormGroup;
   isAdmin = false;
+
+  genders = [];
+  gender = Gender;
   
   constructor(private danKyuService: DanKyuService,private genderService: GenderService, private userService: UserService,
-     private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog) { }
+     private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog) {
+      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+    }
 
   ngOnInit() {
     this.getUser();
     this.getDanKyus();
-    this.getGenders();
     this.isOrganizationAdminOrAdmin()
   }
   private isOrganizationAdminOrAdmin()
@@ -47,7 +49,7 @@ export class ProfileComponent implements OnInit {
     this.userEditForm = this.fb.group({
       firstname: [this.user.firstname, Validators.compose([Validators.required])],
       lastname: [this.user.lastname, Validators.compose([Validators.required])],
-      genderId: [this.user.gender.id, Validators.compose([Validators.required])],
+      gender: [this.user.gender, Validators.compose([Validators.required])],
       dankyuId: [null, Validators.compose([Validators.required])],
       email: [this.user.email, Validators.compose([Validators.required])],
       birthDate: [new Date(this.user.birthDate), Validators.compose([Validators.required])],
@@ -71,14 +73,7 @@ export class ProfileComponent implements OnInit {
    //   horizontalPosition: 'end',
     });
   }
-  private getGenders()
-  {
-    return this.genderService.getAll()
-    .subscribe(
-      data => {
-        this.genders = data as any;
-      })
-  }
+
   private getDanKyus()
   {
     return this.danKyuService.getAll()

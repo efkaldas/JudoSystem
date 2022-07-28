@@ -17,10 +17,10 @@ import { RoleService } from '../../../services/role.service';
 import { Role } from '../../../data/role.data';
 import { UserRole } from '../../../data/user-role.data';
 import { GenderService } from '../../../services/gender.service';
-import { Gender } from '../../../data/gender.data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DanKyuService } from '../../../services/dan-kyu.service';
 import { DanKyu } from '../../../data/DanKyu.data';
+import { Gender } from '../../../enums/gender.enum';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -42,16 +42,19 @@ export class RegisterComponent implements OnInit {
   danKyus: DanKyu[];
   errorMessage: string;
   message: string;
-  genders: Gender[];
+
+  genders = [];
+  gender = Gender;
 
   constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
     private roleService: RoleService, private danKyuService: DanKyuService, private userService: UserService, private fb: FormBuilder, private router: Router,
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar) {
+     this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+    }
 
   ngOnInit() {
     this.getOrganizationTypes();
     this.getDanKyus();
-    this.getGenders();
     this.formGroup();
   }
   private formGroup()
@@ -62,7 +65,7 @@ export class RegisterComponent implements OnInit {
       phoneNumber: [null, Validators.compose([Validators.required])],
       birthDate: [null, Validators.compose([Validators.required])],
       danKyuId: [null, Validators.compose([Validators.required])],
-      genderId: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
       StatusId: 2,
       password: Password,
@@ -85,14 +88,6 @@ export class RegisterComponent implements OnInit {
         this.organizationTypes = data as OrganizationType[];
       })
   }
-  private getGenders()
-  {
-    return this.genderService.getAll()
-    .subscribe(
-      data => {
-        this.genders = data as any;
-      })
-  }
   private getDanKyus()
   {
     return this.danKyuService.getAll()
@@ -102,7 +97,7 @@ export class RegisterComponent implements OnInit {
       })
   }
 
-  onUserFormSubmit()
+  onUserFormSubmit() 
   {
     this.clicked = true;
     this.userData = this.userForm.value;

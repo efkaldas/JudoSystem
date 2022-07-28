@@ -9,7 +9,6 @@ namespace Entities
     public class JudoDbContext : DbContext
     {
         public DbSet<DanKyu> DanKyu { get; set; }
-        public DbSet<Gender> Gender { get; set; }
         public DbSet<Judoka> Judoka { get; set; }
         public DbSet<Organization> Organization { get; set; }
         public DbSet<OrganizationType> OrganizationType { get; set; }
@@ -76,7 +75,6 @@ namespace Entities
 
 
             DanKyuSeed.Generate(builder);
-            GenderSeed.Generate(builder);
             OrganizationTypeSeed.Generate(builder);
             UserRoleSeed.Generate(builder);
             UserStatusSeed.Generate(builder);

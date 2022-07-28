@@ -20,7 +20,7 @@ export class JudokaService extends LoginService {
         return this.http.get(this.judokaUrl + this.myJudokasUrl); 
     }
     getByRank(id: number) {
-      return this.http.get(this.judokaUrl + this.byRankUrl, {params: { genderId: id.toString() }}) ; 
+      return this.http.get(this.judokaUrl + this.byRankUrl, {params: { gender: id.toString() }}) ; 
     }
     getJudokasHistory(id: number) {
       return this.http.get(this.judokaUrl + id + this.historyUrl) ; 

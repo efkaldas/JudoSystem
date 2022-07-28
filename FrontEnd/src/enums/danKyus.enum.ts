@@ -1,4 +1,4 @@
-enum DanKyu {
+const enum DanKyus {
     KYU6 = 1,
     KYU5 = 2,
     KYU4 = 3,

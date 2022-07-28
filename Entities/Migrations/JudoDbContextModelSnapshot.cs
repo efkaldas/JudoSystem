@@ -35,7 +35,7 @@ namespace Entities.Migrations
                     b.Property<int>("DanKyuTo")
                         .HasColumnType("int");
 
-                    b.Property<int>("GenderId")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -58,8 +58,6 @@ namespace Entities.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompetitionsId");
-
-                    b.HasIndex("GenderId");
 
                     b.ToTable("AgeGroup");
                 });
@@ -330,48 +328,6 @@ namespace Entities.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.Models.Gender", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("TextEN")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("TextLT")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("TextRU")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Gender");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            TextEN = "Male",
-                            TextLT = "Vyras",
-                            TextRU = "Mужчина"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            TextEN = "Female",
-                            TextLT = "Moteris",
-                            TextRU = "Женщина"
-                        });
-                });
-
             modelBuilder.Entity("Entities.Models.Judoka", b =>
                 {
                     b.Property<int>("Id")
@@ -389,7 +345,7 @@ namespace Entities.Migrations
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("GenderId")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Lastname")
@@ -406,8 +362,6 @@ namespace Entities.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DanKyuId");
-
-                    b.HasIndex("GenderId");
 
                     b.HasIndex("UserId");
 
@@ -597,7 +551,7 @@ namespace Entities.Migrations
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("GenderId")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -627,6 +581,12 @@ namespace Entities.Migrations
                         .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250);
 
+                    b.Property<string>("ResetToken")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime?>("ResetTokenExpires")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -638,8 +598,6 @@ namespace Entities.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("GenderId");
 
                     b.HasIndex("OrganizationId");
 
@@ -653,15 +611,15 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(1063),
-                            DateCreated = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(2070),
-                            DateUpdated = new DateTime(2020, 5, 23, 13, 48, 37, 692, DateTimeKind.Local).AddTicks(2543),
+                            BirthDate = new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(5818),
+                            DateCreated = new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(6668),
+                            DateUpdated = new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(7070),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
-                            GenderId = 1,
+                            Gender = 1,
                             Image = "admin_image.png",
                             Lastname = "Kušlevič",
-                            Password = "AQAAAAEAACcQAAAAEF86PBDmAJBHAtIHm7S+Ku/NcQ6nAAb3N3d3FGuA6kDhzVBv4KnNg+FihTUGJQYTxg==",
+                            Password = "AQAAAAEAACcQAAAAEGkFMggZOvu2l9nFT9h1o7VLde+i5yGV4dnHL6J9o7327Gycl+fv3CgUdoE5+WXzgQ==",
                             PhoneNumber = "+37060477292",
                             StatusId = 1
                         });
@@ -766,12 +724,6 @@ namespace Entities.Migrations
                         .HasForeignKey("CompetitionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Entities.Models.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Models.Competitions", b =>
@@ -836,12 +788,6 @@ namespace Entities.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Models.User", "User")
                         .WithMany("Judokas")
                         .HasForeignKey("UserId")
@@ -863,12 +809,6 @@ namespace Entities.Migrations
                     b.HasOne("Entities.Models.DanKyu", "DanKyu")
                         .WithMany()
                         .HasForeignKey("DanKyuId");
-
-                    b.HasOne("Entities.Models.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.HasOne("Entities.Models.Organization", "Organization")
                         .WithMany("Users")
