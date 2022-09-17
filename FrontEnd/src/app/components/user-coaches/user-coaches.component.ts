@@ -3,6 +3,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../data/user.data';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
 import { CoachService } from '../../../services/coach.service';
+import { Gender } from '../../../enums/gender.enum';
 
 @Component({
   selector: 'app-users-coaches',
@@ -15,11 +16,17 @@ export class UserCoachesComponent implements OnInit {
   selectedElement: any;
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<User>;
+  genders = [];
+  gender = Gender;
+
+  
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'email', 'phoneNumber',
    'status', 'actions'];
   errorMessage: string;
 
-  constructor(private coachService: CoachService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(private coachService: CoachService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+    this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

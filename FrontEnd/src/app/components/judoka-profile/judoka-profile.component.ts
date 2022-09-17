@@ -3,6 +3,7 @@ import { JudokaService } from '../../../services/judoka.service';
 import { ActivatedRoute } from '@angular/router';
 import { Judoka } from '../../../data/judoka.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { Gender } from '../../../enums/gender.enum';
 
 @Component({
   selector: 'app-judoka-profile',
@@ -16,12 +17,16 @@ export class JudokaProfileComponent implements OnInit {
   judoka: Judoka;
   history: any[];
   errorMessage: string;
+  genders = [];
+  gender = Gender;
 
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
   displayedColumns: string[] = ['position', 'competitions', 'ageGroup', 'date', 'place'];
 
-  constructor(private judokaService: JudokaService, private route: ActivatedRoute) { }
+  constructor(private judokaService: JudokaService, private route: ActivatedRoute) { 
+    this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+  }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

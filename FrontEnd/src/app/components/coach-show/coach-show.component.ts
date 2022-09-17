@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Tile } from '../../../data/title.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { Gender } from '../../../enums/gender.enum';
 
 @Component({
   selector: 'app-coach-show',
@@ -20,12 +21,16 @@ export class CoachShowComponent implements OnInit {
   coachId: number;
   public userImage;
   public organizationlogo;
+  genders = [];
+  gender = Gender;
 
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'birthYears', 'gender', 'danKyu'];
 
-  constructor(private coachService : CoachService, private route: ActivatedRoute) { }
+  constructor(private coachService : CoachService, private route: ActivatedRoute) { 
+    this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+  }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
