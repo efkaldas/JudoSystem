@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { CustomValidators } from 'ng2-validation';
-import { CompetitionsTypeService } from '../../../../services/competitions-type.service';
-import { CompetitionsType } from '../../../../data/competitions-type.data';
-import { CompetitionsService } from '../../../../services/Competitions.service';
+import { CompetitionsTypeService } from '../../../services/competitions-type.service';
+import { CompetitionsType } from '../../../data/competitions-type.data';
+import { CompetitionsService } from '../../../services/Competitions.service';
 
 @Component({
   selector: 'app-new-competitions',

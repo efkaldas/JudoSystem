@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { PendingUserService } from '../../../services/pending-user.service';
-import { User } from '../../../data/user.data';
-import { Organization } from '../../../data/organization.data';
+import { UserService } from '../../services/user.service';
+import { PendingUserService } from '../../services/pending-user.service';
+import { User } from '../../data/user.data';
+import { Organization } from '../../data/organization.data';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { GenderService } from '../../../services/gender.service';
+import { GenderService } from '../../services/gender.service';
 import { Router } from '@angular/router';
-import { Gender } from '../../../enums/gender.enum';
+import { Gender } from '../../enums/gender.enum';
 
 
 @Component({

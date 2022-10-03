@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { OrganizationService } from '../../../services/organization.service';
+import { OrganizationService } from '../../services/organization.service';
 import { MatDialog, MatSnackBar, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
-import { Organization } from '../../../data/organization.data';
+import { Organization } from '../../data/organization.data';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({

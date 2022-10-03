@@ -30,7 +30,15 @@ namespace JudoSystem.ExceptionHandlers
                 _logger.LogError($"Something went wrong: {ex}");
                 await HandleExceptionAsync(httpContext, ex);
             }
-            await HandleCustomException(httpContext);
+            try
+            {
+                await HandleCustomException(httpContext);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                throw;
+            }
         }
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
@@ -47,7 +55,7 @@ namespace JudoSystem.ExceptionHandlers
         {
             ErrorDetails temp = new ErrorDetails();
 
-            context.Response.ContentType = "application/json";
+  //          context.Response.ContentType = "application/json";
 
             switch (context.Response.StatusCode)
             {
@@ -67,7 +75,7 @@ namespace JudoSystem.ExceptionHandlers
                     temp = ErrorDetails.HTTP_STATUS_REQUEST_TIMEOUT;
                     break;
                 default:
-                    break;
+                    return Task.CompletedTask;
             }
 
             return context.Response.WriteAsync(temp.ToString());

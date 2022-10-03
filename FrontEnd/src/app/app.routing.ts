@@ -6,7 +6,7 @@ import { MyJudokasComponent } from './components/my-judokas/my-judokas.component
 import { AuthGuard } from './auth-guard/auth.guard';
 import { PendingUsersComponent } from './components/pending-users/pending-users.component';
 import { HomeComponent } from './components/home/home.component';
-import { Role } from '../data/user-role.enum.data';
+import { Role } from './data/user-role.enum.data';
 import { CoachComponent } from './components/coach/coach.component';
 import { CoachShowComponent } from './components/coach-show/coach-show.component';
 import { ProfileComponent } from './components/profile/profile.component';

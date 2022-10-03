@@ -41,8 +41,9 @@ namespace JudoSystem.Controllers
 
         // PUT: api/Judge/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] string value)
         {
+            return Ok();
         }
         [HttpGet("My", Name = "GetMyJudge")]
         public IActionResult GetMy()

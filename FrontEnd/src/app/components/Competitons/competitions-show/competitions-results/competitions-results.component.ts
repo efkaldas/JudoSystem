@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
-import { Judoka } from '../../../../../data/judoka.data';
-import { CompetitionsService } from '../../../../../services/Competitions.service';
-import { AgeGroup } from '../../../../../data/age-group.data';
+import { Judoka } from '../../../../data/judoka.data';
+import { CompetitionsService } from '../../../../services/Competitions.service';
+import { AgeGroup } from '../../../../data/age-group.data';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 

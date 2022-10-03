@@ -1,20 +1,20 @@
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatChipInputEvent, MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { AgeGroupService } from '../../../../../services/age-group.service';
-import { Judoka } from '../../../../../data/judoka.data';
-import { CompetitionsService } from '../../../../../services/Competitions.service';
+import { AgeGroupService } from '../../../../services/age-group.service';
+import { Judoka } from '../../../../data/judoka.data';
+import { CompetitionsService } from '../../../../services/Competitions.service';
 import { ActivatedRoute } from '@angular/router';
-import { Competitions } from '../../../../../data/competitions.data';
-import { AgeGroup } from '../../../../../data/age-group.data';
-import { WeightCategoryService } from '../../../../../services/weight-category.service';
-import { Role } from '../../../../../data/user-role.enum.data';
+import { Competitions } from '../../../../data/competitions.data';
+import { AgeGroup } from '../../../../data/age-group.data';
+import { WeightCategoryService } from '../../../../services/weight-category.service';
+import { Role } from '../../../../data/user-role.enum.data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WeightCategory } from '../../../../../data/weight-category.data';
-import { GenderService } from '../../../../../services/gender.service';
-import { DanKyuService } from '../../../../../services/dan-kyu.service';
-import { DanKyu } from '../../../../../data/DanKyu.data';
+import { WeightCategory } from '../../../../data/weight-category.data';
+import { GenderService } from '../../../../services/gender.service';
+import { DanKyuService } from '../../../../services/dan-kyu.service';
+import { DanKyu } from '../../../../data/DanKyu.data';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
-import { Gender } from '../../../../../enums/gender.enum';
+import { Gender } from '../../../../enums/gender.enum';
 
 @Component({
   selector: 'app-competitions-age-groups',

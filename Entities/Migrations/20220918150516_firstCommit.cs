@@ -437,7 +437,7 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "BirthDate", "DanKyuId", "Email", "Firstname", "Gender", "Image", "Lastname", "OrganizationId", "ParentUserId", "Password", "PhoneNumber", "ResetToken", "ResetTokenExpires", "StatusId" },
-                values: new object[] { 1, new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(5818), null, "judosystem.info@gmail.com", "Evaldas", 1, "admin_image.png", "Kušlevič", null, null, "AQAAAAEAACcQAAAAEGkFMggZOvu2l9nFT9h1o7VLde+i5yGV4dnHL6J9o7327Gycl+fv3CgUdoE5+WXzgQ==", "+37060477292", null, null, 1 });
+                values: new object[] { 1, new DateTime(2022, 9, 18, 18, 5, 16, 18, DateTimeKind.Local).AddTicks(7687), null, "judosystem.info@gmail.com", "Evaldas", 1, "admin_image.png", "Kušlevič", null, null, "AQAAAAEAACcQAAAAEGKh1O1LEc57cBYLsSdBa8ebbj6IbybgEEKxtUOUMh+j44qtIFaVkja87y0dJm52cg==", "+37060477292", null, null, 1 });
 
             migrationBuilder.InsertData(
                 table: "UserRole",

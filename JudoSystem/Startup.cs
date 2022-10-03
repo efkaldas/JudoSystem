@@ -49,6 +49,14 @@ namespace JudoSystem
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             services.ConfigureFilters();
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,15 +71,15 @@ namespace JudoSystem
                 app.UseExceptionHandler("/Error");
             }
 
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider.GetService<JudoDbContext>().Database.Migrate();
-            }
+            //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    scope.ServiceProvider.GetService<JudoDbContext>().Database.Migrate();
+            //}
 
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
             app.ConfigureExceptionHandler(logger);

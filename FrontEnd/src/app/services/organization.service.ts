@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { LoginService } from './Login.service';
 import { Judoka } from '../data/judoka.data';
 import { User } from '../data/user.data';

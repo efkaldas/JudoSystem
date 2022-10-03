@@ -8,19 +8,19 @@ import {
   FormArray
 } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { OrganizationTypeService } from '../../../services/organization-type.service';
-import { UserService } from '../../../services/user.service';
-import { OrganizationType } from '../../../data/organization-type.data';
-import { Organization } from '../../../data/organization.data';
-import { User } from '../../../data/user.data';
-import { RoleService } from '../../../services/role.service';
-import { Role } from '../../../data/role.data';
-import { UserRole } from '../../../data/user-role.data';
-import { GenderService } from '../../../services/gender.service';
+import { OrganizationTypeService } from '../../services/organization-type.service';
+import { UserService } from '../../services/user.service';
+import { OrganizationType } from '../../data/organization-type.data';
+import { Organization } from '../../data/organization.data';
+import { User } from '../../data/user.data';
+import { RoleService } from '../../services/role.service';
+import { Role } from '../../data/role.data';
+import { UserRole } from '../../data/user-role.data';
+import { GenderService } from '../../services/gender.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DanKyuService } from '../../../services/dan-kyu.service';
-import { DanKyu } from '../../../data/DanKyu.data';
-import { Gender } from '../../../enums/gender.enum';
+import { DanKyuService } from '../../services/dan-kyu.service';
+import { DanKyu } from '../../data/DanKyu.data';
+import { Gender } from '../../enums/gender.enum';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));

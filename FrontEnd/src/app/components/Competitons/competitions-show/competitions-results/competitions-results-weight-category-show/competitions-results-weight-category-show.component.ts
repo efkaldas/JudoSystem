@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar } from '@angular/material';
-import { WeightCategoryService } from '../../../../../../services/weight-category.service';
+import { WeightCategoryService } from '../../../../../services/weight-category.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Judoka } from '../../../../../../data/judoka.data';
+import { Judoka } from '../../../../../data/judoka.data';
 
 @Component({
   selector: 'app-competitions-results-weight-category-show',

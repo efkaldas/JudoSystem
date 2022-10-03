@@ -6,8 +6,7 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from '../../services/Login.service';
-import { LoggedInUser } from '../../data/LoggedInUser.data';
+import { LoginService } from '../services/Login.service';
 
 @Injectable({
   providedIn: 'root'

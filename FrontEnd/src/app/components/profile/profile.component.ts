@@ -1,14 +1,14 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { User } from '../../../data/user.data';
-import { UserService } from '../../../services/user.service';
+import { User } from '../../data/user.data';
+import { UserService } from '../../services/user.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { CustomValidators } from 'ng2-validation';
-import { DanKyuService } from '../../../services/dan-kyu.service';
-import { GenderService } from '../../../services/gender.service';
-import { DanKyu } from '../../../data/DanKyu.data';
-import { Role } from '../../../data/user-role.enum.data';
-import { Gender } from '../../../enums/gender.enum';
+import { DanKyuService } from '../../services/dan-kyu.service';
+import { GenderService } from '../../services/gender.service';
+import { DanKyu } from '../../data/DanKyu.data';
+import { Role } from '../../data/user-role.enum.data';
+import { Gender } from '../../enums/gender.enum';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));

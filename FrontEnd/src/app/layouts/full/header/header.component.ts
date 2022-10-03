@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
-import { LoginService } from '../../../../services/Login.service';
+import { LoginService } from '../@shared/services/Login.service';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { User } from '../../../../data/user.data';
+import { User } from '../../../data/user.data';
 
 @Component({
   selector: 'app-header',

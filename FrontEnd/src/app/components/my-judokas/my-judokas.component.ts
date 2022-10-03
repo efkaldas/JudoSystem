@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { Judoka } from "../../../data/judoka.data";
-import { JudokaService } from "../../../services/judoka.service";
+import { Judoka } from "../../data/judoka.data";
+import { JudokaService } from "../../services/judoka.service";
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
-import { DanKyu } from "../../../data/DanKyu.data";
-import { DanKyuService } from "../../../services/dan-kyu.service";
-import { Gender } from "../../../enums/gender.enum";
+import { DanKyu } from "../../data/DanKyu.data";
+import { DanKyuService } from "../../services/dan-kyu.service";
+import { Gender } from "../../enums/gender.enum";
 
 @Component({
   selector: "app-my-judokas",

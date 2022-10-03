@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { WeightCategoryService } from '../../../../../../services/weight-category.service';
-import { AgeGroupService } from '../../../../../../services/age-group.service';
-import { WeightCategory } from '../../../../../../data/weight-category.data';
+import { WeightCategoryService } from '../../../../../services/weight-category.service';
+import { AgeGroupService } from '../../../../../services/age-group.service';
+import { WeightCategory } from '../../../../../data/weight-category.data';
 
 @Component({
   selector: 'app-competitions-results-weight-categories',

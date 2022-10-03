@@ -1,8 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Competitions } from '../../../../data/competitions.data';
-import { CompetitionsService } from '../../../../services/Competitions.service';
+import { Competitions } from '../../../data/competitions.data';
+import { CompetitionsService } from '../../../services/Competitions.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Role } from '../../../../data/user-role.enum.data';
+import { Role } from '../../../data/user-role.enum.data';
 
 @Component({
   selector: 'app-competitions',

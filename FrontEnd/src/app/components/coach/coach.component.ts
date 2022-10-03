@@ -1,16 +1,16 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { GenderService } from '../../../services/gender.service';
+import { GenderService } from '../../services/gender.service';
 import { MatSnackBar, MatTableDataSource, MatDialog, MatSort, MatPaginator } from '@angular/material';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
-import { User } from '../../../data/user.data';
-import { CoachService } from '../../../services/coach.service';
-import { LoginService } from '../../../services/Login.service';
-import { DanKyu } from '../../../data/DanKyu.data';
-import { DanKyuService } from '../../../services/dan-kyu.service';
-import { Gender } from '../../../enums/gender.enum';
+import { User } from '../../data/user.data';
+import { CoachService } from '../../services/coach.service';
+import { LoginService } from '@shared/services/Login.service';
+import { DanKyu } from '../../data/DanKyu.data';
+import { DanKyuService } from '../../services/dan-kyu.service';
+import { Gender } from '../../enums/gender.enum';
 
 
 

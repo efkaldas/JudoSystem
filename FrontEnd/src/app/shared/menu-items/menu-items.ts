@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../../../services/Login.service';
+import { LoginService } from 'src/app/services/Login.service';
 
 export interface BadgeItem {
   type: string;

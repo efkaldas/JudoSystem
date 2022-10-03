@@ -70,20 +70,22 @@ namespace JudoSystem.Controllers
         // PUT: api/AgeGroup/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public void Put(int id, [FromBody] AgeGroup ageGroup)
+        public IActionResult Put(int id, [FromBody] AgeGroup ageGroup)
         {
             AgeGroup ageGroupDB = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
             db.AgeGroup.Update(ageGroup);
+            return Ok();
         }
         [Authorize(Roles = "Admin")]
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
             db.AgeGroup.Delete(ageGroup);
             db.Save();
+            return Ok(); 
         }
     }
 }

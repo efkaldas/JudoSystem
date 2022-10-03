@@ -611,15 +611,15 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(5818),
-                            DateCreated = new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(6668),
-                            DateUpdated = new DateTime(2022, 6, 30, 0, 13, 14, 297, DateTimeKind.Local).AddTicks(7070),
+                            BirthDate = new DateTime(2022, 9, 18, 18, 5, 16, 18, DateTimeKind.Local).AddTicks(7687),
+                            DateCreated = new DateTime(2022, 9, 18, 18, 5, 16, 19, DateTimeKind.Local).AddTicks(4027),
+                            DateUpdated = new DateTime(2022, 9, 18, 18, 5, 16, 19, DateTimeKind.Local).AddTicks(4482),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
                             Image = "admin_image.png",
                             Lastname = "Kušlevič",
-                            Password = "AQAAAAEAACcQAAAAEGkFMggZOvu2l9nFT9h1o7VLde+i5yGV4dnHL6J9o7327Gycl+fv3CgUdoE5+WXzgQ==",
+                            Password = "AQAAAAEAACcQAAAAEGKh1O1LEc57cBYLsSdBa8ebbj6IbybgEEKxtUOUMh+j44qtIFaVkja87y0dJm52cg==",
                             PhoneNumber = "+37060477292",
                             StatusId = 1
                         });

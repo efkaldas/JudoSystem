@@ -7,7 +7,7 @@ import {
   FormControl
 } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { LoginService } from '../../../services/Login.service';
+import { LoginService } from '@shared/services/Login.service';
 import { MatSnackBar } from '@angular/material';
 
 const Password = new FormControl('', Validators.required);

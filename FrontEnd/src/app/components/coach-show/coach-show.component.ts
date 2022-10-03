@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from '../../../data/user.data';
-import { CoachService } from '../../../services/coach.service';
-import { Judoka } from '../../../data/judoka.data';
+import { User } from '../../data/user.data';
+import { CoachService } from '../../services/coach.service';
+import { Judoka } from '../../data/judoka.data';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Tile } from '../../../data/title.data';
+import { Tile } from '../../data/title.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Gender } from '../../../enums/gender.enum';
+import { Gender } from '../../enums/gender.enum';
 
 @Component({
   selector: 'app-coach-show',

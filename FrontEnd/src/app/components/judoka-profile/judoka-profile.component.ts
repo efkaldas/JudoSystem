@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { JudokaService } from '../../../services/judoka.service';
+import { JudokaService } from '../../services/judoka.service';
 import { ActivatedRoute } from '@angular/router';
-import { Judoka } from '../../../data/judoka.data';
+import { Judoka } from '../../data/judoka.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Gender } from '../../../enums/gender.enum';
+import { Gender } from '../../enums/gender.enum';
 
 @Component({
   selector: 'app-judoka-profile',

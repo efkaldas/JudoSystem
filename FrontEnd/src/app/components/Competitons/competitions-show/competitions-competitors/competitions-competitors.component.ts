@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { AgeGroup } from '../../../../../data/age-group.data';
-import { Competitions } from '../../../../../data/competitions.data';
-import { Judoka } from '../../../../../data/judoka.data';
-import { Role } from '../../../../../data/user-role.enum.data';
-import { AgeGroupService } from '../../../../../services/age-group.service';
-import { CompetitionsService } from '../../../../../services/Competitions.service';
-import { WeightCategoryService } from '../../../../../services/weight-category.service';
+import { AgeGroup } from '../../../../data/age-group.data';
+import { Competitions } from '../../../../data/competitions.data';
+import { Judoka } from '../../../../data/judoka.data';
+import { Role } from '../../../../data/user-role.enum.data';
+import { AgeGroupService } from '../../../../services/age-group.service';
+import { CompetitionsService } from '../../../../services/Competitions.service';
+import { WeightCategoryService } from '../../../../services/weight-category.service';
 
 @Component({
   selector: 'app-competitions-competitors',

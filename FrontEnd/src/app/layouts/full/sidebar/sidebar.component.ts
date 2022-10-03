@@ -14,9 +14,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 
 
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { LoginService } from '../../../../services/Login.service';
-import { User } from '../../../../data/user.data';
-import { Role } from '../../../../data/user-role.enum.data';
+import { LoginService } from '../@shared/services/Login.service';
+import { User } from '../../../data/user.data';
+import { Role } from '../../../data/user-role.enum.data';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',

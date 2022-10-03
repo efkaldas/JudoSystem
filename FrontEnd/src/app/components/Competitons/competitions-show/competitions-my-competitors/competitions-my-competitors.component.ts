@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar } from '@angular/material';
-import { Judoka } from '../../../../../data/judoka.data';
-import { CompetitionsService } from '../../../../../services/Competitions.service';
+import { Judoka } from '../../../../data/judoka.data';
+import { CompetitionsService } from '../../../../services/Competitions.service';
 import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  

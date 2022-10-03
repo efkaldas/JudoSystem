@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { User } from '../../../data/user.data';
+import { UserService } from '../../services/user.service';
+import { User } from '../../data/user.data';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
-import { CoachService } from '../../../services/coach.service';
-import { Gender } from '../../../enums/gender.enum';
+import { CoachService } from '../../services/coach.service';
+import { Gender } from '../../enums/gender.enum';
 
 @Component({
   selector: 'app-users-coaches',
