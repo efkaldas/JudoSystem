@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@a
 import { MatChipInputEvent, MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { AgeGroupService } from '../../../../services/age-group.service';
 import { Judoka } from '../../../../data/judoka.data';
-import { CompetitionsService } from '../../../../services/Competitions.service';
+import { CompetitionsService } from '../../../../services/competitions.service';
 import { ActivatedRoute } from '@angular/router';
 import { Competitions } from '../../../../data/competitions.data';
 import { AgeGroup } from '../../../../data/age-group.data';
@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WeightCategory } from '../../../../data/weight-category.data';
 import { GenderService } from '../../../../services/gender.service';
 import { DanKyuService } from '../../../../services/dan-kyu.service';
-import { DanKyu } from '../../../../data/DanKyu.data';
+import { DanKyu } from '../../../../data/danKyu.data';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Gender } from '../../../../enums/gender.enum';
 

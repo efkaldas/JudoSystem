@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { CustomValidators } from 'ng2-validation';
 import { CompetitionsTypeService } from '../../../services/competitions-type.service';
 import { CompetitionsType } from '../../../data/competitions-type.data';
-import { CompetitionsService } from '../../../services/Competitions.service';
+import { CompetitionsService } from '../../../services/competitions.service';
 
 @Component({
   selector: 'app-new-competitions',

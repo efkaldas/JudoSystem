@@ -14,7 +14,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 
 
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { LoginService } from '../@shared/services/Login.service';
+import { LoginService } from '../../../services/login.service';
 import { User } from '../../../data/user.data';
 import { Role } from '../../../data/user-role.enum.data';
 @Component({

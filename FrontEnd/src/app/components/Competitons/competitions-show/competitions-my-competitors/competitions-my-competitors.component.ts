@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import { Judoka } from '../../../../data/judoka.data';
-import { CompetitionsService } from '../../../../services/Competitions.service';
+import { CompetitionsService } from '../../../../services/competitions.service';
 import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  
+import { Gender } from '../../../../enums/gender.enum';
 
 @Component({
   selector: 'app-competitions-my-competitors',
@@ -20,6 +21,8 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
   dataSource = new MatTableDataSource;
   myCompetitors : Judoka[];
   errorMessage: string;
+  genders = [];
+  gender = Gender;
 
   competitionsId: number;
   routeSub: any;
@@ -28,7 +31,8 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
   
   constructor(private competitionsService: CompetitionsService, private route: ActivatedRoute,
      private snackBar: MatSnackBar) { 
-    this.routeSub = this.route.parent.params.subscribe(params => {
+      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+      this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
   }

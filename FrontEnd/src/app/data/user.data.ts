@@ -1,7 +1,7 @@
 import { Organization } from "./organization.data";
 import { UserRole } from "./user-role.data";
 import { UserStatus } from "./userStatus.data";
-import { DanKyu } from "./DanKyu.data";
+import { DanKyu } from "./danKyu.data";
 import { Judoka } from "./judoka.data";
 import { Gender } from "../enums/gender.enum";
 

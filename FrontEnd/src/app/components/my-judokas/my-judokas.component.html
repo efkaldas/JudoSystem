@@ -103,9 +103,9 @@
 </ng-template>
 
 <ng-template #editJudokaModal>
-    <div mat-dialog-content>
-        <h1 mat-dialog-title>{{ 'EditJudoka' | translate }}</h1>
-        <form [formGroup]="judokaEditForm" novalidate (ngSubmit)="editJudoka()" color="accent">
+    <form [formGroup]="judokaEditForm" novalidate (ngSubmit)="editJudoka()" color="accent">
+        <div mat-dialog-content>
+            <h1 mat-dialog-title>{{ 'EditJudoka' | translate }}</h1>
             <mat-form-field>
                 <input autofocus type="text" matInput placeholder="{{ 'Firstname' | translate }}" required formControlName="firstname">
             </mat-form-field>
@@ -135,12 +135,12 @@
             <mat-form-field>
                 <input autofocus type="number" matInput placeholder="Birth Years" required formControlName="birthYears">
             </mat-form-field>
-        </form>
-    </div>
-    <div mat-dialog-actions>
-        <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
-        <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
-    </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
+        </div>
+    </form>
 </ng-template>
 
 <ng-template #deleteJudokaModal>

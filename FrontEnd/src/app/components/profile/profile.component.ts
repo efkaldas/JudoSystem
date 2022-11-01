@@ -6,7 +6,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { CustomValidators } from 'ng2-validation';
 import { DanKyuService } from '../../services/dan-kyu.service';
 import { GenderService } from '../../services/gender.service';
-import { DanKyu } from '../../data/DanKyu.data';
+import { DanKyu } from '../../data/danKyu.data';
 import { Role } from '../../data/user-role.enum.data';
 import { Gender } from '../../enums/gender.enum';
 

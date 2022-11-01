@@ -35,8 +35,8 @@
         <!-- ============================================================== -->
 
         <button mat-icon-button (click)="snav.toggle() && clickEvent()" value="sidebarclosed">
-      <mat-icon>menu</mat-icon>
-    </button>
+            <mat-icon>menu</mat-icon>
+        </button>
         <!-- ============================================================== -->
         <!-- Search - style you can find in header.scss -->
         <!-- ============================================================== -->
@@ -53,13 +53,24 @@
         <!-- ============================================================== -->
         <!-- app header component - style you can find in header.scss / header.component.ts-->
         <!-- ============================================================== -->
+
         <app-header></app-header>
         <!-- ============================================================== -->
         <!-- Right sidebar toggle - style you can find in rightsidebar.component.scss -->
         <!-- ============================================================== -->
+
+        <mat-select style="width: 50px;" (selectionChange)="changeLang($event.value)" [(value)]="currentLanguage.iso">
+            <mat-select-trigger>
+                <span [ngClass]="currentLanguage.flag"></span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let language of languages" [value]="language.iso">
+                <span [ngClass]="language.flag"></span> {{language.iso}}
+            </mat-option>
+        </mat-select>
+
         <button (click)="end.toggle()" mat-icon-button class="ml-xs overflow-visible">
-      <mat-icon>settings</mat-icon>
-    </button>
+            <mat-icon>settings</mat-icon>
+        </button>
     </mat-toolbar>
     <!-- ============================================================== -->
     <!-- End Topbar - style you can find in pages.scss -->

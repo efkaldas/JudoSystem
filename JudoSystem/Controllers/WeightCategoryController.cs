@@ -35,7 +35,6 @@ namespace JudoSystem.Controllers
                         .ThenInclude(x => x.DanKyu)
                 .Include(x => x.Competitors)
                     .ThenInclude(x => x.Judoka)
-                        .ThenInclude(x => x.Gender)
                 .Include(x => x.Competitors)
                     .ThenInclude(x => x.Judoka)
                         .ThenInclude(x => x.User)
@@ -56,8 +55,6 @@ namespace JudoSystem.Controllers
         public IActionResult GetResults(int id)
         {
             List<CompetitionsResults> categoryResults = db.CompetitionsResults.FindByCondition(x => x.WeightCategoryId == id)
-                .Include(x => x.Judoka)
-                    .ThenInclude(x => x.Gender)
                 .Include(x => x.Judoka)
                     .ThenInclude(x => x.DanKyu)
                 .Include(x => x.Judoka)

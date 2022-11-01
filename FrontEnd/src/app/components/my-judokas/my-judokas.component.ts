@@ -4,7 +4,7 @@ import { Judoka } from "../../data/judoka.data";
 import { JudokaService } from "../../services/judoka.service";
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from "@angular/router";
-import { DanKyu } from "../../data/DanKyu.data";
+import { DanKyu } from "../../data/danKyu.data";
 import { DanKyuService } from "../../services/dan-kyu.service";
 import { Gender } from "../../enums/gender.enum";
 
@@ -65,7 +65,8 @@ export class MyJudokasComponent implements OnInit {
   }
   compare(o1: any, o2: any) {
     return (o1 == o2);
-   }
+  }
+
   private formGroup()
   {
     this.judokaForm = this.fb.group({
@@ -104,7 +105,6 @@ export class MyJudokasComponent implements OnInit {
   }
   public addJudoka()
   {
-    console.log(this.judokaForm);
     if(this.judokaForm.valid)    
     {
     return this.judokaService.create(this.judokaForm.value)
@@ -122,23 +122,23 @@ export class MyJudokasComponent implements OnInit {
       );
     }
   }
+
   public editJudoka()
-  {
-    if(this.judokaEditForm.valid && this.selectedElement != null)   
-    { 
-    return this.judokaService.update(this.selectedElement.id, this.judokaEditForm.value)
-      .subscribe(
-        data => {
-          this.openSnackBar("Judoka has been updated", 'CLOSE');
-          this.getJudokas();
-          this.onNoClick();
-        },
-        error => {
-          this.errorMessage = error["error"].message;
-          this.openSnackBar(this.errorMessage, 'CLOSE');
-          console.log(error); //gives an object at this point
-        }
-      );
+  { 
+    if (this.judokaEditForm.valid && this.selectedElement != null) { 
+      return this.judokaService.update(this.selectedElement.id, this.judokaEditForm.value)
+        .subscribe(
+          data => {
+            this.openSnackBar("Judoka has been updated", 'CLOSE');
+            this.getJudokas();
+            this.onNoClick();
+          },
+          error => {
+            this.errorMessage = error["error"].message;
+            this.openSnackBar(this.errorMessage, 'CLOSE');
+            console.log(error); //gives an object at this point
+          }
+        );
     }
   }
   private getJudokas() {

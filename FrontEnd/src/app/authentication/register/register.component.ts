@@ -19,7 +19,7 @@ import { UserRole } from '../../data/user-role.data';
 import { GenderService } from '../../services/gender.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DanKyuService } from '../../services/dan-kyu.service';
-import { DanKyu } from '../../data/DanKyu.data';
+import { DanKyu } from '../../data/danKyu.data';
 import { Gender } from '../../enums/gender.enum';
 
 const Password = new FormControl('', Validators.required);

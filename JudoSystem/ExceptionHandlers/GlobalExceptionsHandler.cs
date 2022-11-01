@@ -45,10 +45,11 @@ namespace JudoSystem.ExceptionHandlers
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error."
+                Message = $"Internal Server Error. {exception.Message} {exception.InnerException} {exception}"
             }.ToString());
         }
         private Task HandleCustomException(HttpContext context)

@@ -7,7 +7,7 @@ import {
   FormControl
 } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { LoginService } from "@shared/services/Login.service";
+import { LoginService } from "../../services/login.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../services/user.service';
 import { User } from '../../data/user.data';

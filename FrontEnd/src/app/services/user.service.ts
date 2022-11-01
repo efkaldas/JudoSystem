@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../data/user.data';
 import { Organization } from '../data/organization.data';
 import { HttpClient } from '@angular/common/http';
-import { LoginService } from './Login.service';
+import { LoginService } from './login.service';
 
 
 @Injectable()

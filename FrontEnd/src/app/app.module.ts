@@ -29,7 +29,7 @@ import { OrganizationTypeService } from './services/organization-type.service';
 import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { GenderService } from './services/gender.service';
-import { LoginService } from './services/Login.service';
+import { LoginService } from './services/login.service';
 import { MyJudokasComponent } from './components/my-judokas/my-judokas.component';
 import { JudokaService } from './services/judoka.service';
 import { httpInterceptorProviders } from './interceptors/interceptor-provider';
@@ -44,7 +44,7 @@ import { CoachService } from './services/coach.service';
 import { CoachShowComponent } from './components/coach-show/coach-show.component';
 import { CoachOrganizationComponent } from './components/coach-show/coach-organization/coach-organization.component';
 import { CoachProfileComponent } from './components/coach-show/coach-profile/coach-profile.component';
-import { CompetitionsService } from './services/Competitions.service';
+import { CompetitionsService } from './services/competitions.service';
 import { NewCompetitionsComponent } from './components/Competitons/new-competitions/new-competitions.component';
 import { QuillModule } from 'ngx-quill';
 import { CompetitionsTypeService } from './services/competitions-type.service';
@@ -158,10 +158,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     })
   ],
   providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
     httpInterceptorProviders,
     OrganizationTypeService,
     UserService,
@@ -176,7 +172,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompetitionsTypeService,
     AgeGroupService,
     WeightCategoryService,
-    OrganizationService
+    OrganizationService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   bootstrap: [AppComponent]
 })

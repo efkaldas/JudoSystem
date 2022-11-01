@@ -42,7 +42,7 @@ namespace JudoSystem.Extensions
         public static void ConfigureMySql(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<JudoDbContext>(options =>
-                options.UseMySql(configuration.GetConnectionString("JudoSystem-db")));
+                options.UseMySql(configuration.GetConnectionString("JudoSystem-db"), ServerVersion.AutoDetect(configuration.GetConnectionString("JudoSystem-db"))));
         }
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)

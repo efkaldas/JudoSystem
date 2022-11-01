@@ -28,7 +28,7 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<User> notApprovedUsers = db.User.FindByCondition(x => x.StatusId == UserStatus.STATUS_NOT_APPROVED).Include(x => x.Status).Include(x => x.Gender)
+            List<User> notApprovedUsers = db.User.FindByCondition(x => x.StatusId == UserStatus.STATUS_NOT_APPROVED).Include(x => x.Status)
                 .Include(x => x.Organization).Include(x => x.Organization.OrganizationType).Include(x => x.UserRoles).ThenInclude(x => x.Role).ToList();
 
             return Ok(notApprovedUsers);

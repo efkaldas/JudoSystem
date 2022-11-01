@@ -27,14 +27,14 @@ namespace JudoSystem.Controllers
 
         // GET: api/AgeGroup/5
         [HttpGet("{id}/Judokas", Name = "GetAgeGroupUserJudokas")]
-        [Authorize(Roles = "Admin, coach")]
+        [Authorize(Roles = "Admin, Coach")]
         public IActionResult GetAgeGroupUserJudokas(int id)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
             AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
 
             List<Judoka> judokas = db.Judoka.FindByCondition(x => x.UserId == userId
-            && x.Gender== ageGroup.Gender && x.BirthYears <= ageGroup.YearsTo && x.BirthYears >= ageGroup.YearsFrom
+            && x.Gender == ageGroup.Gender && x.BirthYears <= ageGroup.YearsTo && x.BirthYears >= ageGroup.YearsFrom
             && x.DanKyuId <= ageGroup.DanKyuTo && x.DanKyuId >= ageGroup.DanKyuFrom)
                 .Include(x => x.DanKyu)
                 .Include(x => x.WeightCategories)
@@ -76,8 +76,8 @@ namespace JudoSystem.Controllers
             db.AgeGroup.Update(ageGroup);
             return Ok();
         }
-        [Authorize(Roles = "Admin")]
 
+        [Authorize(Roles = "Admin")]
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

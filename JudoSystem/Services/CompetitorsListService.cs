@@ -1,8 +1,10 @@
 ﻿
 using CsvHelper;
+using CsvHelper.Configuration;
 using Entities.Models;
 using Entities.Models.Dto;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 using System.Threading;
@@ -51,10 +53,13 @@ namespace JudoSystem.Services
         }
         private string ExportFile(string filePath, List<CompetitorDto> competitors)
         {
+            CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = true
+            };
             using (TextWriter writer = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
             {
-                var csv = new CsvWriter(writer, System.Globalization.CultureInfo.CurrentCulture);
-                csv.Configuration.HasHeaderRecord = true;
+                var csv = new CsvWriter(writer, config);
                 csv.WriteRecords(competitors); // where values implements IEnumerable
             }
             Thread.Sleep(1000);

@@ -39,7 +39,7 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<Competitions> competitions = db.Competitions.FindAll().ToList();
+            var competitions = db.Competitions.FindAll().ToList();
             return Ok(competitions);
         }
         [Authorize(Roles = "Admin")]
@@ -57,8 +57,7 @@ namespace JudoSystem.Controllers
                      .Include(x => x.AgeGroups)
                         .ThenInclude(x => x.WeightCategories)
                             .ThenInclude(x => x.Competitors)
-                                .ThenInclude(x => x.Judoka)
-                                    .ThenInclude(x => x.Gender).FirstOrDefault();
+                                .ThenInclude(x => x.Judoka).FirstOrDefault();
 
             CompetitorsListService export = new CompetitorsListService();
             string file = export.Execute(competitions);
@@ -90,7 +89,6 @@ namespace JudoSystem.Controllers
                     .ThenInclude(x => x.WeightCategories)
                         .ThenInclude(x => x.Competitors)
                             .ThenInclude(x => x.Judoka)
-                                .ThenInclude(x => x.Gender)
                  .Include(x => x.AgeGroups)
                     .ThenInclude(x => x.WeightCategories)
                         .ThenInclude(x => x.Competitors)
@@ -215,7 +213,6 @@ namespace JudoSystem.Controllers
                     .ThenInclude(x => x.WeightCategories)
                         .ThenInclude(x => x.Competitors)
                             .ThenInclude(x => x.Judoka)
-                                .ThenInclude(x => x.Gender)
                  .Include(x => x.AgeGroups)
                     .ThenInclude(x => x.WeightCategories)
                         .ThenInclude(x => x.Competitors)

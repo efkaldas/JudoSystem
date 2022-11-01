@@ -15,10 +15,6 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "paths": {
-      "@environments/*": ["./src/environments/*"],
-      "@shared/*":  ["./src/app/*"]
-    },
     "lib": [
       "es2017",
       "dom"

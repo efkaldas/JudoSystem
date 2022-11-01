@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { User } from '../../data/user.data';
 import { CoachService } from '../../services/coach.service';
-import { LoginService } from '@shared/services/Login.service';
-import { DanKyu } from '../../data/DanKyu.data';
+import { LoginService } from '../../services/login.service';
+import { DanKyu } from '../../data/danKyu.data';
 import { DanKyuService } from '../../services/dan-kyu.service';
 import { Gender } from '../../enums/gender.enum';
 

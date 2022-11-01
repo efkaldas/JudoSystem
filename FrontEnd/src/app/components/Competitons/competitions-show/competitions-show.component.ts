@@ -5,14 +5,14 @@ import { MatDialog, MatSnackBar, MatChipInputEvent, MatTableDataSource, MatPagin
 import { AgeGroup } from '../../../data/age-group.data';
 import { DanKyuService } from '../../../services/dan-kyu.service';
 import { GenderService } from '../../../services/gender.service';
-import { DanKyu } from '../../../data/DanKyu.data';
+import { DanKyu } from '../../../data/danKyu.data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ENTER, COMMA, SPACE } from '@angular/cdk/keycodes';
 import { WeightCategory } from '../../../data/weight-category.data';
 import { AgeGroupService } from '../../../services/age-group.service';
 import { Judoka } from '../../../data/judoka.data';
 import { WeightCategoryService } from '../../../services/weight-category.service';
-import { CompetitionsService } from '../../../services/Competitions.service';
+import { CompetitionsService } from '../../../services/competitions.service';
 import { saveAs } from 'file-saver';
 import { Role } from '../../../data/user-role.enum.data';
 import * as jspdf from 'jspdf';      

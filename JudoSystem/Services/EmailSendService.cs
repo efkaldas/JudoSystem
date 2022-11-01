@@ -20,7 +20,8 @@ namespace JudoSystem.Services
         int repeat;
         TimeSpan time = new TimeSpan(0, 0, 1, 0);
         public readonly string ADMIN_LOGIN = "judosystem.info@gmail.com";
-        public readonly string ADMIN_PASSWORD = "gq9ECcs9ZCg7QaxE";
+        public readonly string ADMIN_PASSWORD = "diyqfcxphezqppzy";
+        public readonly string ADMIN_PASSWORD2 = "gq9ECcs9ZCg7QaxE";
 
         public void SendEmail(string title, string message, List<string> recipients, string fileToAttach = null)
         {

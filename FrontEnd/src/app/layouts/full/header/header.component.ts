@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
-import { LoginService } from '../@shared/services/Login.service';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { User } from '../../../data/user.data';
+import { LoginService } from '../../../services/login.service';
+
 
 @Component({
   selector: 'app-header',
@@ -22,15 +23,8 @@ export class AppHeaderComponent implements OnInit{
   constructor(
     public translate: TranslateService, private loginService : LoginService, public menuItems: MenuItems
   ) {
-    translate.addLangs(['en', 'lt', 'ru']);
-    translate.setDefaultLang('lt');
   }
 
-  changeLang(language: string) {  
-    localStorage.setItem('locale', language);  
-    this.translate.use(language);  
-    window.location.reload();
-  } 
   signOut() {
     this.loginService.logout();
   }

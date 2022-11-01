@@ -24,7 +24,7 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-        <td mat-cell *matCellDef="let element"> <a fxFlexFill [routerLink]="'/coaches/'+element.id" class="mat-row-link">{{ genders[element.gender] | translate }}</a> </td>
+        <td mat-cell *matCellDef="let element"> <a fxFlexFill [routerLink]="'/coaches/'+element.id" class="mat-row-link">{{ gender[element.gender] | translate }}</a> </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
@@ -79,7 +79,7 @@
                 <mat-label>Select gender</mat-label>
                 <mat-select formControlName="gender" required>
                     <mat-option *ngFor="let genderId of genders" [value]="genderId">
-                        {{ genders[genderId] | translate }}
+                        {{ gender[genderId] | translate }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { Gender } from '../../../../enums/gender.enum';
 import { AgeGroup } from '../../../../data/age-group.data';
 import { Competitions } from '../../../../data/competitions.data';
 import { Judoka } from '../../../../data/judoka.data';
 import { Role } from '../../../../data/user-role.enum.data';
 import { AgeGroupService } from '../../../../services/age-group.service';
-import { CompetitionsService } from '../../../../services/Competitions.service';
+import { CompetitionsService } from '../../../../services/competitions.service';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
 
 @Component({
@@ -24,6 +25,8 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   weightCategoryId: any;
   competitors: Judoka[];
   isAdmin = false;
+  genders = [];
+  gender = Gender;
 
   dataSource = new MatTableDataSource;
 
@@ -36,6 +39,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
     this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
+    this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
   }
 
   ngOnInit() {

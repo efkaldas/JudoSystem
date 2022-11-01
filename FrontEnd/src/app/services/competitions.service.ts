@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginService } from './Login.service';
+import { LoginService } from './login.service';
 import { Competitions } from '../data/competitions.data';
 
 @Injectable()
 export class CompetitionsService extends LoginService {
-  protected competitionsUrl : string = environment.apiHost+"/Competitions/";
+  protected competitionsUrl : string = environment.apiHost + "/Competitions/";
   protected ageGroupUrl : string = "/AgeGroups";
   protected printCompetitorsUrl : string = "/Competitors-list.csv";
   protected importResultsUrl : string = "/ResultsFile"; 
@@ -34,7 +34,7 @@ export class CompetitionsService extends LoginService {
   async create(competitions: Competitions, file) {
     var newCompetitions: Competitions;
     var response = null;
-
+    console.log(competitions);
     await this.http.post(this.competitionsUrl, competitions)
     .toPromise()
     .then(

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
-import { LoginService } from '../services/Login.service';
+import { LoginService } from '../services/login.service';
 
 @Injectable()
 export class JwtTokenInterceptor implements HttpInterceptor {
