@@ -250,7 +250,7 @@ const MENUITEMS = [
     icon: 'perm_contact_calendar',
     children: [
       { state: 'login', name: 'Login', type: 'link' },
-      { state: 'register', name: 'Register', type: 'link' },
+      { state: 'register', name: 'Register2', type: 'link' },
       { state: 'forgot', name: 'Forgot', type: 'link' },
       { state: 'lockscreen', name: 'Lockscreen', type: 'link' },
       { state: '404', name: 'Error', type: 'link' }

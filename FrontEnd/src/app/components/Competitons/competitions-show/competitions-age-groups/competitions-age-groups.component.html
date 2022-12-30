@@ -12,6 +12,21 @@
 
 <mat-tab-group [selectedIndex]="0" (selectedTabChange)="getTabRecords($event)">
     <mat-tab *ngFor="let ageGroup of competitions?.ageGroups" label="{{ageGroup?.title}}">
+    <br>
+        <div fxFlex.gt-sm="100" fxFlex="100">
+            <!-- Row -->
+            <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
+                <h4><b>{{ 'Gender' | translate }}: </b> {{ gender[ageGroup.gender] | translate }}</h4>
+            </div>
+            <!-- Row -->
+            <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
+                <h4><b>{{ 'Ages' | translate }}:  </b>{{ageGroup.yearsFrom}} - {{ageGroup.yearsTo}}</h4>
+            </div>
+            <!-- Row -->
+            <div fxLayout="row" fxLayoutAlign="start" class="p-l-20">
+                <h4><b>Dan/Kyu requirments: </b> {{ageGroup.danKyuFrom}} - {{ageGroup.danKyuTo}}</h4>
+            </div>
+        </div>
         <mat-card-content *ngIf="isLoggedIn()">
             <div fxLayout="row" fxLayoutAlign="end center" *ngIf="isAdmin">
                 <button mat-raised-button (click)="openDialog(deleteModal, competition.id)" color="accent"><mat-icon>edit</mat-icon> Edit </button>
@@ -73,7 +88,6 @@
                             </mat-select>
                             <div *ngIf="element.weightCategories.length > 0">
                                 {{element.weightCategories[0].weightCategory.title}}
-
                             </div>
                         </td>
                     </ng-container>

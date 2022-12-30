@@ -100,5 +100,8 @@
     "ForgotPasssword": "Forgot Passsword?",
     "EnterEmailAndWeSendPassword": "Enter your email and we'll send you the password reset link.",
     "RecoverPassword": "Recover Password",
-    "ResetPassword": "ResetPassword"
+    "ResetPassword": "ResetPassword",
+    "HomeWelcomeMessage": "In order to use system, you should sign in first.",
+    "Register2": "Registruotis",
+    "Ages": "Ages"
 }

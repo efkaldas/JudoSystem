@@ -99,5 +99,8 @@
     "ForgotPasssword": "Pamiršote slaptažodį?",
     "EnterEmailAndWeSendPassword": "Įveskite el-paštą kuriuo norėtumete gauti slaptažodžio atkurimo nuorodą.",
     "RecoverPassword": "Slaptažodžio atkurimas",
-    "ResetPassword": "Sukurti naują slaptažodį"
+    "ResetPassword": "Sukurti naują slaptažodį",
+    "HomeWelcomeMessage": "Tam, kad pilnai naudotis sistma turite prisijungti.",
+    "Register2": "Registruotis",
+    "Ages": "Amžius"
 }
