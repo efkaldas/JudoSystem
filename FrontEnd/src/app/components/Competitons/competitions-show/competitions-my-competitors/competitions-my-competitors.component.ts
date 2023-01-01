@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  
 import { Gender } from '../../../../enums/gender.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-competitions-my-competitors',
@@ -29,8 +30,10 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'danKyu', 'status', 'category'];
   
-  constructor(private competitionsService: CompetitionsService, private route: ActivatedRoute,
-     private snackBar: MatSnackBar) { 
+  constructor(private competitionsService: CompetitionsService
+    , private route: ActivatedRoute
+    , private snackBar: MatSnackBar
+    , private translate: TranslateService) { 
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
       this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
@@ -71,15 +74,15 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
     .subscribe(
       data => {
         if (data != null)  {
-          saveAs(data, "MyCompetitors.csv");
-          this.openSnackBar("File has been generated", 'CLOSE');
+          saveAs(data, "MyCompetitors.pdf");
+          this.openSnackBar(this.translate.instant("FileHasBeenGenerated"), this.translate.instant("Close"));
         } else {
-          this.openSnackBar("File was not generated", 'CLOSE');
+          this.openSnackBar(this.translate.instant("FileWasNotGenerated"), this.translate.instant("Close"));
         }
       },
       error => {
         this.errorMessage = error["error"].message;
-        this.openSnackBar(this.errorMessage, 'CLOSE');
+        this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
         console.log(error); //gives an object at this point
       }
     );

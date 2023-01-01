@@ -20,7 +20,11 @@ export class ForgotComponent implements OnInit {
   public form: FormGroup;
   public message: string;
   constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService, private snackBar: MatSnackBar,
-    private location: Location) {}
+    private location: Location) {
+      if (loginService.isLoggedIn()) {
+        router.navigate(['home']);
+      }
+    }
 
   ngOnInit() {
     this.form = this.fb.group({

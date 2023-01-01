@@ -23,7 +23,11 @@ export class ResetPasswordComponent implements OnInit {
   public message: string;
   public clicked = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private loginService: LoginService, private snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private loginService: LoginService, private snackBar: MatSnackBar) {
+    if (loginService.isLoggedIn()) {
+      router.navigate(['home']);
+    }
+  }
 
   ngOnInit() {
     this.form = this.fb.group({

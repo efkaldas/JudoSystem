@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Gender } from '../../../../enums/gender.enum';
 import { AgeGroup } from '../../../../data/age-group.data';
@@ -9,6 +9,7 @@ import { Role } from '../../../../data/user-role.enum.data';
 import { AgeGroupService } from '../../../../services/age-group.service';
 import { CompetitionsService } from '../../../../services/competitions.service';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-competitions-competitors',
@@ -35,7 +36,11 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
-  constructor(private competitionsService: CompetitionsService, private weightCategorySerivce: WeightCategoryService, private route: ActivatedRoute) { 
+  constructor(private competitionsService: CompetitionsService
+    , private weightCategorySerivce: WeightCategoryService
+    , private route: ActivatedRoute
+    , private _snackBar: MatSnackBar
+    , private translate: TranslateService) { 
     this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
@@ -58,6 +63,14 @@ export class CompetitionsCompetitorsComponent implements OnInit {
   {
     let selectedGroup = this.competitions.ageGroups.find(x => x.title == $event.tab.textLabel);
     this.ageGroupId = this.competitions.ageGroups.indexOf(selectedGroup);
+  }
+
+  public openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+   //   horizontalPosition: 'end',
+    });
   }
 
   private getCompetitions() {
@@ -85,6 +98,26 @@ export class CompetitionsCompetitorsComponent implements OnInit {
          },
          error => {
            this.errorMessage = error["error"].message;
+           console.log(error); //gives an object at this point
+         }
+       );
+   }
+
+   public printCompetitors()
+   {
+     return this.competitionsService.print(this.competitionsId)
+       .subscribe(
+         data => {
+           if (data != null)  {
+             saveAs(data, "Contestants.csv");
+             this.openSnackBar(this.translate.instant("FileHasBeenGenerated"), this.translate.instant("Close"));
+            } else {
+              this.openSnackBar(this.translate.instant("FileWasNotGenerated"), this.translate.instant("Close"));
+            }
+         },
+         error => {
+           this.errorMessage = error["error"].message;
+           this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
            console.log(error); //gives an object at this point
          }
        );

@@ -25,7 +25,11 @@ export class LoginComponent implements OnInit {
   message: string;
   token: any;
 
-  constructor(private userService: UserService, private loginService: LoginService, private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar) {}
+  constructor(private userService: UserService, private loginService: LoginService, private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar) {
+    if (loginService.isLoggedIn()) {
+      router.navigate(['home']);
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({

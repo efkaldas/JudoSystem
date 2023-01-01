@@ -79,7 +79,7 @@
     "YouMustInclude": "Turite užpildyti",
     "BirthYears": "Gimimo metai",
     "Accept": "Patvirtinti",
-    "Close": "Atšaukti",
+    "Close": "Uždaryti",
     "EditJudoka": "Redaguoti sportininką",
     "AreYouSureWantToDelete": "Ar tikrai norite pašalinti?",
     "Yes": "Taip",
@@ -102,5 +102,12 @@
     "ResetPassword": "Sukurti naują slaptažodį",
     "HomeWelcomeMessage": "Tam, kad pilnai naudotis sistma turite prisijungti.",
     "Register2": "Registruotis",
-    "Ages": "Amžius"
+    "Ages": "Amžius",
+    "Coaches": "Treneriai",
+    "CompetitionsInformation": "Varžybų informacija",
+    "CompetitionsMyCompetitiors": "Varžybos, mano sportininkai",
+    "CompetitionsAgeGroups": "Varžybų amžiaus grupės",
+    "CompetitionsResults": "Varžybų rezultatai",
+    "FileHasBeenGenerated": "Failas buvo sugeneruotas",
+    "FileWasNotGenerated": "Failas nebuvo sugeneruotas"
 }

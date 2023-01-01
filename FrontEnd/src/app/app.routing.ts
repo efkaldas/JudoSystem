@@ -49,16 +49,16 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent, data: {title: 'Home'} },
       { path: 'myjudokas', component: MyJudokasComponent, canActivate: [AuthGuard], data: {title: 'MyJudokas', roles: [Role.Admin, Role.Coach]} },
       { path: 'my-coaches', component: CoachComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [Role.Admin, Role.Organization_Admin]} },
-      { path: 'users', component: UserCoachesComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [Role.Admin]} },
+      { path: 'users', component: UserCoachesComponent,canActivate: [AuthGuard], data: {title: 'Users', roles: [Role.Admin]} },
       { path: 'coaches/:id', component: CoachShowComponent, canActivate: [AuthGuard], data: {title: 'Coach'} },
-      { path: 'pending-users', component: PendingUsersComponent, canActivate: [AuthGuard], data: {title: 'Pending Users', roles: [Role.Admin]} },
+      { path: 'pending-users', component: PendingUsersComponent, canActivate: [AuthGuard], data: {title: 'PendingUsers', roles: [Role.Admin]} },
       { path: 'competitions', component: CompetitionsComponent, data: {title: 'Competitions'} },
       { path: 'competitions/:id', component: CompetitionsTabsComponent, data: {title: 'Competitions'}, 
         children: [
           { path: '', redirectTo: 'info', pathMatch: 'full', data: {title: 'Home'} },
-          { path: 'info', component: CompetitionsInfoComponent, data: {title: 'Competitions Information'} },
-          { path: 'my-competitors', component: CompetitionsMyCompetitorsComponent, data: {title: 'Competitions My Competitiors'} },
-          { path: 'age-groups', component: CompetitionsAgeGroupsComponent, data: {title: 'Competitions Age Groups'} },
+          { path: 'info', component: CompetitionsInfoComponent, data: {title: 'CompetitionsInformation'} },
+          { path: 'my-competitors', component: CompetitionsMyCompetitorsComponent, data: {title: 'CompetitionsMyCompetitiors'} },
+          { path: 'age-groups', component: CompetitionsAgeGroupsComponent, data: {title: 'CompetitionsAgeGroups'} },
           { path: 'competitors', component: CompetitionsCompetitorsComponent, data: {title: 'Competitors'},
             children: [
               { path: 'group/:groupId', component: CompetitionsResultsWeightCategoriesComponent, data: {title: 'Competitors'},
@@ -66,11 +66,11 @@ export const routes: Routes = [
                   { path: 'weight-category/:categoryId', component: CompetitionsResultsWeightCategoryShowComponent, data: {title: 'Competitors'} }
                 ] }
               ] },
-          { path: 'results', component: CompetitionsResultsComponent, data: {title: 'Competitions Results'},
+          { path: 'results', component: CompetitionsResultsComponent, data: {title: 'CompetitionsResults'},
             children: [
-              { path: 'group/:groupId', component: CompetitionsResultsWeightCategoriesComponent, data: {title: 'Competitions Age Groups'},
+              { path: 'group/:groupId', component: CompetitionsResultsWeightCategoriesComponent, data: {title: 'CompetitionsAgeGroups'},
                 children: [
-                  { path: 'weight-category/:categoryId', component: CompetitionsResultsWeightCategoryShowComponent, data: {title: 'Competitions Age Groups'} }
+                  { path: 'weight-category/:categoryId', component: CompetitionsResultsWeightCategoryShowComponent, data: {title: 'CompetitionsAgeGroups'} }
                 ] }
               ] },
           ]},
@@ -78,7 +78,7 @@ export const routes: Routes = [
       { path: 'new-competitions', component: NewCompetitionsComponent, canActivate: [AuthGuard], data: {title: 'Create Competitons', roles: [Role.Admin]} },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {title: 'Profile'} },
       { path: 'judoka/:id', component: JudokaProfileComponent, canActivate: [AuthGuard], data: {title: 'Judoka'} },
-      { path: 'judokas/rating', component: JudokasRatingComponent, canActivate: [AuthGuard], data: {title: 'Judokas Rating'} },
+      { path: 'judokas/rating', component: JudokasRatingComponent, canActivate: [AuthGuard], data: {title: 'Judokas Rating', roles: [Role.Admin]} },
       { path: 'organizations', component: OrganizationsComponent, canActivate: [AuthGuard], data: {title: 'Organizations', roles: [Role.Admin, Role.Organization_Admin]} },
     ]
   },

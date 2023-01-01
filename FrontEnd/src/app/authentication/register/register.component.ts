@@ -21,6 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DanKyuService } from '../../services/dan-kyu.service';
 import { DanKyu } from '../../data/danKyu.data';
 import { Gender } from '../../enums/gender.enum';
+import { LoginService } from '../..//services/login.service';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -48,7 +49,10 @@ export class RegisterComponent implements OnInit {
 
   constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
     private roleService: RoleService, private danKyuService: DanKyuService, private userService: UserService, private fb: FormBuilder, private router: Router,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar, private loginService: LoginService) {
+      if (loginService.isLoggedIn()) {
+        router.navigate(['home']);
+      }
      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
     }
 

@@ -103,5 +103,12 @@
     "ResetPassword": "ResetPassword",
     "HomeWelcomeMessage": "In order to use system, you should sign in first.",
     "Register2": "Registruotis",
-    "Ages": "Ages"
+    "Ages": "Ages",
+    "Coaches": "Coaches",
+    "CompetitionsInformation": "Competitions information",
+    "CompetitionsMyCompetitiors": "Competitions, my participants",
+    "CompetitionsAgeGroups": "Competitions age groups",
+    "CompetitionsResults": "Competitions results",
+    "FileHasBeenGenerated": "File has been generated",
+    "FileWasNotGenerated": "File was not generated"
 }

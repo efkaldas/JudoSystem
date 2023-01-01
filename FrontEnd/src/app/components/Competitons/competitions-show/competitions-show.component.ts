@@ -18,6 +18,7 @@ import { Role } from '../../../data/user-role.enum.data';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  
 import { Gender } from '../../../enums/gender.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -74,11 +75,18 @@ export class CompetitionsShowComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('htmlData',{static: true}) htmlData:ElementRef;
 
-  constructor(private weightCategorySerivce: WeightCategoryService, private genderService: GenderService, private danKyuService: DanKyuService, 
-    private competitionsService: CompetitionsService, private route: ActivatedRoute,
-    private ageGroupService: AgeGroupService,
-    private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar, private fb: FormBuilder,
-    private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private weightCategorySerivce: WeightCategoryService
+    , private genderService: GenderService
+    , private danKyuService: DanKyuService
+    , private competitionsService: CompetitionsService
+    , private route: ActivatedRoute
+    , private ageGroupService: AgeGroupService
+    , private router: Router
+    , public dialog: MatDialog
+    , private _snackBar: MatSnackBar
+    , private fb: FormBuilder
+    , private changeDetectorRefs: ChangeDetectorRef
+    , private translate: TranslateService) {
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
      }
 
@@ -233,21 +241,22 @@ export class CompetitionsShowComponent implements OnInit {
         }
       );
   }
-  public printCompetitiors()
+  public printCompetitors()
   {
+    console.log("asdasdasdasd");
     return this.competitionsService.print(this.competitionsId)
       .subscribe(
         data => {
           if (data != null)  {
             saveAs(data, "Contestants.csv");
-            this.openSnackBar("File has been generated", 'CLOSE');
+            this.openSnackBar(this.translate.instant("FileHasBeenGenerated"), this.translate.instant("Close"));
           } else {
-            this.openSnackBar("File was not generated", 'CLOSE');
+            this.openSnackBar(this.translate.instant("FileWasNotGenerated"), this.translate.instant("Close"));
           }
         },
         error => {
           this.errorMessage = error["error"].message;
-          this.openSnackBar(this.errorMessage, 'CLOSE');
+          this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
           console.log(error); //gives an object at this point
         }
       );
@@ -256,16 +265,16 @@ export class CompetitionsShowComponent implements OnInit {
     if (this.file == null) {
     } else if (this.file.name.substr(this.file.name.length - 4) != ".pdf") {
       this.errorMessage = "File format must be *.pdf";
-      this.openSnackBar(this.errorMessage, 'CLOSE');
+      this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
     } else {
       this.competitionsService.importResultsFile(this.file, this.competitionsId).subscribe(
         data => {
           this.errorMessage = "File has successfully been uploaded";
-          this.openSnackBar(this.errorMessage, 'CLOSE');
+          this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
         },
         error => {
           this.errorMessage = error["error"].message;
-          this.openSnackBar(this.errorMessage, 'CLOSE');
+          this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
           console.log(error); //gives an object at this point
         }
         );
@@ -289,14 +298,14 @@ export class CompetitionsShowComponent implements OnInit {
     return this.ageGroupService.create(this.ageGroupForm.value)
       .subscribe(
         data => {
-          this.openSnackBar("New age group has been created", 'CLOSE');
+          this.openSnackBar("New age group has been created", this.translate.instant("Close"));
           this.categories = [];
           this.getCompetitions();
           this.onNoClick();
         },
         error => {
           this.errorMessage = error["error"].message;
-          this.openSnackBar(this.errorMessage, 'CLOSE');
+          this.openSnackBar(this.errorMessage, this.translate.instant("Close"));
           console.log(error); //gives an object at this point
         }
       );
