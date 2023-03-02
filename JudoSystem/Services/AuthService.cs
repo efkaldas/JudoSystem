@@ -77,13 +77,13 @@ namespace JudoSystem.Services
             {
                 new Claim(ClaimTypes.Name, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Actor, user.Status.StatusNameEN)
+                new Claim(ClaimTypes.Actor, user.Status.ToString())
             };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token");
 
             foreach (UserRole role in user.UserRoles)
             {
-                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Role.RoleNameEN));
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Type.ToString()));
             }
 
             return claimsIdentity;

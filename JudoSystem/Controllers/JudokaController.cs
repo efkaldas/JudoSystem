@@ -59,8 +59,7 @@ namespace JudoSystem.Controllers
         {
             Judoka judoka = db.Judoka.FindByConditionFull(x => x.Id == id)
                 .Include(x => x.User)
-                    .ThenInclude(x => x.Organization)
-                        .ThenInclude(x => x.OrganizationType).FirstOrDefault();
+                    .ThenInclude(x => x.Organization).FirstOrDefault();
 
             return Ok(judoka);
         }

@@ -42,7 +42,6 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Image { get; set; }
-        public int StatusId { get; set; }
         public UserStatus Status { get; set; }
         public int? OrganizationId { get; set; }
         public Organization Organization { get; set; }

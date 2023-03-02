@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Collections.Generic;
 using JudoSystem.Interfaces;
+using Enums;
 
 namespace JudoSystem.Controllers
 {
@@ -51,15 +52,15 @@ namespace JudoSystem.Controllers
             }
 
             user.UserRoles = new List<UserRole>();
-            user.UserRoles.Add(new UserRole { RoleId = Role.ORGANIZATION_ADMIN });
+            user.UserRoles.Add(new UserRole { Type = UserType.OrganizationAdmin });
 
-            if (user.Organization.OrganizationTypeId == Organization.TYPE_CLUB || user.Organization.OrganizationTypeId == Organization.TYPE_SPORTS_CENTER)
+            if (user.Organization.Type == OrganizationType.Club || user.Organization.Type == OrganizationType.SportsCenter)
             {
-                user.UserRoles.Add(new UserRole { RoleId = Role.COACH });
+                user.UserRoles.Add(new UserRole { Type = UserType.Coach });
             }
-            else if(user.Organization.OrganizationTypeId == Organization.TYPE_JUDGE_ASSOCIATION)
+            else if(user.Organization.Type == OrganizationType.JudgesAssociation)
             {
-                user.UserRoles.Add(new UserRole { RoleId = Role.JUDGE });
+                user.UserRoles.Add(new UserRole { Type = UserType.Judge });
             }
 
             user.BirthDate = user.BirthDate.Date;

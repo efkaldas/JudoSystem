@@ -51,7 +51,7 @@
                 <mat-tab label="{{ 'Organization' | translate }}">
                     <mat-card-content>
                         <div *ngIf="isAdmin" fxLayout="row" fxLayoutAlign="end center" class="edit-button">
-                            <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
+                            <button mat-raised-button (click)="openDialog(editOrganizationModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                         </div>
                         <mat-grid-list cols="12" rowHeight="75px">
                             <mat-grid-tile [colspan]="3" [rowspan]="4">
@@ -66,7 +66,7 @@
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                                 <h5><b>{{ 'Type' | translate }}: </b>
-                                    <p>{{user.organization.organizationType.typeNameEN}}</p>
+                                    <p>{{ organization[user.organization.type] | translate }}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
@@ -137,6 +137,45 @@
                 <mat-form-field style="width: 100%">
                     <input matInput placeholder="{{ 'ConfirmPassword' | translate }}" formControlName="confirmPassword" class="form-control" type="password">
                 </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #editOrganizationModal>
+    <form [formGroup]="organizationEditForm" novalidate (ngSubmit)="editUser()" color="accent">
+        <h1 mat-dialog-title>{{ 'EditProfile' | translate }}</h1>
+        <div mat-dialog-content>
+            <div fxLayout="row wrap">
+                <mat-form-field>
+                    <input autofocus type="text" matInput placeholder="{{ 'OrganizationExactName' | translate }}" required formControlName="exactName">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input autofocus type="text" matInput placeholder="{{ 'Country' | translate }}" required formControlName="country">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input autofocus type="text" matInput placeholder="{{ 'City' | translate }}" required formControlName="city">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input autofocus type="text" matInput placeholder="{{ 'Address' | translate }}" required formControlName="address">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ 'OrganizationType' | translate }}</mat-label>
+                    <mat-select [compareWith]="compareGenderFunction" formControlName="type" required>
+                        <mat-option *ngFor="let organizationTypeId of organizationTypes" [value]="organizationTypeId">
+                            {{ organizationType[organizationTypeId] | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
             </div>
         </div>
         <div mat-dialog-actions>

@@ -11,10 +11,8 @@ namespace Repository
     {
         private JudoDbContext _repoContext;
         private IUserRepository user;
-        private IOrganizationTypeRepository organizationType;
         private IOrganizationRepository organization;
         private IUserRoleRepository userRole;
-        private IRoleRepository role;
         private IJudokaRepository judoka;
         private IDanKyu danKyu;
         private ICompetitions competitions;
@@ -48,18 +46,6 @@ namespace Repository
                 return organization;
             }
         }
-        public IOrganizationTypeRepository OrganizationType
-        {
-            get
-            {
-                if (organizationType == null)
-                {
-                    organizationType = new OrganizationTypeRepository(_repoContext);
-                }
-
-                return organizationType;
-            }
-        }
 
         public IUserRoleRepository UserRole
         {
@@ -71,18 +57,6 @@ namespace Repository
                 }
 
                 return userRole;
-            }
-        }
-        public IRoleRepository Role
-        {
-            get
-            {
-                if (role == null)
-                {
-                    role = new RoleRepository(_repoContext);
-                }
-
-                return role;
             }
         }
         public IJudokaRepository Judoka

@@ -25,7 +25,7 @@ namespace Entities.Seeds
                         Image = "admin_image.png",
                         Email = "judosystem.info@gmail.com",
                         PhoneNumber = "+37060477292",
-                        StatusId = UserStatus.STATUS_APPROVED,
+                        Status = UserStatus.Approved,
                         Password = Crypto.HashPassword("adminJudo1337"),
                         UserRoles = new List<UserRole>(),
                         BirthDate = DateTime.Now,

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,8 @@ namespace JudoSystem.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<User> notApprovedUsers = db.User.FindByCondition(x => x.StatusId == UserStatus.STATUS_NOT_APPROVED).Include(x => x.Status)
-                .Include(x => x.Organization).Include(x => x.Organization.OrganizationType).Include(x => x.UserRoles).ThenInclude(x => x.Role).ToList();
+            List<User> notApprovedUsers = db.User.FindByCondition(x => x.Status == UserStatus.NotApproved).Include(x => x.Status)
+                .Include(x => x.Organization).Include(x => x.UserRoles).ToList();
 
             return Ok(notApprovedUsers);
         }
@@ -47,7 +48,7 @@ namespace JudoSystem.Controllers
         public IActionResult Put(int id, [FromBody] User user)
         {
             User dbUser = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
-            dbUser.StatusId = user.StatusId;
+            dbUser.Status = user.Status;
             db.User.Update(dbUser);
             db.Save();
 

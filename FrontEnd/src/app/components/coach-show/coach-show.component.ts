@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Tile } from '../../data/title.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Gender } from '../../enums/gender.enum';
+import { OrganizationType } from '../../enums/organizationType';
 
 @Component({
   selector: 'app-coach-show',
@@ -23,6 +24,9 @@ export class CoachShowComponent implements OnInit {
   public organizationlogo;
   genders = [];
   gender = Gender;
+  organizationTypes = [];
+  organizationType = OrganizationType;
+
 
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
@@ -30,6 +34,7 @@ export class CoachShowComponent implements OnInit {
 
   constructor(private coachService : CoachService, private route: ActivatedRoute) { 
     this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+    this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

@@ -54,6 +54,7 @@ namespace JudoSystem.Extensions
             services.AddScoped<IEmailSendService, EmailSendService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IOrganizationService, OrganizationService>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {
@@ -105,8 +106,7 @@ namespace JudoSystem.Extensions
                 .LogToConsole()
                 .Build();
 
-            var result = upgrader.PerformUpgrade();
-            
+            var result = upgrader.PerformUpgrade();        
         }
     }
 }

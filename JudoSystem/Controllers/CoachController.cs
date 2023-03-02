@@ -5,12 +5,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using Enums;
 using JudoSystem.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Org.BouncyCastle.Crypto.Tls;
 
 namespace JudoSystem.Controllers
 {
@@ -33,11 +35,10 @@ namespace JudoSystem.Controllers
         {
             List<User> users = db.User.FindAll()
                 .Include(x => x.UserRoles)
-                    .ThenInclude(x => x.Role)
                 .Include(x => x.DanKyu)
                 .Include(x => x.Status).ToList();
 
-            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.RoleId == UserRole.COACH) != null).ToList();
+            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.Type == UserType.Coach) != null).ToList();
 
             return Ok(coaches);
         }
@@ -49,11 +50,10 @@ namespace JudoSystem.Controllers
 
             List<User> users = db.User.FindByCondition(x => x.ParentUserId == userId)
                 .Include(x => x.UserRoles)
-                    .ThenInclude(x => x.Role)
                 .Include(x => x.DanKyu)
                 .Include(x => x.Status).ToList();
 
-            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.RoleId == UserRole.COACH) != null).ToList();
+            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.Type == UserType.Coach) != null).ToList();
 
             return Ok(coaches);
         }
@@ -68,7 +68,6 @@ namespace JudoSystem.Controllers
                 .Include(x => x.Organization)
                 .Include(x => x.Judokas)
                     .ThenInclude(x => x.DanKyu)
-                .Include(x => x.Organization.OrganizationType)
                 .FirstOrDefault();
 
             return Ok(coach);
@@ -85,7 +84,7 @@ namespace JudoSystem.Controllers
             coach.OrganizationId = user.Organization.Id;
             coach.ParentUserId = user.Id;
             coach.Password = StringHelper.HashPassword(coach.Password);
-            coach.UserRoles.Add(new UserRole { RoleId = Role.COACH });
+            coach.UserRoles.Add(new UserRole { Type = UserType.Coach });
             db.User.Create(coach);
             db.Save();
             return Ok();
@@ -97,7 +96,7 @@ namespace JudoSystem.Controllers
         public IActionResult Block(int id)
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
-            user.StatusId = UserStatus.STATUS_BLOCKED;
+            user.Status = UserStatus.Blocked;
             db.User.Update(user);
             db.Save();
             return Ok();
@@ -108,7 +107,7 @@ namespace JudoSystem.Controllers
         public IActionResult UnBlock(int id)
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
-            user.StatusId = UserStatus.STATUS_APPROVED;
+            user.Status = UserStatus.Approved;
             db.User.Update(user);
             db.Save();
             return Ok();

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Judoka } from '../../data/judoka.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Gender } from '../../enums/gender.enum';
+import { OrganizationType } from '../../enums/organizationType';
 
 @Component({
   selector: 'app-judoka-profile',
@@ -19,6 +20,8 @@ export class JudokaProfileComponent implements OnInit {
   errorMessage: string;
   genders = [];
   gender = Gender;
+  organizationTypes = [];
+  organizationType = OrganizationType;
 
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
@@ -26,6 +29,7 @@ export class JudokaProfileComponent implements OnInit {
 
   constructor(private judokaService: JudokaService, private route: ActivatedRoute) { 
     this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+    this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

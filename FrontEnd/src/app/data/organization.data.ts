@@ -1,4 +1,4 @@
-import { OrganizationType } from "./organization-type.data";
+import { OrganizationType } from "../enums/organizationType";
 
 
 export class Organization {
@@ -9,5 +9,5 @@ export class Organization {
     city: string;
     address: string;
     image: string;
-    organizationType: OrganizationType;
+    type: OrganizationType;
 }

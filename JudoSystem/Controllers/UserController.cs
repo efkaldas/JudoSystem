@@ -33,8 +33,7 @@ namespace JudoSystem.Controllers
             List<User> users = db.User.FindAll()
                 .Include(x => x.Status)
                 .Include(x => x.Organization)
-                .Include(x => x.UserRoles)
-                    .ThenInclude(x => x.Role).ToList();
+                .Include(x => x.UserRoles).ToList();
 
             users.Remove(users.Find(x => x.Id == 1));
 
@@ -48,8 +47,7 @@ namespace JudoSystem.Controllers
         {
             User user = db.User.FindByCondition(x => x.Id == id)
                 .Include(x => x.Organization)
-                .Include(x => x.UserRoles)
-                    .ThenInclude(x => x.Role).FirstOrDefault();
+                .Include(x => x.UserRoles).FirstOrDefault();
            // User user = HttpContext.Items["entity"] as User;
             return Ok(user);
         }
@@ -61,8 +59,7 @@ namespace JudoSystem.Controllers
             User user = db.User.FindByCondition(x => x.Id == id)
                 .Include(x => x.DanKyu)
                 .Include(x => x.UserRoles)
-                .Include(x => x.Organization)
-                    .ThenInclude(x => x.OrganizationType).FirstOrDefault();
+                .Include(x => x.Organization).FirstOrDefault();
             // User user = HttpContext.Items["entity"] as User;
             return Ok(user);
         }

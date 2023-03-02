@@ -7,6 +7,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } fro
 import { GenderService } from '../../services/gender.service';
 import { Router } from '@angular/router';
 import { Gender } from '../../enums/gender.enum';
+import { OrganizationType } from '../../enums/organizationType';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class PendingUsersComponent implements OnInit {
 
   genders = [];
   gender = Gender;
+  organizationTypes = [];
+  organizationType = OrganizationType;
 
   displayedColumns: string[] = ['position','firstname', 'lastname', 'phoneNumber', 'email', 'organizationName', 
    'organizationType', 'address', 'actions'];
@@ -36,6 +39,7 @@ export class PendingUsersComponent implements OnInit {
   constructor(private pendingUserService : PendingUserService, private genderService: GenderService,
      private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) { 
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+      this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
      }
 
   ngOnInit() {

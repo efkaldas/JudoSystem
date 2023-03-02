@@ -105,13 +105,12 @@
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field>
-                                        <mat-select placeholder="{{ 'OrganizationType' | translate }}" formControlName="organizationTypeId" class="form-control">
-                                            <mat-option *ngFor="let organizationType of organizationTypes" [value]="organizationType.id">
-                                                {{organizationType.typeNameEN}}
-                                            </mat-option>
+                                        <mat-label>{{ 'OrganizationType' | translate }}</mat-label>
+                                        <mat-select formControlName="type">
+                                            <mat-option *ngFor="let organizationTypeId of organizationTypes" [value]="organizationTypeId">{{ organizationType[organizationTypeId] | translate }}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <small *ngIf="submitted && organizationForm.controls['organizationTypeId'].hasError('required')" class="text-danger support-text">You must select an organization type.</small>
+                                    <small *ngIf="submitted && organizationForm.controls['type'].hasError('required')" class="text-danger support-text">You must select an organization type.</small>
                                 </div>
                                 <!-- col full-->
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">

@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Entities.Seeds
                     new UserRole
                     {
                         UserId = 1,
-                        RoleId = 1,
+                        Type = UserType.Admin,
                     }
                     );
         }

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,11 +30,10 @@ namespace JudoSystem.Controllers
         {
             List<User> users = db.User.FindAll()
                 .Include(x => x.UserRoles)
-                    .ThenInclude(x => x.Role)
                 .Include(x => x.DanKyu)
                 .Include(x => x.Status).ToList();
 
-            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.RoleId == Role.JUDGE) != null).ToList();
+            List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.Type == UserType.Judge) != null).ToList();
 
             return Ok(coaches);
         }
@@ -52,11 +52,10 @@ namespace JudoSystem.Controllers
 
             List<User> users = db.User.FindByCondition(x => x.ParentUserId == userId)
                 .Include(x => x.UserRoles)
-                    .ThenInclude(x => x.Role)
                 .Include(x => x.DanKyu)
                 .Include(x => x.Status).ToList();
 
-            List<User> judges = users.Where(x => x.UserRoles.Where(x => x.RoleId == Role.JUDGE) != null).ToList();
+            List<User> judges = users.Where(x => x.UserRoles.Where(x => x.Type == UserType.Judge) != null).ToList();
 
             return Ok(judges);
         }
@@ -70,7 +69,6 @@ namespace JudoSystem.Controllers
                  .Include(x => x.Judokas)
                      .ThenInclude(x => x.DanKyu)
                  .Include(x => x.ParentUser)
-                 .Include(x => x.Organization.OrganizationType)
                  .FirstOrDefault();
 
             return Ok(judge);
@@ -80,7 +78,7 @@ namespace JudoSystem.Controllers
         public IActionResult Block(int id)
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
-            user.StatusId = UserStatus.STATUS_BLOCKED;
+            user.Status = UserStatus.Blocked;
             db.User.Update(user);
             db.Save();
             return Ok();
@@ -90,7 +88,7 @@ namespace JudoSystem.Controllers
         public IActionResult UnBlock(int id)
         {
             User user = db.User.FindByCondition(x => x.Id == id).FirstOrDefault();
-            user.StatusId = UserStatus.STATUS_APPROVED;
+            user.Status = UserStatus.Approved;
             db.User.Update(user);
             db.Save();
             return Ok();

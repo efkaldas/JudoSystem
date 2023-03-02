@@ -40,7 +40,7 @@ export class OrganizationsComponent implements OnInit {
       city: this.selectedElement.city,
       address: this.selectedElement.address,
       image: this.selectedElement.address,
-      organizationTypeId: this.selectedElement.organizationType.id,
+      type: this.selectedElement.type,
     });
   }
   public update()

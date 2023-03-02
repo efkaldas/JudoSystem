@@ -110,5 +110,8 @@
     "CompetitionsAgeGroups": "Competitions age groups",
     "CompetitionsResults": "Competitions results",
     "FileHasBeenGenerated": "File has been generated",
-    "FileWasNotGenerated": "File was not generated"
+    "FileWasNotGenerated": "File was not generated",
+    "Club": "Club",
+    "SportsCenter": "Sports Center",
+    "JudgesAssociation": "JudgesAssociation"
 }

@@ -109,5 +109,8 @@
     "CompetitionsAgeGroups": "Varžybų amžiaus grupės",
     "CompetitionsResults": "Varžybų rezultatai",
     "FileHasBeenGenerated": "Failas buvo sugeneruotas",
-    "FileWasNotGenerated": "Failas nebuvo sugeneruotas"
+    "FileWasNotGenerated": "Failas nebuvo sugeneruotas",
+    "Club": "Klubas",
+    "SportsCenter": "Sporto Centras",
+    "JudgesAssociation": "Teisėjų Asociacija"
 }

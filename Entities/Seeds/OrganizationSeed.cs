@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Entities.Seeds
                         City = "Vilnius",
                         Address = "Vilniaus g. 18",
                         Image = "no_organization_image.png",
-                        OrganizationTypeId = 1
+                        Type = OrganizationType.Club,
                     }
                 );
         }

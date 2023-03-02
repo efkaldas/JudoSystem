@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,9 +10,6 @@ namespace Entities.Models
 {
     public class Organization
     {
-        public static readonly int TYPE_CLUB = 1;
-        public static readonly int TYPE_SPORTS_CENTER = 2;
-        public static readonly int TYPE_JUDGE_ASSOCIATION = 3;
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "ExactName is required")]
@@ -37,7 +35,6 @@ namespace Entities.Models
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]
         public string Image { get; set; }
-        public int OrganizationTypeId { get; set; }
-        public OrganizationType OrganizationType { get; set; }
+        public OrganizationType Type { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace JudoSystem.Controllers
         public IActionResult Login([FromBody]UserDto userDto)
         {
             User user = db.User.FindByCondition(x => x.Email == userDto.Email).Include(x => x.Status)
-                .Include(x => x.UserRoles).ThenInclude(x => x.Role).FirstOrDefault();
+                .Include(x => x.UserRoles).FirstOrDefault();
 
             if (user == null)
                 return new NotFoundObjectResult(new ErrorDetails(ErrorDetails.HTTP_STATUS_NOT_FOUND_CONST, "Vartotojas neegzistuoja"));

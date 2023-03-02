@@ -8,8 +8,6 @@ namespace Contracts.Interfaces
     {
         IUserRepository User { get; }
         IOrganizationRepository Organization { get; }
-        IOrganizationTypeRepository OrganizationType { get; }
-        IRoleRepository Role { get; }
         IUserRoleRepository UserRole { get; }
         IJudokaRepository Judoka { get; }
         IDanKyu DanKyu { get; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Interfaces;
 using Entities.Models;
+using JudoSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,30 +17,26 @@ namespace JudoSystem.Controllers
     [ApiController]
     public class OrganizationController : ControllerBase
     {
-        private IRepositoryWrapper db;
-        private readonly IConfiguration configuration;
-        public OrganizationController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
+        private IOrganizationService _organizationService;
+        public OrganizationController(IOrganizationService organizationService)
         {
-            this.configuration = configuration;
-            db = repoWrapper;
+            _organizationService = organizationService;
         }
+
         // GET: api/Organization
         [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
-            List<Organization> organizations = db.Organization.FindAll().Include(x => x.OrganizationType).ToList();
-            return Ok(organizations);
+            return Ok(_organizationService.Get());
         }
-
 
         // PUT: api/Organization/5
         [Authorize(Roles = "Admin, Organization admin")]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Organization value)
+        public IActionResult Put(int id, [FromBody] Organization organization)
         {
-            db.Organization.Update(value);
-            db.Save();
+            _organizationService.Update(organization);
             return Ok();
         }
     }
