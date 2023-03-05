@@ -14,11 +14,11 @@ import { Judoka } from '../../../data/judoka.data';
 import { WeightCategoryService } from '../../../services/weight-category.service';
 import { CompetitionsService } from '../../../services/competitions.service';
 import { saveAs } from 'file-saver';
-import { Role } from '../../../data/user-role.enum.data';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  
 import { Gender } from '../../../enums/gender.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { UserType } from '../../../enums/userType.enum';
 
 
 @Component({
@@ -138,7 +138,7 @@ export class CompetitionsShowComponent implements OnInit {
   } 
   private isUserAdmin()
   {
-    if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
+    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.type == UserType.Admin).length > 0)
       this.isAdmin = true;
   }
 

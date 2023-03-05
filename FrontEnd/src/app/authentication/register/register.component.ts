@@ -13,7 +13,6 @@ import { UserService } from '../../services/user.service';
 import { Organization } from '../../data/organization.data';
 import { User } from '../../data/user.data';
 import { RoleService } from '../../services/role.service';
-import { Role } from '../../data/role.data';
 import { UserRole } from '../../data/user-role.data';
 import { GenderService } from '../../services/gender.service';
 import { MatSnackBar } from '@angular/material/snack-bar';

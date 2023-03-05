@@ -73,7 +73,7 @@ namespace JudoSystem
 
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-         //       scope.ServiceProvider.GetService<JudoDbContext>().Database.Migrate();
+                scope.ServiceProvider.GetService<JudoDbContext>().Database.Migrate();
             }
 
             app.UseStaticFiles();

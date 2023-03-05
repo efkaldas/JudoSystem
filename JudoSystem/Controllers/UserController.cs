@@ -31,7 +31,6 @@ namespace JudoSystem.Controllers
         public IActionResult Get()
         {
             List<User> users = db.User.FindAll()
-                .Include(x => x.Status)
                 .Include(x => x.Organization)
                 .Include(x => x.UserRoles).ToList();
 

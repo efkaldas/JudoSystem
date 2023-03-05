@@ -8,6 +8,7 @@ import { GenderService } from '../../services/gender.service';
 import { Router } from '@angular/router';
 import { Gender } from '../../enums/gender.enum';
 import { OrganizationType } from '../../enums/organizationType';
+import { UserStatus } from '../../enums/UserStatus.enum';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class PendingUsersComponent implements OnInit {
   gender = Gender;
   organizationTypes = [];
   organizationType = OrganizationType;
+  userStatuses = [];
+  userStatus = UserStatus;
 
   displayedColumns: string[] = ['position','firstname', 'lastname', 'phoneNumber', 'email', 'organizationName', 
    'organizationType', 'address', 'actions'];
@@ -40,6 +43,7 @@ export class PendingUsersComponent implements OnInit {
      private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) { 
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
       this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
+      this.userStatuses = Object.values(this.userStatus).filter((o) => typeof o == 'number');
      }
 
   ngOnInit() {
@@ -65,7 +69,7 @@ export class PendingUsersComponent implements OnInit {
 
   public approve(element: User)
   {
-    element.statusId = 1;
+    element.status = UserStatus.Approved;
     return this.pendingUserService.update(element.id, element)
     .subscribe(
       data => {

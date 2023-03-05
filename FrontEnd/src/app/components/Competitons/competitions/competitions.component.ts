@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Competitions } from '../../../data/competitions.data';
 import { CompetitionsService } from '../../../services/competitions.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Role } from '../../../data/user-role.enum.data';
+import { UserType } from '../../../enums/userType.enum';
 
 @Component({
   selector: 'app-competitions',
@@ -33,7 +33,7 @@ export class CompetitionsComponent implements OnInit {
   }
   private isUserAdmin()
   {
-    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
+    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.type == UserType.Admin).length > 0)
       this.isAdmin = true;
   }
   public openSnackBar(message: string, action: string) {

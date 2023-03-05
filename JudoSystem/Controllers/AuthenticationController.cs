@@ -34,7 +34,7 @@ namespace JudoSystem.Controllers
         [HttpPost]
         public IActionResult Login([FromBody]UserDto userDto)
         {
-            User user = db.User.FindByCondition(x => x.Email == userDto.Email).Include(x => x.Status)
+            User user = db.User.FindByCondition(x => x.Email == userDto.Email)
                 .Include(x => x.UserRoles).FirstOrDefault();
 
             if (user == null)

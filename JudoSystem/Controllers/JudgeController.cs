@@ -30,8 +30,7 @@ namespace JudoSystem.Controllers
         {
             List<User> users = db.User.FindAll()
                 .Include(x => x.UserRoles)
-                .Include(x => x.DanKyu)
-                .Include(x => x.Status).ToList();
+                .Include(x => x.DanKyu).ToList();
 
             List<User> coaches = users.Where(x => x.UserRoles.Where(x => x.Type == UserType.Judge) != null).ToList();
 
@@ -52,8 +51,7 @@ namespace JudoSystem.Controllers
 
             List<User> users = db.User.FindByCondition(x => x.ParentUserId == userId)
                 .Include(x => x.UserRoles)
-                .Include(x => x.DanKyu)
-                .Include(x => x.Status).ToList();
+                .Include(x => x.DanKyu).ToList();
 
             List<User> judges = users.Where(x => x.UserRoles.Where(x => x.Type == UserType.Judge) != null).ToList();
 

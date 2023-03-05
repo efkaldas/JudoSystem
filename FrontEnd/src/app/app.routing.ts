@@ -6,7 +6,6 @@ import { MyJudokasComponent } from './components/my-judokas/my-judokas.component
 import { AuthGuard } from './auth-guard/auth.guard';
 import { PendingUsersComponent } from './components/pending-users/pending-users.component';
 import { HomeComponent } from './components/home/home.component';
-import { Role } from './data/user-role.enum.data';
 import { CoachComponent } from './components/coach/coach.component';
 import { CoachShowComponent } from './components/coach-show/coach-show.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -39,6 +38,7 @@ import { CompetitionsResultsWeightCategoriesComponent } from './components/Compe
 import { CompetitionsResultsWeightCategoryShowComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-category-show/competitions-results-weight-category-show.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
+import { UserType } from './enums/userType.enum';
 
 export const routes: Routes = [
   {
@@ -47,11 +47,11 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full', data: {title: 'Home'} },
       { path: 'home', component: HomeComponent, data: {title: 'Home'} },
-      { path: 'myjudokas', component: MyJudokasComponent, canActivate: [AuthGuard], data: {title: 'MyJudokas', roles: [Role.Admin, Role.Coach]} },
-      { path: 'my-coaches', component: CoachComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [Role.Admin, Role.Organization_Admin]} },
-      { path: 'users', component: UserCoachesComponent,canActivate: [AuthGuard], data: {title: 'Users', roles: [Role.Admin]} },
+      { path: 'myjudokas', component: MyJudokasComponent, canActivate: [AuthGuard], data: {title: 'MyJudokas', roles: [UserType[UserType.Admin], UserType[UserType.Coach]]} },
+      { path: 'my-coaches', component: CoachComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [UserType[UserType.Admin], UserType[UserType.OrganizationAdmin]]} },
+      { path: 'users', component: UserCoachesComponent,canActivate: [AuthGuard], data: {title: 'Users', roles: [UserType[UserType.Admin]]} },
       { path: 'coaches/:id', component: CoachShowComponent, canActivate: [AuthGuard], data: {title: 'Coach'} },
-      { path: 'pending-users', component: PendingUsersComponent, canActivate: [AuthGuard], data: {title: 'PendingUsers', roles: [Role.Admin]} },
+      { path: 'pending-users', component: PendingUsersComponent, canActivate: [AuthGuard], data: {title: 'PendingUsers', UserType: [UserType[UserType.Admin]]} },
       { path: 'competitions', component: CompetitionsComponent, data: {title: 'Competitions'} },
       { path: 'competitions/:id', component: CompetitionsTabsComponent, data: {title: 'Competitions'}, 
         children: [
@@ -75,11 +75,11 @@ export const routes: Routes = [
               ] },
           ]},
       { path: 'competitions/:id/competitors-export', component: MyContestantsExportComponent, data: {title: 'Export'} },
-      { path: 'new-competitions', component: NewCompetitionsComponent, canActivate: [AuthGuard], data: {title: 'Create Competitons', roles: [Role.Admin]} },
+      { path: 'new-competitions', component: NewCompetitionsComponent, canActivate: [AuthGuard], data: {title: 'Create Competitons', roles: [UserType[UserType.Admin]]} },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {title: 'Profile'} },
       { path: 'judoka/:id', component: JudokaProfileComponent, canActivate: [AuthGuard], data: {title: 'Judoka'} },
-      { path: 'judokas/rating', component: JudokasRatingComponent, canActivate: [AuthGuard], data: {title: 'Judokas Rating', roles: [Role.Admin]} },
-      { path: 'organizations', component: OrganizationsComponent, canActivate: [AuthGuard], data: {title: 'Organizations', roles: [Role.Admin, Role.Organization_Admin]} },
+      { path: 'judokas/rating', component: JudokasRatingComponent, canActivate: [AuthGuard], data: {title: 'Judokas Rating', roles: [UserType[UserType.Admin]]} },
+      { path: 'organizations', component: OrganizationsComponent, canActivate: [AuthGuard], data: {title: 'Organizations', roles: [UserType[UserType.Admin], UserType[UserType.OrganizationAdmin]]} },
     ]
   },
   { path: 'login', component: LoginComponent },

@@ -7,9 +7,9 @@ import { CustomValidators } from 'ng2-validation';
 import { DanKyuService } from '../../services/dan-kyu.service';
 import { GenderService } from '../../services/gender.service';
 import { DanKyu } from '../../data/danKyu.data';
-import { Role } from '../../data/user-role.enum.data';
 import { Gender } from '../../enums/gender.enum';
 import { OrganizationType } from '../../enums/organizationType';
+import { UserType } from '../../enums/userType.enum';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
   }
   private isOrganizationAdminOrAdmin()
   {
-   if(this.danKyuService.getUser() != null && this.danKyuService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin ||  x.role.roleNameEN == Role.Organization_Admin))
+   if(this.danKyuService.getUser() != null && this.danKyuService.getUser().userRoles.filter(x => x.type == UserType.Admin ||  x.type == UserType.OrganizationAdmin))
       this.isAdmin = true;
   }
   private formEditGroup()

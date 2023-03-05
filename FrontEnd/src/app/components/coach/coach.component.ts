@@ -11,6 +11,8 @@ import { LoginService } from '../../services/login.service';
 import { DanKyu } from '../../data/danKyu.data';
 import { DanKyuService } from '../../services/dan-kyu.service';
 import { Gender } from '../../enums/gender.enum';
+import { UserStatus } from '../../enums/UserStatus.enum';
+import EnumHelper from '../../helpers/enumHelper.helper';
 
 
 
@@ -43,13 +45,16 @@ export class CoachComponent implements OnInit {
 
   genders = [];
   gender = Gender;
+  userStatuses = [];
+  userStatus = UserStatus;
 
   displayedColumns: string[] = ['position','firstname', 'lastname', 'birthDate', 'gender','email', 'danKyu',
    'phoneNumber', 'status', 'actions'];
 
   constructor(private danKyuService: DanKyuService, private loginService: LoginService, private genderService: GenderService, private coachService: CoachService,
      private fb: FormBuilder, private router: Router,public dialog: MatDialog, private _snackBar: MatSnackBar) {
-      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+      this.genders = EnumHelper.getEnumList(this.gender);
+      this.userStatuses = EnumHelper.getEnumList(this.userStatus);
       }
 
 
@@ -85,7 +90,7 @@ export class CoachComponent implements OnInit {
       gender: [null, Validators.compose([Validators.required])],
       danKyuId: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, CustomValidators.email])],
-      statusId: 1,
+      status: UserStatus.Approved,
       password: Password,
       confirmPassword: ConfirmPassword
     });

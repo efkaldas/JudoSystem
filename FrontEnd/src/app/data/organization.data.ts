@@ -1,6 +1,5 @@
 import { OrganizationType } from "../enums/organizationType";
 
-
 export class Organization {
     id: number;
     exactName: string;

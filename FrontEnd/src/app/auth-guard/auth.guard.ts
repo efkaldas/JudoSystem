@@ -6,6 +6,7 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserStatus } from '../enums/UserStatus.enum';
 import { LoginService } from '../services/login.service';
 
 @Injectable({
@@ -26,13 +27,13 @@ export class AuthGuard implements CanActivate {
 
         if(this.loggedInUser != null)  
         {
-            if (this.loggedInUser['http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor']  === "Blocked") {
+            if (this.loggedInUser['http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor']  === UserStatus[UserStatus.Blocked]) {
                 // role not authorised so redirect to home page
                 this.router.navigate(['/user-blocked']);
                 this.apiService.logout();
                 return false;
             }
-            else if (this.loggedInUser['http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor'] === "Not аpproved") {
+            else if (this.loggedInUser['http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor'] === UserStatus[UserStatus.NotApproved]) {
                 // role not authorised so redirect to home page
                 this.router.navigate(['/not-approved']);
                 this.apiService.logout();

@@ -16,7 +16,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { LoginService } from '../../../services/login.service';
 import { User } from '../../../data/user.data';
-import { Role } from '../../../data/user-role.enum.data';
+import { UserType } from '../../../enums/userType.enum';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -69,13 +69,13 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
   }
   public getMenuItems(): any[]
   { 
-    if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Admin)) {
+    if(this.user != null && this.user.userRoles.some(x => x.type == UserType.Admin)) {
       return this.menuItems.getAdminMenuitem();
     }
-    else if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Organization_Admin)) {
+    else if(this.user != null && this.user.userRoles.some(x => x.type == UserType.OrganizationAdmin)) {
       return this.menuItems.getOrganizationAdminMenuitem();
     }
-    else if(this.user != null && this.user.userRoles.some(x => x.role.roleNameEN == Role.Coach)) {
+    else if(this.user != null && this.user.userRoles.some(x => x.type == UserType.Coach)) {
       return this.menuItems.getCoachMenuitem();
     }
     else {

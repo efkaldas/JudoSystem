@@ -4,6 +4,8 @@ import { User } from '../../data/user.data';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
 import { CoachService } from '../../services/coach.service';
 import { Gender } from '../../enums/gender.enum';
+import { UserStatus } from '../../enums/UserStatus.enum';
+import EnumHelper from '../../helpers/enumHelper.helper';
 
 @Component({
   selector: 'app-users-coaches',
@@ -18,6 +20,8 @@ export class UserCoachesComponent implements OnInit {
   source : MatTableDataSource<User>;
   genders = [];
   gender = Gender;
+  userStatuses = [];
+  userStatus = UserStatus;
 
   
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'email', 'phoneNumber',
@@ -25,7 +29,8 @@ export class UserCoachesComponent implements OnInit {
   errorMessage: string;
 
   constructor(private coachService: CoachService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
-    this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+    this.genders = EnumHelper.getEnumList(this.gender);
+    this.userStatuses = EnumHelper.getEnumList(this.userStatus)
    }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

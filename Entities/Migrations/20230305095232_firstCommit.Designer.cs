@@ -6,17 +6,19 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    [Migration("20220918150516_firstCommit")]
+    [Migration("20230305095232_firstCommit")]
     partial class firstCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Entities.Models.AgeGroup", b =>
@@ -42,8 +44,8 @@ namespace Entities.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<DateTime>("WeightInFrom")
                         .HasColumnType("datetime(6)");
@@ -84,14 +86,14 @@ namespace Entities.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<decimal?>("EntryFee")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("Place")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("RegistrationEnd")
                         .HasColumnType("datetime(6)");
@@ -100,12 +102,12 @@ namespace Entities.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Regulations")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.HasKey("Id");
 
@@ -172,8 +174,8 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.HasKey("Id");
 
@@ -219,13 +221,13 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Imagepath")
-                        .HasColumnType("VARCHAR(1024)")
-                        .HasMaxLength(1024);
+                        .HasMaxLength(1024)
+                        .HasColumnType("VARCHAR(1024)");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.HasKey("Id");
 
@@ -344,16 +346,16 @@ namespace Entities.Migrations
 
                     b.Property<string>("Firstname")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<int>("Points")
                         .HasColumnType("int");
@@ -378,147 +380,40 @@ namespace Entities.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("ExactName")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("Image")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)")
                         .HasDefaultValue("no_organization_image.png");
 
-                    b.Property<int>("OrganizationTypeId")
+                    b.Property<string>("ShortName")
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<string>("ShortName")
-                        .HasColumnType("VARCHAR(128)")
-                        .HasMaxLength(250);
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrganizationTypeId");
 
                     b.ToTable("Organization");
-                });
-
-            modelBuilder.Entity("Entities.Models.OrganizationType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeNameEN")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("TypeNameLT")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("TypeNameRU")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrganizationType");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            TypeNameEN = "Club",
-                            TypeNameLT = "Klubas",
-                            TypeNameRU = "Клуб"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            TypeNameEN = "Sports Center",
-                            TypeNameLT = "Sporto Centras",
-                            TypeNameRU = "Спортивный Центр"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            TypeNameEN = "Judges Association",
-                            TypeNameLT = "Teisėjų Asociacija",
-                            TypeNameRU = "Ассоциация Судей"
-                        });
-                });
-
-            modelBuilder.Entity("Entities.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("RoleNameEN")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("RoleNameLT")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("RoleNameRU")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            RoleNameEN = "Admin",
-                            RoleNameLT = "Administratorius",
-                            RoleNameRU = "Администратор"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            RoleNameEN = "Organization admin",
-                            RoleNameLT = "Organizacijos administratorius",
-                            RoleNameRU = "Администратор организации"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            RoleNameEN = "Coach",
-                            RoleNameLT = "Treneris",
-                            RoleNameRU = "Тренер"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            RoleNameEN = "Judge",
-                            RoleNameLT = "Teisėjas",
-                            RoleNameRU = "Судья"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -545,27 +440,27 @@ namespace Entities.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("Firstname")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("VARCHAR(250)")
                         .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)")
                         .HasDefaultValue("no_user_image.png");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<int?>("OrganizationId")
                         .HasColumnType("int");
@@ -575,21 +470,21 @@ namespace Entities.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("ResetToken")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("ResetTokenExpires")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(2);
@@ -605,25 +500,23 @@ namespace Entities.Migrations
 
                     b.HasIndex("ParentUserId");
 
-                    b.HasIndex("StatusId");
-
                     b.ToTable("User");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2022, 9, 18, 18, 5, 16, 18, DateTimeKind.Local).AddTicks(7687),
-                            DateCreated = new DateTime(2022, 9, 18, 18, 5, 16, 19, DateTimeKind.Local).AddTicks(4027),
-                            DateUpdated = new DateTime(2022, 9, 18, 18, 5, 16, 19, DateTimeKind.Local).AddTicks(4482),
+                            BirthDate = new DateTime(2023, 3, 5, 11, 52, 31, 795, DateTimeKind.Local).AddTicks(6018),
+                            DateCreated = new DateTime(2023, 3, 5, 11, 52, 31, 795, DateTimeKind.Local).AddTicks(6055),
+                            DateUpdated = new DateTime(2023, 3, 5, 11, 52, 31, 795, DateTimeKind.Local).AddTicks(6057),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
                             Image = "admin_image.png",
                             Lastname = "Kušlevič",
-                            Password = "AQAAAAEAACcQAAAAEGKh1O1LEc57cBYLsSdBa8ebbj6IbybgEEKxtUOUMh+j44qtIFaVkja87y0dJm52cg==",
+                            Password = "AQAAAAEAACcQAAAAEAfCwlX/oSU22RL4TmnPKX8+97gW3VXOSqAYP6Gn2vAlnstkfv5Wz3PjfpYZ5GGfSQ==",
                             PhoneNumber = "+37060477292",
-                            StatusId = 1
+                            Status = 1
                         });
                 });
 
@@ -632,12 +525,13 @@ namespace Entities.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.HasKey("UserId", "Type");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("UserId", "Type")
+                        .IsUnique();
 
                     b.ToTable("UserRole");
 
@@ -645,56 +539,7 @@ namespace Entities.Migrations
                         new
                         {
                             UserId = 1,
-                            RoleId = 1
-                        });
-                });
-
-            modelBuilder.Entity("Entities.Models.UserStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("StatusNameEN")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("StatusNameLT")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("StatusNameRU")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            StatusNameEN = "Approved",
-                            StatusNameLT = "Patvirtintas",
-                            StatusNameRU = "Одобренный"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            StatusNameEN = "Not аpproved",
-                            StatusNameLT = "Nepatvirtintas",
-                            StatusNameRU = "Не одобренный"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            StatusNameEN = "Blocked",
-                            StatusNameLT = "Užblokuotas",
-                            StatusNameRU = "Заблокирован"
+                            Type = 1
                         });
                 });
 
@@ -709,8 +554,8 @@ namespace Entities.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.HasKey("Id");
 
@@ -726,6 +571,8 @@ namespace Entities.Migrations
                         .HasForeignKey("CompetitionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Competitions");
                 });
 
             modelBuilder.Entity("Entities.Models.Competitions", b =>
@@ -735,6 +582,8 @@ namespace Entities.Migrations
                         .HasForeignKey("CompetitionsTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ComppetitionsType");
                 });
 
             modelBuilder.Entity("Entities.Models.CompetitionsJudge", b =>
@@ -750,6 +599,10 @@ namespace Entities.Migrations
                         .HasForeignKey("JudgeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Competitions");
+
+                    b.Navigation("Judge");
                 });
 
             modelBuilder.Entity("Entities.Models.CompetitionsResults", b =>
@@ -765,6 +618,10 @@ namespace Entities.Migrations
                         .HasForeignKey("WeightCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Judoka");
+
+                    b.Navigation("WeightCategory");
                 });
 
             modelBuilder.Entity("Entities.Models.Competitor", b =>
@@ -780,6 +637,10 @@ namespace Entities.Migrations
                         .HasForeignKey("WeightCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Judoka");
+
+                    b.Navigation("WeightCategory");
                 });
 
             modelBuilder.Entity("Entities.Models.Judoka", b =>
@@ -795,15 +656,10 @@ namespace Entities.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Entities.Models.Organization", b =>
-                {
-                    b.HasOne("Entities.Models.OrganizationType", "OrganizationType")
-                        .WithMany()
-                        .HasForeignKey("OrganizationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("DanKyu");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -820,26 +676,22 @@ namespace Entities.Migrations
                         .WithMany()
                         .HasForeignKey("ParentUserId");
 
-                    b.HasOne("Entities.Models.UserStatus", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("DanKyu");
+
+                    b.Navigation("Organization");
+
+                    b.Navigation("ParentUser");
                 });
 
             modelBuilder.Entity("Entities.Models.UserRole", b =>
                 {
-                    b.HasOne("Entities.Models.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Models.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Entities.Models.WeightCategory", b =>
@@ -849,6 +701,46 @@ namespace Entities.Migrations
                         .HasForeignKey("AgeGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AgeGroup");
+                });
+
+            modelBuilder.Entity("Entities.Models.AgeGroup", b =>
+                {
+                    b.Navigation("WeightCategories");
+                });
+
+            modelBuilder.Entity("Entities.Models.Competitions", b =>
+                {
+                    b.Navigation("AgeGroups");
+
+                    b.Navigation("Judges");
+                });
+
+            modelBuilder.Entity("Entities.Models.Judoka", b =>
+                {
+                    b.Navigation("WeightCategories");
+                });
+
+            modelBuilder.Entity("Entities.Models.Organization", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Entities.Models.User", b =>
+                {
+                    b.Navigation("Competitions");
+
+                    b.Navigation("Judokas");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Entities.Models.WeightCategory", b =>
+                {
+                    b.Navigation("Competitors");
+
+                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }

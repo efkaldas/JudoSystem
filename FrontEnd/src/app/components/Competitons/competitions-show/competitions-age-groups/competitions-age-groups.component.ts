@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Competitions } from '../../../../data/competitions.data';
 import { AgeGroup } from '../../../../data/age-group.data';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
-import { Role } from '../../../../data/user-role.enum.data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WeightCategory } from '../../../../data/weight-category.data';
 import { GenderService } from '../../../../services/gender.service';
@@ -15,6 +14,7 @@ import { DanKyuService } from '../../../../services/dan-kyu.service';
 import { DanKyu } from '../../../../data/danKyu.data';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Gender } from '../../../../enums/gender.enum';
+import { UserType } from '../../../../enums/userType.enum';
 
 @Component({
   selector: 'app-competitions-age-groups',
@@ -138,7 +138,7 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
 
   private isUserAdmin()
   {
-    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
+    if(this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.type == UserType.Admin).length > 0)
       this.isAdmin = true;
   }
 

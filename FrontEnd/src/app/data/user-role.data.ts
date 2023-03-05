@@ -1,7 +1,6 @@
-import { Role } from "./role.data";
+import { UserType } from "../enums/userType.enum";
 
 export class UserRole {
-    role: Role;
     userId: number;
-    roleId: number;
+    type: UserType;
 }

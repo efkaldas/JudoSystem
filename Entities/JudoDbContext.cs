@@ -1,6 +1,7 @@
 ﻿using Entities.Models;
 using Entities.Models.Seeds;
 using Entities.Seeds;
+using Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -34,7 +35,7 @@ namespace Entities
 
             builder.Entity<User>()
                 .Property(b => b.Status)
-                .HasDefaultValue(2);
+                .HasDefaultValue(UserStatus.NotApproved);
 
             builder.Entity<User>()
                 .Property(b => b.Image)
@@ -51,11 +52,6 @@ namespace Entities
                 .HasOne(bc => bc.User)
                 .WithMany(b => b.UserRoles)
                 .HasForeignKey(bc => bc.UserId);
-           
-            //builder.Entity<UserRole>()
-            //    .HasOne(bc => bc.Role)
-            //    .WithMany(c => c.UserRoles)
-            //    .HasForeignKey(bc => bc.RoleId);
 
             builder.Entity<Competitor>()
                 .HasKey(bc => new { bc.WeightCategoryId, bc.JudokaId });

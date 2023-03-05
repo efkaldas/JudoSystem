@@ -5,11 +5,11 @@ import { Gender } from '../../../../enums/gender.enum';
 import { AgeGroup } from '../../../../data/age-group.data';
 import { Competitions } from '../../../../data/competitions.data';
 import { Judoka } from '../../../../data/judoka.data';
-import { Role } from '../../../../data/user-role.enum.data';
 import { AgeGroupService } from '../../../../services/age-group.service';
 import { CompetitionsService } from '../../../../services/competitions.service';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UserType } from '../../../../enums/userType.enum';
 
 @Component({
   selector: 'app-competitions-competitors',
@@ -55,8 +55,8 @@ export class CompetitionsCompetitorsComponent implements OnInit {
 
   private isUserAdmin()
   {
-    if(this.weightCategorySerivce.getUser() != null && this.weightCategorySerivce.getUser().userRoles.filter(x => x.role.roleNameEN == Role.Admin).length > 0)
-      this.isAdmin = true;
+    if(this.weightCategorySerivce.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.type == UserType.Admin).length > 0)
+    this.isAdmin = true;
   }
 
   public setAgeGroupId($event)
