@@ -69,6 +69,7 @@ namespace Entities
 
             DanKyuSeed.Generate(builder);
             CompetitionsTypeSeed.Generate(builder);
+            OrganizationSeed.Generate(builder);
             UserSeed.Generate(builder);
             AdminUserRolesSeed.Generate(builder);
         }

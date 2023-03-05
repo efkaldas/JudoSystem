@@ -16,7 +16,7 @@ namespace Entities.Seeds
                     new Organization
                     {
                         Id = 1,
-                        ExactName = "My Admin Orgaization",
+                        ExactName = "Administration Organization",
                         ShortName = "Admin org",
                         Country = "LTU",
                         City = "Vilnius",
