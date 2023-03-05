@@ -25,7 +25,7 @@ namespace JudoSystem.Controllers
             this.configuration = configuration;
             db = repoWrapper;
         }
-        // GET: api/PendingUser
+        // GET: api/PendingUser 
         [HttpGet]
         public IActionResult Get()
         {

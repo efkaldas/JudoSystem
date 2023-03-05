@@ -39,8 +39,8 @@
     <ng-container matColumnDef="danKyu">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'DanKyu' | translate }} </th>
         <td mat-cell *matCellDef="let element">
-            <div *ngIf="element.dankyu != null">
-                {{element.danKyu.text}}
+            <div>
+                {{element.danKyu?.text}}
             </div>
         </td>
     </ng-container>
