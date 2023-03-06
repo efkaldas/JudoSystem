@@ -33,7 +33,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                             <h5><b>{{ 'DanKyu' | translate }}: </b>
-                                <p *ngIf="user.danKyu != null">{{user.danKyu.text}}</p>
+                                <p>{{user.danKyu?.text}}</p>
                             </h5>
                         </mat-grid-tile>
                         <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
@@ -71,8 +71,8 @@
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
                                 <h5><b>{{ 'Administrator' | translate }}: </b>
-                                    <p *ngIf="user.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
-                                    <p *ngIf="!user.parentUser">{{user.firstname}} {{user.lastname}}</p>
+                                    <p *ngIf="user?.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
+                                    <p *ngIf="!user?.parentUser">{{user.firstname}} {{user.lastname}}</p>
                                 </h5>
                             </mat-grid-tile>
                             <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">

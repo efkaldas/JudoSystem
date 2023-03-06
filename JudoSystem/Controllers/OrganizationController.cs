@@ -32,7 +32,7 @@ namespace JudoSystem.Controllers
         }
 
         // PUT: api/Organization/5
-        [Authorize(Roles = "Admin, Organization admin")]
+        [Authorize(Roles = "Admin, OrganizationAdmin")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Organization organization)
         {
