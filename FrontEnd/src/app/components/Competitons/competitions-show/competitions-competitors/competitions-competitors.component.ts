@@ -10,6 +10,7 @@ import { CompetitionsService } from '../../../../services/competitions.service';
 import { WeightCategoryService } from '../../../../services/weight-category.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserType } from '../../../../enums/userType.enum';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-competitions-competitors',
@@ -109,7 +110,7 @@ export class CompetitionsCompetitorsComponent implements OnInit {
        .subscribe(
          data => {
            if (data != null)  {
-             saveAs(data, "Contestants.csv");
+            FileSaver.saveAs(data, "Contestants.csv");
              this.openSnackBar(this.translate.instant("FileHasBeenGenerated"), this.translate.instant("Close"));
             } else {
               this.openSnackBar(this.translate.instant("FileWasNotGenerated"), this.translate.instant("Close"));

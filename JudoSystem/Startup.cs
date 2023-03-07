@@ -47,6 +47,7 @@ namespace JudoSystem
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
 
             services.ConfigureFilters();
             services.AddDistributedMemoryCache();

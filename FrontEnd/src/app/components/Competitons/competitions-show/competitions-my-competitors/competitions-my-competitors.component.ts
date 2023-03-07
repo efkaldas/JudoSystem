@@ -7,6 +7,7 @@ import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';  
 import { Gender } from '../../../../enums/gender.enum';
 import { TranslateService } from '@ngx-translate/core';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-competitions-my-competitors',
@@ -74,7 +75,7 @@ export class CompetitionsMyCompetitorsComponent implements OnInit {
     .subscribe(
       data => {
         if (data != null)  {
-          saveAs(data, "MyCompetitors.pdf");
+          FileSaver.saveAs(data, "MyCompetitors.pdf");
           this.openSnackBar(this.translate.instant("FileHasBeenGenerated"), this.translate.instant("Close"));
         } else {
           this.openSnackBar(this.translate.instant("FileWasNotGenerated"), this.translate.instant("Close"));

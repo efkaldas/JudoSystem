@@ -13,12 +13,12 @@ import { AgeGroupService } from '../../../services/age-group.service';
 import { Judoka } from '../../../data/judoka.data';
 import { WeightCategoryService } from '../../../services/weight-category.service';
 import { CompetitionsService } from '../../../services/competitions.service';
-import { saveAs } from 'file-saver';
 import * as jspdf from 'jspdf';      
 import html2canvas from 'html2canvas';  
 import { Gender } from '../../../enums/gender.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { UserType } from '../../../enums/userType.enum';
+import * as FileSaver from 'file-saver';
 
 
 @Component({
@@ -243,12 +243,11 @@ export class CompetitionsShowComponent implements OnInit {
   }
   public printCompetitors()
   {
-    console.log("asdasdasdasd");
     return this.competitionsService.print(this.competitionsId)
       .subscribe(
         data => {
           if (data != null)  {
-            saveAs(data, "Contestants.csv");
+            FileSaver.saveAs(data, "Contestants.csv");
             this.openSnackBar(this.translate.instant("FileHasBeenGenerated"), this.translate.instant("Close"));
           } else {
             this.openSnackBar(this.translate.instant("FileWasNotGenerated"), this.translate.instant("Close"));

@@ -1,11 +1,11 @@
-﻿using PdfSharp;
-using PdfSharp.Pdf;
+﻿using PdfSharpCore;
+using PdfSharpCore.Pdf;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
+using VetCV.HtmlRendererCore.PdfSharpCore;
 
 namespace JudoSystem.Helpers
 {
