@@ -73,7 +73,7 @@ namespace JudoSystem.Controllers
 
         // POST: api/Coach
         [HttpPost]
-        [Authorize(Roles = "Admin, OrganizationAdmin)]
+        [Authorize(Roles = "Admin, OrganizationAdmin")]
         public IActionResult Post([FromBody] User coach)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
