@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
     <!-- Card column -->
-    <div fxFlex.gt-sm="100%" fxFlex="100">
+    <div fxFlex="100">
         <mat-card>
             <mat-card-content>
                 <mat-card-title>{{ 'UserInformation' | translate }}</mat-card-title>
@@ -10,77 +10,95 @@
                     <div fxLayout="row" fxLayoutAlign="end center" class="edit-button">
                         <button mat-raised-button (click)="openDialog(editUserModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                     </div>
-                    <mat-grid-list cols="12" rowHeight="75px">
-                        <mat-grid-tile [colspan]="3" [rowspan]="6">
-                            <div class="image-container" fxLayoutAlign="center">
-                                <img class="image" [src]="user.image" />
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <div class="item item-1 image-container">
+                            <div class="container main-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                                <div class="item item-1">
+                                    <img class="image" [src]="user.image" />
+                                </div>
+                                <div class="item item-2">
+                                    <button mat-raised-button (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
+                                </div>
                             </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                            <h5><b>{{ 'FirstnameAndLastname' | translate }}: </b>
-                                <p>{{user.firstname}} {{user.lastname}}</p>
-                            </h5>
-                        </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                            <h5><b>{{ 'Gender' | translate }}: </b>
-                                <p>{{ gender[user.gender] | translate }}</p>
-                            </h5>
-                        </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                            <h5><b>{{ 'BirthDate' | translate }}: </b>
-                                <p>{{user.birthDate}}</p>
-                            </h5>
-                        </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                            <h5><b>{{ 'DanKyu' | translate }}: </b>
-                                <p>{{user.danKyu?.text}}</p>
-                            </h5>
-                        </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                            <h5><b>{{ 'Email' | translate }}: </b>
-                                <p>{{user.email}}</p>
-                            </h5>
-                        </mat-grid-tile>
-                        <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                            <h5><b>{{ 'PhoneNumber' | translate }}: </b>
-                                <p>{{user.phoneNumber}}</p>
-                            </h5>
-                        </mat-grid-tile>
-                    </mat-grid-list>
+                        </div>
+                        <div class="item item-2">
+                            <div class="container text-container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+                                <div class="item item-1">
+                                    <h5><b>{{ 'FirstnameAndLastname' | translate }}: </b>
+                                        <p>{{user.firstname}} {{user.lastname}}</p>
+                                    </h5>
+                                </div>
+                                <div class="item item-2">
+                                    <h5><b>{{ 'Gender' | translate }}: </b>
+                                        <p>{{ gender[user.gender] | translate }}</p>
+                                    </h5>
+                                </div>
+                                <div class="item item-3">
+                                    <h5><b>{{ 'BirthDate' | translate }}: </b>
+                                        <p>{{user.birthDate}}</p>
+                                    </h5>
+                                </div>
+                                <div class="item item-4">
+                                    <h5><b>{{ 'DanKyu' | translate }}: </b>
+                                        <p>{{user.danKyu?.text}}</p>
+                                    </h5>
+                                </div>
+                                <div class="item item-5">
+                                    <h5><b>{{ 'Email' | translate }}: </b>
+                                        <p>{{user.email}}</p>
+                                    </h5>
+                                </div>
+                                <div class="item item-6">
+                                    <h5><b>{{ 'PhoneNumber' | translate }}: </b>
+                                        <p>{{user.phoneNumber}}</p>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </mat-tab>
                 <mat-tab label="{{ 'Organization' | translate }}">
                     <mat-card-content>
                         <div *ngIf="isAdmin" fxLayout="row" fxLayoutAlign="end center" class="edit-button">
                             <button mat-raised-button (click)="openDialog(editOrganizationModal)" color="accent"><mat-icon>edit</mat-icon> {{ 'Edit' | translate }} </button>
                         </div>
-                        <mat-grid-list cols="12" rowHeight="75px">
-                            <mat-grid-tile [colspan]="3" [rowspan]="4">
-                                <div class="image-container" fxLayoutAlign="center">
-                                    <img class="image" [src]="user.organization.image" />
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <div class="item item-1 image-container">
+                                <div class="container main-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                                    <div class="item item-1">
+                                        <img class="image" [src]="user.organization.image" />
+                                    </div>
+                                    <div class="item item-2">
+                                        <button mat-raised-button (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
+                                    </div>
                                 </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                                <h5><b>{{ 'OrganizationName' | translate }}: </b>
-                                    <p>{{user.organization.exactName}}</p>
-                                </h5>
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                                <h5><b>{{ 'Type' | translate }}: </b>
-                                    <p>{{ organizationType[user.organization.type] | translate }}</p>
-                                </h5>
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                                <h5><b>{{ 'Administrator' | translate }}: </b>
-                                    <p *ngIf="user?.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
-                                    <p *ngIf="!user?.parentUser">{{user.firstname}} {{user.lastname}}</p>
-                                </h5>
-                            </mat-grid-tile>
-                            <mat-grid-tile class="title" [colspan]="9" [rowspan]="1">
-                                <h5><b>{{ 'Address' | translate }}: </b>
-                                    <p>{{user.organization.country}}, {{user.organization.city}}, {{user.organization.address}}</p>
-                                </h5>
-                            </mat-grid-tile>
-                        </mat-grid-list>
+                            </div>
+                            <div class="item item-2">
+                                <div class="container text-container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+                                    <div class="item item-1">
+                                        <h5><b>{{ 'OrganizationName' | translate }}: </b>
+                                            <p>{{user.organization.exactName}}</p>
+                                        </h5>
+                                    </div>
+                                    <div class="item item-2">
+                                        <h5><b>{{ 'Type' | translate }}: </b>
+                                            <p>{{ organizationType[user.organization.type] | translate }}</p>
+                                        </h5>
+                                    </div>
+                                    <div class="item item-3">
+                                        <h5><b>{{ 'Administrator' | translate }}: </b>
+                                            <p *ngIf="user?.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
+                                            <p *ngIf="!user?.parentUser">{{user.firstname}} {{user.lastname}}</p>
+                                        </h5>
+                                    </div>
+                                    <div class="item item-4">
+                                        <h5><b>{{ 'Address' | translate }}: </b>
+                                            <p>{{user.organization.country}}, {{user.organization.city}}, {{user.organization.address}}</p>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </mat-card-content>
                 </mat-tab>
             </mat-tab-group>
@@ -183,4 +201,20 @@
             <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
         </div>
     </form>
+</ng-template>
+
+<ng-template #uploadAvatarModal>
+    <div fxLayout="row wrap">
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" class="p-10">
+            <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" class="py-5 mb-3 text-center font-medium-5 text-uppercase grey my-drop-zone">
+                Base dropzone
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" class="p-10">
+            <label class="custom-file">
+                <input type="file" ng2FileSelect class="custom-file-input">
+                <span class="custom-file-control"></span>
+            </label>
+        </div>
+    </div>
 </ng-template>

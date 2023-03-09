@@ -16,8 +16,10 @@ table {
 }
 
 .image-container {
-    width: 700px;
-    height: 250px;
+    width: 300px;
+    height: auto;
+    text-align: center;
+    padding: 15px;
 }
 
 .image {
@@ -27,4 +29,12 @@ table {
 
 a {
     color: inherit;
+}
+
+.main-container {
+    padding: 0px 0px 25px 10px;
+}
+
+.text-container {
+    padding: 15px 0px 0px 10px;
 }

@@ -11,6 +11,9 @@ import { Gender } from '../../enums/gender.enum';
 import { OrganizationType } from '../../enums/organizationType';
 import { UserType } from '../../enums/userType.enum';
 import { OrganizationService } from '../../services/organization.service';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -29,6 +32,13 @@ export class ProfileComponent implements OnInit {
   public organizationEditForm: FormGroup;
   isAdmin = false;
 
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    isHTML5: true
+  });
+  hasBaseDropZoneOver = false;
+  hasAnotherDropZoneOver = false;
+
   genders = [];
   gender = Gender;
   organizationTypes = [];
@@ -38,6 +48,14 @@ export class ProfileComponent implements OnInit {
      private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog) {
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
       this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
+    }
+
+    fileOverBase(e: any): void {
+      this.hasBaseDropZoneOver = e;
+    }
+  
+    fileOverAnother(e: any): void {
+      this.hasAnotherDropZoneOver = e;
     }
 
   ngOnInit() {
