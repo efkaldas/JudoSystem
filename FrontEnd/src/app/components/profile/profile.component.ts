@@ -32,12 +32,13 @@ export class ProfileComponent implements OnInit {
   public organizationEditForm: FormGroup;
   isAdmin = false;
 
-  public uploader: FileUploader = new FileUploader({
+  uploader: FileUploader = new FileUploader({
     url: URL,
     isHTML5: true
   });
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
+
 
   genders = [];
   gender = Gender;
@@ -52,10 +53,6 @@ export class ProfileComponent implements OnInit {
 
     fileOverBase(e: any): void {
       this.hasBaseDropZoneOver = e;
-    }
-  
-    fileOverAnother(e: any): void {
-      this.hasAnotherDropZoneOver = e;
     }
 
   ngOnInit() {
