@@ -112,5 +112,21 @@ namespace JudoSystem.Controllers
 
             return Ok();
         }
+
+        // PUT: api/User/5
+        [HttpPost("UploadProfileImage")]
+        [ServiceFilter(typeof(ValidateForm))]
+        public IActionResult UploadImage([FromBody]string imagePath)
+        {
+            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
+
+            User updateUser = db.User.FindByCondition(x => x.Id == userId).FirstOrDefault();
+            updateUser.Image = imagePath;
+
+            db.User.Update(updateUser);
+            db.Save();
+
+            return Ok();
+        }
     }
 }

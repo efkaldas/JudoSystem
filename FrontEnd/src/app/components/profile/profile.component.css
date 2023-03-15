@@ -34,6 +34,10 @@ a {
     padding: 0px 0px 25px 10px;
 }
 
+.input-container {
+    padding: 0px 0px 25px 10px;
+}
+
 .text-container {
     padding: 15px 0px 0px 10px;
 }
@@ -58,4 +62,16 @@ a {
 
 .another-file-over-class {
     border: dotted 2px green;
+}
+
+input {
+    margin-top: 1rem;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: dodgerblue;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 1px;
 }

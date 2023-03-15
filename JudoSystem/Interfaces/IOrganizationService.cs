@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
 namespace JudoSystem.Interfaces
@@ -7,5 +8,6 @@ namespace JudoSystem.Interfaces
     {
         List<Organization> Get();
         void Update(Organization organization);
+        void UpdateImage(int userId, IFormFile image);
     }
 }

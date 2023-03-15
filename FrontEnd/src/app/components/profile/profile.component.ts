@@ -31,6 +31,8 @@ export class ProfileComponent implements OnInit {
   public userEditForm: FormGroup;
   public organizationEditForm: FormGroup;
   isAdmin = false;
+  profileImage = null;
+  organizationImage = null;
 
   uploader: FileUploader = new FileUploader({
     url: URL,
@@ -166,6 +168,38 @@ export class ProfileComponent implements OnInit {
           console.log(error); //gives an object at this point
         }
       );
+  }
+
+  imageChangeProfile(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+        this.profileImage = fileList[0]; 
+    }
+    else {
+    }
+  }
+
+  public uploadImage(image) {
+    if (image == null) {
+      this.errorMessage = "Select file first";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else if (image.name.substr(image.name.length - 4) != ".png" && image.name.substr(image.name.length - 5) != ".jpeg") {
+      this.errorMessage = "File format must be *.png or .jpeg";
+      this.openSnackBar(this.errorMessage, 'CLOSE');
+    } else {
+      var reader = new FileReader();
+      reader.readAsDataURL(image);
+      
+    return false;
+  }
+
+  imageChangeOrganization(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+        this.organizationImage = fileList[0]; 
+    }
+    else {
+    }
   }
 
 }

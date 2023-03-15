@@ -3,8 +3,14 @@ using Entities.Models;
 using Google.Protobuf.WellKnownTypes;
 using JudoSystem.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using SautinSoft.Document.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using JudoSystem.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace JudoSystem.Services
 {
@@ -26,5 +32,23 @@ namespace JudoSystem.Services
             _repository.Organization.Update(organization);
             _repository.Save();
         }
+        public void UpdateImage(int userId, IFormFile image)
+        {
+            //if (file.ContentType.ToString() != "image/png, image/jpeg")
+            //    return null;
+
+            var user = _repository.User.FindByCondition(x => x.Id == userId).FirstOrDefault();
+            if (user != null)
+                return;
+
+            var imagePath = FileHelper.SaveFile(image);
+            var organization = _repository.Organization.FindByCondition(x => x.Id == userId).FirstOrDefault();
+
+            organization.Image = imagePath;
+
+            _repository.Organization.Update(organization);
+            _repository.Save();
+        }
+
     }
 }

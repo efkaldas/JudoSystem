@@ -90,6 +90,7 @@ export class NewCompetitionsComponent implements OnInit {
       );
     }
   }
+  
   private resultsFileUpload() {
     if (this.file == null) {
       this.errorMessage = "Select file first";
@@ -102,6 +103,7 @@ export class NewCompetitionsComponent implements OnInit {
     } 
     return false;
   }
+
   fileChange(event) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {

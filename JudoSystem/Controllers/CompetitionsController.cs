@@ -99,6 +99,7 @@ namespace JudoSystem.Controllers
 
             return Ok(competitors);
         }
+
         // GET: api/Competitions/5
         [HttpGet("{id}/AgeGroups", Name = "GetCompetitionsАgeGroups")]
         public IActionResult GetAgeGroups(int id)
@@ -106,6 +107,7 @@ namespace JudoSystem.Controllers
             List<AgeGroup> ageGroups = db.AgeGroup.FindByCondition(x => x.CompetitionsId == id).ToList();
             return Ok(ageGroups);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost("{id}/ResultsFile", Name = "ImportResultsFile")]
         public IActionResult ImportResultsFile(int id, [FromHeader]IFormFile file)

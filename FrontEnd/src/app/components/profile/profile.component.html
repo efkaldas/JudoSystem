@@ -17,14 +17,11 @@
                                     <div class="item item-1">
                                         <img class="image" [src]="user.image" />
                                     </div>
-                                    <div class="item item-2">
-                                        <label class="custom-file">
-                                            <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input">
-                                            <span class="custom-file-control"></span>
-                                        </label>
+                                    <div class="container input-container">
+                                            <input placeholder="file" type="file" (change)="imageChangeProfile($event)" accept="image/png, image/jpeg">
                                     </div>
                                     <div class="item item-3">
-                                        <button mat-raised-button (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
+                                        <button mat-raised-button [disabled]="profileImage == null" (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +73,11 @@
                                     <div class="item item-1">
                                         <img class="image" [src]="user.organization.image" />
                                     </div>
+                                    <div class="container input-container">
+                                        <input placeholder="file" type="file" (change)="imageChangeOrganization($event)" accept="image/png, image/jpeg">
+                                    </div>
                                     <div class="item item-2">
-                                        <button mat-raised-button (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
+                                        <button mat-raised-button  [disabled]="organizationImage == null" (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
                                     </div>
                                 </div>
                             </div>
