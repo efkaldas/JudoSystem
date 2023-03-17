@@ -39,9 +39,7 @@ namespace Entities.Models
         public int? DanKyuId { get; set; }
         public DanKyu DanKyu { get; set; }
         public Gender Gender { get; set; }
-        [Column(TypeName = "VARCHAR(250)")]
-        [StringLength(250)]
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public UserStatus Status { get; set; }
         public int? OrganizationId { get; set; }
         public Organization Organization { get; set; }

@@ -396,11 +396,8 @@ namespace Entities.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
-                    b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(250)
-                        .HasColumnType("VARCHAR(250)")
-                        .HasDefaultValue("no_organization_image.png");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("ShortName")
                         .HasMaxLength(250)
@@ -421,7 +418,6 @@ namespace Entities.Migrations
                             City = "Vilnius",
                             Country = "LTU",
                             ExactName = "Administration Organization",
-                            Image = "no_organization_image.png",
                             ShortName = "Admin org",
                             Type = 1
                         });
@@ -462,11 +458,8 @@ namespace Entities.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(250)
-                        .HasColumnType("VARCHAR(250)")
-                        .HasDefaultValue("no_user_image.png");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -517,17 +510,16 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2023, 3, 5, 17, 40, 16, 61, DateTimeKind.Local).AddTicks(4726),
+                            BirthDate = new DateTime(2023, 3, 17, 21, 43, 26, 477, DateTimeKind.Local).AddTicks(9405),
                             DanKyuId = 1,
-                            DateCreated = new DateTime(2023, 3, 5, 17, 40, 16, 61, DateTimeKind.Local).AddTicks(4763),
-                            DateUpdated = new DateTime(2023, 3, 5, 17, 40, 16, 61, DateTimeKind.Local).AddTicks(4765),
+                            DateCreated = new DateTime(2023, 3, 17, 21, 43, 26, 477, DateTimeKind.Local).AddTicks(9432),
+                            DateUpdated = new DateTime(2023, 3, 17, 21, 43, 26, 477, DateTimeKind.Local).AddTicks(9434),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
-                            Image = "admin_image.png",
                             Lastname = "Kušlevič",
                             OrganizationId = 1,
-                            Password = "AQAAAAEAACcQAAAAEN80opLXRrq91kGxFm9dld5KKhJ53U0EiLoqs/1fjFkYI7m5vj/LJx10Z99D3T13BA==",
+                            Password = "AQAAAAEAACcQAAAAEF7hyQzDHxWHMQOo2O7vHS9TzLvkLU+6HgU4XzbnzBdDBr3QcFWgx8oPHr2mqyIIew==",
                             PhoneNumber = "+37060477292",
                             Status = 1
                         });

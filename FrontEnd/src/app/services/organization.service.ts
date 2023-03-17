@@ -9,21 +9,22 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class OrganizationService extends LoginService {
     protected organizationUrl : string = environment.apiHost+"/Organization/";
-    protected uploadAvatarUrl : string = "/UploadAvatar/";
+    protected uploadImageUrl : string = "UploadImage";
 
     getAll() {
       return this.http.get(this.organizationUrl); 
     }
+
     update(id: number, organization: Organization) {
       return this.http.put(this.organizationUrl + id, organization); 
     }  
-    public uploadAvatar(file) {
+
+    public uploadImage(file) {
       const formData = new FormData();
-      formData.append('file', file, file.name); 
+      formData.append('image', file, file.name); 
   
-      let headers = new HttpHeaders(); 
-      headers.append('Accept','image');
+      console.log(formData.getAll);
       
-      return this.http.post(this.organizationUrl + this.uploadAvatarUrl, formData, {headers: headers, responseType: 'blob' }).toPromise();  
+      return this.http.post(this.organizationUrl + this.uploadImageUrl, formData);  
     }
 }

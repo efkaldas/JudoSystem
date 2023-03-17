@@ -15,13 +15,13 @@
                             <div class="item item-1 image-container">
                                 <div class="container main-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
                                     <div class="item item-1">
-                                        <img class="image" [src]="user.image" />
+                                        <img class="image" src="data:image/png;base64,{{user.image}}" />
                                     </div>
                                     <div class="container input-container">
                                             <input placeholder="file" type="file" (change)="imageChangeProfile($event)" accept="image/png, image/jpeg">
                                     </div>
                                     <div class="item item-3">
-                                        <button mat-raised-button [disabled]="profileImage == null" (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
+                                        <button mat-raised-button [disabled]="profileImage == null" (click)="uploadProfileImage()" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
                                     </div>
                                 </div>
                             </div>
@@ -71,13 +71,13 @@
                             <div class="item item-1 image-container">
                                 <div class="container main-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
                                     <div class="item item-1">
-                                        <img class="image" [src]="user.organization.image" />
+                                        <img class="image" src="data:image/png;base64,{{user.organization.image}}" />
                                     </div>
                                     <div class="container input-container">
                                         <input placeholder="file" type="file" (change)="imageChangeOrganization($event)" accept="image/png, image/jpeg">
                                     </div>
                                     <div class="item item-2">
-                                        <button mat-raised-button  [disabled]="organizationImage == null" (click)="openDialog(uploadAvatarModal)" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
+                                        <button mat-raised-button  [disabled]="organizationImage == null" (click)="uploadOrganizationImage()" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     <div class="item item-3">
                                         <h5><b>{{ 'Administrator' | translate }}: </b>
                                             <p *ngIf="user?.parentUser">{{user.parentUser.firstname}} {{user.parentUser.lastname}}</p>
-                                            <p *ngIf="!user?.parentUser">{{user.firstname}} {{user.lastname}}</p>
+                                            <p *ngIf="!user?.parentUser">{{user?.firstname}} {{user?.lastname}}</p>
                                         </h5>
                                     </div>
                                     <div class="item item-4">
@@ -209,27 +209,4 @@
             <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
         </div>
     </form>
-</ng-template>
-
-<ng-template #uploadAvatarModal>
-    <h1 mat-dialog-title>{{ 'UploadAvatar' | translate }}</h1>
-    <div mat-dialog-content>
-        <div fxLayout="row wrap">
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" class="p-10">
-                <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader" class="py-5 mb-3 text-center font-medium-5 text-uppercase grey my-drop-zone">
-                    Base dropzone
-                </div>
-            </div>
-            <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" class="p-10">
-                <label class="custom-file">
-                        <input type="file" ng2FileSelect class="custom-file-input">
-                        <span class="custom-file-control"></span>
-                    </label>
-            </div>
-        </div>
-    </div>
-    <div mat-dialog-actions>
-        <button type="submit" mat-raised-button color="primary">{{ 'Accept' | translate }}</button>
-        <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'Close' | translate }}</button>
-    </div>
 </ng-template>

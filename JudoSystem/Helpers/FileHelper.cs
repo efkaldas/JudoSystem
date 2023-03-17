@@ -1,30 +1,25 @@
 ﻿
 
 using Microsoft.AspNetCore.Http;
+using Org.BouncyCastle.Utilities;
+using System;
 using System.IO;
 
 namespace JudoSystem.Helpers
 {
     public static class FileHelper
     {
-        public static string SaveFile(IFormFile file, string path)
+        public static byte[] ConvertFileToBytes(IFormFile file)
         {
-            var filePath = string.Empty;
+            byte[] imageBytes = null;
 
-            filePath = Path.g() + file.FileName;
-
-            if (File.Exists(filePath))
-                File.Delete(filePath);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            using (var ms = new MemoryStream())
             {
-                file.CopyTo(fileStream);
+                file.CopyTo(ms);
+                imageBytes = ms.ToArray();
             }
 
-            if (File.Exists(filePath))
-                return filePath;
-
-            return string.Empty;
+            return imageBytes;
         }
     }
 }

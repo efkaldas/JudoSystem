@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    [Migration("20230305154016_addOrgnizationSeed")]
-    partial class addOrgnizationSeed
+    [Migration("20230317183608_firstMigration")]
+    partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -464,11 +464,8 @@ namespace Entities.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(250)
-                        .HasColumnType("VARCHAR(250)")
-                        .HasDefaultValue("no_user_image.png");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -519,17 +516,16 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2023, 3, 5, 17, 40, 16, 61, DateTimeKind.Local).AddTicks(4726),
+                            BirthDate = new DateTime(2023, 3, 17, 20, 36, 8, 373, DateTimeKind.Local).AddTicks(3334),
                             DanKyuId = 1,
-                            DateCreated = new DateTime(2023, 3, 5, 17, 40, 16, 61, DateTimeKind.Local).AddTicks(4763),
-                            DateUpdated = new DateTime(2023, 3, 5, 17, 40, 16, 61, DateTimeKind.Local).AddTicks(4765),
+                            DateCreated = new DateTime(2023, 3, 17, 20, 36, 8, 373, DateTimeKind.Local).AddTicks(3361),
+                            DateUpdated = new DateTime(2023, 3, 17, 20, 36, 8, 373, DateTimeKind.Local).AddTicks(3362),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
-                            Image = "admin_image.png",
                             Lastname = "Kušlevič",
                             OrganizationId = 1,
-                            Password = "AQAAAAEAACcQAAAAEN80opLXRrq91kGxFm9dld5KKhJ53U0EiLoqs/1fjFkYI7m5vj/LJx10Z99D3T13BA==",
+                            Password = "AQAAAAEAACcQAAAAEC9L+JZjZVkOwR/fTQAJjzoUswG64nYtAAeLQsVnXY5i8U4WS2zp6JiNfnK7mclJNA==",
                             PhoneNumber = "+37060477292",
                             Status = 1
                         });

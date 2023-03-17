@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -113,15 +115,14 @@ namespace JudoSystem.Controllers
             return Ok();
         }
 
-        // PUT: api/User/5
         [HttpPost("UploadProfileImage")]
-        [ServiceFilter(typeof(ValidateForm))]
-        public IActionResult UploadImage([FromBody]string imagePath)
+        //[ServiceFilter(typeof(ValidateForm))]
+        public IActionResult UploadImage([FromForm]IFormFile image)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
             User updateUser = db.User.FindByCondition(x => x.Id == userId).FirstOrDefault();
-            updateUser.Image = imagePath;
+            updateUser.Image = FileHelper.ConvertFileToBytes(image);
 
             db.User.Update(updateUser);
             db.Save();

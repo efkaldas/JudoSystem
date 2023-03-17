@@ -7,6 +7,6 @@ export class Organization {
     country: string;
     city: string;
     address: string;
-    image: string;
+    image: any;
     type: OrganizationType;
 }

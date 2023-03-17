@@ -22,7 +22,7 @@ namespace Entities.Seeds
                         Lastname = "Kušlevič",
                         OrganizationId = 1,
                         DanKyuId = 1,
-                        Image = "admin_image.png",
+                //        Image = "admin_image.png",
                         Email = "judosystem.info@gmail.com",
                         PhoneNumber = "+37060477292",
                         Status = UserStatus.Approved,

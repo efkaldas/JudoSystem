@@ -16,7 +16,7 @@ export class User {
     gender: Gender;
     birthDate: Date;
     danKyu: DanKyu;
-    image: string;
+    image: any;
     status: UserStatus;
     organization: Organization;
     judokas: Array<Judoka>;

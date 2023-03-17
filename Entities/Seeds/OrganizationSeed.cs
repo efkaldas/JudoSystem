@@ -21,7 +21,7 @@ namespace Entities.Seeds
                         Country = "LTU",
                         City = "Vilnius",
                         Address = "Vilniaus g. 18",
-                        Image = "no_organization_image.png",
+                    //    Image = "no_organization_image.png",
                         Type = OrganizationType.Club,
                     }
                 );

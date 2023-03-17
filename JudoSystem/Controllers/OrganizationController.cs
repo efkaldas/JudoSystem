@@ -50,41 +50,12 @@ namespace JudoSystem.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost("{id}/ResultsFile", Name = "ImportResultsFile")]
-        public IActionResult ImportResultsFile([FromHeader]IFormFile file)
+        [HttpPost("UploadImage")]
+        //[ServiceFilter(typeof(ValidateForm))]
+        public IActionResult UploadImage([FromForm] IFormFile image)
         {
-            var httpRequest = HttpContext.Request;
-
-            if (httpRequest.Form.Files.Count == 0)
-                return null;
-
-            //if (file.ContentType.ToString() != "image/png, image/jpeg")
-            //    return null;
-
-            FileHelper.SaveFile(file);
-
-            return Ok();
-        }
-
-        [HttpPost("UploadProfileImage")]
-        [ServiceFilter(typeof(ValidateForm))]
-        public IActionResult UploadImage([FromHeader]IFormFile file)
-        {
-            var httpRequest = HttpContext.Request;
-
-            if (httpRequest.Form.Files.Count == 0)
-                return null;
-
-            //if (file.ContentType.ToString() != "image/png, image/jpeg")
-            //    return null;
-
-            var filePath = FileHelper.SaveFile(file);
-
-            return Ok();
-
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
-            _organizationService.UpdateImage(userId, file);
+            _organizationService.UpdateImage(userId, image);
 
             return Ok();
         }

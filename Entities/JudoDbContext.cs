@@ -37,13 +37,13 @@ namespace Entities
                 .Property(b => b.Status)
                 .HasDefaultValue(UserStatus.NotApproved);
 
-            builder.Entity<User>()
-                .Property(b => b.Image)
-                .HasDefaultValue("no_user_image.png");
+            //builder.Entity<User>()
+            //    .Property(b => b.Image)
+            //    .HasDefaultValue("no_user_image.png");
 
-            builder.Entity<Organization>()
-                .Property(b => b.Image)
-                .HasDefaultValue("no_organization_image.png");
+            //builder.Entity<Organization>()
+            //    .Property(b => b.Image)
+            //    .HasDefaultValue("no_organization_image.png");
 
             builder.Entity<UserRole>()
                 .HasKey(bc => new { bc.UserId, bc.Type });

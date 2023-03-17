@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    [Migration("20230305095232_firstCommit")]
-    partial class firstCommit
+    [Migration("20230317194326_updateOrganizationTable")]
+    partial class updateOrganizationTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -398,11 +398,8 @@ namespace Entities.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
-                    b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(250)
-                        .HasColumnType("VARCHAR(250)")
-                        .HasDefaultValue("no_organization_image.png");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("ShortName")
                         .HasMaxLength(250)
@@ -414,6 +411,18 @@ namespace Entities.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Organization");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Vilniaus g. 18",
+                            City = "Vilnius",
+                            Country = "LTU",
+                            ExactName = "Administration Organization",
+                            ShortName = "Admin org",
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -451,11 +460,8 @@ namespace Entities.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(250)
-                        .HasColumnType("VARCHAR(250)")
-                        .HasDefaultValue("no_user_image.png");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -506,15 +512,16 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2023, 3, 5, 11, 52, 31, 795, DateTimeKind.Local).AddTicks(6018),
-                            DateCreated = new DateTime(2023, 3, 5, 11, 52, 31, 795, DateTimeKind.Local).AddTicks(6055),
-                            DateUpdated = new DateTime(2023, 3, 5, 11, 52, 31, 795, DateTimeKind.Local).AddTicks(6057),
+                            BirthDate = new DateTime(2023, 3, 17, 21, 43, 26, 477, DateTimeKind.Local).AddTicks(9405),
+                            DanKyuId = 1,
+                            DateCreated = new DateTime(2023, 3, 17, 21, 43, 26, 477, DateTimeKind.Local).AddTicks(9432),
+                            DateUpdated = new DateTime(2023, 3, 17, 21, 43, 26, 477, DateTimeKind.Local).AddTicks(9434),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
-                            Image = "admin_image.png",
                             Lastname = "Kušlevič",
-                            Password = "AQAAAAEAACcQAAAAEAfCwlX/oSU22RL4TmnPKX8+97gW3VXOSqAYP6Gn2vAlnstkfv5Wz3PjfpYZ5GGfSQ==",
+                            OrganizationId = 1,
+                            Password = "AQAAAAEAACcQAAAAEF7hyQzDHxWHMQOo2O7vHS9TzLvkLU+6HgU4XzbnzBdDBr3QcFWgx8oPHr2mqyIIew==",
                             PhoneNumber = "+37060477292",
                             Status = 1
                         });

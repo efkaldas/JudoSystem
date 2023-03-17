@@ -34,17 +34,8 @@ namespace JudoSystem.Services
         }
         public void UpdateImage(int userId, IFormFile image)
         {
-            //if (file.ContentType.ToString() != "image/png, image/jpeg")
-            //    return null;
-
-            var user = _repository.User.FindByCondition(x => x.Id == userId).FirstOrDefault();
-            if (user != null)
-                return;
-
-            var imagePath = FileHelper.SaveFile(image);
-            var organization = _repository.Organization.FindByCondition(x => x.Id == userId).FirstOrDefault();
-
-            organization.Image = imagePath;
+            var organization = _repository.Organization.FindByCondition(x => x.Users.Any(x => x.Id == userId)).FirstOrDefault();
+            organization.Image = FileHelper.ConvertFileToBytes(image);
 
             _repository.Organization.Update(organization);
             _repository.Save();

@@ -32,9 +32,7 @@ namespace Entities.Models
         [StringLength(250)]
         public string Address { get; set; }
         public List<User> Users { get; set; }
-        [Column(TypeName = "VARCHAR(250)")]
-        [StringLength(250)]
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public OrganizationType Type { get; set; }
     }
 }

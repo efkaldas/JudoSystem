@@ -11,7 +11,7 @@ export class UserService extends LoginService{
   protected userUrl : string = environment.apiHost+"/User/";  
   protected userFullUrl : string = environment.apiHost+"/User/full/"; 
   protected registerUserUrl : string = environment.apiHost+"/Registration";  
-  protected uploadAvatarUrl : string = "/UploadAvatar";  
+  protected uploadProfileImageUrl : string = "UploadProfileImage";  
 
   get(id: number) {
     return this.http.get(this.userUrl + id);
@@ -31,13 +31,12 @@ export class UserService extends LoginService{
     return this.http.post(this.registerUserUrl, user); 
   }
 
-  public uploadAvatar(file) {
+ uploadProfileImage(file) {
     const formData = new FormData();
-    formData.append('file', file, file.name); 
+    formData.append('image', file, file.name); 
 
-    let headers = new HttpHeaders(); 
-    headers.append('Accept','image');
+    console.log(formData.getAll);
     
-    return this.http.post(this.userUrl + this.uploadAvatarUrl, formData, {headers: headers, responseType: 'blob' }).toPromise();  
+    return this.http.post(this.userUrl + this.uploadProfileImageUrl, formData);  
   }
 }
