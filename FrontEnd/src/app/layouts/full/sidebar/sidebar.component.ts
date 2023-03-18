@@ -28,6 +28,9 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
   public user: User;
   userMenu: any[];
 
+  userImage = "assets/images/users/no_user_image.png";
+  organizationImage = 'url(assets/images/organizations/no_organization_image.png)';
+
   private _mobileQueryListener: () => void;
   status: boolean = true;
   
@@ -89,6 +92,12 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
   getUser(){
     if (this.menuItems.isLoggedIn()) {
       this.user = this.menuItems.getUser();
+      if(this.user.organization) {
+        this.organizationImage = "url(data:image/png;base64," + this.user.organization.image + ")";
+      }
+      if(this.user.image) {
+        this.userImage = "data:image/png;base64," + this.user.image;
+      }
     }
 
   }

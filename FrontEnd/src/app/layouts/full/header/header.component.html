@@ -2,7 +2,7 @@
 </ng-container>
 
 <ng-template #loggedIn>
-    <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <img src="assets/images/users/{{user.image}}" alt="user" class="profile-pic"> </button>
+    <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <img src="data:image/png;base64,{{user.image}}" alt="user" class="profile-pic"> </button>
     <mat-menu #profile="matMenu" class="mymegamenu">
         <button *ngFor="let menuitem of menuItems.getHeaderMenuitem()" [routerLink]="[menuitem.state]" mat-menu-item>
                 <mat-icon>{{menuitem.icon}}</mat-icon>{{ menuitem.name | translate }}</button>

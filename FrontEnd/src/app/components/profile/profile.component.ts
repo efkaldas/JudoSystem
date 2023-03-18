@@ -184,14 +184,22 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  private checkUploadedImage(image) {
+  if (image == null) {
+    this.errorMessage = "Select file first";
+    this.openSnackBar(this.errorMessage, 'CLOSE');
+  } else if (image.name.substr(image.name.length - 4) != ".png" && image.name.substr(image.name.length - 5) != ".jpeg"
+              && image.name.substr(image.name.length - 4) != ".jpg") {
+    this.errorMessage = "File format must be *.png or *.jpeg or *.jpg";
+    this.openSnackBar(this.errorMessage, 'CLOSE');
+  } else {
+    return true;
+  } 
+  return false;
+}
+
   public uploadProfileImage() {
-    if (this.profileImage == null) {
-      this.errorMessage = "Select file first";
-      this.openSnackBar(this.errorMessage, 'CLOSE');
-    } else if (1 != 1) {
-      this.errorMessage = "File format must be *.png or .jpeg";
-      this.openSnackBar(this.errorMessage, 'CLOSE');
-    } else {
+    if (this.checkUploadedImage(this.profileImage)) {
       return this.userService.uploadProfileImage(this.profileImage).subscribe(
         data => {
           this.errorMessage = "File has successfully been uploaded";
@@ -206,37 +214,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-    public uploadOrganizationImage() {
-      if (this.organizationImage == null) {
-        this.errorMessage = "Select file first";
-        this.openSnackBar(this.errorMessage, 'CLOSE');
-      } else if (1 != 1) {
-        this.errorMessage = "File format must be *.png or .jpeg";
-        this.openSnackBar(this.errorMessage, 'CLOSE');
-      } else {
-        return this.organizationService.uploadImage(this.organizationImage).subscribe(
-          data => {
-            this.errorMessage = "File has successfully been uploaded";
-            this.openSnackBar(this.errorMessage, 'CLOSE');
-          },
-          error => {
-            this.errorMessage = error["error"].message;
-            this.openSnackBar(this.errorMessage, 'CLOSE');
-            console.log(error); //gives an object at this point
-          }
-          );
-      }
-      
-    return false;
+  public uploadOrganizationImage() {
+    if (this.checkUploadedImage(this.organizationImage)) {
+      return this.organizationService.uploadImage(this.organizationImage).subscribe(
+        data => {
+          this.errorMessage = "File has successfully been uploaded";
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
+          console.log(error); //gives an object at this point
+        }
+        );
     }
-
-  // imageChangeOrganization(event) {
-  //   const fileList: FileList = event.target.files;
-  //   if (fileList.length > 0) {
-  //       this.organizationImage = fileList[0]; 
-  //   }
-  //   else {
-  //   }
-  // }
-
+    
+  return false;
+  }
 }
