@@ -32,13 +32,15 @@ namespace JudoSystem.Services
             _repository.Organization.Update(organization);
             _repository.Save();
         }
-        public void UpdateImage(int userId, IFormFile image)
+        public Organization UpdateImage(int userId, IFormFile image)
         {
             var organization = _repository.Organization.FindByCondition(x => x.Users.Any(x => x.Id == userId)).FirstOrDefault();
             organization.Image = FileHelper.ConvertFileToBytes(image);
 
             _repository.Organization.Update(organization);
             _repository.Save();
+
+            return organization;
         }
 
     }

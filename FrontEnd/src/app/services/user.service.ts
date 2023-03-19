@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { User } from '../data/user.data';
 import { Organization } from '../data/organization.data';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -31,12 +33,28 @@ export class UserService extends LoginService{
     return this.http.post(this.registerUserUrl, user); 
   }
 
- uploadProfileImage(file) {
+ uploadProfileImage(file) : Observable<any>  {
     const formData = new FormData();
     formData.append('image', file, file.name); 
 
     console.log(formData.getAll);
     
-    return this.http.post(this.userUrl + this.uploadProfileImageUrl, formData);  
+    return this.http.post(this.userUrl + this.uploadProfileImageUrl, formData).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError));  
+  }
+
+  private handleError(err: HttpErrorResponse) {
+
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+
+        errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+
+        errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

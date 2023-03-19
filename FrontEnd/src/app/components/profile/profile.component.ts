@@ -12,6 +12,8 @@ import { OrganizationType } from '../../enums/organizationType';
 import { UserType } from '../../enums/userType.enum';
 import { OrganizationService } from '../../services/organization.service';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { Organization } from '../../data/organization.data';
+import { LoginService } from '../../services/login.service';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -48,7 +50,7 @@ export class ProfileComponent implements OnInit {
   organizationType = OrganizationType;
   
   constructor(private organizationService: OrganizationService, private danKyuService: DanKyuService, private genderService: GenderService, private userService: UserService,
-     private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog) {
+     private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog, public loginService: LoginService) {
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
       this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
     }
@@ -203,6 +205,8 @@ export class ProfileComponent implements OnInit {
       return this.userService.uploadProfileImage(this.profileImage).subscribe(
         data => {
           this.errorMessage = "File has successfully been uploaded";
+          this.user = data as User;
+          this.loginService.setUser(this.user);
           this.openSnackBar(this.errorMessage, 'CLOSE');
         },
         error => {
@@ -219,6 +223,8 @@ export class ProfileComponent implements OnInit {
       return this.organizationService.uploadImage(this.organizationImage).subscribe(
         data => {
           this.errorMessage = "File has successfully been uploaded";
+          this.user.organization = data as Organization;
+          this.loginService.setUser(this.user);
           this.openSnackBar(this.errorMessage, 'CLOSE');
         },
         error => {

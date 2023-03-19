@@ -8,6 +8,6 @@ namespace JudoSystem.Interfaces
     {
         List<Organization> Get();
         void Update(Organization organization);
-        void UpdateImage(int userId, IFormFile image);
+        Organization UpdateImage(int userId, IFormFile image);
     }
 }

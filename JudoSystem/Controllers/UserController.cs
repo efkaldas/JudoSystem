@@ -121,13 +121,13 @@ namespace JudoSystem.Controllers
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
-            User updateUser = db.User.FindByCondition(x => x.Id == userId).FirstOrDefault();
-            updateUser.Image = FileHelper.ConvertFileToBytes(image);
+            User user = db.User.FindByCondition(x => x.Id == userId).Include(x => x.Organization).Include(x => x.UserRoles).FirstOrDefault();
+            user.Image = FileHelper.ConvertFileToBytes(image);
 
-            db.User.Update(updateUser);
+            db.User.Update(user);
             db.Save();
 
-            return Ok();
+            return Ok(user);
         }
     }
 }

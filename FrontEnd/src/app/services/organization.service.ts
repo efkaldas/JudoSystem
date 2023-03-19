@@ -4,7 +4,9 @@ import { LoginService } from './login.service';
 import { Judoka } from '../data/judoka.data';
 import { User } from '../data/user.data';
 import { Organization } from '../data/organization.data';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class OrganizationService extends LoginService {
@@ -19,12 +21,33 @@ export class OrganizationService extends LoginService {
       return this.http.put(this.organizationUrl + id, organization); 
     }  
 
-    public uploadImage(file) {
+    public uploadImage(file) : Observable<any>{
       const formData = new FormData();
       formData.append('image', file, file.name); 
   
       console.log(formData.getAll);
+
+      return this.http.post(this.organizationUrl + this.uploadImageUrl, formData).pipe(
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError));  
       
       return this.http.post(this.organizationUrl + this.uploadImageUrl, formData);  
     }
+
+  private handleError(err: HttpErrorResponse) {
+
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+
+        errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+
+        errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
+
+    
+
 }

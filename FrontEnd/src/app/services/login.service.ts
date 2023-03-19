@@ -3,7 +3,7 @@ import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Login } from "../data/login.data";
 import { LoggedInUser } from "../data/LoggedInUser.data";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import * as jwt_decode from "jwt-decode";
 import { User } from "../data/user.data";
 import { ForgotPassword } from "../data/forgotPassword.data";
@@ -20,6 +20,9 @@ export class LoginService {
 
   private currentUserSubject: BehaviorSubject<LoggedInUser>;
   public currentUser: Observable<LoggedInUser>;
+  private logger = new Subject<boolean>();
+  private user = new Subject();
+  private loggedIn = false;
 
 
   login(login: Login) {
@@ -40,18 +43,37 @@ export class LoginService {
     return result;
   }
 
+  logIn(provider: string, providerResponse: string) {
+    localStorage.setItem('authParams', providerResponse);
+    this.loggedIn = true;
+    this.logger.next(this.loggedIn);
+  }
+
+  isUserLoggedIn(): Observable<boolean> {
+    return this.logger.asObservable();
+  }
+
   public setToken(token: string): void {
     localStorage.setItem("jwtToken", token);
+    this.loggedIn = true;
   }
 
   public setUser(user: User): void {
     localStorage.setItem('user', JSON.stringify(user));
+    console.log(user);
+    this.user.next(user);
+    console.log(this.user.asObservable());
   }
 
   public getUser(): User {
     let result = JSON.parse(localStorage.getItem('user')) as User;
     if (result == null) return null;
     return result;
+  }
+
+  public getUserV2(): Observable<any> {
+    console.log(this.user.asObservable());
+    return this.user.asObservable();
   }
 
   isLoggedIn(): boolean {
@@ -79,5 +101,7 @@ export class LoginService {
   public logout() {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("user");
+    this.loggedIn = false;
+    this.logger.next(this.loggedIn);
   }
 }

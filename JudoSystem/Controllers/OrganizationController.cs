@@ -55,9 +55,9 @@ namespace JudoSystem.Controllers
         public IActionResult UploadImage([FromForm] IFormFile image)
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
-            _organizationService.UpdateImage(userId, image);
+            var organization = _organizationService.UpdateImage(userId, image);
 
-            return Ok();
+            return Ok(organization);
         }
     }
 }
