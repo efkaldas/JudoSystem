@@ -21,7 +21,7 @@ export class LoginService {
   private currentUserSubject: BehaviorSubject<LoggedInUser>;
   public currentUser: Observable<LoggedInUser>;
   private logger = new Subject<boolean>();
-  private user = new Subject();
+  private user = new BehaviorSubject<User | undefined>(undefined);  
   private loggedIn = false;
 
 
@@ -62,7 +62,6 @@ export class LoginService {
     localStorage.setItem('user', JSON.stringify(user));
     console.log(user);
     this.user.next(user);
-    console.log(this.user.asObservable());
   }
 
   public getUser(): User {
@@ -71,9 +70,8 @@ export class LoginService {
     return result;
   }
 
-  public getUserV2(): Observable<any> {
-    console.log(this.user.asObservable());
-    return this.user.asObservable();
+  public get getUserV2(): Observable<User | undefined> { 
+    return this.user;
   }
 
   isLoggedIn(): boolean {
