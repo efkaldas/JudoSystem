@@ -1,10 +1,10 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
-<div *ngIf="user != null" class="user-profile" [style.background]="organizationImage" [style.backgroundSize]="cover" [style.backgroundPosition]="center">
+<div *ngIf="user != null" class="user-profile" [style.background]="'url(' + user.organization.image + ')'" [style.backgroundSize]="cover" [style.backgroundPosition]="center">
     <!-- User profile image -->
     <div class="profile-img">
-        <img src="{{userImage}}" alt="user">
+        <img src="{{user.image}}" alt="user">
     </div>
     <!-- User profile text-->
     <!-- ============================================================== -->

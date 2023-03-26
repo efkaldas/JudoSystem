@@ -16,21 +16,16 @@ export class AppHeaderComponent implements OnInit{
   public user: User;
 
   ngOnInit() {
-    this.getUser();
   }
 
 
   constructor(
     public translate: TranslateService, private loginService : LoginService, public menuItems: MenuItems
   ) {
+    this.loginService.user.subscribe(user => this.user = user);
   }
 
   signOut() {
     this.loginService.logout();
-  }
-  getUser(){
-    if (this.menuItems.isLoggedIn()) {
-      this.user = this.menuItems.getUser();
-    }
   }
 }

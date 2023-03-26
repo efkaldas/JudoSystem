@@ -8,6 +8,7 @@ import * as jwt_decode from "jwt-decode";
 import { User } from "../data/user.data";
 import { ForgotPassword } from "../data/forgotPassword.data";
 import { ResetPassword } from "../data/resetPassword.data";
+import { Organization } from "../data/organization.data";
 
 @Injectable()
 export class LoginService {
@@ -16,14 +17,20 @@ export class LoginService {
   protected forgotPasswordUrl: string = this.authUrl + "/ForgotPassword";
   protected resetPasswordUrl: string = this.authUrl + "/ResetPassword";
 
-  constructor(protected http: HttpClient) {}
+  private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
 
   private currentUserSubject: BehaviorSubject<LoggedInUser>;
   public currentUser: Observable<LoggedInUser>;
   private logger = new Subject<boolean>();
-  private user = new BehaviorSubject<User | undefined>(undefined);  
   private loggedIn = false;
 
+  constructor(protected http: HttpClient) {
+    this.userSubject = new BehaviorSubject<User>(
+      JSON.parse(localStorage.getItem('user'))
+    );
+    this.user = this.userSubject.asObservable();
+  }
 
   login(login: Login) {
     return this.http.post(this.loginUrl, login);
@@ -31,11 +38,11 @@ export class LoginService {
 
   forgotPassword(forgotPassword: ForgotPassword) {
     return this.http.post(this.forgotPasswordUrl, forgotPassword);
-   }
+  }
 
    resetPassword(resetPassword: ResetPassword) {
     return this.http.post(this.resetPasswordUrl, resetPassword);
-   }
+  }
 
   public getToken(): string {
     let result = localStorage.getItem("jwtToken");
@@ -59,29 +66,32 @@ export class LoginService {
   }
 
   public setUser(user: User): void {
+    user.image = user.image ? "data:image/png;base64," + user.image : "assets/images/users/no_user_image.png";
+    user.organization.image = user.organization.image ? "data:image/png;base64," + user.organization.image : "assets/images/organizations/no_image.png";
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(user);
-    this.user.next(user);
+    this.userSubject.next(user);
+  }
+
+  public setOrganization(organization: Organization): void {
+    organization.image = organization.image ? "data:image/png;base64," + organization.image : "assets/images/organizations/no_image.png";
+    this.userSubject.value.organization = organization;
+    localStorage.setItem('user', JSON.stringify(this.userSubject.value));
+    this.userSubject.next(this.userSubject.value);
   }
 
   public getUser(): User {
-    let result = JSON.parse(localStorage.getItem('user')) as User;
-    if (result == null) return null;
-    return result;
-  }
-
-  public get getUserV2(): Observable<User | undefined> { 
-    return this.user;
+    return this.userSubject.value;
   }
 
   isLoggedIn(): boolean {
-  return this.getToken() != null;
+    return this.getToken() != null;
   }
+
   public get currentUserValue(): LoggedInUser {
     this.currentUserSubject = new BehaviorSubject<LoggedInUser>(this.getDecodedAccessToken(localStorage.getItem('jwtToken')));
     this.currentUser = this.currentUserSubject.asObservable();
     return this.currentUserSubject.value;
-}
+  }
 
     public getDecodedAccessToken(token: string): any {
          try{
@@ -100,6 +110,6 @@ export class LoginService {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("user");
     this.loggedIn = false;
-    this.logger.next(this.loggedIn);
+    this.userSubject.next(null);
   }
 }

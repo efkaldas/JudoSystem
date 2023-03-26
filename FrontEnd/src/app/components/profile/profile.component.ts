@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
      private _snackBar: MatSnackBar, private fb: FormBuilder, public dialog: MatDialog, public loginService: LoginService) {
       this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
       this.organizationTypes = Object.values(this.organizationType).filter((o) => typeof o == 'number');
+      this.loginService.user.subscribe(user => this.user = user);
     }
 
     fileOverBase(e: any): void {
@@ -60,13 +61,12 @@ export class ProfileComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.getUser();
     this.getDanKyus();
     this.isOrganizationAdminOrAdmin()
   }
   private isOrganizationAdminOrAdmin()
   {
-   if(this.danKyuService.getUser() != null && this.danKyuService.getUser().userRoles.filter(x => x.type == UserType.Admin ||  x.type == UserType.OrganizationAdmin))
+   if(this.user && this.user.userRoles.filter(x => x.type == UserType.Admin ||  x.type == UserType.OrganizationAdmin))
       this.isAdmin = true;
   }
   private formEditGroup()
@@ -158,20 +158,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  private getUser() {
-    return this.userService.getFull(this.userService.getUser().id)
-      .subscribe(
-        data => {
-          this.user = data as User;
-          this.formEditGroup();
-        },
-        error => {
-          this.errorMessage = error["error"].message;
-          console.log(error); //gives an object at this point
-        }
-      );
-  }
-
   imageChangeProfile(event) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
@@ -224,7 +210,7 @@ export class ProfileComponent implements OnInit {
         data => {
           this.errorMessage = "File has successfully been uploaded";
           this.user.organization = data as Organization;
-          this.loginService.setUser(this.user);
+          this.loginService.setOrganization(data);
           this.openSnackBar(this.errorMessage, 'CLOSE');
         },
         error => {

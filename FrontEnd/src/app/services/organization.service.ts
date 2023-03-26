@@ -24,14 +24,10 @@ export class OrganizationService extends LoginService {
     public uploadImage(file) : Observable<any>{
       const formData = new FormData();
       formData.append('image', file, file.name); 
-  
-      console.log(formData.getAll);
 
       return this.http.post(this.organizationUrl + this.uploadImageUrl, formData).pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError));  
-      
-      return this.http.post(this.organizationUrl + this.uploadImageUrl, formData);  
     }
 
   private handleError(err: HttpErrorResponse) {

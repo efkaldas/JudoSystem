@@ -36,8 +36,6 @@ export class UserService extends LoginService{
  uploadProfileImage(file) : Observable<any>  {
     const formData = new FormData();
     formData.append('image', file, file.name); 
-
-    console.log(formData.getAll);
     
     return this.http.post(this.userUrl + this.uploadProfileImageUrl, formData).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
