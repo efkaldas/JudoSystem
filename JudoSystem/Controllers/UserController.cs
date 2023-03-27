@@ -93,7 +93,7 @@ namespace JudoSystem.Controllers
 
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
-            User updateUser = db.User.FindByCondition(x => x.Id == userId).FirstOrDefault();
+            User updateUser = db.User.FindByCondition(x => x.Id == userId).Include(x => x.Organization).Include(x => x.UserRoles).Include(x => x.DanKyu).FirstOrDefault();
 
             db.User.Update(updateUser);
             db.Save();
@@ -112,7 +112,7 @@ namespace JudoSystem.Controllers
             db.User.Update(updateUser);
             db.Save();
 
-            return Ok();
+            return Ok(updateUser);
         }
 
         [HttpPost("UploadProfileImage")]
@@ -121,7 +121,7 @@ namespace JudoSystem.Controllers
         {
             int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
-            User user = db.User.FindByCondition(x => x.Id == userId).Include(x => x.Organization).Include(x => x.UserRoles).FirstOrDefault();
+            User user = db.User.FindByCondition(x => x.Id == userId).Include(x => x.Organization).Include(x => x.UserRoles).Include(x => x.DanKyu).FirstOrDefault();
             user.Image = FileHelper.ConvertFileToBytes(image);
 
             db.User.Update(user);
