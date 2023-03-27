@@ -24,8 +24,8 @@ export class UserService extends LoginService{
   getAll() {
     return this.http.get(this.userFullUrl);
   }  
-  updateProfile(user: User) {
-    return this.http.put(this.userFullUrl, user);
+  updateProfile(user: User) : Observable<any> {
+    return this.http.put(this.userFullUrl, user); 
   }   
 
   registerUser(user: User, organization: Organization) {

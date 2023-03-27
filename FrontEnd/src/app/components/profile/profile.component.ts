@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getDanKyus();
-    this.isOrganizationAdminOrAdmin()
+    this.isOrganizationAdminOrAdmin();
   }
   private isOrganizationAdminOrAdmin()
   {
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
       firstname: [this.user.firstname, Validators.compose([Validators.required])],
       lastname: [this.user.lastname, Validators.compose([Validators.required])],
       gender: [this.user.gender, Validators.compose([Validators.required])],
-      dankyuId: [null, Validators.compose([Validators.required])],
+      dankyuId: [this.user.danKyu.id, Validators.compose([Validators.required])],
       email: [this.user.email, Validators.compose([Validators.required])],
       birthDate: [new Date(this.user.birthDate), Validators.compose([Validators.required])],
       phoneNumber: [this.user.phoneNumber, Validators.compose([Validators.required])],
@@ -94,7 +94,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  compare(o1: any, o2: any) {
+    return (o1 == o2);
+  }
+
   openDialog(templateRef: TemplateRef<any>) {
+    this.formEditGroup();
     this.dialog.open(templateRef);
   }
 
@@ -146,7 +151,8 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         data => {
           this.openSnackBar("Profile has been updated", 'CLOSE');
-          this.getUser();
+          this.user = data as User;
+          this.loginService.setUser(this.user);
           this.onNoClick();
         },
         error => {

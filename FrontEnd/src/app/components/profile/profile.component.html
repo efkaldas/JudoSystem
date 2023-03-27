@@ -73,10 +73,10 @@
                                     <div class="item item-1">
                                         <img class="image" src="{{user.organization.image}}" />
                                     </div>
-                                    <div class="container input-container">
+                                    <div *ngIf="isAdmin" class="container input-container">
                                         <input placeholder="file" type="file" (change)="imageChangeOrganization($event)" accept="image/png, image/jpeg">
                                     </div>
-                                    <div class="item item-2">
+                                    <div *ngIf="isAdmin" class="item item-2">
                                         <button mat-raised-button [disabled]="organizationImage == null" (click)="uploadOrganizationImage()" color="accent"><mat-icon>upload</mat-icon> {{ 'UploadAvatar' | translate }} </button>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
 
                 <mat-form-field>
                     <mat-label>{{ 'Gender' | translate }}</mat-label>
-                    <mat-select [compareWith]="compareGenderFunction" formControlName="gender" required>
+                    <mat-select formControlName="gender" required>
                         <mat-option *ngFor="let genderId of genders" [value]="genderId">
                             {{ gender[genderId] | translate }}
                         </mat-option>
@@ -137,7 +137,7 @@
 
                 <mat-form-field>
                     <mat-label>{{ 'DanKyu' | translate }}</mat-label>
-                    <mat-select [compareWith]="compareDanKyuFunction" formControlName="dankyuId" required>
+                    <mat-select [compareWith]="compare" formControlName="dankyuId" required>
                         <mat-option *ngFor="let danKyu of danKyus" [value]="danKyu.id">
                             {{danKyu.text}}
                         </mat-option>
@@ -195,7 +195,7 @@
 
                 <mat-form-field>
                     <mat-label>{{ 'OrganizationType' | translate }}</mat-label>
-                    <mat-select [compareWith]="compareGenderFunction" formControlName="type" required>
+                    <mat-select formControlName="type" required>
                         <mat-option *ngFor="let organizationTypeId of organizationTypes" [value]="organizationTypeId">
                             {{ organizationType[organizationTypeId] | translate }}
                         </mat-option>

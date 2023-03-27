@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         {
           this.loginService.setToken(data['token']);
           this.token = jwt_decode(data['token']);
-          return this.userService.get(
+          return this.userService.getFull(
             this.token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']).subscribe(
             data =>
             {
