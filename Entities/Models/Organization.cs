@@ -20,9 +20,7 @@ namespace Entities.Models
         [StringLength(250)]
         public string ShortName { get; set; }
         [Required(ErrorMessage = "Country is required")]
-        [Column(TypeName = "VARCHAR(250)")]
-        [StringLength(250)]
-        public string Country { get; set; }
+        public Country Country { get; set; }
         [Required(ErrorMessage = "City is required")]
         [Column(TypeName = "VARCHAR(250)")]
         [StringLength(250)]

@@ -21,6 +21,7 @@ import { DanKyu } from '../../data/danKyu.data';
 import { Gender } from '../../enums/gender.enum';
 import { LoginService } from '../../services/login.service';
 import { OrganizationType } from '../../enums/organizationType';
+import { Country } from '../../enums/country.enum';
 
 const Password = new FormControl('', Validators.required);
 const ConfirmPassword = new FormControl('', CustomValidators.equalTo(Password));
@@ -47,6 +48,13 @@ export class RegisterComponent implements OnInit {
 
   organizationTypes = [];
   organizationType = OrganizationType;
+
+  public countries: any[] = [ 
+    { key: Country.Lithuania, value: 'fi fi-lt' },
+    { key: Country.Latvia, value: 'fi fi-lt' },
+    { key: Country.Poland, value: 'fi fi-lt' },
+    { key: Country.Germany, value: 'fi fi-lt' },
+  ];
 
   constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
     private roleService: RoleService, private danKyuService: DanKyuService, private userService: UserService, private fb: FormBuilder, private router: Router,

@@ -4,6 +4,7 @@ import { DanKyu } from "./danKyu.data";
 import { Judoka } from "./judoka.data";
 import { Gender } from "../enums/gender.enum";
 import { UserStatus } from "../enums/UserStatus.enum";
+import { Country } from "../enums/country.enum";
 
 export class User {
     id: number;
@@ -14,6 +15,7 @@ export class User {
     lastname: string;
     phoneNumber: string;
     gender: Gender;
+    country: Country;
     birthDate: Date;
     danKyu: DanKyu;
     image: any;

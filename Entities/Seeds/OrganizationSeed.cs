@@ -18,7 +18,7 @@ namespace Entities.Seeds
                         Id = 1,
                         ExactName = "Administration Organization",
                         ShortName = "Admin org",
-                        Country = "LTU",
+                        Country = Country.Lithuania,
                         City = "Vilnius",
                         Address = "Vilniaus g. 18",
                     //    Image = "no_organization_image.png",

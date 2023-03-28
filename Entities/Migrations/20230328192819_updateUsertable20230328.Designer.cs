@@ -3,6 +3,7 @@ using System;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    partial class JudoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230328192819_updateUsertable20230328")]
+    partial class updateUsertable20230328
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -386,8 +388,10 @@ namespace Entities.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("int");
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("ExactName")
                         .IsRequired()
@@ -414,7 +418,7 @@ namespace Entities.Migrations
                             Id = 1,
                             Address = "Vilniaus g. 18",
                             City = "Vilnius",
-                            Country = 1,
+                            Country = "LTU",
                             ExactName = "Administration Organization",
                             ShortName = "Admin org",
                             Type = 1
@@ -429,6 +433,9 @@ namespace Entities.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Country")
+                        .HasColumnType("int");
 
                     b.Property<int?>("DanKyuId")
                         .HasColumnType("int");
@@ -508,16 +515,17 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2023, 3, 28, 22, 56, 9, 536, DateTimeKind.Local).AddTicks(5095),
+                            BirthDate = new DateTime(2023, 3, 28, 22, 28, 19, 49, DateTimeKind.Local).AddTicks(4136),
+                            Country = 1,
                             DanKyuId = 1,
-                            DateCreated = new DateTime(2023, 3, 28, 22, 56, 9, 536, DateTimeKind.Local).AddTicks(5147),
-                            DateUpdated = new DateTime(2023, 3, 28, 22, 56, 9, 536, DateTimeKind.Local).AddTicks(5150),
+                            DateCreated = new DateTime(2023, 3, 28, 22, 28, 19, 49, DateTimeKind.Local).AddTicks(4177),
+                            DateUpdated = new DateTime(2023, 3, 28, 22, 28, 19, 49, DateTimeKind.Local).AddTicks(4180),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
                             Lastname = "Kušlevič",
                             OrganizationId = 1,
-                            Password = "AQAAAAEAACcQAAAAEDDSuEK23O9PGAMN1zJIeVhCIeuKoKKxo8OXbx0Y8Q4bGsFlZGrI1WA9x+PI2v/jOw==",
+                            Password = "AQAAAAEAACcQAAAAEL6lvHumQ1tYdPP+4LpchSKilXXJWplYhWfw4jFSf+t9+BZGpeHk4RBWQoykMphZZw==",
                             PhoneNumber = "+37060477292",
                             Status = 1
                         });
