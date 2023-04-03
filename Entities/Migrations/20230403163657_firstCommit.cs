@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class firstCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,14 +57,12 @@ namespace Entities.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ShortName = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Country = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Country = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Address = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Image = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: true, defaultValue: "no_organization_image.png")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Image = table.Column<byte[]>(type: "longblob", nullable: true),
                     Type = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -380,12 +378,12 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "Organization",
                 columns: new[] { "Id", "Address", "City", "Country", "ExactName", "Image", "ShortName", "Type" },
-                values: new object[] { 1, "Vilniaus g. 18", "Vilnius", "LTU", "Administration Organization", "no_organization_image.png", "Admin org", 1 });
+                values: new object[] { 1, "Vilniaus g. 18", "Vilnius", 1, "Administration Organization", null, "Admin org", 1 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "BirthDate", "DanKyuId", "Email", "Firstname", "Gender", "Image", "Lastname", "OrganizationId", "ParentUserId", "Password", "PhoneNumber", "ResetToken", "ResetTokenExpires", "Status" },
-                values: new object[] { 1, new DateTime(2023, 3, 17, 20, 36, 8, 373, DateTimeKind.Local).AddTicks(3334), 1, "judosystem.info@gmail.com", "Evaldas", 1, null, "Kušlevič", 1, null, "AQAAAAEAACcQAAAAEC9L+JZjZVkOwR/fTQAJjzoUswG64nYtAAeLQsVnXY5i8U4WS2zp6JiNfnK7mclJNA==", "+37060477292", null, null, 1 });
+                values: new object[] { 1, new DateTime(2023, 4, 3, 19, 36, 56, 668, DateTimeKind.Local).AddTicks(266), 1, "judosystem.info@gmail.com", "Evaldas", 1, null, "Kušlevič", 1, null, "AQAAAAEAACcQAAAAEDhKHtNdONpJlh4tln9Ihq/8hc44sVrvdMzdm9Efd5sfqfljsq0mFnzs1aXD9Icy4Q==", "+37060477292", null, null, 1 });
 
             migrationBuilder.InsertData(
                 table: "UserRole",

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(JudoDbContext))]
-    [Migration("20230328195610_updateOrganizationTable2023-03-28")]
-    partial class updateOrganizationTable20230328
+    [Migration("20230403163657_firstCommit")]
+    partial class firstCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -510,16 +510,16 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2023, 3, 28, 22, 56, 9, 536, DateTimeKind.Local).AddTicks(5095),
+                            BirthDate = new DateTime(2023, 4, 3, 19, 36, 56, 668, DateTimeKind.Local).AddTicks(266),
                             DanKyuId = 1,
-                            DateCreated = new DateTime(2023, 3, 28, 22, 56, 9, 536, DateTimeKind.Local).AddTicks(5147),
-                            DateUpdated = new DateTime(2023, 3, 28, 22, 56, 9, 536, DateTimeKind.Local).AddTicks(5150),
+                            DateCreated = new DateTime(2023, 4, 3, 19, 36, 56, 668, DateTimeKind.Local).AddTicks(319),
+                            DateUpdated = new DateTime(2023, 4, 3, 19, 36, 56, 668, DateTimeKind.Local).AddTicks(334),
                             Email = "judosystem.info@gmail.com",
                             Firstname = "Evaldas",
                             Gender = 1,
                             Lastname = "Kušlevič",
                             OrganizationId = 1,
-                            Password = "AQAAAAEAACcQAAAAEDDSuEK23O9PGAMN1zJIeVhCIeuKoKKxo8OXbx0Y8Q4bGsFlZGrI1WA9x+PI2v/jOw==",
+                            Password = "AQAAAAEAACcQAAAAEDhKHtNdONpJlh4tln9Ihq/8hc44sVrvdMzdm9Efd5sfqfljsq0mFnzs1aXD9Icy4Q==",
                             PhoneNumber = "+37060477292",
                             Status = 1
                         });
