@@ -125,10 +125,10 @@
                                         <mat-label>{{ 'Country' | translate }}</mat-label>
                                         <mat-select formControlName="country" [(value)]="country">
                                             <mat-select-trigger>
-                                                <span [ngClass]="country?.value"></span> {{country?.key}}
+                                                <span [ngClass]="country?.value"></span> {{country?.ISO}}
                                             </mat-select-trigger>
                                             <mat-option *ngFor="let country of countries" [value]="country">
-                                                <span [ngClass]="country.value"></span> {{country.key}}
+                                                <span [ngClass]="country.value"></span> {{country.ISO}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

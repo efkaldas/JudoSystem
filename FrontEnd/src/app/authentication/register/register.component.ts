@@ -50,10 +50,11 @@ export class RegisterComponent implements OnInit {
   organizationType = OrganizationType;
 
   public countries: any[] = [ 
-    { key: Country.Lithuania, value: 'fi fi-lt' },
-    { key: Country.Latvia, value: 'fi fi-lt' },
-    { key: Country.Poland, value: 'fi fi-lt' },
-    { key: Country.Germany, value: 'fi fi-lt' },
+    { key: Country.Lithuania, value: 'fi fi-lt', ISO: "LTU" },
+    { key: Country.Latvia, value: 'fi fi-lv', ISO: "LAT"  },
+    { key: Country.Estonia, value: 'fi fi-ee', ISO: "EST"  },
+    { key: Country.Poland, value: 'fi fi-pl', ISO: "POL"  },
+    { key: Country.Germany, value: 'fi fi-de', ISO: "GER"  },
   ];
 
   constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
