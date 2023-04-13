@@ -49,12 +49,15 @@ export class RegisterComponent implements OnInit {
   organizationTypes = [];
   organizationType = OrganizationType;
 
+  country: any = {};
+  selectedCountry: any = {};
+
   public countries: any[] = [ 
-    { key: Country.Lithuania, value: 'fi fi-lt', ISO: "LTU" },
-    { key: Country.Latvia, value: 'fi fi-lv', ISO: "LAT"  },
-    { key: Country.Estonia, value: 'fi fi-ee', ISO: "EST"  },
-    { key: Country.Poland, value: 'fi fi-pl', ISO: "POL"  },
-    { key: Country.Germany, value: 'fi fi-de', ISO: "GER"  },
+    { key: Country.Lithuania, value: 'fi fi-lt', iso: "LTU" },
+    { key: Country.Latvia, value: 'fi fi-lv', iso: "LAT"  },
+    { key: Country.Estonia, value: 'fi fi-ee', iso: "EST"  },
+    { key: Country.Poland, value: 'fi fi-pl', iso: "POL"  },
+    { key: Country.Germany, value: 'fi fi-de', iso: "GER"  },
   ];
 
   constructor(private organizationService: OrganizationTypeService, private genderService: GenderService,
@@ -94,7 +97,11 @@ export class RegisterComponent implements OnInit {
       address: [null, Validators.compose([Validators.required])],
     });
   }
-  
+
+  changeLang(country: Country) {  
+    this.selectedCountry = this.countries.find(element => element.key === country);
+  } 
+
   private getDanKyus()
   {
     return this.danKyuService.getAll()

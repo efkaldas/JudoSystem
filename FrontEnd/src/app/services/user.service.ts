@@ -30,7 +30,6 @@ export class UserService extends LoginService{
 
   registerUser(user: User, organization: Organization) {
     user.organization = organization;
-    console.log(organization);
     return this.http.post(this.registerUserUrl, user); 
   }
 

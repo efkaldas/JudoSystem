@@ -123,12 +123,12 @@
                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                                     <mat-form-field style="width: 100%">
                                         <mat-label>{{ 'Country' | translate }}</mat-label>
-                                        <mat-select formControlName="country" [(value)]="country">
+                                        <mat-select formControlName="country" (selectionChange)="changeLang($event.value)" [(value)]="country.key">
                                             <mat-select-trigger>
-                                                <span [ngClass]="country?.value"></span> {{country?.ISO}}
+                                                <span [ngClass]="selectedCountry.value"></span> {{selectedCountry.iso}}
                                             </mat-select-trigger>
-                                            <mat-option *ngFor="let country of countries" [value]="country">
-                                                <span [ngClass]="country.value"></span> {{country.ISO}}
+                                            <mat-option *ngFor="let country of countries" [value]="country.key">
+                                                <span [ngClass]="country.value"></span> {{country.iso}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
