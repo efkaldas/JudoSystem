@@ -125,8 +125,9 @@ use profile section
 ******************/
 
 .user-profile {
-    position: relative;
-    background-size: cover;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
     .profile-img {
         width: 50px;
         margin-left: 30px;

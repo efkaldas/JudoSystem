@@ -1,7 +1,7 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
-<div *ngIf="user != null" class="user-profile" [style.background]="'url(' + user.organization.image + ')'" [style.backgroundSize]="cover" [style.backgroundPosition]="center">
+<div *ngIf="user != null" class="user-profile" [style.background]="'url(' + user.organization.image + ')'" [style.backgroundSize]="containt" [style.backgroundRepeat]="no-repeat" [style.backgroundPosition]="center">
     <!-- User profile image -->
     <div class="profile-img">
         <img src="{{user.image}}" alt="user">
