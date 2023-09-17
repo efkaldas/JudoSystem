@@ -9,11 +9,14 @@ using Contracts.Interfaces;
 using Entities.Models;
 using Enums;
 using JudoSystem.Helpers;
+using JudoSystem.Interfaces;
+using JudoSystem.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NuGet.Protocol.Core.Types;
 
 namespace JudoSystem.Controllers
 {
@@ -23,10 +26,11 @@ namespace JudoSystem.Controllers
     public class JudokaController : ControllerBase
     {
         private IRepositoryWrapper db;
-        private readonly IConfiguration configuration;
-        public JudokaController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
-        {
-            this.configuration = configuration;
+        private readonly IJudokaService _judokaService;
+    
+        public JudokaController(IRepositoryWrapper repoWrapper, IJudokaService judokaService)
+        { 
+            _judokaService = judokaService;
             db = repoWrapper;
         }
         // GET: api/Judoka
@@ -80,9 +84,7 @@ namespace JudoSystem.Controllers
         [Authorize(Roles = "Admin, Coach")]
         public IActionResult GetMyJudokas()
         {
-            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            List<Judoka> judokas = db.Judoka.FindByConditionFull(x => x.UserId == Convert.ToInt32(userId)).ToList();
-            return Ok(judokas);
+            return Ok(_judokaService.GetUserJudokas());
         }
 
         // POST: api/Judoka
@@ -90,10 +92,15 @@ namespace JudoSystem.Controllers
         [Authorize(Roles = "Admin, Coach")]
         public IActionResult Post([FromBody] Judoka judoka)
         {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            var currentUserId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
-            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            judoka.UserId = Convert.ToInt32(userId);
+            if (judoka.UserId != currentUserId)
+            {
+                List<User> users = db.User.FindByCondition(x => x.ParentUserId == currentUserId).ToList();
+
+                if (!users.Any())
+                    return null;
+            }
 
             judoka.Firstname = StringHelper.ToTitleCase(judoka.Firstname);
             judoka.Lastname = StringHelper.ToTitleCase(judoka.Lastname);
@@ -110,14 +117,19 @@ namespace JudoSystem.Controllers
         [Authorize(Roles = "Admin, Coach")]
         public IActionResult Put(int id, [FromBody] Judoka judoka)
         {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            var currentUserId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
+
+            if (judoka.UserId != currentUserId)
+            {
+                List<User> users = db.User.FindByCondition(x => x.ParentUserId == currentUserId).ToList();
+
+                if (!users.Any())
+                    return null;
+            }
 
             judoka.Id = id;
             judoka.Firstname = StringHelper.ToTitleCase(judoka.Firstname);
             judoka.Lastname = StringHelper.ToTitleCase(judoka.Lastname);
-
-            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            judoka.UserId = Convert.ToInt32(userId);
 
             db.Judoka.Update(judoka);
             db.Save();

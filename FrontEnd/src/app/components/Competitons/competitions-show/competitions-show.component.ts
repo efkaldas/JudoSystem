@@ -357,19 +357,19 @@ export class CompetitionsShowComponent implements OnInit {
   }
 
   public getJudokasToRegister() {
-    return this.ageGroupService.getJudokasToRegister(this.ageGroupId)
-      .subscribe(
-        data => {
-          this.JudokasToRegister = data as Judoka[];
-          this.dataSource = new MatTableDataSource(this.JudokasToRegister);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        },
-        error => {
-          this.errorMessage = error["error"].message;
-          console.log(error); //gives an object at this point
-        }
-      );
+    // return this.ageGroupService.getJudokasToRegister(this.ageGroupId)
+    //   .subscribe(
+    //     data => {
+    //       this.JudokasToRegister = data as Judoka[];
+    //       this.dataSource = new MatTableDataSource(this.JudokasToRegister);
+    //       this.dataSource.sort = this.sort;
+    //       this.dataSource.paginator = this.paginator;
+    //     },
+    //     error => {
+    //       this.errorMessage = error["error"].message;
+    //       console.log(error); //gives an object at this point
+    //     }
+    //   );
   }
   public getData($event)
   {

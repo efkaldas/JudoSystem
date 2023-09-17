@@ -1,47 +1,66 @@
-import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { Judoka } from "../../data/judoka.data";
-import { JudokaService } from "../../services/judoka.service";
+import { Judoka } from "../../../data/judoka.data";
+import { JudokaService } from "../../../services/judoka.service";
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
-import { Router } from "@angular/router";
-import { DanKyu } from "../../data/danKyu.data";
-import { DanKyuService } from "../../services/dan-kyu.service";
-import { Gender } from "../../enums/gender.enum";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { DanKyu } from "../../../data/danKyu.data";
+import { DanKyuService } from "../../../services/dan-kyu.service";
+import { Gender } from "../../../enums/gender.enum";
+import { CoachService } from "../../../services/coach.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-my-judokas",
   templateUrl: "./my-judokas.component.html",
   styleUrls: ["./my-judokas.component.scss"]
 })
-export class MyJudokasComponent implements OnInit {
+export class MyJudokasComponent implements OnDestroy  {
 
   public judokaForm: FormGroup;
   public judokaEditForm: FormGroup;
   myJudokas: Judoka[];
+  routeSub: any;
+  userId: number;
   genders = [];
   gender = Gender;
   danKyus: DanKyu[];
   selectedElement: any;
   errorMessage: string;
   message: string;
+  mySubscription: any;
   dataSource = new MatTableDataSource;
   source : MatTableDataSource<Judoka>;
   displayedColumns: string[] = ['position', 'firstname', 'lastname', 'gender', 'birthYears', 'danKyu', 'actions'];
 
-  constructor(private danKyuService: DanKyuService, 
-    private judokaService: JudokaService, private router: Router, public dialog: MatDialog,
-    private _snackBar: MatSnackBar, private fb: FormBuilder) {
+  constructor(private danKyuService: DanKyuService
+    , private judokaService: JudokaService
+    , private coachService: CoachService
+    , private router: Router
+    , public dialog: MatDialog
+    , private _snackBar: MatSnackBar
+    , private fb: FormBuilder
+    , private route: ActivatedRoute
+    ) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      };
+      this.routeSub = this.route.params.subscribe(params => {
+        this.userId = params['userId'] as number;
+      });
      this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
+     this.getJudokas();
+     this.getDanKyus();
+     this.formGroup();
     }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  ngOnInit() {
-    this.getJudokas();
-    this.getDanKyus();
-    this.formGroup();
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
+
   openDialog(templateRef: TemplateRef<any>, element: Judoka) {
     this.selectedElement = element;
     if(this.selectedElement != null) {
@@ -74,7 +93,8 @@ export class MyJudokasComponent implements OnInit {
       lastname: [null, Validators.compose([Validators.required])],
       gender: [null, Validators.compose([Validators.required])],
       birthYears: [null, Validators.compose([Validators.required])],
-      dankyuId: [null, Validators.compose([Validators.required])]
+      dankyuId: [null, Validators.compose([Validators.required])],
+      userId: this.userId
     });
   }
   private formEditGroup()
@@ -84,7 +104,8 @@ export class MyJudokasComponent implements OnInit {
       lastname: [this.selectedElement.lastname, Validators.compose([Validators.required])],
       gender: [this.selectedElement.gender, Validators.compose([Validators.required])],
       birthYears: [this.selectedElement.birthYears, Validators.compose([Validators.required])],
-      dankyuId: [this.selectedElement.danKyuId, Validators.compose([Validators.required])]
+      dankyuId: [this.selectedElement.danKyuId, Validators.compose([Validators.required])],
+      userId: this.userId
     });
   }
   public deletionConfirm()
@@ -142,7 +163,7 @@ export class MyJudokasComponent implements OnInit {
     }
   }
   private getJudokas() {
-    return this.judokaService.getMyJudokas()
+    return this.coachService.getJudokas(this.userId)
       .subscribe(
         data => {
           this.myJudokas = data as Judoka[];

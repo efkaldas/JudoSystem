@@ -7,8 +7,9 @@ import { AgeGroup } from '../data/age-group.data';
 @Injectable()
 export class AgeGroupService extends LoginService {
   protected ageGroupUrl : string = environment.apiHost+"/AgeGroup/";
-  protected judokasToRegisterUrl : string = "/Judokas/";
+  protected judokasToRegisterUrl : string = "/Judokas";
   protected weightCategoryUrl : string = "/WeightCategories/";
+  protected coachUrl : string = "/Coach/";
 
   getAll() {
     return this.http.get(this.ageGroupUrl); 
@@ -19,8 +20,8 @@ export class AgeGroupService extends LoginService {
   getWeightCategories(id: number) {
     return this.http.get(this.ageGroupUrl + id + this.weightCategoryUrl); 
   }  
-  getJudokasToRegister(id: number) {
-    return this.http.get(this.ageGroupUrl + id + this.judokasToRegisterUrl); 
+  getJudokasToRegister(groupId: number, coachId: number) {
+    return this.http.get(this.ageGroupUrl + groupId + this.coachUrl + coachId + this.judokasToRegisterUrl); 
   } 
   update(id: number, ageGroup: AgeGroup) {
     return this.http.put(this.ageGroupUrl + id, ageGroup); 

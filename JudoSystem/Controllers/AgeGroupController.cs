@@ -26,14 +26,22 @@ namespace JudoSystem.Controllers
         }
 
         // GET: api/AgeGroup/5
-        [HttpGet("{id}/Judokas", Name = "GetAgeGroupUserJudokas")]
+        [HttpGet("{groupId}/Coach/{coachId}/Judokas", Name = "GetAgeGroupUserJudokas")]
         [Authorize(Roles = "Admin, Coach")]
-        public IActionResult GetAgeGroupUserJudokas(int id)
+        public IActionResult GetAgeGroupUserJudokas(int groupId, int coachId)
         {
-            int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
-            AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == id).FirstOrDefault();
+            var currentUserId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value);
 
-            List<Judoka> judokas = db.Judoka.FindByCondition(x => x.UserId == userId
+            if (coachId != currentUserId)
+            {
+                List<User> users = db.User.FindByCondition(x => x.ParentUserId == currentUserId).ToList();
+
+                if (!users.Any())
+                    return null;
+            }
+            AgeGroup ageGroup = db.AgeGroup.FindByCondition(x => x.Id == groupId).FirstOrDefault();
+
+            List<Judoka> judokas = db.Judoka.FindByCondition(x => x.UserId == coachId
             && x.Gender == ageGroup.Gender && x.BirthYears <= ageGroup.YearsTo && x.BirthYears >= ageGroup.YearsFrom
             && x.DanKyuId <= ageGroup.DanKyuTo && x.DanKyuId >= ageGroup.DanKyuFrom)
                 .Include(x => x.DanKyu)
@@ -43,7 +51,7 @@ namespace JudoSystem.Controllers
 
             foreach (var judoka in judokas)
             {
-                judoka.WeightCategories = judoka.WeightCategories.Where(x => x.WeightCategory.AgeGroupId == id).ToList();
+                judoka.WeightCategories = judoka.WeightCategories.Where(x => x.WeightCategory.AgeGroupId == groupId).ToList();
             }
 
             return Ok(judokas);

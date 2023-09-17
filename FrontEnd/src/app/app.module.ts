@@ -31,7 +31,7 @@ import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { GenderService } from './services/gender.service';
 import { LoginService } from './services/login.service';
-import { MyJudokasComponent } from './components/my-judokas/my-judokas.component';
+import { MyJudokasComponent } from './components/MyJudokas/my-judokas/my-judokas.component';
 import { JudokaService } from './services/judoka.service';
 import { httpInterceptorProviders } from './interceptors/interceptor-provider';
 import { DanKyuService } from './services/dan-kyu.service';
@@ -73,7 +73,6 @@ import { UserBlockedComponent } from './authentication/error/user-blocked/user-b
 import { CompetitionsTabsComponent } from './components/Competitons/competitions-show/competitions-tabs/competitions-tabs.component';
 import { CompetitionsInfoComponent } from './components/Competitons/competitions-show/competitions-info/competitions-info.component';
 import { CompetitionsMyCompetitorsComponent } from './components/Competitons/competitions-show/competitions-my-competitors/competitions-my-competitors.component';
-import { CompetitionsAgeGroupsComponent } from './components/Competitons/competitions-show/competitions-age-groups/competitions-age-groups.component';
 import { CompetitionsCompetitorsComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors.component';
 import { CompetitionsResultsComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results.component';
 import { CompetitionsResultsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-categories/competitions-results-weight-categories.component';
@@ -81,6 +80,9 @@ import { CompetitionsResultsWeightCategoryShowComponent } from './components/Com
 import { CompetitionsCompetitorsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors-weight-categories/competitions-competitors-weight-categories.component';
 import { CompetitionsCompetitorsWeightCategoriesShowComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors-weight-categories-show/competitions-competitors-weight-categories-show.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
+import { MyJudokasTabsComponent } from './components/MyJudokas/my-judokas-tabs/my-judokas-tabs-component';
+import { CompetitionsAgeGroupsTabsComponent } from './components/Competitons/competitions-show/AgeGroups/competitions-age-groups-tabs/competitions-age-groups-tabs.component';
+import { CompetitionsAgeGroupsComponent } from './components/Competitons/competitions-show/AgeGroups/competitions-age-groups/competitions-age-groups.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -128,6 +130,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompetitionsTabsComponent,
     CompetitionsInfoComponent,
     CompetitionsMyCompetitorsComponent,
+    CompetitionsAgeGroupsTabsComponent,
     CompetitionsAgeGroupsComponent,
     CompetitionsCompetitorsComponent,
     CompetitionsResultsComponent,
@@ -135,7 +138,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompetitionsResultsWeightCategoryShowComponent,
     CompetitionsCompetitorsWeightCategoriesComponent,
     CompetitionsCompetitorsWeightCategoriesShowComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    MyJudokasTabsComponent,
   ],
   imports: [
     BrowserModule,

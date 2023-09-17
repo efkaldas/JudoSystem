@@ -51,10 +51,13 @@ namespace JudoSystem.Extensions
         }
         public static void InitilizeObjects(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<IEmailSendService, EmailSendService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IOrganizationService, OrganizationService>();
+            services.AddScoped<IJudokaService, JudokaService>();
+            services.AddScoped<ICoachService, CoachService>();
         }
         public static void ConfigureSwagger(this IServiceCollection services)
         {

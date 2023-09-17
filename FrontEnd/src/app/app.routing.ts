@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { AppBlankComponent } from './layouts/blank/blank.component';
-import { MyJudokasComponent } from './components/my-judokas/my-judokas.component';
+import { MyJudokasComponent } from './components/MyJudokas/my-judokas/my-judokas.component';
 import { AuthGuard } from './auth-guard/auth.guard';
 import { PendingUsersComponent } from './components/pending-users/pending-users.component';
 import { HomeComponent } from './components/home/home.component';
@@ -31,7 +31,6 @@ import { UserBlockedComponent } from './authentication/error/user-blocked/user-b
 import { CompetitionsTabsComponent } from './components/Competitons/competitions-show/competitions-tabs/competitions-tabs.component';
 import { CompetitionsInfoComponent } from './components/Competitons/competitions-show/competitions-info/competitions-info.component';
 import { CompetitionsMyCompetitorsComponent } from './components/Competitons/competitions-show/competitions-my-competitors/competitions-my-competitors.component';
-import { CompetitionsAgeGroupsComponent } from './components/Competitons/competitions-show/competitions-age-groups/competitions-age-groups.component';
 import { CompetitionsCompetitorsComponent } from './components/Competitons/competitions-show/competitions-competitors/competitions-competitors.component';
 import { CompetitionsResultsComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results.component';
 import { CompetitionsResultsWeightCategoriesComponent } from './components/Competitons/competitions-show/competitions-results/competitions-results-weight-categories/competitions-results-weight-categories.component';
@@ -39,6 +38,8 @@ import { CompetitionsResultsWeightCategoryShowComponent } from './components/Com
 import { TranslateModule } from '@ngx-translate/core';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { UserType } from './enums/userType.enum';
+import { MyJudokasTabsComponent } from './components/MyJudokas/my-judokas-tabs/my-judokas-tabs-component';
+import { CompetitionsAgeGroupsComponent } from './components/Competitons/competitions-show/AgeGroups/competitions-age-groups/competitions-age-groups.component';
 
 export const routes: Routes = [
   {
@@ -47,7 +48,10 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full', data: {title: 'Home'} },
       { path: 'home', component: HomeComponent, data: {title: 'Home'} },
-      { path: 'myjudokas', component: MyJudokasComponent, canActivate: [AuthGuard], data: {title: 'MyJudokas', roles: [UserType[UserType.Admin], UserType[UserType.Coach]]} },
+      { path: 'myjudokas', component: MyJudokasTabsComponent, data: {title: 'MyJudokas'}, 
+        children: [
+          { path: 'coach/:userId', component: MyJudokasComponent, data: {title: 'MyCoachJudokas'} },
+          ]},
       { path: 'my-coaches', component: CoachComponent,canActivate: [AuthGuard], data: {title: 'Coaches', roles: [UserType[UserType.Admin], UserType[UserType.OrganizationAdmin]]} },
       { path: 'users', component: UserCoachesComponent,canActivate: [AuthGuard], data: {title: 'Users', roles: [UserType[UserType.Admin]]} },
       { path: 'coaches/:id', component: CoachShowComponent, canActivate: [AuthGuard], data: {title: 'Coach'} },
@@ -55,7 +59,7 @@ export const routes: Routes = [
       { path: 'competitions', component: CompetitionsComponent, data: {title: 'Competitions'} },
       { path: 'competitions/:id', component: CompetitionsTabsComponent, data: {title: 'Competitions'}, 
         children: [
-          { path: '', redirectTo: 'info', pathMatch: 'full', data: {title: 'Home'} },
+          { path: '', redirectTo: 'info', pathMatch: 'full', data: {title: 'Info'} },
           { path: 'info', component: CompetitionsInfoComponent, data: {title: 'CompetitionsInformation'} },
           { path: 'my-competitors', component: CompetitionsMyCompetitorsComponent, data: {title: 'CompetitionsMyCompetitiors'} },
           { path: 'age-groups', component: CompetitionsAgeGroupsComponent, data: {title: 'CompetitionsAgeGroups'} },

@@ -1,20 +1,22 @@
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatChipInputEvent, MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { AgeGroupService } from '../../../../services/age-group.service';
-import { Judoka } from '../../../../data/judoka.data';
-import { CompetitionsService } from '../../../../services/competitions.service';
+import { AgeGroupService } from '../../../../../services/age-group.service';
+import { Judoka } from '../../../../../data/judoka.data';
+import { CompetitionsService } from '../../../../../services/competitions.service';
 import { ActivatedRoute } from '@angular/router';
-import { Competitions } from '../../../../data/competitions.data';
-import { AgeGroup } from '../../../../data/age-group.data';
-import { WeightCategoryService } from '../../../../services/weight-category.service';
+import { Competitions } from '../../../../../data/competitions.data';
+import { AgeGroup } from '../../../../../data/age-group.data';
+import { WeightCategoryService } from '../../../../../services/weight-category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WeightCategory } from '../../../../data/weight-category.data';
-import { GenderService } from '../../../../services/gender.service';
-import { DanKyuService } from '../../../../services/dan-kyu.service';
-import { DanKyu } from '../../../../data/danKyu.data';
+import { WeightCategory } from '../../../../../data/weight-category.data';
+import { GenderService } from '../../../../../services/gender.service';
+import { DanKyuService } from '../../../../../services/dan-kyu.service';
+import { DanKyu } from '../../../../../data/danKyu.data';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
-import { Gender } from '../../../../enums/gender.enum';
-import { UserType } from '../../../../enums/userType.enum';
+import { Gender } from '../../../../../enums/gender.enum';
+import { UserType } from '../../../../../enums/userType.enum';
+import { CoachService } from '../../../../../services/coach.service';
+import { User } from '../../../../../data/user.data';
 
 @Component({
   selector: 'app-competitions-age-groups',
@@ -42,6 +44,9 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
   selectedCategory: number[] = [];
   categories : WeightCategory[] = [];
   danKyus: DanKyu[];
+  coaches: User[];
+  coachesTabs: any[]
+  coachId: number;
 
   genders = [];
   gender = Gender;
@@ -53,13 +58,27 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  constructor(private ageGroupService: AgeGroupService, private competitionsService: CompetitionsService,
-    private weightCategoryService: WeightCategoryService, private route: ActivatedRoute,
-    private changeDetectorRefs: ChangeDetectorRef, private snackBar: MatSnackBar, public dialog: MatDialog, private genderService: GenderService,
-    private danKyuService: DanKyuService, private fb: FormBuilder,) {
-    this.routeSub = this.route.parent.params.subscribe(params => {
+  constructor(private ageGroupService: AgeGroupService
+    , private competitionsService: CompetitionsService
+    , private weightCategoryService: WeightCategoryService
+    , private route: ActivatedRoute
+    , private changeDetectorRefs: ChangeDetectorRef
+    , private snackBar: MatSnackBar
+    , public dialog: MatDialog
+    , private genderService: GenderService
+    , private danKyuService: DanKyuService
+    , private fb: FormBuilder
+    , private coachService: CoachService
+    ) {
+      this.coachId = coachService.getUser().id;
+      this.routeSub = this.route.parent.params.subscribe(params => {
       this.competitionsId = params['id'] as number;
     });
+    this.coachesTabs = [
+      {
+        label: 'MyJudokas',
+        index: coachService.getUser().id,
+      }];  
     this.genders = Object.values(this.gender).filter((o) => typeof o == 'number');
    }
 
@@ -68,6 +87,10 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
     this.formGroup();
     this.getAgeGroups();
     this.getDanKyus();
+
+    if(this.isOrganizationAdministrator() || this.isAdmin) {
+      this.getCoaches();
+    }
   }
 
   public isLoggedIn()
@@ -142,6 +165,11 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
       this.isAdmin = true;
   }
 
+  private isOrganizationAdministrator() : boolean
+  {
+    return this.competitionsService.getUser() != null && this.competitionsService.getUser().userRoles.filter(x => x.type == UserType.OrganizationAdmin).length > 0;
+  }
+
   public getAgeGroups() {
   return this.competitionsService.get(this.competitionsId)
     .subscribe(
@@ -203,8 +231,21 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
     this.getJudokasToRegister();
   }
 
+  public getCoachTabRecords($event)
+  {
+    this.coachId = null;
+    var tab = this.coachesTabs.find(x => x.label == $event.tab.textLabel);
+    if(tab != null) {
+      this.coachId = tab.index
+    }
+    if(!this.coachId) {
+      this.coachId = this.coachService.getUser().id;
+    }
+    this.getJudokasToRegister();
+  }
+
   public getJudokasToRegister() {
-    return this.ageGroupService.getJudokasToRegister(this.ageGroupId)
+    return this.ageGroupService.getJudokasToRegister(this.ageGroupId, this.coachId)
       .subscribe(
         data => {
           this.judokasToRegister = data as Judoka[];
@@ -214,6 +255,28 @@ export class CompetitionsAgeGroupsComponent implements OnInit {
         },
         error => {
           this.errorMessage = error["error"].message;
+          console.log(error); //gives an object at this point
+        }
+      );
+  }
+
+  public getCoaches()
+  {
+    return this.coachService.getMy()
+      .subscribe(
+        data => {
+          this.coaches = data as any[];
+          this.coachesTabs = this.coachesTabs.concat(this.coaches.map(x => {
+            return {
+              label: `${x.firstname} ${x.lastname}`,
+              index: x.id,
+            }
+          }
+          ));
+        },
+        error => {
+          this.errorMessage = error["error"].message;
+          this.openSnackBar(this.errorMessage, 'CLOSE');
           console.log(error); //gives an object at this point
         }
       );

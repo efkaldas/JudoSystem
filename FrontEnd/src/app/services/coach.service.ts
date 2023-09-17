@@ -10,6 +10,7 @@ export class CoachService extends LoginService {
   protected blockhUrl : string = "/Block/";
   protected unBlockUrl : string = "/UnBlock/";
   protected myUrl : string = "My/";
+  protected judokasUrl : string = "/Judokas";
 
   getAll() {
     return this.http.get(this.coachUrl); 
@@ -31,5 +32,8 @@ export class CoachService extends LoginService {
   } 
   create(coach: User) {
     return this.http.post(this.coachUrl, coach); 
+  } 
+  getJudokas(userId: number) {
+    return this.http.get(this.coachUrl + userId + this.judokasUrl); 
   } 
 }

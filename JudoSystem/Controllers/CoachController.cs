@@ -7,6 +7,7 @@ using Contracts.Interfaces;
 using Entities.Models;
 using Enums;
 using JudoSystem.Helpers;
+using JudoSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,10 @@ namespace JudoSystem.Controllers
     public class CoachController : ControllerBase
     {
         private IRepositoryWrapper db;
-        private readonly IConfiguration configuration;
-        public CoachController(IConfiguration configuration, IRepositoryWrapper repoWrapper)
+        private readonly ICoachService _coachService;
+        public CoachController(ICoachService coachService, IRepositoryWrapper repoWrapper)
         {
-            this.configuration = configuration;
-            this.configuration = configuration;
+            _coachService = coachService;
             db = repoWrapper;
         }
         // GET: api/Coach
@@ -109,6 +109,13 @@ namespace JudoSystem.Controllers
             db.User.Update(user);
             db.Save();
             return Ok();
+        }
+
+        [HttpGet("{id}/Judokas", Name = "Judokas")]
+        [Authorize(Roles = "Admin, OrganizationAdmin, Coach")]
+        public IActionResult GetJudokas(int id)
+        {
+            return Ok(_coachService.GetUserJudokas(id));
         }
     }
 }
