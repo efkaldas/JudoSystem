@@ -133,6 +133,7 @@ namespace JudoSystem.Controllers
             if (System.IO.File.Exists(localFileLocation))
             {
                 ResultsFileReaderService service = new ResultsFileReaderService();
+                service.execute(db, id, localFileLocation);
 
                 return Ok();
             }
